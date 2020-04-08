@@ -1,0 +1,3 @@
+rootProject.name='TWINS'
+include ':app'
+include ':twins-clases'
