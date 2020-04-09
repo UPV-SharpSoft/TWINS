@@ -2,17 +2,13 @@ package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import com.sharpsoft.twins_clases.logic.Tablero;
-import com.sharpsoft.twinsapp.ILogic.ICarta;
+import com.sharpsoft.twinsapp.ILogic.Baraja;
+import com.sharpsoft.twinsapp.ILogic.BarajaFactory;
+import com.sharpsoft.twinsapp.ILogic.ITablero;
 
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Juego extends AppCompatActivity {
     private Tablero tablero;
@@ -22,17 +18,13 @@ public class Juego extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
 
-        Bitmap b = null;
-        try {
-            InputStream is = getAssets().open("CartasBasicas/RedstoneOre.png");
-            b = BitmapFactory.decodeStream(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, 20, this);
+        tablero = new ITablero(4,5, baraja, this);
 
-        for(int i = 0; i < 5; i ++){
-            ICarta carta = new ICarta(b, b, this);
-            ((LinearLayout) findViewById(R.id.linearLayoutJuego)).addView(carta.getCartaView());
+        for(int y = 0; y < tablero.getHeight(); y++){
+            for(int x = 0; x < tablero.getWidth(); x++){
+
+            }
         }
     }
 }

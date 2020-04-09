@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.sharpsoft.twins_clases.logic.Carta;
 import com.sharpsoft.twinsapp.R;
@@ -33,7 +32,7 @@ public class ICarta implements Carta {
 
     @Override
     public boolean mismaImagen(Carta c) {
-        if(!(c instanceof ICarta)) throw new RuntimeException("No son la misma implementacion");
+        if(!(c instanceof ICarta)) throw new RuntimeException("No son mismo tipo");
         ICarta o = (ICarta) c;
         return this.bitmapCarta.equals(o.bitmapCarta);
     }
