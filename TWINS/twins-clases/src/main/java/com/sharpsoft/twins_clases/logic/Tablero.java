@@ -3,12 +3,14 @@ package com.sharpsoft.twins_clases.logic;
 import java.util.Stack;
 
 public class Tablero {
-    private Carta[][] cartas;
+    protected Carta[][] cartas;
     private int width;
     private int height;
     private Stack<Carta> cartasGiradas;
 
     public Tablero(int width, int height){
+        if( (width*height) % 2 != 0) throw new MalformedTableroException("Las cartas son impares");
+
         this.height = height; this.width = width;
         cartas = new Carta[width][height];
 
@@ -36,6 +38,11 @@ public class Tablero {
                 cartasGiradas.push(c1);
                 cartasGiradas.push(c2);
             }else{  //No coinciden
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 c1.girar();
                 c2.girar();
             }
