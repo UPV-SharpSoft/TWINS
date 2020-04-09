@@ -24,7 +24,7 @@ public class Cronometro {
             public void onFinish() {
                 textViewFinish.setText("TIME OUT!");
             }
-        };
+        }.start();
 
     }
 }
