@@ -34,7 +34,7 @@ public class ICarta implements Carta {
     public boolean mismaImagen(Carta c) {
         if(!(c instanceof ICarta)) throw new RuntimeException("No son mismo tipo");
         ICarta o = (ICarta) c;
-        return this.bitmapCarta.equals(o.bitmapCarta);
+        return this.bitmapCarta.sameAs(o.bitmapCarta);
     }
 
     @Override
