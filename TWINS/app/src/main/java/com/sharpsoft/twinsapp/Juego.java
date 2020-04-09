@@ -3,26 +3,37 @@ package com.sharpsoft.twinsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.sharpsoft.twins_clases.logic.Tablero;
 import com.sharpsoft.twinsapp.ILogic.Baraja;
 import com.sharpsoft.twinsapp.ILogic.BarajaFactory;
+import com.sharpsoft.twinsapp.ILogic.Cronometro;
 import com.sharpsoft.twinsapp.ILogic.ICarta;
 import com.sharpsoft.twinsapp.ILogic.ITablero;
+
+import java.util.Formatter;
 
 
 public class Juego extends AppCompatActivity {
     private LinearLayout tableroLayout;
 
     private Tablero tablero;
+    private Cronometro cronometro;
+    private TextView cronoTV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
 
+        cronoTV = findViewById(R.id.cronoTV);
+        instanciarCronometro();
         tableroLayout = findViewById(R.id.tableroLinearLayout);
 
         Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, 20, this);
@@ -37,6 +48,11 @@ public class Juego extends AppCompatActivity {
                 horizontalLayout.addView(cartaView);
             }
             tableroLayout.addView(horizontalLayout);
+            cronometro.start();
         }
+    }
+
+    public void instanciarCronometro(){
+        cronometro = new Cronometro(60, cronoTV);
     }
 }
