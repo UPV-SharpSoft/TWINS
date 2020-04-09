@@ -32,16 +32,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 1000);
 
-
-        //Música de fondo partida
-        MediaPlayer player = new MediaPlayer();
-        player.setLooping(true);
-        try {
-            player.setDataSource("C:\\Users\\Carlos\\OneDrive - UPV\\Github\\TWINS\\TWINS\\twins-clases\\src\\main\\java\\com\\sharpsoft\\twins_clases\\Sounds\\partida-default.mp3");
-            player.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        player.start();
     }
 }
