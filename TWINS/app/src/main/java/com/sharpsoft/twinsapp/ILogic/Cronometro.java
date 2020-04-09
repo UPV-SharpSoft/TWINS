@@ -1,7 +1,12 @@
 package com.sharpsoft.twinsapp.ILogic;
 
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.widget.TextView;
+
+import com.sharpsoft.twinsapp.Juego;
+import com.sharpsoft.twinsapp.R;
 
 import java.text.CollationElementIterator;
 import java.text.DecimalFormat;
@@ -11,10 +16,16 @@ import java.util.Formatter;
 public class Cronometro {
 
     private CountDownTimer workingCountDown;
+    private Context caller;
     private final DecimalFormat cronoFormatShort = new DecimalFormat("#0");
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
 
-    public Cronometro(int tiempo, final TextView crono){
+    private MediaPlayer finalTiempo;
+
+    public Cronometro(int tiempo, final TextView crono, Context context){
+
+        this.caller = context;
+        finalTiempo = MediaPlayer.create(caller, R.raw.gameover_default);
 
         workingCountDown = new CountDownTimer(tiempo * 1000, 100) {
             @Override
@@ -26,6 +37,7 @@ public class Cronometro {
             @Override
             public void onFinish() {
                 /*ToDo*/
+                finalTiempo.start();
             }
         };
     }

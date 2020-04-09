@@ -2,6 +2,7 @@ package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -58,13 +59,14 @@ public class Juego extends AppCompatActivity {
             }
         });
         //Música de fondo partida
-        MediaPlayer player = MediaPlayer.create(this, R.raw.partida_default);
-        player.setLooping(true);
-        player.start();
+        MediaPlayer musicaFondo = MediaPlayer.create(this, R.raw.partida_default);
+        musicaFondo.setLooping(true);
+        musicaFondo.start();
 
     }
 
     public void instanciarCronometro(){
-        cronometro = new Cronometro(60, cronoTV);
+        cronometro = new Cronometro(60, cronoTV, this);
     }
+
 }
