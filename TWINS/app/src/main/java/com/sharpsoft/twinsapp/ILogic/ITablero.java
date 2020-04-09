@@ -13,7 +13,7 @@ public class ITablero extends Tablero {
 
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
-                final ICarta carta = new ICarta(set.sacarCarta(), set.getReverso(), ctx);
+                final ICarta carta = new ICarta(set.getReverso(), set.sacarCarta(), ctx);
                 setClickListener(carta, x, y);
                 this.cartas[x][y] = carta;
             }

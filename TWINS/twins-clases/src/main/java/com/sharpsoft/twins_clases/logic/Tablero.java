@@ -7,6 +7,7 @@ public class Tablero {
     private int width;
     private int height;
     private Stack<Carta> cartasGiradas;
+    private boolean estaEsperando;
 
     public Tablero(int width, int height){
         if( (width*height) % 2 != 0) throw new MalformedTableroException("Las cartas son impares");
@@ -15,6 +16,8 @@ public class Tablero {
         cartas = new Carta[width][height];
 
         cartasGiradas = new Stack<>();
+
+        estaEsperando = false;
     }
 
     public int getWidth(){
@@ -25,9 +28,26 @@ public class Tablero {
         return height;
     }
 
+    private void girarCartas(final Carta c1, final Carta c2){
+        estaEsperando = true;
+        new Thread(){
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                c1.girar();
+                c2.girar();
+                estaEsperando = false;
+            }
+        }.start();
+    }
+
     public void girar(int x, int y){
         Carta c = cartas[x][y];
-        if(cartasGiradas.contains(c)) throw new CartaGiradaException(c); //Lanzar exception si la carta esta sido girada
+        //if(cartasGiradas.contains(c)) throw new CartaGiradaException(c); //Lanzar exception si la carta esta sido girada
+        if(estaEsperando) return;
 
         c.girar();
         cartasGiradas.push(c);
@@ -38,14 +58,12 @@ public class Tablero {
                 cartasGiradas.push(c1);
                 cartasGiradas.push(c2);
             }else{  //No coinciden
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                c1.girar();
-                c2.girar();
+               girarCartas(c1, c2);
             }
         }
+    }
+
+    public Carta getCarta(int x, int y){
+        return cartas[x][y];
     }
 }
