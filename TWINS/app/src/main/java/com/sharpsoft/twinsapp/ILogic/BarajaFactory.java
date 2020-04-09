@@ -28,7 +28,7 @@ public class BarajaFactory {
                 Bitmap b = getBitmapFromAsset("CartasMinecraft/" + cartasMinecraft[i%cartasMinecraft.length], ctx);
                 cartas.add(b); cartas.add(b);
             }
-            reverso = getBitmapFromAsset("CartasMinecraft/roca.jph", ctx);
+            reverso = getBitmapFromAsset("CartasMinecraft/stone.png", ctx);
         }
 
         return new Baraja(cartas, reverso);

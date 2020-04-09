@@ -1,6 +1,8 @@
 package com.sharpsoft.twinsapp.ILogic;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 
 import com.sharpsoft.twins_clases.logic.Tablero;
@@ -13,7 +15,8 @@ public class ITablero extends Tablero {
 
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
-                final ICarta carta = new ICarta(set.sacarCarta(), set.getReverso(), ctx);
+                Bitmap b = set.sacarCarta();
+                final ICarta carta = new ICarta(set.getReverso(), b, ctx);
                 setClickListener(carta, x, y);
                 this.cartas[x][y] = carta;
             }
@@ -28,4 +31,5 @@ public class ITablero extends Tablero {
             }
         });
     }
+
 }

@@ -3,8 +3,8 @@ package com.sharpsoft.twins_clases.logic;
 public class CartaGiradaException extends RuntimeException {
     Carta c;
 
-    public CartaGiradaException(Carta carta){
-        this.c = c;
+    public CartaGiradaException(){
+
     }
 
     public String toString(){
