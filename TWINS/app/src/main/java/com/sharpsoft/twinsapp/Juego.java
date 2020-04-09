@@ -3,6 +3,7 @@ package com.sharpsoft.twinsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -35,7 +36,8 @@ public class Juego extends AppCompatActivity {
             horizontalLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
             for(int x = 0; x < tablero.getWidth(); x++){
                 ICarta carta = (ICarta) tablero.getCarta(x, y);
-                horizontalLinearLayout.addView(carta.getCartaView());
+                View cartaView = carta.getCartaView();
+                horizontalLinearLayout.addView(cartaView);
             }
             tableLayout.addView(horizontalLinearLayout);
         }

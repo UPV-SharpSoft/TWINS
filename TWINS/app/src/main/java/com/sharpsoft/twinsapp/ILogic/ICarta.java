@@ -1,5 +1,6 @@
 package com.sharpsoft.twinsapp.ILogic;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -15,9 +16,12 @@ public class ICarta implements Carta {
     private View layout;
     private boolean bocaArriba;
 
+    private Context ctx;
+
     public ICarta(Bitmap bitmapDorso, Bitmap bitmapCarta, Context ctx){
         this.bitmapCarta = bitmapCarta;
         this.bitmapDorso = bitmapDorso;
+        this.ctx = ctx;
 
         LayoutInflater inflater = LayoutInflater.from(ctx);
         layout = inflater.inflate(R.layout.carta, null, false);
@@ -40,8 +44,13 @@ public class ICarta implements Carta {
     @Override
     public void girar() {       //Faltaria animar?
         bocaArriba = !bocaArriba;
-        Bitmap b = bocaArriba?bitmapCarta:bitmapDorso;
-        imageView.setImageBitmap(b);
+        final Bitmap b = bocaArriba?bitmapCarta:bitmapDorso;
+
+        ((Activity) ctx).runOnUiThread(new Thread(){
+            public void run(){
+                imageView.setImageBitmap(b);
+            }
+        });
     }
 
     @Override
