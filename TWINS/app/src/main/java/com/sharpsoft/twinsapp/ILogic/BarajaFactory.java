@@ -17,7 +17,7 @@ public class BarajaFactory {
         ESPAÑOLA
     }
 
-    private final static String[] cartasMinecraft = {"RedstoneOre.png", "DiamondOre.png"};
+    private final static String[] cartasMinecraft = {"RedstoneOre.png", "DiamondOre.png", "GoldOre.png"};
 
     public static Baraja getBaraja(Barajas baraja, int numCartas, Context ctx){
         List<Bitmap> cartas = new ArrayList<>();
