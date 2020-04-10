@@ -2,9 +2,11 @@ package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class Juego extends AppCompatActivity {
     private Tablero tablero;
     private Cronometro cronometro;
     private TextView cronoTV;
+    private ImageButton imageButtonPause;
 
 
     @Override
@@ -50,6 +53,17 @@ public class Juego extends AppCompatActivity {
             tableroLayout.addView(horizontalLayout);
             cronometro.start();
         }
+
+        imageButtonPause = findViewById(R.id.imageButtonPause);
+
+        imageButtonPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (Juego.this, PausedActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void instanciarCronometro(){
