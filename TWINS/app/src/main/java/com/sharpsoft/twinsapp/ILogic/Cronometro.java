@@ -17,15 +17,14 @@ public class Cronometro {
 
     private CountDownTimer workingCountDown;
     private Context caller;
-    private final DecimalFormat cronoFormatShort = new DecimalFormat("#0");
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
 
-    private MediaPlayer finalTiempo;
+    private MediaPlayer finalTiempoMusic;
 
     public Cronometro(int tiempo, final TextView crono, Context context){
 
         this.caller = context;
-        finalTiempo = MediaPlayer.create(caller, R.raw.gameover_default);
+        finalTiempoMusic = MediaPlayer.create(caller, R.raw.gameover_default);
 
         workingCountDown = new CountDownTimer(tiempo * 1000, 100) {
             @Override
@@ -37,7 +36,8 @@ public class Cronometro {
             @Override
             public void onFinish() {
                 /*ToDo*/
-                finalTiempo.start();
+                finalTiempoMusic.start();
+                crono.setText(cronoFormatLong.format(0));
             }
         };
     }

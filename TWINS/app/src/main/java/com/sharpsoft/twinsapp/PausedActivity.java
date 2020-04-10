@@ -12,6 +12,7 @@ public class PausedActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.zoom_enter,R.anim.zoom_exit);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paused);
 
