@@ -65,12 +65,14 @@ public class Juego extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 cronometro.start();
             }
         });
+
         //Música de fondo partida
         MediaPlayer musicaFondo = MediaPlayer.create(this, R.raw.partida_default);
         musicaFondo.setLooping(true);
