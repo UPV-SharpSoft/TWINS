@@ -10,7 +10,7 @@ public class Tablero {
     private boolean estaEsperando;
 
     public Tablero(int width, int height){
-        if( (width*height) % 2 != 0) throw new MalformedTableroException("Las cartas son impares");
+        if( ((width*height) % 2 != 0) || (width * height == 0)) throw new MalformedTableroException("Las cartas son impares");
 
         this.height = height; this.width = width;
         cartas = new Carta[width][height];
