@@ -18,6 +18,7 @@ public class Tablero {
         cartasGiradas = new Stack<>();
 
         estaEsperando = false;
+
     }
 
     public int getWidth(){
@@ -66,4 +67,5 @@ public class Tablero {
     public Carta getCarta(int x, int y){
         return cartas[x][y];
     }
+
 }

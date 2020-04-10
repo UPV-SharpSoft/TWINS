@@ -3,6 +3,8 @@ package com.sharpsoft.twinsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.sharpsoft.twinsapp.ILogic.Cronometro;
 import com.sharpsoft.twinsapp.ILogic.ICarta;
 import com.sharpsoft.twinsapp.ILogic.ITablero;
 
+import java.io.IOException;
 import java.util.Formatter;
 
 
@@ -51,7 +54,6 @@ public class Juego extends AppCompatActivity {
                 horizontalLayout.addView(cartaView);
             }
             tableroLayout.addView(horizontalLayout);
-            cronometro.start();
         }
 
         imageButtonPause = findViewById(R.id.imageButtonPause);
@@ -63,10 +65,21 @@ public class Juego extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                cronometro.start();
+            }
+        });
+        //Música de fondo partida
+        MediaPlayer musicaFondo = MediaPlayer.create(this, R.raw.partida_default);
+        musicaFondo.setLooping(true);
+        musicaFondo.start();
 
     }
 
     public void instanciarCronometro(){
-        cronometro = new Cronometro(60, cronoTV);
+        cronometro = new Cronometro(60, cronoTV, this);
     }
+
 }
