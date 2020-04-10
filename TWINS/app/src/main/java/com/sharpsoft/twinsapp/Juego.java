@@ -25,7 +25,7 @@ import java.util.Formatter;
 
 public class Juego extends AppCompatActivity {
     private LinearLayout tableroLayout;
-
+    protected MediaPlayer musicaFondo;
     private Tablero tablero;
     private Cronometro cronometro;
     private TextView cronoTV;
@@ -74,10 +74,12 @@ public class Juego extends AppCompatActivity {
         });
 
         //Música de fondo partida
-        MediaPlayer musicaFondo = MediaPlayer.create(this, R.raw.partida_default);
-        musicaFondo.setLooping(true);
-        musicaFondo.setVolume(50,50);
-        musicaFondo.start();
+        if(musicaFondo == null) {
+            musicaFondo = MediaPlayer.create(this, R.raw.partida_default);
+            musicaFondo.setLooping(true);
+            musicaFondo.setVolume(50, 50);
+            musicaFondo.start();
+        }
 
     }
 
