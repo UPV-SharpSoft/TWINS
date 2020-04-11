@@ -26,6 +26,7 @@ public class ICarta implements Carta {
     public ICarta(Bitmap bitmapDorso, Bitmap bitmapCarta){
         this.bitmapCarta = bitmapCarta;
         this.bitmapDorso = bitmapDorso;
+        bocaArriba = false;
     }
 
     public void setTablero(Tablero tablero, int x, int y){
