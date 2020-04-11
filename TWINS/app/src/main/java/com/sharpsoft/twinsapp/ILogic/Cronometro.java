@@ -2,7 +2,9 @@ package com.sharpsoft.twinsapp.ILogic;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.Juego;
@@ -26,6 +28,7 @@ public class Cronometro {
         this.caller = context;
         finalTiempoMusic = MediaPlayer.create(caller, R.raw.gameover_default);
 
+
         workingCountDown = new CountDownTimer(tiempo * 1000, 100) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -44,5 +47,9 @@ public class Cronometro {
 
     public void start() {
         workingCountDown.start();
+    }
+
+    public void pause() {
+        workingCountDown.cancel();
     }
 }

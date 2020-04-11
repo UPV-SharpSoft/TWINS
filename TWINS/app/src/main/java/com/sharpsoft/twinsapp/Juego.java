@@ -7,6 +7,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -34,7 +35,6 @@ public class Juego extends AppCompatActivity {
     private TextView cronoTV;
     private ImageButton imageButtonPause;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -57,7 +57,9 @@ public class Juego extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (Juego.this, PausedActivity.class);
+                /*intent.putExtra("cronometro", (Parcelable) cronometro);*/
                 startActivity(intent);
+                cronometro.pause();
             }
         });
 
@@ -79,7 +81,8 @@ public class Juego extends AppCompatActivity {
     }
 
     private void instanciarCronometro(){
-        cronometro = new Cronometro(60, cronoTV, this);
+        int valueCrono = Integer.parseInt(cronoTV.getText().toString());
+        cronometro = new Cronometro(valueCrono, cronoTV, this);
     }
 
 }
