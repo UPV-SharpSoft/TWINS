@@ -42,8 +42,6 @@ public class Juego extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
 
-
-
         cronoTV = findViewById(R.id.cronoTV);
         tableroLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
@@ -66,10 +64,6 @@ public class Juego extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState != null) {
-            long timeLeftChrono = System.currentTimeMillis() - savedInstanceState.getInt("timeLeft");
-            //Intentando que cuando se rote el móvil no se pierda el tiempo del crono
-        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -80,7 +74,6 @@ public class Juego extends AppCompatActivity {
         //Música de fondo partida
         if(savedInstanceState != null && musicaFondo != null) {
             int pos = savedInstanceState.getInt("position");
-
             musicaFondo.seekTo(pos);
             musicaFondo.start();
         }else{
