@@ -28,11 +28,11 @@ import java.util.Formatter;
 
 
 public class Juego extends AppCompatActivity {
+    private TextView cronoTV;
     private LinearLayout tableroLayout;
     protected MediaPlayer musicaFondo;
     private Tablero tablero;
     private Cronometro cronometro;
-    private TextView cronoTV;
     private ImageButton imageButtonPause;
 
     @Override
@@ -57,7 +57,7 @@ public class Juego extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (Juego.this, PausedActivity.class);
-                /*intent.putExtra("cronometro", (Parcelable) cronometro);*/
+                /*intent.putExtra("cronometro", cronoTV.getText());*/
                 startActivity(intent);
                 cronometro.pause();
             }
@@ -84,5 +84,9 @@ public class Juego extends AppCompatActivity {
         int valueCrono = Integer.parseInt(cronoTV.getText().toString());
         cronometro = new Cronometro(valueCrono, cronoTV, this);
     }
-
+    /*
+    public TextView getCronoTV() {
+        return cronoTV;
+    }
+*/
 }
