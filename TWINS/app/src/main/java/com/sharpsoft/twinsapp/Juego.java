@@ -48,28 +48,11 @@ public class Juego extends AppCompatActivity {
 
         instanciarCronometro();
 
-        Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, 20, this);
-        tablero = new ITablero(4,5, baraja);
+        addTablero();
 
-        View tableroView = ((ITablero) tablero).getView(this);
-        tableroLayout.addView(tableroView);
+        ToPausedActivity();
 
-        imageButtonPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (Juego.this, PausedActivity.class);
-                /*intent.putExtra("cronometro", cronoTV.getText());*/
-                startActivity(intent);
-                cronometro.pause();
-            }
-        });
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                cronometro.start();
-            }
-        });
+        cronometro.start();
 
         //Música de fondo partida
         if(savedInstanceState != null && musicaFondo != null) {
@@ -85,10 +68,21 @@ public class Juego extends AppCompatActivity {
 
     }
 
+    public void addTablero(){
+
+        Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, 20, this);
+        tablero = new ITablero(4,5, baraja);
+
+        View tableroView = ((ITablero) tablero).getView(this);
+        tableroLayout.addView(tableroView);
+    }
+
     private void instanciarCronometro(){
+
         int valueCrono = Integer.parseInt(cronoTV.getText().toString());
         cronometro = new Cronometro(valueCrono, cronoTV, this);
     }
+
     /*
     public TextView getCronoTV() {
         return cronoTV;
@@ -105,5 +99,18 @@ public class Juego extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
     }
+
+    public void ToPausedActivity(){
+        imageButtonPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (Juego.this, PausedActivity.class);
+                /*intent.putExtra("cronometro", cronoTV.getText());*/
+                startActivity(intent);
+                cronometro.pause();
+            }
+        });
+    }
+
 
 }
