@@ -20,7 +20,8 @@ public class Cronometro {
     private CountDownTimer workingCountDown;
     private Context caller;
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
-
+    private long mTimeLeftInMillis = 600000;
+    private long mEndTime;
     private MediaPlayer finalTiempoMusic;
 
     public Cronometro(int tiempo, final TextView crono, Context context){
@@ -28,12 +29,15 @@ public class Cronometro {
         this.caller = context;
         finalTiempoMusic = MediaPlayer.create(caller, R.raw.gameover_default);
 
+        mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
 
         workingCountDown = new CountDownTimer(tiempo * 1000, 100) {
             @Override
             public void onTick(long millisUntilFinished) {
                 if(millisUntilFinished>10000) crono.setText("" + millisUntilFinished / 1000);
                 else crono.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
+
+                mTimeLeftInMillis = millisUntilFinished;
             }
 
             @Override
@@ -49,7 +53,11 @@ public class Cronometro {
         workingCountDown.start();
     }
 
+    public Long timeLeft(){
+        return mEndTime;
+    }
     public void pause() {
         workingCountDown.cancel();
     }
+
 }

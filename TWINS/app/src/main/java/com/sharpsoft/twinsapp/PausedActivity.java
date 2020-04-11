@@ -12,6 +12,7 @@ import com.sharpsoft.twinsapp.ILogic.Cronometro;
 public class PausedActivity extends AppCompatActivity {
 
     private ImageButton imageButtonClose;
+    private Cronometro cronometro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +24,21 @@ public class PausedActivity extends AppCompatActivity {
         imageButtonClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*Bundle bundle = getIntent().getExtras();
+                /*
+                Bundle bundle = getIntent().getExtras();
 
                 if (bundle != null) {
-                    String string = bundle.getString("cronometro");
-                }*/
-
+                    String cronoTVcontent = bundle.getString("cronometro");
+                    instanciarCronometro(cronoTVcontent);
+                }
+                */
                 finish();
             }
         });
     }
-
+    /*
+    private void instanciarCronometro(String cronoTVcontent){
+        cronometro = new Cronometro(cronoTVcontent, Juego.getCronoTV(), Juego.class);
+    }
+    */
 }
