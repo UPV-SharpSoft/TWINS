@@ -34,8 +34,6 @@ public class Juego extends AppCompatActivity {
     static protected MediaPlayer musicaFondo;
     private Tablero tablero;
     private Cronometro cronometro;
-    static private Cronometro cronometro;
-    private TextView cronoTV;
     private ImageButton imageButtonPause;
 
     @Override
@@ -53,7 +51,7 @@ public class Juego extends AppCompatActivity {
         instanciarCronometro();
 
         Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, 20, this);
-        tablero = new ITablero(4,5, baraja, this);
+        tablero = new ITablero(4,5, baraja);
 
         View tableroView = ((ITablero) tablero).getView(this);
         tableroLayout.addView(tableroView);

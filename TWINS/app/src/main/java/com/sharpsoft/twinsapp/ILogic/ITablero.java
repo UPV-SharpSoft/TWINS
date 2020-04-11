@@ -3,7 +3,6 @@ package com.sharpsoft.twinsapp.ILogic;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.sharpsoft.twins_clases.logic.Tablero;
@@ -11,7 +10,7 @@ import com.sharpsoft.twins_clases.logic.Tablero;
 
 public class ITablero extends Tablero {
 
-    public ITablero(int width, int height, Baraja set, Context ctx) {
+    public ITablero(int width, int height, Baraja set) {
         super(width, height);
 
         for(int x = 0; x < width; x++){
