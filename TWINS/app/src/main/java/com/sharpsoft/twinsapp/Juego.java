@@ -2,6 +2,7 @@ package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -25,9 +26,9 @@ import java.util.Formatter;
 
 public class Juego extends AppCompatActivity {
     private LinearLayout tableroLayout;
-    protected MediaPlayer musicaFondo;
+    static protected MediaPlayer musicaFondo;
     private Tablero tablero;
-    private Cronometro cronometro;
+    static private Cronometro cronometro;
     private TextView cronoTV;
     private ImageButton imageButtonPause;
 
@@ -37,6 +38,8 @@ public class Juego extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
+
+
 
         cronoTV = findViewById(R.id.cronoTV);
         instanciarCronometro();
@@ -66,6 +69,10 @@ public class Juego extends AppCompatActivity {
             }
         });
 
+        if (savedInstanceState != null) {
+            long timeLeftChrono = System.currentTimeMillis() - savedInstanceState.getInt("timeLeft");
+            //Intentando que cuando se rote el móvil no se pierda el tiempo del crono
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -74,7 +81,12 @@ public class Juego extends AppCompatActivity {
         });
 
         //Música de fondo partida
-        if(musicaFondo == null) {
+        if(savedInstanceState != null && musicaFondo != null) {
+            int pos = savedInstanceState.getInt("position");
+
+            musicaFondo.seekTo(pos);
+            musicaFondo.start();
+        }else{
             musicaFondo = MediaPlayer.create(this, R.raw.partida_default);
             musicaFondo.setLooping(true);
             musicaFondo.setVolume(50, 50);
@@ -85,6 +97,17 @@ public class Juego extends AppCompatActivity {
 
     public void instanciarCronometro(){
         cronometro = new Cronometro(60, cronoTV, this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        outState.putInt("position" , musicaFondo.getCurrentPosition());
+        musicaFondo.pause();
+
+        outState.putLong("timeLeft", cronometro.timeLeft());
+
+        super.onSaveInstanceState(outState);
+
     }
 
 }
