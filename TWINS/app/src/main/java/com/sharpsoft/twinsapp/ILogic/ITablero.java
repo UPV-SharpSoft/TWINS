@@ -3,6 +3,7 @@ package com.sharpsoft.twinsapp.ILogic;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.sharpsoft.twins_clases.logic.Tablero;
@@ -33,7 +34,7 @@ public class ITablero extends Tablero {
             horizontalLayout.setGravity(Gravity.CENTER);
             for(int x = 0; x < this.getWidth(); x++){
                 ICarta carta = (ICarta) this.getCarta(x, y);
-                View cartaView = carta.getCartaView(ctx);
+                View cartaView = carta.getCartaView(ctx, horizontalLayout);
                 horizontalLayout.addView(cartaView);
             }
             tableroLayout.addView(horizontalLayout);

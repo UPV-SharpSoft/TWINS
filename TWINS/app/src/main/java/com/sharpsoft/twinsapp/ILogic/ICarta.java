@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.sharpsoft.twins_clases.logic.Carta;
@@ -33,11 +34,11 @@ public class ICarta implements Carta {
         this.y = y;
     }
 
-    public View getCartaView(Context ctx){
+    public View getCartaView(Context ctx, ViewGroup parent){
         if(layout == null){
             this.ctx = ctx;
             LayoutInflater inflater = LayoutInflater.from(ctx);
-            layout = inflater.inflate(R.layout.carta, null, false);
+            layout = inflater.inflate(R.layout.carta, parent, false);
             imageView = layout.findViewById(R.id.cartaImageView);
 
             imageView.setImageBitmap(bitmapDorso);
