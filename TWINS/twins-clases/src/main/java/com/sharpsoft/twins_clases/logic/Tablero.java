@@ -47,7 +47,7 @@ public class Tablero {
 
     public void girar(int x, int y){
         Carta c = cartas[x][y];
-        //if(cartasGiradas.contains(c)) throw new CartaGiradaException(c); //Lanzar exception si la carta esta sido girada
+        if(c.estaBocaArriba()) return; //salir si la carta ya ha sido girada
         if(estaEsperando) return;
 
         c.girar();
