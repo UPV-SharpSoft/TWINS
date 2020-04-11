@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.Juego;
@@ -55,4 +56,8 @@ public class Cronometro {
     public Long timeLeft(){
         return mEndTime;
     }
+    public void pause() {
+        workingCountDown.cancel();
+    }
+
 }

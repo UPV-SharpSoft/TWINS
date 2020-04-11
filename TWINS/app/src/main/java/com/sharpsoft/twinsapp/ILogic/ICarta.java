@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.sharpsoft.twins_clases.logic.Carta;
+import com.sharpsoft.twins_clases.logic.Tablero;
 import com.sharpsoft.twinsapp.R;
 
 public class ICarta implements Carta {
@@ -16,21 +17,41 @@ public class ICarta implements Carta {
     private View layout;
     private boolean bocaArriba;
 
+    private Tablero tablero;
+    private int x, y;
+
     private Context ctx;
 
-    public ICarta(Bitmap bitmapDorso, Bitmap bitmapCarta, Context ctx){
+    public ICarta(Bitmap bitmapDorso, Bitmap bitmapCarta){
         this.bitmapCarta = bitmapCarta;
         this.bitmapDorso = bitmapDorso;
-        this.ctx = ctx;
-
-        LayoutInflater inflater = LayoutInflater.from(ctx);
-        layout = inflater.inflate(R.layout.carta, null, false);
-        imageView = layout.findViewById(R.id.cartaImageView);
-
-        imageView.setImageBitmap(bitmapDorso);
     }
 
-    public View getCartaView(){
+    public void setTablero(Tablero tablero, int x, int y){
+        this.tablero = tablero;
+        this.x = x;
+        this.y = y;
+    }
+
+    public View getCartaView(Context ctx){
+        if(layout == null){
+            this.ctx = ctx;
+            LayoutInflater inflater = LayoutInflater.from(ctx);
+            layout = inflater.inflate(R.layout.carta, null, false);
+            imageView = layout.findViewById(R.id.cartaImageView);
+
+            imageView.setImageBitmap(bitmapDorso);
+
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(tablero != null){
+                        tablero.girar(x, y);
+                    }
+                }
+            });
+        }
+
         return layout;
     }
 
@@ -46,11 +67,13 @@ public class ICarta implements Carta {
         bocaArriba = !bocaArriba;
         final Bitmap b = bocaArriba?bitmapCarta:bitmapDorso;
 
-        ((Activity) ctx).runOnUiThread(new Thread(){
-            public void run(){
-                imageView.setImageBitmap(b);
-            }
-        });
+        if(layout != null){
+            ((Activity) layout.getContext()).runOnUiThread(new Thread(){
+                public void run(){
+                    imageView.setImageBitmap(b);
+                }
+            });
+        }
     }
 
     @Override
