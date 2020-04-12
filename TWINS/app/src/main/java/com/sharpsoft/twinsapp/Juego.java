@@ -28,6 +28,7 @@ public class Juego extends AppCompatActivity {
     private TextView cronoTV;
     private CountDownTimer cronometro;
     long timeLeft;
+    boolean primero = true;
 
     private LinearLayout tableroLayout;
     private com.sharpsoft.twins_clases.logic.Tablero tablero;
@@ -46,7 +47,7 @@ public class Juego extends AppCompatActivity {
 
         addTablero();
 
-        instanciarCronometro(60000);
+        instanciarCronometro(60000);//Time in ms
         cronometro.start();
 
         ToPausedActivity();
@@ -58,10 +59,12 @@ public class Juego extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        instanciarCronometro(timeLeft);
-        cronometro.start();
-        audioInstance.resumeMusic(this);
+        if(!primero) {
+            instanciarCronometro(timeLeft);
+            cronometro.start();
+            audioInstance.resumeMusic(this);
+        }
+        primero = false;
     }
 
     @Override
@@ -146,7 +149,7 @@ public class Juego extends AppCompatActivity {
                 /*intent.putExtra("cronometro", cronoTV.getText());*/
                 startActivity(intent);
                 cronometro.cancel();
-                audioInstance.pauseMusic(getBaseContext());
+                audioInstance.pauseMusic(Juego.this);
             }
         });
     }
