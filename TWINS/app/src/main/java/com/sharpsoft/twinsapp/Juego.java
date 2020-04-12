@@ -19,6 +19,9 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
 
 import java.util.Observable;
 
+import static com.sharpsoft.twinsapp.Audio.Sounds.correct;
+import static com.sharpsoft.twinsapp.Audio.Sounds.incorrect;
+
 
 public class Juego extends AppCompatActivity {
     private TextView cronoTV;
@@ -61,8 +64,8 @@ public class Juego extends AppCompatActivity {
         audioInstance.resumeMusic(this);
     }
 
-    public void addTablero(){
-        Dimension dimension = new Dimension(4,5);
+    public void addTablero() {
+        Dimension dimension = new Dimension(4, 5);
         Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, dimension, this);
         tablero = new Tablero(dimension, baraja);
 
@@ -72,25 +75,49 @@ public class Juego extends AppCompatActivity {
         tablero.addObserver(new FlipObserver() {
             @Override
             public void update(Observable observable, Object o) {
-                if(o == On.success && tablero.isComplete()){
+                if (o == On.success && tablero.isComplete()) {
                     Log.i("Completado", "Tablero completado");
+                    //
+                } else if (o == On.success) {
+                    new Thread() {
+                        public void run() {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            audioInstance.makeSound(correct);
+                        }
+                    }.start();
+                } else if (o == On.failure) {
+                    new Thread() {
+                        public void run() {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            audioInstance.makeSound(incorrect);
+                        }
+                    }.start();
                 }
             }
+
         });
     }
 
-    private void instanciarCronometro(){
+    private void instanciarCronometro() {
 
         int valueCrono = Integer.parseInt(cronoTV.getText().toString());
         cronometro = new Cronometro(valueCrono, cronoTV, this);
     }
 
 
-    public void ToPausedActivity(){
+    public void ToPausedActivity() {
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (Juego.this, PausedActivity.class);
+                Intent intent = new Intent(Juego.this, PausedActivity.class);
                 /*intent.putExtra("cronometro", cronoTV.getText());*/
                 startActivity(intent);
                 cronometro.pause();

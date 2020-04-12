@@ -19,8 +19,9 @@ public class Audio {
     private int gameOverSound;
     private int correctSound;
     private int victorySound;
+    private int incorrectSound;
 
-    public enum Sounds{flip, gameover, correct,victory}
+    public enum Sounds{flip, gameover, correct,victory, incorrect}
 
     public static Audio getInstance(){
         return audioInstance;
@@ -64,6 +65,7 @@ public class Audio {
         gameOverSound = soundFX.load(context, R.raw.gameover_default,1);
         correctSound = soundFX.load(context, R.raw.correct_default, 1);
         victorySound = soundFX.load(context, R.raw.victoria_default, 1);
+        incorrectSound = soundFX.load(context, R.raw.incorrect_default, 1);
     }
 
     /** Próximamente, cuando hagamos más packs de Sonidos, habrá que precargar los sonidos
@@ -78,13 +80,15 @@ public class Audio {
         case gameover:
             soundFX.play(gameOverSound,1,1,0,0,1);
             break;
-            case correct:
+        case correct:
             soundFX.play(correctSound,1,1,0,0,1);
             break;
-            case victory:
+        case victory:
             soundFX.play(victorySound,1,1,0,0,1);
             break;
-
+        case incorrect:
+            soundFX.play(incorrectSound,1,1,0,0,1);
+            break;
         }
     }
 

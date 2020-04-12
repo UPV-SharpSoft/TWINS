@@ -12,6 +12,10 @@ import com.sharpsoft.twins_clases.logic.Tablero;
 import com.sharpsoft.twinsapp.Audio;
 import com.sharpsoft.twinsapp.R;
 
+import static com.sharpsoft.twinsapp.Audio.Sounds.correct;
+import static com.sharpsoft.twinsapp.Audio.Sounds.flip;
+import static com.sharpsoft.twinsapp.Audio.Sounds.incorrect;
+
 public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
     private Bitmap bitmapDorso, bitmapCarta;
     private ImageView imageView;
@@ -63,12 +67,16 @@ public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
     public boolean mismaImagen(com.sharpsoft.twins_clases.logic.Carta c) {
         if(!(c instanceof Carta)) throw new RuntimeException("No son mismo tipo");
         Carta o = (Carta) c;
+
         return this.bitmapCarta.sameAs(o.bitmapCarta);
     }
 
     @Override
     public void girar() {       //Faltaria animar?
         bocaArriba = !bocaArriba;
+        if(bocaArriba){
+            audioInstance.makeSound(flip);
+        }
         final Bitmap b = bocaArriba?bitmapCarta:bitmapDorso;
 
 
