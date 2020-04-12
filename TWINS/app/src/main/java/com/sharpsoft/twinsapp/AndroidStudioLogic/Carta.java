@@ -25,8 +25,6 @@ public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
     private Tablero tablero;
     private int x, y;
 
-    private Audio audioInstance = Audio.getInstance();
-
     private Context ctx;
 
     public Carta(Bitmap bitmapDorso, Bitmap bitmapCarta){

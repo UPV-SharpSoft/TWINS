@@ -6,13 +6,13 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
+import android.util.Log;
 
 import java.net.ContentHandler;
 
 public class Audio {
     private static final Audio audioInstance = new Audio();
     private MediaPlayer bgMusic;
-    private SoundPool.Builder soundFXBuilder;
     private SoundPool soundFX;
 
     private int flipSound;
@@ -26,6 +26,10 @@ public class Audio {
 
     public static Audio getInstance() {
         return audioInstance;
+    }
+
+    public void setOnPreared(SoundPool.OnLoadCompleteListener listener){
+        soundFX.setOnLoadCompleteListener(listener);
     }
 
     public void startMusic(Context context, int song) {
@@ -57,18 +61,18 @@ public class Audio {
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .build();
             soundFX = new SoundPool.Builder()
-                    .setMaxStreams(3)
+                    .setMaxStreams(9)
                     .build();
         } else {
-            soundFX = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+            soundFX = new SoundPool(9, AudioManager.STREAM_MUSIC, 0);
         }
 
         //Precarga de sonidos default
-        flipSound = soundFX.load(context, R.raw.flip_default, 1);
-        gameOverSound = soundFX.load(context, R.raw.gameover_default, 1);
-        correctSound = soundFX.load(context, R.raw.correct_default, 1);
-        victorySound = soundFX.load(context, R.raw.victoria_default, 1);
-        incorrectSound = soundFX.load(context, R.raw.incorrect_default, 1);
+        flipSound = soundFX.load(context, R.raw.flip_default, 2);
+        gameOverSound = soundFX.load(context, R.raw.gameover_default, 2);
+        correctSound = soundFX.load(context, R.raw.correct_default, 2);
+        victorySound = soundFX.load(context, R.raw.victoria_default, 2);
+        incorrectSound = soundFX.load(context, R.raw.incorrect_default, 2);
         shuffleSound = soundFX.load(context, R.raw.shuffle, 1);
     }
 
