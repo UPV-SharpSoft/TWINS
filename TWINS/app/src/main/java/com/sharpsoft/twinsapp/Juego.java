@@ -86,6 +86,13 @@ public class Juego extends AppCompatActivity {
             @Override
             public void onFlip() {
                 audioInstance.makeSound(flip);
+
+                Log.i("tablero", "tablero " + tablero.isComplete());
+                if(tablero.isComplete()){ //Si se ha terminado el tablero
+                    Intent i = new Intent(Juego.this, FinPartida.class);
+                    startActivity(i);
+                    finish();
+                }
             }
 
             @Override
