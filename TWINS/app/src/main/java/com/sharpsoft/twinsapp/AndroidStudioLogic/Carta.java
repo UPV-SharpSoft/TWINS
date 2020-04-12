@@ -51,7 +51,6 @@ public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
                 public void onClick(View view) {
                     if(tablero != null){
                         tablero.girar(x, y);
-                        audioInstance.makeSound("flip");
                     }
                 }
             });

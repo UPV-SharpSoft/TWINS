@@ -20,6 +20,8 @@ public class Audio {
     private int correctSound;
     private int victorySound;
 
+    public enum Sounds{flip, gameover, correct,victory}
+
     public static Audio getInstance(){
         return audioInstance;
     }
@@ -47,11 +49,11 @@ public class Audio {
     public void createSoundPool(Context context){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_GAME)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .build();
             soundFX = new SoundPool.Builder()
-                    .setAudioAttributes(audioAttributes)
+                    .setMaxStreams(3)
                     .build();
         }else{
             soundFX = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
