@@ -6,16 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twins_clases.logic.Tablero;
 
 
 public class ITablero extends Tablero {
 
-    public ITablero(int width, int height, Baraja set) {
-        super(width, height);
+    public ITablero(Dimension dimension, Baraja set) {
+        super(dimension);
 
-        for(int x = 0; x < width; x++){
-            for(int y = 0; y < height; y++){
+        for(int x = 0; x < dimension.width; x++){
+            for(int y = 0; y < dimension.height; y++){
                 final ICarta carta = new ICarta(set.getReverso(), set.sacarCarta());
                 carta.setTablero(this, x, y);
                 this.cartas[x][y] = carta;
@@ -29,11 +30,11 @@ public class ITablero extends Tablero {
         tableroLayout.setGravity(Gravity.CENTER);
 
 
-        for(int y = 0; y < this.getHeight(); y++){
+        for(int y = 0; y < getDimension().height; y++){
             LinearLayout horizontalLayout = new LinearLayout(ctx);
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
             horizontalLayout.setGravity(Gravity.CENTER);
-            for(int x = 0; x < this.getWidth(); x++){
+            for(int x = 0; x < getDimension().width; x++){
                 ICarta carta = (ICarta) this.getCarta(x, y);
                 View cartaView = carta.getCartaView(ctx, horizontalLayout);
 

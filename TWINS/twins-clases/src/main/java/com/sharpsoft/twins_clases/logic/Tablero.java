@@ -4,15 +4,18 @@ import java.util.Stack;
 
 public class Tablero {
     protected Carta[][] cartas;
-    private int width;
-    private int height;
+    private Dimension dimension;
     private Stack<Carta> cartasGiradas;
     private boolean estaEsperando;
 
-    public Tablero(int width, int height){
+    public Tablero(Dimension dimension){
+        this.dimension = dimension;
+
+        int width = dimension.width;
+        int height = dimension.height;
+
         if( ((width*height) % 2 != 0) || (width * height == 0)) throw new MalformedTableroException("Las cartas son impares");
 
-        this.height = height; this.width = width;
         cartas = new Carta[width][height];
 
         cartasGiradas = new Stack<>();
@@ -21,12 +24,8 @@ public class Tablero {
 
     }
 
-    public int getWidth(){
-        return width;
-    }
-
-    public int getHeight(){
-        return height;
+    public Dimension getDimension() {
+        return dimension;
     }
 
     private void girarCartas(final Carta c1, final Carta c2){

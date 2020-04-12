@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twins_clases.logic.Tablero;
 import com.sharpsoft.twinsapp.ILogic.Baraja;
 import com.sharpsoft.twinsapp.ILogic.BarajaFactory;
@@ -62,9 +63,9 @@ public class Juego extends AppCompatActivity {
     }
 
     public void addTablero(){
-
-        Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, 20, this);
-        tablero = new ITablero(4,5, baraja);
+        Dimension dimension = new Dimension(4,5);
+        Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, dimension, this);
+        tablero = new ITablero(dimension, baraja);
 
         View tableroView = ((ITablero) tablero).getView(this);
         tableroLayout.addView(tableroView);

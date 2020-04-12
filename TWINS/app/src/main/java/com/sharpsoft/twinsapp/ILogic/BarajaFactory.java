@@ -5,6 +5,8 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.sharpsoft.twins_clases.logic.Dimension;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,12 +21,12 @@ public class BarajaFactory {
 
     private final static String[] cartasMinecraft = {"RedstoneOre.png", "DiamondOre.png", "GoldOre.png"};
 
-    public static Baraja getBaraja(Barajas baraja, int numCartas, Context ctx){
+    public static Baraja getBaraja(Barajas baraja, Dimension dimension, Context ctx){
         List<Bitmap> cartas = new ArrayList<>();
         Bitmap reverso = null;
 
         if(baraja == Barajas.minecraft){
-            for(int i = 0; i < numCartas/2; i++){
+            for(int i = 0; i < dimension.getTotal()/2; i++){
                 Bitmap b = getBitmapFromAsset("CartasMinecraft/" + cartasMinecraft[i%cartasMinecraft.length], ctx);
                 cartas.add(b); cartas.add(b);
             }
