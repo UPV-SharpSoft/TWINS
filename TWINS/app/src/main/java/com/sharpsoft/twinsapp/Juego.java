@@ -46,7 +46,6 @@ public class Juego extends AppCompatActivity {
 
         //Música de fondo partida
         audioInstance.startMusic(this, R.raw.partida_default);
-
     }
 
     public void addTablero(){
