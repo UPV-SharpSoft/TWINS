@@ -1,8 +1,9 @@
 package com.sharpsoft.twins_clases.logic;
 
+import java.util.Observable;
 import java.util.Stack;
 
-public class Tablero {
+public class Tablero extends Observable {
     protected Carta[][] cartas;
     private Dimension dimension;
     private Stack<Carta> cartasGiradas;
@@ -50,6 +51,9 @@ public class Tablero {
         if(estaEsperando) return;
 
         c.girar();
+
+        notifyObservers(FlipObserver.On.Flip);
+
         cartasGiradas.push(c);
         if(cartasGiradas.size() % 2 == 0){  //Se ha girado la segunda carta
             Carta c1 = cartasGiradas.pop();
@@ -57,14 +61,22 @@ public class Tablero {
             if(c1.mismaImagen(c2)){ //Coinciden
                 cartasGiradas.push(c1);
                 cartasGiradas.push(c2);
+
+                notifyObservers(FlipObserver.On.success);
             }else{  //No coinciden
                girarCartas(c1, c2);
+
+               notifyObservers(FlipObserver.On.failure);
             }
         }
     }
 
     public Carta getCarta(int x, int y){
         return cartas[x][y];
+    }
+
+    public boolean isComplete(){
+        return cartasGiradas.size() == dimension.getTotal();
     }
 
 }
