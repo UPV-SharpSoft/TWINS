@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Juego"
     android:background="#FFFF"
-    >
+    tools:context=".Juego">
 
     <LinearLayout
         android:id="@+id/tableroLayout"
@@ -26,10 +25,9 @@
 
     <ImageButton
         android:id="@+id/imageButtonPause"
-        android:layout_width="39dp"
-        android:layout_height="36dp"
-        android:background="#EDEDED"
-        android:backgroundTint="#FFFFFF"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_square"
         android:tint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,9 +45,9 @@
         android:text="60"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonPause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonPause"
         app:layout_constraintVertical_bias="0.036" />
 </androidx.constraintlayout.widget.ConstraintLayout>
