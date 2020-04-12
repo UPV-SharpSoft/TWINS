@@ -85,36 +85,17 @@ public class Juego extends AppCompatActivity {
         tablero.addObserver(new FlipObserver() {
             @Override
             public void onFlip() {
-                Log.i("Flip", "Flip");
                 audioInstance.makeSound(flip);
             }
 
             @Override
             public void onSuccess() {
-                new Thread(){
-                    public void run(){
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        audioInstance.makeSound(correct);
-                    }
-                }.start();
+                audioInstance.makeSound(correct);
             }
 
             @Override
             public void onFailure() {
-                new Thread(){
-                    public void run(){
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        audioInstance.makeSound(incorrect);
-                    }
-                }.start();
+                audioInstance.makeSound(incorrect);
             }
         });
     }

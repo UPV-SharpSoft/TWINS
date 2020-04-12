@@ -34,7 +34,7 @@ public class Tablero extends Observable {
         new Thread(){
             public void run(){
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -49,8 +49,6 @@ public class Tablero extends Observable {
         Carta c = cartas[x][y];
         if(c.estaBocaArriba()) return; //salir si la carta ya ha sido girada
         if(estaEsperando) return;
-
-        estaEsperando = true;
 
         c.girar();
 
@@ -67,16 +65,12 @@ public class Tablero extends Observable {
 
                 setChanged();
                 notifyObservers(FlipObserver.On.success);
-
-                estaEsperando = false;
             }else{  //No coinciden
                girarCartas(c1, c2);
 
                 setChanged();
                notifyObservers(FlipObserver.On.failure);
             }
-        }else{
-            estaEsperando = false;
         }
     }
 
