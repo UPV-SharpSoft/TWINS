@@ -16,12 +16,10 @@ public class Cronometro {
     private long mTimeLeftInMillis = 600000;
     private long mEndTime;
     private Audio audioInstance = Audio.getInstance();
-   // private MediaPlayer finalTiempoMusic;
 
     public Cronometro(int tiempo, final TextView crono, Context context){
 
         this.caller = context;
-        //finalTiempoMusic = MediaPlayer.create(caller, R.raw.gameover_default);
 
         mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
 
@@ -37,8 +35,8 @@ public class Cronometro {
             @Override
             public void onFinish() {
                 /*ToDo*/
-                //audioInstance.makeSound("over");
-                //finalTiempoMusic.start();
+                audioInstance.stopMusic(caller);
+                audioInstance.makeSound(Audio.Sounds.gameover);
                 crono.setText(cronoFormatLong.format(0));
 
             }

@@ -19,6 +19,9 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
 
 import java.util.Observable;
 
+import static com.sharpsoft.twinsapp.Audio.Sounds.correct;
+import static com.sharpsoft.twinsapp.Audio.Sounds.incorrect;
+
 
 public class Juego extends AppCompatActivity {
     private TextView cronoTV;
@@ -46,7 +49,7 @@ public class Juego extends AppCompatActivity {
 
         cronometro.start();
 
-        audioInstance.createSoundPool(this);
+
 
         //Música de fondo partida
         audioInstance.startMusic(this, R.raw.partida_default);
@@ -61,8 +64,14 @@ public class Juego extends AppCompatActivity {
         audioInstance.resumeMusic(this);
     }
 
-    public void addTablero(){
-        Dimension dimension = new Dimension(4,5);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        audioInstance.pauseMusic(this);
+    }
+
+    public void addTablero() {
+        Dimension dimension = new Dimension(4, 5);
         Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, dimension, this);
         tablero = new Tablero(dimension, baraja);
 
@@ -71,10 +80,36 @@ public class Juego extends AppCompatActivity {
 
         tablero.addObserver(new FlipObserver() {
             @Override
-            public void update(Observable observable, Object o) {
-                if(o == On.success && tablero.isComplete()){
-                    Log.i("Completado", "Tablero completado");
-                }
+            public void onFlip() {
+                Log.i("Flip", "Flip");
+            }
+
+            @Override
+            public void onSuccess() {
+                new Thread(){
+                    public void run(){
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        audioInstance.makeSound(correct);
+                    }
+                }.start();
+            }
+
+            @Override
+            public void onFailure() {
+                new Thread(){
+                    public void run(){
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        audioInstance.makeSound(incorrect);
+                    }
+                }.start();
             }
         });
     }
@@ -86,11 +121,11 @@ public class Juego extends AppCompatActivity {
     }
 
 
-    public void ToPausedActivity(){
+    public void ToPausedActivity() {
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (Juego.this, PausedActivity.class);
+                Intent intent = new Intent(Juego.this, PausedActivity.class);
                 /*intent.putExtra("cronometro", cronoTV.getText());*/
                 startActivity(intent);
                 cronometro.pause();
