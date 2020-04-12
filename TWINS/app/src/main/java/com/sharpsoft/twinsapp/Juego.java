@@ -74,6 +74,23 @@ public class Juego extends AppCompatActivity {
 
         tablero.addObserver(new FlipObserver() {
             @Override
+            public void onFlip() {
+                Log.i("Flip", "Flip");
+            }
+
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+
+        /*tablero.addObserver(new FlipObserver() {
+            @Override
             public void update(Observable observable, Object o) {
                 if (o == On.success && tablero.isComplete()) {
                     Log.i("Completado", "Tablero completado");
@@ -103,7 +120,7 @@ public class Juego extends AppCompatActivity {
                 }
             }
 
-        });
+        });*/
     }
     
     private void instanciarCronometro(){
