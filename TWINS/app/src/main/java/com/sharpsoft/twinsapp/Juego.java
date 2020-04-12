@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,20 +15,22 @@ import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Baraja;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BarajaFactory;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Cronometro;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
 
-import java.util.Observable;
+import java.text.DecimalFormat;
 
 import static com.sharpsoft.twinsapp.Audio.Sounds.correct;
 import static com.sharpsoft.twinsapp.Audio.Sounds.incorrect;
 
 
 public class Juego extends AppCompatActivity {
+    //Crono's things
     private TextView cronoTV;
+    private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
+    private CountDownTimer cronometro;
+
     private LinearLayout tableroLayout;
     private com.sharpsoft.twins_clases.logic.Tablero tablero;
-    private Cronometro cronometro;
     private ImageButton imageButtonPause;
     private Audio audioInstance = Audio.getInstance();
 
@@ -115,9 +118,22 @@ public class Juego extends AppCompatActivity {
     }
     
     private void instanciarCronometro(){
-
         int valueCrono = Integer.parseInt(cronoTV.getText().toString());
-        cronometro = new Cronometro(valueCrono, cronoTV, this);
+        //cronometro = new Cronometro(valueCrono, cronoTV, this);
+        cronometro = new CountDownTimer(valueCrono*1000, 100) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if(millisUntilFinished>10000) cronoTV.setText("" + millisUntilFinished / 1000);
+                else cronoTV.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
+            }
+
+            @Override
+            public void onFinish() {
+                audioInstance.stopMusic(Juego.this);
+                audioInstance.makeSound(Audio.Sounds.gameover);
+                cronoTV.setText(cronoFormatLong.format(0));
+            }
+        };
     }
 
 
@@ -128,7 +144,7 @@ public class Juego extends AppCompatActivity {
                 Intent intent = new Intent(Juego.this, PausedActivity.class);
                 /*intent.putExtra("cronometro", cronoTV.getText());*/
                 startActivity(intent);
-                cronometro.pause();
+                cronometro.cancel();
                 audioInstance.pauseMusic(getBaseContext());
             }
         });
