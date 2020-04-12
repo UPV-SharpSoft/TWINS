@@ -52,6 +52,7 @@ public class Tablero extends Observable {
 
         c.girar();
 
+        setChanged();
         notifyObservers(FlipObserver.On.Flip);
 
         cartasGiradas.push(c);
@@ -62,10 +63,12 @@ public class Tablero extends Observable {
                 cartasGiradas.push(c1);
                 cartasGiradas.push(c2);
 
+                setChanged();
                 notifyObservers(FlipObserver.On.success);
             }else{  //No coinciden
                girarCartas(c1, c2);
 
+                setChanged();
                notifyObservers(FlipObserver.On.failure);
             }
         }
