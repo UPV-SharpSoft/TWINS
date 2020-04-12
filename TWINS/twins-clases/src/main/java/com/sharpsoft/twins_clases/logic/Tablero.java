@@ -50,6 +50,8 @@ public class Tablero extends Observable {
         if(c.estaBocaArriba()) return; //salir si la carta ya ha sido girada
         if(estaEsperando) return;
 
+        estaEsperando = true;
+
         c.girar();
 
         setChanged();
@@ -65,12 +67,16 @@ public class Tablero extends Observable {
 
                 setChanged();
                 notifyObservers(FlipObserver.On.success);
+
+                estaEsperando = false;
             }else{  //No coinciden
                girarCartas(c1, c2);
 
                 setChanged();
                notifyObservers(FlipObserver.On.failure);
             }
+        }else{
+            estaEsperando = false;
         }
     }
 
