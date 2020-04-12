@@ -20,6 +20,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
 import java.text.DecimalFormat;
 
 import static com.sharpsoft.twinsapp.Audio.Sounds.correct;
+import static com.sharpsoft.twinsapp.Audio.Sounds.flip;
 import static com.sharpsoft.twinsapp.Audio.Sounds.incorrect;
 
 
@@ -85,6 +86,7 @@ public class Juego extends AppCompatActivity {
             @Override
             public void onFlip() {
                 Log.i("Flip", "Flip");
+                audioInstance.makeSound(flip);
             }
 
             @Override

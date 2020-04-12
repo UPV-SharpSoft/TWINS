@@ -74,13 +74,8 @@ public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
     @Override
     public void girar() {       //Faltaria animar?
         bocaArriba = !bocaArriba;
-        if(bocaArriba){
-            audioInstance.makeSound(flip);
-        }
+
         final Bitmap b = bocaArriba?bitmapCarta:bitmapDorso;
-
-
-
         if(layout != null){
             ((Activity) layout.getContext()).runOnUiThread(new Thread(){
                 public void run(){
