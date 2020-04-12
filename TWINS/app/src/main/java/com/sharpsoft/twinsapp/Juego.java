@@ -31,10 +31,10 @@ import java.util.Formatter;
 public class Juego extends AppCompatActivity {
     private TextView cronoTV;
     private LinearLayout tableroLayout;
-    static protected MediaPlayer musicaFondo;
     private Tablero tablero;
     private Cronometro cronometro;
     private ImageButton imageButtonPause;
+    private Audio audioInstance = Audio.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +55,7 @@ public class Juego extends AppCompatActivity {
         cronometro.start();
 
         //Música de fondo partida
-        if(savedInstanceState != null && musicaFondo != null) {
-            int pos = savedInstanceState.getInt("position");
-            musicaFondo.seekTo(pos);
-            musicaFondo.start();
-        }else{
-            musicaFondo = MediaPlayer.create(this, R.raw.partida_default);
-            musicaFondo.setLooping(true);
-            musicaFondo.setVolume(50, 50);
-            musicaFondo.start();
-        }
+        audioInstance.startMusic(this, R.raw.partida_default);
 
     }
 
@@ -90,14 +81,9 @@ public class Juego extends AppCompatActivity {
 */
 
     @Override
-    protected void onSaveInstanceState(Bundle outState){
-        outState.putInt("position" , musicaFondo.getCurrentPosition());
-        musicaFondo.pause();
-
-        outState.putLong("timeLeft", cronometro.timeLeft());
-
-        super.onSaveInstanceState(outState);
-
+    protected void onResume() {
+        super.onResume();
+        audioInstance.resumeMusic(this);
     }
 
     public void ToPausedActivity(){
@@ -108,9 +94,12 @@ public class Juego extends AppCompatActivity {
                 /*intent.putExtra("cronometro", cronoTV.getText());*/
                 startActivity(intent);
                 cronometro.pause();
+                audioInstance.pauseMusic(getBaseContext());
             }
         });
     }
+
+
 
 
 }

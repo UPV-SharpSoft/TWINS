@@ -45,6 +45,7 @@ public class Cronometro {
                 /*ToDo*/
                 finalTiempoMusic.start();
                 crono.setText(cronoFormatLong.format(0));
+
             }
         };
     }
