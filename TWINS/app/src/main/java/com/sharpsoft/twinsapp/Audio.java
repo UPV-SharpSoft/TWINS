@@ -28,6 +28,10 @@ public class Audio {
         return audioInstance;
     }
 
+    public MediaPlayer getMediaPlayer(){
+        return bgMusic;
+    }
+
     public void setOnPreared(SoundPool.OnLoadCompleteListener listener){
         soundFX.setOnLoadCompleteListener(listener);
     }

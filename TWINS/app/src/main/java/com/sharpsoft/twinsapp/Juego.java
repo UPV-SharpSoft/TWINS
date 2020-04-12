@@ -19,9 +19,8 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
 
 import java.text.DecimalFormat;
 
-import static com.sharpsoft.twinsapp.Audio.Sounds.correct;
-import static com.sharpsoft.twinsapp.Audio.Sounds.flip;
-import static com.sharpsoft.twinsapp.Audio.Sounds.incorrect;
+
+import static com.sharpsoft.twinsapp.Audio.Sounds.*;
 
 
 public class Juego extends AppCompatActivity {

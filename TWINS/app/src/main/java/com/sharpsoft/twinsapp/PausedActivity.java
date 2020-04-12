@@ -2,6 +2,8 @@ package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -12,6 +14,10 @@ public class PausedActivity extends AppCompatActivity {
 
     private ImageButton imageButtonClose;
     private SeekBar seekBarMusic;
+    private Audio audioInstance = Audio.getInstance();
+    private AudioManager audioManager;
+    private final static int MAX_VOLUME = 100;
+    private int curVolume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,25 +33,25 @@ public class PausedActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        SeekBar seekBarMusic = findViewById(R.id.seekBarMusic);
+
+        //Volumen música
+
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        seekBarMusic = (SeekBar) findViewById(R.id.seekBarMusic);
+        seekBarMusic.setMax(MAX_VOLUME);
+        seekBarMusic.setProgress(MAX_VOLUME*audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)/audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
         seekBarMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-                int value = seekBarMusic.getProgress();
-                Audio.setVolume(value,value);
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
-
+                float volume = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
+                audioInstance.getMediaPlayer().setVolume(volume, volume);
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });*/
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
     }
 }
