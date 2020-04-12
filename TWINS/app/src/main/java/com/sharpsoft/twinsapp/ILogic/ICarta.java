@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.sharpsoft.twins_clases.logic.Carta;
 import com.sharpsoft.twins_clases.logic.Tablero;
+import com.sharpsoft.twinsapp.Audio;
 import com.sharpsoft.twinsapp.R;
 
 public class ICarta implements Carta {
@@ -20,6 +21,8 @@ public class ICarta implements Carta {
 
     private Tablero tablero;
     private int x, y;
+
+    private Audio audioInstance = Audio.getInstance();
 
     private Context ctx;
 
@@ -49,6 +52,7 @@ public class ICarta implements Carta {
                 public void onClick(View view) {
                     if(tablero != null){
                         tablero.girar(x, y);
+                        audioInstance.makeSound("flip");
                     }
                 }
             });
@@ -68,6 +72,8 @@ public class ICarta implements Carta {
     public void girar() {       //Faltaria animar?
         bocaArriba = !bocaArriba;
         final Bitmap b = bocaArriba?bitmapCarta:bitmapDorso;
+
+
 
         if(layout != null){
             ((Activity) layout.getContext()).runOnUiThread(new Thread(){

@@ -54,6 +54,8 @@ public class Juego extends AppCompatActivity {
 
         cronometro.start();
 
+        audioInstance.createSoundPool(this);
+
         //Música de fondo partida
         audioInstance.startMusic(this, R.raw.partida_default);
 

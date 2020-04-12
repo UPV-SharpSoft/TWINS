@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.sharpsoft.twinsapp.Audio;
 import com.sharpsoft.twinsapp.Juego;
 import com.sharpsoft.twinsapp.R;
 
@@ -22,12 +23,13 @@ public class Cronometro {
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
     private long mTimeLeftInMillis = 600000;
     private long mEndTime;
-    private MediaPlayer finalTiempoMusic;
+    private Audio audioInstance = Audio.getInstance();
+   // private MediaPlayer finalTiempoMusic;
 
     public Cronometro(int tiempo, final TextView crono, Context context){
 
         this.caller = context;
-        finalTiempoMusic = MediaPlayer.create(caller, R.raw.gameover_default);
+        //finalTiempoMusic = MediaPlayer.create(caller, R.raw.gameover_default);
 
         mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
 
@@ -43,7 +45,8 @@ public class Cronometro {
             @Override
             public void onFinish() {
                 /*ToDo*/
-                finalTiempoMusic.start();
+                audioInstance.makeSound("over");
+                //finalTiempoMusic.start();
                 crono.setText(cronoFormatLong.format(0));
 
             }
