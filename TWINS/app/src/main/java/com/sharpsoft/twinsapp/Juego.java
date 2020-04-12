@@ -52,7 +52,7 @@ public class Juego extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        instanciarCronometro();
+        //instanciarCronometro();
         cronometro.start();
         audioInstance.resumeMusic(this);
     }
@@ -65,7 +65,7 @@ public class Juego extends AppCompatActivity {
         View tableroView = ((Tablero) tablero).getView(this);
         tableroLayout.addView(tableroView);
     }
-
+    
     private void instanciarCronometro(){
 
         int valueCrono = Integer.parseInt(cronoTV.getText().toString());
