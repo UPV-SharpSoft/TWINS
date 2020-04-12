@@ -64,6 +64,12 @@ public class Juego extends AppCompatActivity {
         audioInstance.resumeMusic(this);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        audioInstance.pauseMusic(this);
+    }
+
     public void addTablero() {
         Dimension dimension = new Dimension(4, 5);
         Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, dimension, this);
@@ -80,47 +86,32 @@ public class Juego extends AppCompatActivity {
 
             @Override
             public void onSuccess() {
-
+                new Thread(){
+                    public void run(){
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        audioInstance.makeSound(correct);
+                    }
+                }.start();
             }
 
             @Override
             public void onFailure() {
-
+                new Thread(){
+                    public void run(){
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        audioInstance.makeSound(incorrect);
+                    }
+                }.start();
             }
         });
-
-        /*tablero.addObserver(new FlipObserver() {
-            @Override
-            public void update(Observable observable, Object o) {
-                if (o == On.success && tablero.isComplete()) {
-                    Log.i("Completado", "Tablero completado");
-                    //
-                } else if (o == On.success) {
-                    new Thread() {
-                        public void run() {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            audioInstance.makeSound(correct);
-                        }
-                    }.start();
-                } else if (o == On.failure) {
-                    new Thread() {
-                        public void run() {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            audioInstance.makeSound(incorrect);
-                        }
-                    }.start();
-                }
-            }
-
-        });*/
     }
     
     private void instanciarCronometro(){
