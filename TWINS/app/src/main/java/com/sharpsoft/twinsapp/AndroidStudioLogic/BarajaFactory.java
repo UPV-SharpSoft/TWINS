@@ -1,4 +1,4 @@
-package com.sharpsoft.twinsapp.ILogic;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.content.Context;
 import android.content.res.AssetManager;

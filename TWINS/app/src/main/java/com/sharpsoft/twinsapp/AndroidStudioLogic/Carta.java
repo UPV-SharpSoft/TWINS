@@ -1,4 +1,4 @@
-package com.sharpsoft.twinsapp.ILogic;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,12 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.sharpsoft.twins_clases.logic.Carta;
 import com.sharpsoft.twins_clases.logic.Tablero;
 import com.sharpsoft.twinsapp.Audio;
 import com.sharpsoft.twinsapp.R;
 
-public class ICarta implements Carta {
+public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
     private Bitmap bitmapDorso, bitmapCarta;
     private ImageView imageView;
     private View layout;
@@ -26,7 +25,7 @@ public class ICarta implements Carta {
 
     private Context ctx;
 
-    public ICarta(Bitmap bitmapDorso, Bitmap bitmapCarta){
+    public Carta(Bitmap bitmapDorso, Bitmap bitmapCarta){
         this.bitmapCarta = bitmapCarta;
         this.bitmapDorso = bitmapDorso;
         bocaArriba = false;
@@ -62,9 +61,9 @@ public class ICarta implements Carta {
     }
 
     @Override
-    public boolean mismaImagen(Carta c) {
-        if(!(c instanceof ICarta)) throw new RuntimeException("No son mismo tipo");
-        ICarta o = (ICarta) c;
+    public boolean mismaImagen(com.sharpsoft.twins_clases.logic.Carta c) {
+        if(!(c instanceof Carta)) throw new RuntimeException("No son mismo tipo");
+        Carta o = (Carta) c;
         return this.bitmapCarta.sameAs(o.bitmapCarta);
     }
 

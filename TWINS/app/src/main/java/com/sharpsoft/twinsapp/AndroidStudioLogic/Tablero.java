@@ -1,4 +1,4 @@
-package com.sharpsoft.twinsapp.ILogic;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -7,17 +7,16 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
-import com.sharpsoft.twins_clases.logic.Tablero;
 
 
-public class ITablero extends Tablero {
+public class Tablero extends com.sharpsoft.twins_clases.logic.Tablero {
 
-    public ITablero(Dimension dimension, Baraja set) {
+    public Tablero(Dimension dimension, Baraja set) {
         super(dimension);
 
         for(int x = 0; x < dimension.width; x++){
             for(int y = 0; y < dimension.height; y++){
-                final ICarta carta = new ICarta(set.getReverso(), set.sacarCarta());
+                final Carta carta = new Carta(set.getReverso(), set.sacarCarta());
                 carta.setTablero(this, x, y);
                 this.cartas[x][y] = carta;
             }
@@ -35,7 +34,7 @@ public class ITablero extends Tablero {
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
             horizontalLayout.setGravity(Gravity.CENTER);
             for(int x = 0; x < getDimension().width; x++){
-                ICarta carta = (ICarta) this.getCarta(x, y);
+                Carta carta = (Carta) this.getCarta(x, y);
                 View cartaView = carta.getCartaView(ctx, horizontalLayout);
 
                 ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(cartaView.getLayoutParams());

@@ -1,20 +1,12 @@
-package com.sharpsoft.twinsapp.ILogic;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.Audio;
-import com.sharpsoft.twinsapp.Juego;
-import com.sharpsoft.twinsapp.R;
 
-import java.text.CollationElementIterator;
 import java.text.DecimalFormat;
-import java.text.Format;
-import java.util.Formatter;
 
 public class Cronometro {
 

@@ -2,37 +2,24 @@ package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.Context;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Parcelable;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
-import com.sharpsoft.twins_clases.logic.Tablero;
-import com.sharpsoft.twinsapp.ILogic.Baraja;
-import com.sharpsoft.twinsapp.ILogic.BarajaFactory;
-import com.sharpsoft.twinsapp.ILogic.Cronometro;
-import com.sharpsoft.twinsapp.ILogic.ICarta;
-import com.sharpsoft.twinsapp.ILogic.ITablero;
-
-import java.io.IOException;
-import java.util.Formatter;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Baraja;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.BarajaFactory;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Cronometro;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
 
 
 public class Juego extends AppCompatActivity {
     private TextView cronoTV;
     private LinearLayout tableroLayout;
-    private Tablero tablero;
+    private com.sharpsoft.twins_clases.logic.Tablero tablero;
     private Cronometro cronometro;
     private ImageButton imageButtonPause;
     private Audio audioInstance = Audio.getInstance();
@@ -65,9 +52,9 @@ public class Juego extends AppCompatActivity {
     public void addTablero(){
         Dimension dimension = new Dimension(4,5);
         Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, dimension, this);
-        tablero = new ITablero(dimension, baraja);
+        tablero = new Tablero(dimension, baraja);
 
-        View tableroView = ((ITablero) tablero).getView(this);
+        View tableroView = ((Tablero) tablero).getView(this);
         tableroLayout.addView(tableroView);
     }
 
