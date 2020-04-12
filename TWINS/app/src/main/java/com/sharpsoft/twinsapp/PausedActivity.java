@@ -3,6 +3,7 @@ package com.sharpsoft.twinsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -10,7 +11,6 @@ import android.widget.SeekBar;
 public class PausedActivity extends AppCompatActivity {
 
     private ImageButton imageButtonClose;
-    private Cronometro cronometro;
     private SeekBar seekBarMusic;
 
     @Override

@@ -26,8 +26,8 @@ import static com.sharpsoft.twinsapp.Audio.Sounds.incorrect;
 public class Juego extends AppCompatActivity {
     //Crono's things
     private TextView cronoTV;
-    private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
     private CountDownTimer cronometro;
+    long timeLeft;
 
     private LinearLayout tableroLayout;
     private com.sharpsoft.twins_clases.logic.Tablero tablero;
@@ -46,13 +46,10 @@ public class Juego extends AppCompatActivity {
 
         addTablero();
 
-        instanciarCronometro();
-
-        ToPausedActivity();
-
+        instanciarCronometro(60000);
         cronometro.start();
 
-
+        ToPausedActivity();
 
         //Música de fondo partida
         audioInstance.startMusic(this, R.raw.partida_default);
@@ -62,7 +59,7 @@ public class Juego extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //instanciarCronometro();
+        instanciarCronometro(timeLeft);
         cronometro.start();
         audioInstance.resumeMusic(this);
     }
@@ -117,14 +114,18 @@ public class Juego extends AppCompatActivity {
         });
     }
     
-    private void instanciarCronometro(){
-        int valueCrono = Integer.parseInt(cronoTV.getText().toString());
-        //cronometro = new Cronometro(valueCrono, cronoTV, this);
-        cronometro = new CountDownTimer(valueCrono*1000, 100) {
+    private void instanciarCronometro(long time){
+        //int valueCrono = Integer.parseInt(cronoTV.getText().toString()); * NO SÉ QUÉ ES ESTO *
+
+        cronometro = new CountDownTimer(time, 100) {
+
+            private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
+
             @Override
             public void onTick(long millisUntilFinished) {
                 if(millisUntilFinished>10000) cronoTV.setText("" + millisUntilFinished / 1000);
                 else cronoTV.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
+                timeLeft = millisUntilFinished;
             }
 
             @Override
