@@ -48,6 +48,15 @@ public class Juego extends AppCompatActivity {
         audioInstance.startMusic(this, R.raw.partida_default);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        instanciarCronometro();
+        cronometro.start();
+        audioInstance.resumeMusic(this);
+    }
+
     public void addTablero(){
         Dimension dimension = new Dimension(4,5);
         Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, dimension, this);
@@ -63,17 +72,6 @@ public class Juego extends AppCompatActivity {
         cronometro = new Cronometro(valueCrono, cronoTV, this);
     }
 
-    /*
-    public TextView getCronoTV() {
-        return cronoTV;
-    }
-*/
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        audioInstance.resumeMusic(this);
-    }
 
     public void ToPausedActivity(){
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +85,4 @@ public class Juego extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 }

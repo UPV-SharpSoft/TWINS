@@ -23,21 +23,8 @@ public class PausedActivity extends AppCompatActivity {
         imageButtonClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                Bundle bundle = getIntent().getExtras();
-
-                if (bundle != null) {
-                    String cronoTVcontent = bundle.getString("cronometro");
-                    instanciarCronometro(cronoTVcontent);
-                }
-                */
                 finish();
             }
         });
     }
-    /*
-    private void instanciarCronometro(String cronoTVcontent){
-        cronometro = new Cronometro(cronoTVcontent, Juego.getCronoTV(), Juego.class);
-    }
-    */
 }
