@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run(){
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -50,20 +50,6 @@ public class MainActivity extends AppCompatActivity {
         };
         t.start();
 
-        /*Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent i = new Intent(MainActivity.this, Juego.class);
-                        startActivity(i);
-                        finish();
-                    }
-                });
-            }
-        }, 2000);*/
 
     }
 }

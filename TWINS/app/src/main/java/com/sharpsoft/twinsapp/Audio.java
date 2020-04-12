@@ -34,7 +34,7 @@ public class Audio {
 
     public void startMusic(Context context, int song) {
         bgMusic = MediaPlayer.create(context, song);
-        //bgMusic.setLooping(true);
+        bgMusic.setLooping(true);
         bgMusic.setVolume(50, 50);
         bgMusic.start();
     }
