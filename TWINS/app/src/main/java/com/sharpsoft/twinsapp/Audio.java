@@ -70,18 +70,18 @@ public class Audio {
      * ¿en un método aparte?
      */
 
-    public void makeSound(String sound){
+    public void makeSound(Sounds sound){
         switch (sound){
-        case "flip":
+        case flip:
             soundFX.play(flipSound,1,1,0,0,1);
             break;
-        case "over":
+        case gameover:
             soundFX.play(gameOverSound,1,1,0,0,1);
             break;
-        case "correct":
+            case correct:
             soundFX.play(correctSound,1,1,0,0,1);
             break;
-        case "victory":
+            case victory:
             soundFX.play(victorySound,1,1,0,0,1);
             break;
 

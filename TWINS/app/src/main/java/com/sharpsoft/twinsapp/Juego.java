@@ -4,16 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Baraja;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BarajaFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Cronometro;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
+
+import java.util.Observable;
 
 
 public class Juego extends AppCompatActivity {
@@ -34,9 +38,9 @@ public class Juego extends AppCompatActivity {
         tableroLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
 
-        instanciarCronometro();
-
         addTablero();
+
+        instanciarCronometro();
 
         ToPausedActivity();
 
@@ -64,6 +68,15 @@ public class Juego extends AppCompatActivity {
 
         View tableroView = ((Tablero) tablero).getView(this);
         tableroLayout.addView(tableroView);
+
+        tablero.addObserver(new FlipObserver() {
+            @Override
+            public void update(Observable observable, Object o) {
+                if(o == On.success && tablero.isComplete()){
+                    Log.i("Completado", "Tablero completado");
+                }
+            }
+        });
     }
     
     private void instanciarCronometro(){

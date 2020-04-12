@@ -26,4 +26,8 @@ public class Baraja {
     public Bitmap getReverso(){
         return reverso;
     }
+
+    public int getNumCartas(){
+        return cartas.size();
+    }
 }

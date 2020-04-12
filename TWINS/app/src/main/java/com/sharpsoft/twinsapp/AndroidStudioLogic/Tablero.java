@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twins_clases.logic.MalformedTableroException;
 
 
 public class Tablero extends com.sharpsoft.twins_clases.logic.Tablero {
 
     public Tablero(Dimension dimension, Baraja set) {
         super(dimension);
+        if(set.getNumCartas() != dimension.getTotal()) throw new MalformedTableroException("La dimension de la baraja y el tablero no coinciden!");
 
         for(int x = 0; x < dimension.width; x++){
             for(int y = 0; y < dimension.height; y++){
@@ -49,5 +51,4 @@ public class Tablero extends com.sharpsoft.twins_clases.logic.Tablero {
 
         return tableroLayout;
     }
-
 }
