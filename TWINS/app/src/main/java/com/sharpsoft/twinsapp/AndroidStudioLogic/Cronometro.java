@@ -37,7 +37,7 @@ public class Cronometro {
             @Override
             public void onFinish() {
                 /*ToDo*/
-                audioInstance.makeSound("over");
+                //audioInstance.makeSound("over");
                 //finalTiempoMusic.start();
                 crono.setText(cronoFormatLong.format(0));
 

@@ -123,7 +123,7 @@
         app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/seekBarMusic"
         android:layout_width="165dp"
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
@@ -138,7 +138,7 @@
         app:tickMarkTint="#000000" />
 
     <SeekBar
-        android:id="@+id/seekBar2"
+        android:id="@+id/seekBarSound"
         android:layout_width="165dp"
         android:layout_height="23dp"
         android:progressTint="#000000"
