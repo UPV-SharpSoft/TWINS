@@ -22,14 +22,20 @@ public class Audio {
     private int incorrectSound;
     private int shuffleSound;
 
+    private static int mPlayerProgress = 100;
+
     public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle}
 
     public static Audio getInstance() {
         return audioInstance;
     }
 
-    public MediaPlayer getMediaPlayer(){
-        return bgMusic;
+    public void setMusicSeekbarProgress(int progress){
+        mPlayerProgress = progress;
+    }
+
+    public int getMusicSeekbarProgress(){
+        return mPlayerProgress;
     }
 
     public void setOnPreared(SoundPool.OnLoadCompleteListener listener){
@@ -39,7 +45,7 @@ public class Audio {
     public void startMusic(Context context, int song) {
         bgMusic = MediaPlayer.create(context, song);
         bgMusic.setLooping(true);
-        bgMusic.setVolume(50, 50);
+        bgMusic.setVolume(100, 100);
         bgMusic.start();
     }
 
@@ -51,7 +57,7 @@ public class Audio {
         bgMusic.pause();
     }
 
-    //public void setVolume(int left, int right) {bgMusic.setVolume(left,right);}
+    public void setMusicVolume(float left, float right) {bgMusic.setVolume(left,right);}
 
     public void stopMusic(Context context){
         bgMusic.stop();
