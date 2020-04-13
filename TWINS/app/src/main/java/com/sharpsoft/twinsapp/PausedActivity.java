@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -20,6 +19,7 @@ public class PausedActivity extends AppCompatActivity {
     private int curVolume;
     private int volume_level;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.zoom_enter,R.anim.zoom_exit);
@@ -33,14 +33,15 @@ public class PausedActivity extends AppCompatActivity {
                 finish();
             }
         });
+        seekBarMusic = (SeekBar) findViewById(R.id.seekBarMusic);
+
+
 
 
         //Volumen música
-
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        seekBarMusic = (SeekBar) findViewById(R.id.seekBarMusic);
         seekBarMusic.setMax(MAX_VOLUME);
-        seekBarMusic.setProgress(MAX_VOLUME*audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)/audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        seekBarMusic.setProgress(audioInstance.getMusicSeekbarProgress());
         seekBarMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -48,9 +49,8 @@ public class PausedActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
                 float volume = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                audioInstance.getMediaPlayer().setVolume(volume, volume);
-
-                volume_level = seekBarMusic.getProgress();
+                audioInstance.setMusicVolume(volume, volume);
+                audioInstance.setMusicSeekbarProgress(progress);
             }
 
             @Override
@@ -58,5 +58,15 @@ public class PausedActivity extends AppCompatActivity {
               seekBarMusic.setProgress(volume_level);
             }
         });
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 }
