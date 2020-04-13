@@ -27,8 +27,10 @@ public class Juego extends AppCompatActivity {
     //Crono's things
     private TextView cronoTV;
     private CountDownTimer cronometro;
-    long timeLeft;
-    boolean primero = true;
+    private long timeLeft;
+    private boolean primero = true;
+
+    private boolean gameOverBool = false;
 
     private LinearLayout tableroLayout;
     private com.sharpsoft.twins_clases.logic.Tablero tablero;
@@ -87,16 +89,17 @@ public class Juego extends AppCompatActivity {
                 audioInstance.makeSound(flip);
 
                 Log.i("tablero", "tablero " + tablero.isComplete());
-                if(tablero.isComplete()){ //Si se ha terminado el tablero
-                    Intent i = new Intent(Juego.this, FinPartida.class);
-                    startActivity(i);
-                    finish();
-                }
             }
 
             @Override
             public void onSuccess() {
                 audioInstance.makeSound(correct);
+                if(tablero.isComplete()){ //Si se ha terminado el tablero
+                    Intent i = new Intent(Juego.this, FinPartida.class);
+                    i.putExtra("gameOverBool", gameOverBool);
+                    startActivity(i);
+                    finish();
+                }
             }
 
             @Override
@@ -107,8 +110,6 @@ public class Juego extends AppCompatActivity {
     }
     
     private void instanciarCronometro(long time){
-        //int valueCrono = Integer.parseInt(cronoTV.getText().toString()); * NO SÉ QUÉ ES ESTO *
-
         cronometro = new CountDownTimer(time, 100) {
 
             private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
@@ -122,9 +123,15 @@ public class Juego extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                gameOverBool = true;
                 audioInstance.stopMusic(Juego.this);
                 audioInstance.makeSound(Audio.Sounds.gameover);
                 cronoTV.setText(cronoFormatLong.format(0));
+
+                Intent i = new Intent(Juego.this, FinPartida.class);
+                i.putExtra("gameOverBool", gameOverBool);
+                startActivity(i);
+                finish();
             }
         };
     }
@@ -142,4 +149,7 @@ public class Juego extends AppCompatActivity {
             }
         });
     }
+
+
+
 }
