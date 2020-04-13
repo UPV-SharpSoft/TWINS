@@ -53,15 +53,32 @@ public class Audio {
         bgMusic.start();
     }
 
-    public void pauseMusic(Context context) {
-        bgMusic.pause();
+    public void pauseMusic() {
+        if(bgMusic != null){
+            try{
+                if(bgMusic.isPlaying()){
+                    bgMusic.pause();
+                }
+            }catch (Exception e){
+                Log.w(Audio.class.getName(), String.format("Failed to pause media player: %s", e));
+            }
+        }
     }
 
     public void setMusicVolume(float left, float right) {bgMusic.setVolume(left,right);}
 
-    public void stopMusic(Context context){
-        bgMusic.stop();
-        bgMusic.release();
+    public void stopMusic(){
+        if(bgMusic != null){
+            try{
+                if(bgMusic.isPlaying()){
+                    bgMusic.stop();
+                    bgMusic.release();
+                }
+            }catch (Exception e){
+                Log.w(Audio.class.getName(), String.format("Failed to stop and release media player: %s", e));
+            }
+        }
+
     }
 
     public void createSoundPool(Context context) {
