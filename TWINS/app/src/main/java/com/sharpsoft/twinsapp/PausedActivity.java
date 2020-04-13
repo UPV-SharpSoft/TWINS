@@ -18,6 +18,7 @@ public class PausedActivity extends AppCompatActivity {
     private AudioManager audioManager;
     private final static int MAX_VOLUME = 100;
     private int curVolume;
+    private int volume_level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +49,14 @@ public class PausedActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
                 float volume = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
                 audioInstance.getMediaPlayer().setVolume(volume, volume);
+
+                volume_level = seekBarMusic.getProgress();
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+              seekBarMusic.setProgress(volume_level);
+            }
         });
     }
 }

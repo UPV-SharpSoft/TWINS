@@ -51,8 +51,6 @@ public class Audio {
         bgMusic.pause();
     }
 
-    //public void setVolume(int left, int right) {bgMusic.setVolume(left,right);}
-
     public void stopMusic(Context context){
         bgMusic.stop();
         bgMusic.release();
