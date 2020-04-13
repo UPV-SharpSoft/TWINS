@@ -15,6 +15,10 @@ public class FinPartida extends AppCompatActivity {
 
         isGameOver = receiveData();
         System.out.println(isGameOver);
+
+        if(isGameOver){
+
+        }
     }
 
     private boolean receiveData(){

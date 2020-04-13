@@ -97,6 +97,7 @@ public class Juego extends AppCompatActivity {
                 if(tablero.isComplete()){ //Si se ha terminado el tablero
                     Intent i = new Intent(Juego.this, FinPartida.class);
                     i.putExtra("gameOverBool", gameOverBool);
+                    cronometro.cancel();
                     startActivity(i);
                     finish();
                 }
