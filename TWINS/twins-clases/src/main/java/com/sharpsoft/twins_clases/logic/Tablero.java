@@ -79,7 +79,7 @@ public class Tablero extends Observable {
     }
 
     public boolean isComplete(){
-        return cartasGiradas.size() + 1 == dimension.getTotal();
+        return cartasGiradas.size() == dimension.getTotal();
     }
 
 }

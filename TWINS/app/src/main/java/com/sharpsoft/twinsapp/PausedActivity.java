@@ -17,6 +17,7 @@ public class PausedActivity extends AppCompatActivity {
     private AudioManager audioManager;
     private final static int MAX_VOLUME = 100;
     private int curVolume;
+    private int volume_level;
 
 
     @Override
@@ -53,7 +54,9 @@ public class PausedActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+              seekBarMusic.setProgress(volume_level);
+            }
         });
 
 
