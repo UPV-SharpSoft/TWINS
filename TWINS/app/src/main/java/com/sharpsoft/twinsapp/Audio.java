@@ -30,40 +30,6 @@ public class Audio {
         return audioInstance;
     }
 
-    public void setMusicSeekbarProgress(int progress){
-        mPlayerProgress = progress;
-    }
-
-    public int getMusicSeekbarProgress(){
-        return mPlayerProgress;
-    }
-
-    public void setOnPreared(SoundPool.OnLoadCompleteListener listener){
-        soundFX.setOnLoadCompleteListener(listener);
-    }
-
-    public void startMusic(Context context, int song) {
-        bgMusic = MediaPlayer.create(context, song);
-        bgMusic.setLooping(true);
-        bgMusic.setVolume(100, 100);
-        bgMusic.start();
-    }
-
-    public void resumeMusic(Context context) {
-        bgMusic.start();
-    }
-
-    public void pauseMusic(Context context) {
-        bgMusic.pause();
-    }
-
-    public void setMusicVolume(float left, float right) {bgMusic.setVolume(left,right);}
-
-    public void stopMusic(Context context){
-        bgMusic.stop();
-        bgMusic.release();
-    }
-
     public void createSoundPool(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -86,10 +52,63 @@ public class Audio {
         shuffleSound = soundFX.load(context, R.raw.shuffle, 1);
     }
 
+    public void setMusicSeekbarProgress(int progress){
+        mPlayerProgress = progress;
+    }
+
+    public int getMusicSeekbarProgress(){
+        return mPlayerProgress;
+    }
+
+    public void setOnPrepared(SoundPool.OnLoadCompleteListener listener){
+        soundFX.setOnLoadCompleteListener(listener);
+    }
+
+    public void startMusic(Context context, int song) {
+        bgMusic = MediaPlayer.create(context, song);
+        bgMusic.setLooping(true);
+        bgMusic.setVolume(100, 100);
+        bgMusic.start();
+    }
+
+    public void resumeMusic(Context context) {
+        bgMusic.start();
+    }
+
+    public void pauseMusic() {
+        if(bgMusic != null){
+            try{
+                if(bgMusic.isPlaying()){
+                    bgMusic.pause();
+                }
+            }catch (Exception e){
+                Log.w(Audio.class.getName(), String.format("Failed to pause media player: %s", e));
+            }
+        }
+    }
+
+    public void stopMusic(){
+        if(bgMusic != null){
+            try{
+                if(bgMusic.isPlaying()){
+                    bgMusic.stop();
+                    bgMusic.release();
+                }
+            }catch (Exception e){
+                Log.w(Audio.class.getName(), String.format("Failed to stop and release media player: %s", e));
+            }
+        }
+    }
+    public void setMusicVolume(float left, float right) {bgMusic.setVolume(left,right);}
+
+
+
     /**
      * Próximamente, cuando hagamos más packs de Sonidos, habrá que precargar los sonidos
      * ¿en un método aparte?
      */
+
+
 
     public void makeSound(Sounds sound) {
         switch (sound) {

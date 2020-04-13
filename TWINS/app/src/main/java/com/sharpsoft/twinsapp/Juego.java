@@ -49,7 +49,7 @@ public class Juego extends AppCompatActivity {
 
         addTablero();
 
-        instanciarCronometro(60000);//Time in ms
+        instanciarCronometro(5000);//Time in ms
         cronometro.start();
 
         ToPausedActivity();
@@ -72,7 +72,7 @@ public class Juego extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        audioInstance.pauseMusic(this);
+        audioInstance.pauseMusic();
     }
 
     public void addTablero() {
@@ -125,7 +125,7 @@ public class Juego extends AppCompatActivity {
             @Override
             public void onFinish() {
                 gameOverBool = true;
-                audioInstance.stopMusic(Juego.this);
+                audioInstance.stopMusic();
                 audioInstance.makeSound(Audio.Sounds.gameover);
                 cronoTV.setText(cronoFormatLong.format(0));
 
@@ -146,7 +146,7 @@ public class Juego extends AppCompatActivity {
                 /*intent.putExtra("cronometro", cronoTV.getText());*/
                 startActivity(intent);
                 cronometro.cancel();
-                audioInstance.pauseMusic(Juego.this);
+                audioInstance.pauseMusic();
             }
         });
     }
