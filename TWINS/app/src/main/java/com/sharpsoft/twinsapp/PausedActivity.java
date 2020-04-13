@@ -13,11 +13,10 @@ public class PausedActivity extends AppCompatActivity {
 
     private ImageButton imageButtonClose;
     private SeekBar seekBarMusic;
+    private SeekBar seekBarSounds;
     private Audio audioInstance = Audio.getInstance();
     private AudioManager audioManager;
     private final static int MAX_VOLUME = 100;
-    private int curVolume;
-    private int volume_level;
 
 
     @Override
@@ -34,6 +33,7 @@ public class PausedActivity extends AppCompatActivity {
             }
         });
         seekBarMusic = (SeekBar) findViewById(R.id.seekBarMusic);
+        seekBarSounds = (SeekBar) findViewById(R.id.seekBarSound);
 
 
 
@@ -55,11 +55,28 @@ public class PausedActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-              seekBarMusic.setProgress(volume_level);
+
             }
         });
 
 
+        //Volumen efectos
+        seekBarSounds.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
     }
 

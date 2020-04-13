@@ -30,6 +30,28 @@ public class Audio {
         return audioInstance;
     }
 
+    public void createSoundPool(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+            soundFX = new SoundPool.Builder()
+                    .setMaxStreams(9)
+                    .build();
+        } else {
+            soundFX = new SoundPool(9, AudioManager.STREAM_MUSIC, 0);
+        }
+
+        //Precarga de sonidos default
+        flipSound = soundFX.load(context, R.raw.flip_default, 2);
+        gameOverSound = soundFX.load(context, R.raw.gameover_default, 2);
+        correctSound = soundFX.load(context, R.raw.correct_default, 2);
+        victorySound = soundFX.load(context, R.raw.victoria_default, 2);
+        incorrectSound = soundFX.load(context, R.raw.incorrect_default, 2);
+        shuffleSound = soundFX.load(context, R.raw.shuffle, 1);
+    }
+
     public void setMusicSeekbarProgress(int progress){
         mPlayerProgress = progress;
     }
@@ -38,7 +60,7 @@ public class Audio {
         return mPlayerProgress;
     }
 
-    public void setOnPreared(SoundPool.OnLoadCompleteListener listener){
+    public void setOnPrepared(SoundPool.OnLoadCompleteListener listener){
         soundFX.setOnLoadCompleteListener(listener);
     }
 
@@ -65,8 +87,6 @@ public class Audio {
         }
     }
 
-    public void setMusicVolume(float left, float right) {bgMusic.setVolume(left,right);}
-
     public void stopMusic(){
         if(bgMusic != null){
             try{
@@ -78,35 +98,17 @@ public class Audio {
                 Log.w(Audio.class.getName(), String.format("Failed to stop and release media player: %s", e));
             }
         }
-
     }
+    public void setMusicVolume(float left, float right) {bgMusic.setVolume(left,right);}
 
-    public void createSoundPool(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-            soundFX = new SoundPool.Builder()
-                    .setMaxStreams(9)
-                    .build();
-        } else {
-            soundFX = new SoundPool(9, AudioManager.STREAM_MUSIC, 0);
-        }
 
-        //Precarga de sonidos default
-        flipSound = soundFX.load(context, R.raw.flip_default, 2);
-        gameOverSound = soundFX.load(context, R.raw.gameover_default, 2);
-        correctSound = soundFX.load(context, R.raw.correct_default, 2);
-        victorySound = soundFX.load(context, R.raw.victoria_default, 2);
-        incorrectSound = soundFX.load(context, R.raw.incorrect_default, 2);
-        shuffleSound = soundFX.load(context, R.raw.shuffle, 1);
-    }
 
     /**
      * Próximamente, cuando hagamos más packs de Sonidos, habrá que precargar los sonidos
      * ¿en un método aparte?
      */
+
+
 
     public void makeSound(Sounds sound) {
         switch (sound) {
