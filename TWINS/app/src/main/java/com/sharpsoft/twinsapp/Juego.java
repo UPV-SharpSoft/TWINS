@@ -49,7 +49,7 @@ public class Juego extends AppCompatActivity {
 
         addTablero();
 
-        instanciarCronometro(5000);//Time in ms
+        instanciarCronometro(60000);//Time in ms
         cronometro.start();
 
         ToPausedActivity();
@@ -97,6 +97,7 @@ public class Juego extends AppCompatActivity {
                 if(tablero.isComplete()){ //Si se ha terminado el tablero
                     Intent i = new Intent(Juego.this, FinPartida.class);
                     i.putExtra("gameOverBool", gameOverBool);
+                    i.putExtra("timeLeft", timeLeft);
                     cronometro.cancel();
                     startActivity(i);
                     finish();
