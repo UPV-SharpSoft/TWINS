@@ -17,7 +17,7 @@ public class PausedActivity extends AppCompatActivity {
     private SeekBar seekBarSounds;
     private Audio audioInstance = Audio.getInstance();
     private AudioManager audioManager;
-    private final static int MAX_VOLUME = 100;
+
 
 
     @Override
@@ -41,7 +41,7 @@ public class PausedActivity extends AppCompatActivity {
 
         //Volumen música
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        seekBarMusic.setMax(MAX_VOLUME);
+        seekBarMusic.setMax(Audio.MAX_VOLUME);
         seekBarMusic.setProgress(audioInstance.getMusicSeekbarProgress());
         seekBarMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -49,7 +49,7 @@ public class PausedActivity extends AppCompatActivity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
-                float volume = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
+                float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME - progress) / Math.log(Audio.MAX_VOLUME)));
                 audioInstance.setMusicVolume(volume, volume);
                 audioInstance.setMusicSeekbarProgress(progress);
             }
@@ -62,12 +62,12 @@ public class PausedActivity extends AppCompatActivity {
 
 
         //Volumen efectos
-        seekBarSounds.setMax(MAX_VOLUME);
+        seekBarSounds.setMax(Audio.MAX_VOLUME);
         seekBarSounds.setProgress(audioInstance.getSoundPoolProgress());
         seekBarSounds.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float volume = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
+                float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME - progress) / Math.log(Audio.MAX_VOLUME)));
                 audioInstance.setSoundPoolProgress(progress);
                 audioInstance.setSoundVolume(volume);
 

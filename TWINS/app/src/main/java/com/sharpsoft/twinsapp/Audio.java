@@ -20,6 +20,8 @@ public class Audio {
     private int incorrectSound;
     private int shuffleSound;
 
+    public final static int MAX_VOLUME = 100;
+
     private static float soundVolume = 1;
     private static int soundPoolProgress = 100;
 

@@ -55,7 +55,9 @@ public class Juego extends AppCompatActivity {
         ToPausedActivity();
 
         //Música de fondo partida
+        float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME - audioInstance.getMusicSeekbarProgress()) / Math.log(Audio.MAX_VOLUME)));
         audioInstance.startMusic(this, R.raw.partida_default);
+        audioInstance.setMusicVolume(volume, volume);
     }
 
     @Override
