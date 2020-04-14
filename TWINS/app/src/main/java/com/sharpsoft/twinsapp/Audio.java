@@ -8,8 +8,6 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.util.Log;
 
-import java.net.ContentHandler;
-
 public class Audio {
     private static final Audio audioInstance = new Audio();
     private MediaPlayer bgMusic;
@@ -22,7 +20,26 @@ public class Audio {
     private int incorrectSound;
     private int shuffleSound;
 
+    private static float soundVolume = 1;
+    private static int soundPoolProgress = 100;
+
     private static int mPlayerProgress = 100;
+
+    public static float getSoundVolume() {
+        return soundVolume;
+    }
+
+    public void setSoundVolume(float soundVolume) {
+        this.soundVolume = soundVolume;
+    }
+
+    public static int getSoundPoolProgress() {
+        return soundPoolProgress;
+    }
+
+    public void setSoundPoolProgress(int soundPoolProgress) {
+        this.soundPoolProgress = soundPoolProgress;
+    }
 
     public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle}
 
@@ -113,22 +130,22 @@ public class Audio {
     public void makeSound(Sounds sound) {
         switch (sound) {
             case flip:
-                soundFX.play(flipSound, 1, 1, 0, 0, 1);
+                soundFX.play(flipSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
             case gameover:
-                soundFX.play(gameOverSound, 1, 1, 0, 0, 1);
+                soundFX.play(gameOverSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
             case correct:
-                soundFX.play(correctSound, 1, 1, 0, 0, 1);
+                soundFX.play(correctSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
             case victory:
-                soundFX.play(victorySound, 1, 1, 0, 0, 1);
+                soundFX.play(victorySound, soundVolume, soundVolume, 0, 0, 1);
                 break;
             case incorrect:
-                soundFX.play(incorrectSound, 1, 1, 0, 0, 1);
+                soundFX.play(incorrectSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
             case shuffle:
-                soundFX.play(shuffleSound, 1, 1, 0, 0, 1);
+                soundFX.play(shuffleSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
 
         }

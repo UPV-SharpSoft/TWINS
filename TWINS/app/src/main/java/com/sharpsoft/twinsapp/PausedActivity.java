@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -61,10 +62,15 @@ public class PausedActivity extends AppCompatActivity {
 
 
         //Volumen efectos
+        seekBarSounds.setMax(MAX_VOLUME);
+        seekBarSounds.setProgress(audioInstance.getSoundPoolProgress());
         seekBarSounds.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                
+                float volume = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
+                audioInstance.setSoundPoolProgress(progress);
+                audioInstance.setSoundVolume(volume);
+
             }
 
             @Override
@@ -74,6 +80,8 @@ public class PausedActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                Log.i("vol", ""+audioInstance.getSoundVolume());
+                Log.i("progress", ""+audioInstance.getSoundPoolProgress());
 
             }
         });
