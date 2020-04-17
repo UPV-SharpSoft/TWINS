@@ -8,6 +8,7 @@ public class Tablero extends Observable {
     private Dimension dimension;
     private Stack<Carta> cartasGiradas;
     private boolean estaEsperando;
+    private Puntuacion puntuacion;
 
     public Tablero(Dimension dimension){
         this.dimension = dimension;
@@ -23,6 +24,7 @@ public class Tablero extends Observable {
 
         estaEsperando = false;
 
+        puntuacion = new Puntuacion();
     }
 
     public Dimension getDimension() {
@@ -63,10 +65,14 @@ public class Tablero extends Observable {
                 cartasGiradas.push(c1);
                 cartasGiradas.push(c2);
 
+                puntuacion.acierto();
+
                 setChanged();
                 notifyObservers(FlipObserver.On.success);
             }else{  //No coinciden
                girarCartas(c1, c2);
+
+               puntuacion.fallo();
 
                 setChanged();
                notifyObservers(FlipObserver.On.failure);
@@ -80,6 +86,14 @@ public class Tablero extends Observable {
 
     public boolean isComplete(){
         return cartasGiradas.size() == dimension.getTotal();
+    }
+
+    public Puntuacion getPuntuacion(){
+        return this.puntuacion;
+    }
+
+    public void setPuntuacion(Puntuacion puntuacion){
+        this.puntuacion = puntuacion;
     }
 
 }

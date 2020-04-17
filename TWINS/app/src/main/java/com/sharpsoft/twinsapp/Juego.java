@@ -15,6 +15,7 @@ import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Baraja;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BarajaFactory;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Puntuacion;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
 
 import java.text.DecimalFormat;
@@ -111,6 +112,9 @@ public class Juego extends AppCompatActivity {
                 audioInstance.makeSound(incorrect);
             }
         });
+
+        TextView puntuacionTextView = findViewById(R.id.puntuacionTextView);
+        tablero.setPuntuacion(new Puntuacion(puntuacionTextView));
     }
     
     private void instanciarCronometro(long time){

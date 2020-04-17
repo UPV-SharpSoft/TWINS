@@ -51,4 +51,5 @@ public class Tablero extends com.sharpsoft.twins_clases.logic.Tablero {
 
         return tableroLayout;
     }
+
 }
