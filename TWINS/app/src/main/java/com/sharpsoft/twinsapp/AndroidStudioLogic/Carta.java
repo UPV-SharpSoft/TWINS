@@ -9,12 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.sharpsoft.twins_clases.logic.Tablero;
-import com.sharpsoft.twinsapp.Audio;
 import com.sharpsoft.twinsapp.R;
-
-import static com.sharpsoft.twinsapp.Audio.Sounds.correct;
-import static com.sharpsoft.twinsapp.Audio.Sounds.flip;
-import static com.sharpsoft.twinsapp.Audio.Sounds.incorrect;
 
 public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
     private Bitmap bitmapDorso, bitmapCarta;
@@ -25,14 +20,13 @@ public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
     private Tablero tablero;
     private int x, y;
 
-    private Context ctx;
-
     public Carta(Bitmap bitmapDorso, Bitmap bitmapCarta){
         this.bitmapCarta = bitmapCarta;
         this.bitmapDorso = bitmapDorso;
         bocaArriba = false;
     }
 
+    @Override
     public void setTablero(Tablero tablero, int x, int y){
         this.tablero = tablero;
         this.x = x;
@@ -40,8 +34,7 @@ public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
     }
 
     public View getCartaView(Context ctx, ViewGroup parent){
-        if(layout == null){
-            this.ctx = ctx;
+
             LayoutInflater inflater = LayoutInflater.from(ctx);
             layout = inflater.inflate(R.layout.carta, parent, false);
             imageView = layout.findViewById(R.id.cartaImageView);
@@ -56,7 +49,7 @@ public class Carta implements com.sharpsoft.twins_clases.logic.Carta {
                     }
                 }
             });
-        }
+
 
         return layout;
     }

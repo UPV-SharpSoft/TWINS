@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+
 public class PausedActivity extends AppCompatActivity {
 
     private ImageButton imageButtonClose;

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Baraja;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BarajaFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Puntuacion;
@@ -21,7 +22,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Tablero;
 import java.text.DecimalFormat;
 
 
-import static com.sharpsoft.twinsapp.Audio.Sounds.*;
+import static com.sharpsoft.twinsapp.AndroidStudioLogic.Audio.Sounds.*;
 
 
 public class Juego extends AppCompatActivity {
