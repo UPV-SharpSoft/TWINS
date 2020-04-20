@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent i = new Intent(MainActivity.this, Juego.class);
+                        Intent i = new Intent(MainActivity.this, Game.class);
                         startActivity(i);
                         finish();
                     }
