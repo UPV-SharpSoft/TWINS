@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.media.SoundPool;
 import android.os.Bundle;
 
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+
 public class MainActivity extends AppCompatActivity {
     private Audio audioInstance = Audio.getInstance();
 

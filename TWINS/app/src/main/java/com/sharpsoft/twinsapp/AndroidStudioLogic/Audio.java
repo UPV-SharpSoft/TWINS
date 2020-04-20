@@ -1,4 +1,4 @@
-package com.sharpsoft.twinsapp;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.content.Context;
 import android.media.AudioAttributes;
@@ -7,6 +7,8 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.util.Log;
+
+import com.sharpsoft.twinsapp.R;
 
 public class Audio {
     private static final Audio audioInstance = new Audio();
@@ -90,7 +92,7 @@ public class Audio {
         bgMusic.start();
     }
 
-    public void resumeMusic(Context context) {
+    public void resumeMusic() {
         bgMusic.start();
     }
 
