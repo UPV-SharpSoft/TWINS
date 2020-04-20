@@ -25,15 +25,15 @@ import static com.sharpsoft.twinsapp.Audio.Sounds.*;
 
 
 public class Juego extends AppCompatActivity {
-    //Crono's things
-    private TextView cronoTV;
-    private CountDownTimer cronometro;
+
+    private TextView chronoTV;
+    private CountDownTimer chronometer;
     private long timeLeft;
     private boolean primero = true;
 
     private boolean gameOverBool = false;
 
-    private LinearLayout tableroLayout;
+    private LinearLayout tableLayout;
     private com.sharpsoft.twins_clases.logic.Tablero tablero;
     private ImageButton imageButtonPause;
     private Audio audioInstance = Audio.getInstance();
@@ -44,19 +44,19 @@ public class Juego extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
 
-        cronoTV = findViewById(R.id.cronoTV);
-        tableroLayout = findViewById(R.id.tableroLayout);
+        chronoTV = findViewById(R.id.cronoTV);
+        tableLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
 
-        addTablero();
+        addTable();
 
-        instanciarCronometro(60000);//Time in ms
-        cronometro.start();
+        instanceChronometer(60000);
+        chronometer.start();
 
         ToPausedActivity();
 
-        //Música de fondo partida
-        float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME - audioInstance.getMusicSeekbarProgress()) / Math.log(Audio.MAX_VOLUME)));
+        float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME -
+                audioInstance.getMusicSeekbarProgress()) / Math.log(Audio.MAX_VOLUME)));
         audioInstance.startMusic(this, R.raw.partida_default);
         audioInstance.setMusicVolume(volume, volume);
     }
@@ -65,8 +65,8 @@ public class Juego extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(!primero) {
-            instanciarCronometro(timeLeft);
-            cronometro.start();
+            instanceChronometer(timeLeft);
+            chronometer.start();
             audioInstance.resumeMusic(this);
         }
         primero = false;
@@ -78,13 +78,13 @@ public class Juego extends AppCompatActivity {
         audioInstance.pauseMusic();
     }
 
-    public void addTablero() {
+    public void addTable() {
         Dimension dimension = new Dimension(4, 5);
         Baraja baraja = BarajaFactory.getBaraja(BarajaFactory.Barajas.minecraft, dimension, this);
         tablero = new Tablero(dimension, baraja);
 
         View tableroView = ((Tablero) tablero).getView(this);
-        tableroLayout.addView(tableroView);
+        tableLayout.addView(tableroView);
 
         tablero.addObserver(new FlipObserver() {
             @Override
@@ -101,7 +101,7 @@ public class Juego extends AppCompatActivity {
                     Intent i = new Intent(Juego.this, FinPartida.class);
                     i.putExtra("gameOverBool", gameOverBool);
                     i.putExtra("timeLeft", timeLeft);
-                    cronometro.cancel();
+                    chronometer.cancel();
                     startActivity(i);
                     finish();
                 }
@@ -117,15 +117,15 @@ public class Juego extends AppCompatActivity {
         tablero.setPuntuacion(new Puntuacion(puntuacionTextView));
     }
     
-    private void instanciarCronometro(long time){
-        cronometro = new CountDownTimer(time, 100) {
+    private void instanceChronometer(long time){
+        chronometer = new CountDownTimer(time, 100) {
 
             private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
 
             @Override
             public void onTick(long millisUntilFinished) {
-                if(millisUntilFinished>10000) cronoTV.setText("" + millisUntilFinished / 1000);
-                else cronoTV.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
+                if(millisUntilFinished>10000) chronoTV.setText("" + millisUntilFinished / 1000);
+                else chronoTV.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
                 timeLeft = millisUntilFinished;
             }
 
@@ -134,7 +134,7 @@ public class Juego extends AppCompatActivity {
                 gameOverBool = true;
                 audioInstance.stopMusic();
                 audioInstance.makeSound(Audio.Sounds.gameover);
-                cronoTV.setText(cronoFormatLong.format(0));
+                chronoTV.setText(cronoFormatLong.format(0));
 
                 Intent i = new Intent(Juego.this, FinPartida.class);
                 i.putExtra("gameOverBool", gameOverBool);
@@ -150,9 +150,8 @@ public class Juego extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Juego.this, PausedActivity.class);
-                /*intent.putExtra("cronometro", cronoTV.getText());*/
                 startActivity(intent);
-                cronometro.cancel();
+                chronometer.cancel();
                 audioInstance.pauseMusic();
             }
         });
