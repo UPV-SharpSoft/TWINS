@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
+
 public class GameOver extends AppCompatActivity {
 
     private boolean isGameOver;
     private long timeLeft;
-    private TextView resultTV, timeTV;
+    private TextView resultTV, timeTV, scoreTV;
+    private int score;
     private Button exitButton, resetButton;
 
     @Override
@@ -22,8 +25,10 @@ public class GameOver extends AppCompatActivity {
 
         resultTV = findViewById(R.id.resultTV);
         timeTV = findViewById(R.id.timeTV);
+        scoreTV = findViewById(R.id.scoreTV);
         exitButton = findViewById(R.id.exitButton);
         resetButton = findViewById(R.id.resetButton);
+
 
         receiveData();
         createButtons();
@@ -34,12 +39,16 @@ public class GameOver extends AppCompatActivity {
             resultTV.setText("¡DERROTA!");
             timeTV.setText("Se te ha agotado el tiempo");
         }
+        score = score + (int)timeLeft;
+        scoreTV.setText("Puntuación final: " + score);
     }
 
     private void receiveData(){
         Bundle data = getIntent().getExtras();
         timeLeft = data.getLong("timeLeft", 0);
         isGameOver = data.getBoolean("gameOverBool");
+        score = data.getInt("score");
+
     }
 
     private void createButtons(){

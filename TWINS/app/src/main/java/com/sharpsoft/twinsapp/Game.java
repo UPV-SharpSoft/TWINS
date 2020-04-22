@@ -31,7 +31,7 @@ public class Game extends AppCompatActivity {
     private CountDownTimer chronometer;
     private long timeLeft;
     private boolean primero = true;
-
+    private int score;
     private boolean gameOverBool = false;
 
     private LinearLayout tableLayout;
@@ -51,7 +51,7 @@ public class Game extends AppCompatActivity {
 
         addBoard();
 
-        instanceChronometer(60000);
+        instanceChronometer(5000);
         chronometer.start();
 
         ToPausedActivity();
@@ -139,6 +139,7 @@ public class Game extends AppCompatActivity {
 
                 Intent i = new Intent(Game.this, GameOver.class);
                 i.putExtra("gameOverBool", gameOverBool);
+                i.putExtra("score", board.getScore().getScore());
                 startActivity(i);
                 finish();
             }
