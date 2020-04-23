@@ -51,7 +51,7 @@ public class Game extends AppCompatActivity {
 
         addBoard();
 
-        instanceChronometer(5000);
+        instanceChronometer(60000);
         chronometer.start();
 
         ToPausedActivity();
@@ -102,6 +102,7 @@ public class Game extends AppCompatActivity {
                     Intent i = new Intent(Game.this, GameOver.class);
                     i.putExtra("gameOverBool", gameOverBool);
                     i.putExtra("timeLeft", timeLeft);
+                    i.putExtra("score", board.getScore().getScore());
                     chronometer.cancel();
                     startActivity(i);
                     finish();
@@ -134,7 +135,6 @@ public class Game extends AppCompatActivity {
             public void onFinish() {
                 gameOverBool = true;
                 audioInstance.stopMusic();
-                audioInstance.makeSound(Audio.Sounds.gameover);
                 chronoTV.setText(cronoFormatLong.format(0));
 
                 Intent i = new Intent(Game.this, GameOver.class);

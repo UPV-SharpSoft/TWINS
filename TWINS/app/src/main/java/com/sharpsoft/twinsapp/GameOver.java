@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 
 public class GameOver extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class GameOver extends AppCompatActivity {
     private TextView resultTV, timeTV, scoreTV;
     private int score;
     private Button exitButton, resetButton;
+    private Audio audioInstance = Audio.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,11 @@ public class GameOver extends AppCompatActivity {
 
         receiveData();
         createButtons();
+        if(isGameOver) {
+            audioInstance.makeSound(Audio.Sounds.gameover);
+        }else{
+            audioInstance.makeSound(Audio.Sounds.victory);
+        }
 
         timeTV.setText("Tu tiempo ha sido de " + (60000-timeLeft)/1000 + "s.");
 
@@ -39,7 +46,7 @@ public class GameOver extends AppCompatActivity {
             resultTV.setText("¡DERROTA!");
             timeTV.setText("Se te ha agotado el tiempo");
         }
-        score = score + (int)timeLeft;
+        score = score + (int)timeLeft/1000;
         scoreTV.setText("Puntuación final: " + score);
     }
 
