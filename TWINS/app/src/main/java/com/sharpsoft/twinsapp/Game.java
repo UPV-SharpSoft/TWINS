@@ -80,7 +80,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void addBoard() {
-        Dimension dimension = new Dimension(4, 5);
+        Dimension dimension = new Dimension(4, 6);
         Deck deck = DeckFactory.getDeck(DeckFactory.Decks.minecraft, dimension, this);
         board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, deck);
 
