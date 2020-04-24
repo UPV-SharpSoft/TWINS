@@ -19,7 +19,8 @@ public class DeckFactory {
         ESPAÑOLA
     }
 
-    private final static String[] minecraftCards = {"RedstoneOre.png", "DiamondOre.png", "GoldOre.png"};
+    private final static String[] minecraftCards = {"RedstoneOre.png", "DiamondOre.png", "GoldOre.png",
+                                        "LapislazuliOre.png", "EmeraldOre.png", "IronOre.png"};
 
     public static Deck getDeck(Decks deck, Dimension dimension, Context ctx){
         List<Bitmap> cards = new ArrayList<>();
