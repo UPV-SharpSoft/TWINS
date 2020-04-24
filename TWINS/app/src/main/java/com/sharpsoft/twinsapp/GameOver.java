@@ -46,7 +46,7 @@ public class GameOver extends AppCompatActivity {
             resultTV.setText("¡DERROTA!");
             timeTV.setText("Se te ha agotado el tiempo");
         }
-        score = score + (int)timeLeft/1000;
+        score = score + (int) (60000-timeLeft)/1000;
         scoreTV.setText("Puntuación final: " + score);
     }
 
