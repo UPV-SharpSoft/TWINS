@@ -1,5 +1,6 @@
 package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
+import android.app.Activity;
 import android.widget.TextView;
 
 public class Score extends com.sharpsoft.twins_clases.logic.Score {
@@ -18,5 +19,15 @@ public class Score extends com.sharpsoft.twins_clases.logic.Score {
     public void fail(){
         super.fail();
         scoreTextView.setText(String.valueOf(getScore()));
+    }
+
+    public void missedTurn(){
+        super.missedTurn();
+        ((Activity)scoreTextView.getContext()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                scoreTextView.setText(String.valueOf(getScore()));
+            }
+        });
     }
 }

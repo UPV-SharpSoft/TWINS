@@ -6,9 +6,10 @@ import java.util.Stack;
 public class Board extends Observable {
     protected Card[][] cards;
     private Dimension dimension;
-    private Stack<Card> cardsUpside; //cartasGiradas
+    protected Stack<Card> cardsUpside; //cartasGiradas
     private boolean isWaiting;
     private Score score;
+    private Turn turn;
 
     public Board(Dimension dimension){
         this.dimension = dimension;
@@ -25,6 +26,8 @@ public class Board extends Observable {
         isWaiting = false;
 
         score = new Score();
+
+        turn = new Turn(score, 5*1000, this);
     }
 
     public Dimension getDimension() {
@@ -59,6 +62,7 @@ public class Board extends Observable {
 
         cardsUpside.push(c);
         if(cardsUpside.size() % 2 == 0){  //Se ha girado la segunda carta
+            turn.endTurn();
             Card c1 = cardsUpside.pop();
             Card c2 = cardsUpside.pop();
             if(c1.sameImage(c2)){ //Coinciden
@@ -74,9 +78,11 @@ public class Board extends Observable {
 
                score.fail();
 
-                setChanged();
+               setChanged();
                notifyObservers(FlipObserver.On.failure);
             }
+        }else{  //Se ha girado la primera carta
+            turn.startTurn();
         }
     }
 
@@ -94,6 +100,7 @@ public class Board extends Observable {
 
     public void setScore(Score score){
         this.score = score;
+        turn.setScore(score);
     }
 
 }

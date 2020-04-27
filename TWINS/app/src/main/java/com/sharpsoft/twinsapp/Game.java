@@ -31,7 +31,6 @@ public class Game extends AppCompatActivity {
     private CountDownTimer chronometer;
     private long timeLeft;
     private boolean primero = true;
-    private int score;
     private boolean gameOverBool = false;
 
     private LinearLayout tableLayout;
