@@ -35,8 +35,8 @@ public class PausedActivity extends AppCompatActivity {
                 finish();
             }
         });
-        seekBarMusic = (SeekBar) findViewById(R.id.seekBarMusic);
-        seekBarSounds = (SeekBar) findViewById(R.id.seekBarSound);
+        seekBarMusic = findViewById(R.id.seekBarMusic);
+        seekBarSounds = findViewById(R.id.seekBarSound);
 
 
 
