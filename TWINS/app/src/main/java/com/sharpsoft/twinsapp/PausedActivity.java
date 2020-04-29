@@ -52,6 +52,7 @@ public class PausedActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
                 float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME - progress) / Math.log(Audio.MAX_VOLUME)));
+                if(volume > 1) volume = 1;
                 audioInstance.setMusicVolume(volume, volume);
                 audioInstance.setMusicSeekbarProgress(progress);
             }
@@ -70,6 +71,7 @@ public class PausedActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME - progress) / Math.log(Audio.MAX_VOLUME)));
+                if(volume > 1) volume = 1;
                 audioInstance.setSoundPoolProgress(progress);
                 audioInstance.setSoundVolume(volume);
 
