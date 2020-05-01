@@ -22,19 +22,27 @@ public class Audio {
     private int incorrectSound;
     private int shuffleSound;
 
+    private boolean muted;
+
     public final static int MAX_VOLUME = 100;
 
     private static float soundVolume = 1;
     private static int soundPoolProgress = 100;
 
+    private static float musicVolume = 1;
     private static int mPlayerProgress = 100;
+
 
     public static float getSoundVolume() {
         return soundVolume;
     }
 
     public void setSoundVolume(float soundVolume) {
-        this.soundVolume = soundVolume;
+        if(soundVolume > 1){
+            this.soundVolume = 1;}
+        else {
+            this.soundVolume = soundVolume;
+        }
     }
 
     public static int getSoundPoolProgress() {
@@ -49,6 +57,14 @@ public class Audio {
 
     public static Audio getInstance() {
         return audioInstance;
+    }
+
+    public boolean isMuted() {
+        return muted;
+    }
+
+    public void setMuted(boolean muted) {
+        this.muted = muted;
     }
 
     public void createSoundPool(Context context) {
@@ -120,7 +136,18 @@ public class Audio {
             }
         }
     }
-    public void setMusicVolume(float left, float right) {bgMusic.setVolume(left,right);}
+    public void setMusicVolume(float left, float right) {
+        if(left > 1) {
+            this.musicVolume = 1;
+        } else {
+            musicVolume = left;
+        };
+
+        bgMusic.setVolume(left,right);
+    }
+    public static float getMusicVolume() {
+        return musicVolume;
+    }
 
 
 
