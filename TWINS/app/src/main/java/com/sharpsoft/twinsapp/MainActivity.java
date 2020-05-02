@@ -7,6 +7,7 @@ import android.media.SoundPool;
 import android.os.Bundle;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.MainMenu;
 
 public class MainActivity extends AppCompatActivity {
     private Audio audioInstance = Audio.getInstance();
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent i = new Intent(MainActivity.this, Game.class);
+                        Intent i = new Intent(MainActivity.this, MainMenu.class);
                         startActivity(i);
                         finish();
                     }

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".GameOver"></activity>
+        <activity android:name=".AndroidStudioLogic.MainMenu"
+            android:screenOrientation="portrait" />
+        <activity android:name=".GameOver" />
         <activity
             android:name=".PausedActivity"
             android:screenOrientation="portrait" />
@@ -25,10 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

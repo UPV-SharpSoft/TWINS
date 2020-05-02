@@ -8,10 +8,19 @@ import java.util.Random;
 public class Deck {
     private List<Bitmap> cards;
     private Bitmap reverse;
+    private String deckName;
 
     public Deck(List<Bitmap> cards, Bitmap reverse){
         this.cards = cards;
         this.reverse = reverse;
+    }
+
+    public void setName(){
+        this.deckName = deckName;
+    }
+
+    public String getName(){
+        return this.deckName;
     }
 
     public boolean quedanCartas(){
