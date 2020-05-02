@@ -1,8 +1,10 @@
 package com.sharpsoft.twinsapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.Image;
 import android.os.Bundle;
@@ -75,6 +77,28 @@ public class PausedActivity extends AppCompatActivity {
             }
 
         });
+
+
+
+        restartGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getBaseContext())
+                        .setTitle("Reiniciar Partida")
+                        .setMessage("¿Estás seguro que quieres reiniciar la partida? Perderás todo el progreso de la partida en curso")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                System.exit(0);
+                            }
+                        }).setNegativeButton("No", null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+
+
+
 
         /** Todo Música a Opciones
 

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.MainMenu;
 
 public class GameOver extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class GameOver extends AppCompatActivity {
     private long timeLeft;
     private TextView resultTV, timeTV, scoreTV;
     private int score;
-    private Button exitButton, resetButton;
+    private Button mainMenuButton, resetButton;
     private Audio audioInstance = Audio.getInstance();
 
     @Override
@@ -28,7 +28,7 @@ public class GameOver extends AppCompatActivity {
         resultTV = findViewById(R.id.resultTV);
         timeTV = findViewById(R.id.timeTV);
         scoreTV = findViewById(R.id.scoreTV);
-        exitButton = findViewById(R.id.exitButton);
+        mainMenuButton = findViewById(R.id.mainMenuButton);
         resetButton = findViewById(R.id.resetButton);
 
 
@@ -59,9 +59,11 @@ public class GameOver extends AppCompatActivity {
     }
 
     private void createButtons(){
-        exitButton.setOnClickListener(new View.OnClickListener() {
+        mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(GameOver.this, MainMenu.class);
+                startActivity(i);
                 finish();
             }
         });

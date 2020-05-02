@@ -50,15 +50,17 @@ public class Game extends AppCompatActivity {
 
         addBoard();
 
-        instanceChronometer(60000);
+        instanceChronometer(5000);
         chronometer.start();
 
         ToPausedActivity();
 
-        float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME -
-                audioInstance.getMusicSeekbarProgress()) / Math.log(Audio.MAX_VOLUME)));
+        //float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME -
+          //      audioInstance.getMusicSeekbarProgress()) / Math.log(Audio.MAX_VOLUME)));
+        float volume = Audio.getMusicVolume();
         audioInstance.startMusic(this, R.raw.partida_default);
         audioInstance.setMusicVolume(volume, volume);
+
     }
 
     @Override
