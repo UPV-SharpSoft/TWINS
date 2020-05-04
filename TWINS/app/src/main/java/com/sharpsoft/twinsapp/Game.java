@@ -50,7 +50,7 @@ public class Game extends AppCompatActivity {
 
         addBoard();
 
-        instanceChronometer(5000);
+        instanceChronometer(60000);
         chronometer.start();
 
         ToPausedActivity();

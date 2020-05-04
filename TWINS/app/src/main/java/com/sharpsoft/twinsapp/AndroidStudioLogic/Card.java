@@ -3,6 +3,7 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,23 @@ public class Card implements com.sharpsoft.twins_clases.logic.Card {
         if(layout != null){
             ((Activity) layout.getContext()).runOnUiThread(new Thread(){
                 public void run(){
-                    imageView.setImageBitmap(b);
+
+                    layout.animate()
+                            .rotationY(180)
+                            .setDuration(300)
+                            .start();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            imageView.setImageBitmap(b);
+                        }
+                    }, 200);
+
+                    layout.animate()
+                            .rotationY(180)
+                            .setDuration(300)
+                            .start();
                 }
             });
         }

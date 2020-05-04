@@ -59,14 +59,14 @@ public class MainMenu extends AppCompatActivity {
                 ImageView playImage = findViewById(R.id.imageView3);
                 playImage.animate()
                         .rotationY(360)
-                        .setDuration(1000)
+                        .setDuration(500)
                         .start();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         setNewGameUI();
                     }
-                }, 1000);
+                }, 500);
             }
         });
     }
@@ -75,14 +75,26 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.new_game);
 
         ImageButton homeImageButton = findViewById(R.id.homeImageButton);
-        ImageView partidaRapidaImageView = findViewById(R.id.partidaRapidaImageView);
+        final ImageView partidaRapidaImageView = findViewById(R.id.partidaRapidaImageView);
         TextView partidaRapidaTextView = findViewById(R.id.partidaRapidaTextView);
 
         View.OnClickListener partidaRapidaClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainMenu.this, Game.class);
-                startActivity(i);
+                partidaRapidaImageView.animate()
+                        .translationX(5000)
+                        .scaleX(20)
+                        .scaleY(20)
+                        .setDuration(1000)
+                        .start();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(MainMenu.this, Game.class);
+                        startActivity(i);
+                    }
+                }, 500);
+
             }
         };
         homeImageButton.setOnClickListener(new View.OnClickListener() {
