@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.Image;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.MainMenu;
 
 public class PausedActivity extends AppCompatActivity {
 
@@ -36,17 +38,12 @@ public class PausedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paused);
 
+        final Context ctx = this;
+
         Button resumeGameButton = findViewById(R.id.resumeGame);
         Button restartGameButton = findViewById(R.id.restartGame);
         Button mainMenuButton = findViewById(R.id.mainMenu);
         final ImageButton muteAllButton = findViewById(R.id.muteAll);
-        resumeGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
 
 
         if (audioInstance.isMuted()) {
@@ -57,6 +54,13 @@ public class PausedActivity extends AppCompatActivity {
 
         soundVolume = Audio.getSoundVolume();
         musicVolume = Audio.getMusicVolume();
+
+        resumeGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         muteAllButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
@@ -78,18 +82,35 @@ public class PausedActivity extends AppCompatActivity {
 
         });
 
-
-
         restartGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(getBaseContext())
+                new AlertDialog.Builder(ctx)
                         .setTitle("Reiniciar Partida")
-                        .setMessage("¿Estás seguro que quieres reiniciar la partida? Perderás todo el progreso de la partida en curso")
+                        .setMessage("¿Estás seguro de que quieres reiniciar la partida? \n\nPerderás todo el progreso de la partida en curso")
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                System.exit(0);
+                                Intent i = new Intent(PausedActivity.this, Game.class);
+                                startActivity(i);
+                            }
+                        }).setNegativeButton("No", null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+
+        mainMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(ctx)
+                        .setTitle("Salir de la partida")
+                        .setMessage("¿Estás seguro de que quieres salir de la partida? \n\nPerderás todo el progreso de la partida en curso")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                Intent i = new Intent(PausedActivity.this, MainMenu.class);
+                                startActivity(i);
                             }
                         }).setNegativeButton("No", null)
                         .setIcon(android.R.drawable.ic_dialog_alert)

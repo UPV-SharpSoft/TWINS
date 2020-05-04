@@ -22,6 +22,8 @@ public class Audio {
     private int incorrectSound;
     private int shuffleSound;
 
+    public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle}
+
     private boolean muted;
 
     public final static int MAX_VOLUME = 100;
@@ -33,9 +35,18 @@ public class Audio {
     private static int mPlayerProgress = 100;
 
 
+
+
+    public static Audio getInstance() { return audioInstance; }
+
     public static float getSoundVolume() {
         return soundVolume;
     }
+    public static float getMusicVolume() { return musicVolume; }
+
+    public boolean isMuted() { return muted; }
+    public void setMuted(boolean muted) { this.muted = muted; }
+
 
     public void setSoundVolume(float soundVolume) {
         if(soundVolume > 1){
@@ -45,27 +56,20 @@ public class Audio {
         }
     }
 
-    public static int getSoundPoolProgress() {
-        return soundPoolProgress;
+    public void setMusicVolume(float left, float right) {
+        if(left > 1) {
+            this.musicVolume = 1;
+        } else {
+            musicVolume = left;
+        };
+
+        bgMusic.setVolume(left,right);
     }
 
-    public void setSoundPoolProgress(int soundPoolProgress) {
-        this.soundPoolProgress = soundPoolProgress;
+    public void setOnPrepared(SoundPool.OnLoadCompleteListener listener){
+        soundFX.setOnLoadCompleteListener(listener);
     }
 
-    public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle}
-
-    public static Audio getInstance() {
-        return audioInstance;
-    }
-
-    public boolean isMuted() {
-        return muted;
-    }
-
-    public void setMuted(boolean muted) {
-        this.muted = muted;
-    }
 
     public void createSoundPool(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -87,18 +91,6 @@ public class Audio {
         victorySound = soundFX.load(context, R.raw.victoria_default, 2);
         incorrectSound = soundFX.load(context, R.raw.incorrect_default, 2);
         shuffleSound = soundFX.load(context, R.raw.shuffle, 1);
-    }
-
-    public void setMusicSeekbarProgress(int progress){
-        mPlayerProgress = progress;
-    }
-
-    public int getMusicSeekbarProgress(){
-        return mPlayerProgress;
-    }
-
-    public void setOnPrepared(SoundPool.OnLoadCompleteListener listener){
-        soundFX.setOnLoadCompleteListener(listener);
     }
 
     public void startMusic(Context context, int song) {
@@ -136,19 +128,6 @@ public class Audio {
             }
         }
     }
-    public void setMusicVolume(float left, float right) {
-        if(left > 1) {
-            this.musicVolume = 1;
-        } else {
-            musicVolume = left;
-        };
-
-        bgMusic.setVolume(left,right);
-    }
-    public static float getMusicVolume() {
-        return musicVolume;
-    }
-
 
 
     /**
