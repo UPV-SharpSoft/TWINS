@@ -13,15 +13,30 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sharpsoft.twinsapp.EditDeck;
 import com.sharpsoft.twinsapp.Game;
 import com.sharpsoft.twinsapp.R;
 
 public class MainMenu extends AppCompatActivity {
 
+    private Button buttonEditDeck;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setMainUI();
+
+        buttonEditDeck = findViewById(R.id.buttonEditDeck);
+
+        buttonEditDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainMenu.this, EditDeck.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void setMainUI(){
