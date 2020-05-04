@@ -9,11 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".EditDeck"></activity>
+        <activity android:name=".EditDeck"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity
             android:name=".AndroidStudioLogic.MainMenu"
             android:screenOrientation="portrait" />
-        <activity android:name=".GameOver" />
+        <activity
+            android:name=".GameOver"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PausedActivity"
             android:screenOrientation="portrait" />
