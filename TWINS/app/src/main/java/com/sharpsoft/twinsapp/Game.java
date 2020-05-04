@@ -65,13 +65,13 @@ public class Game extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
-        if(!primero) {
-            instanceChronometer(timeLeft);
-            chronometer.start();
-            audioInstance.resumeMusic();
-        }
-        primero = false;
+            super.onResume();
+            if(!primero) {
+                instanceChronometer(timeLeft);
+                chronometer.start();
+                audioInstance.resumeMusic();
+            }
+            primero = false;
     }
 
     @Override
@@ -159,7 +159,5 @@ public class Game extends AppCompatActivity {
             }
         });
     }
-
-
 
 }
