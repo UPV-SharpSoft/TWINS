@@ -2,8 +2,11 @@ package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
@@ -17,6 +20,7 @@ public class EditDeck extends AppCompatActivity {
 
     private ListView listView;
     private List<Deck> deck;
+    private Button buttonCreateDeck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +28,21 @@ public class EditDeck extends AppCompatActivity {
         setContentView(R.layout.activity_edit_deck);
 
         listView = findViewById(R.id.ListView);
-
-        /*deck = new ArrayList<String>();
-        deck.add("Baraja 1");
-        deck.add("Baraja 2");
-        deck.add("Baraja 3");
-        deck.add("Baraja 4");
-        deck.add("Baraja 5");
-        deck.add("Crear Baraja");*/
+        buttonCreateDeck = findViewById(R.id.buttonCreateDeck);
 
         deck = new ArrayList<>();
         deck.addAll(getAllDecks());
 
         AdapterEditDeck adapter = new AdapterEditDeck(this, R.layout.item_editor, deck);
         listView.setAdapter(adapter);
+
+        buttonCreateDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EditDeck.this, NewDeck.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private List<Deck> getAllDecks(){
