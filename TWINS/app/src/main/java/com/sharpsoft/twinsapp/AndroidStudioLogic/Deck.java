@@ -2,6 +2,8 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
 import java.util.Random;
 
@@ -10,9 +12,10 @@ public class Deck {
     private Bitmap reverse;
     private String deckName;
 
-    public Deck(List<Bitmap> cards, Bitmap reverse){
+    public Deck(List<Bitmap> cards, Bitmap reverse, String name){
         this.cards = cards;
         this.reverse = reverse;
+        this.deckName = name;
     }
 
     public void setName(){
@@ -38,5 +41,10 @@ public class Deck {
 
     public int getNumCartas(){
         return cards.size();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return (obj instanceof Deck && ((Deck) obj).deckName.equals(this.deckName));
     }
 }

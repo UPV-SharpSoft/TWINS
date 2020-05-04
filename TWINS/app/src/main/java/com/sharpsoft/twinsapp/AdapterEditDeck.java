@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 
 import java.util.List;
 
@@ -13,22 +16,22 @@ public class AdapterEditDeck extends BaseAdapter {
 
     private Context context;
     private int layout;
-    private List<String> deck;
+    private List<Deck> decks;
 
-    public AdapterEditDeck (Context context , int layout, List<String> notes) {
+    public AdapterEditDeck (Context context , int layout, List<Deck> decks) {
         this.context = context;
         this.layout = layout;
-        this.deck = notes;
+        this.decks = decks;
     }
 
     @Override
     public int getCount() {
-        return this.deck.size();
+        return this.decks.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.deck.get(position);
+        return this.decks.get(position);
     }
 
     @Override
@@ -44,10 +47,13 @@ public class AdapterEditDeck extends BaseAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
         v = layoutInflater.inflate(this.layout, null);
 
-        String currentName = deck.get(position);
+        String currentName = decks.get(position).getName();
 
         TextView textView = v.findViewById(R.id.textView);
         textView.setText(currentName);
+
+        ImageView deckImageView = v.findViewById(R.id.DeckimageView);
+        deckImageView.setImageBitmap(decks.get(position).getReverse());
 
         return v;
     }

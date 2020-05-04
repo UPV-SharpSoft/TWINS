@@ -25,6 +25,7 @@ public class DeckFactory {
     public static Deck getDeck(Decks deck, Dimension dimension, Context ctx){
         List<Bitmap> cards = new ArrayList<>();
         Bitmap reverse = null;
+        String name = null;
 
         if(deck == Decks.minecraft){
             for(int i = 0; i < dimension.getTotal()/2; i++){
@@ -32,9 +33,20 @@ public class DeckFactory {
                 cards.add(b); cards.add(b);
             }
             reverse = getBitmapFromAsset("CartasMinecraft/stone.png", ctx);
+            name = "Minecraft";
         }
 
-        return new Deck(cards, reverse);
+        return new Deck(cards, reverse, name);
+    }
+
+    public static List<Bitmap> getAllImages(Decks deck, Context ctx){
+        List<Bitmap> res = new ArrayList<>();
+        if(deck == Decks.minecraft){
+            for(String s : minecraftCards){
+                res.add(getBitmapFromAsset("CartasMinecraft/" + s, ctx));
+            }
+        }
+        return res;
     }
 
     private static Bitmap getBitmapFromAsset(String path, Context ctx) {
