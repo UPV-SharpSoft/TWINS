@@ -62,8 +62,6 @@ public class GameOver extends AppCompatActivity {
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(GameOver.this, MainMenu.class);
-                startActivity(i);
                 finish();
             }
         });
