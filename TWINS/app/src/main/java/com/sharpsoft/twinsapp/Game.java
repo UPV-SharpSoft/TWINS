@@ -83,7 +83,7 @@ public class Game extends AppCompatActivity {
 
     public void addBoard() {
         Dimension dimension = new Dimension(4, 6);
-        Deck deck = DeckFactory.getDeck(DeckFactory.Decks.minecraft, dimension, this);
+        Deck deck = DeckFactory.getDeck(DeckFactory.Decks.fruits, dimension, this);
         board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, deck);
 
         View tableroView = ((com.sharpsoft.twinsapp.AndroidStudioLogic.Board) board).getView(this);
