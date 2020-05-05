@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,20 +38,6 @@ public class NewDeck extends AppCompatActivity {
         Button buttonLoadImage = findViewById(R.id.buttonLoadImage);
         Spinner spinnerDeck = findViewById(R.id.spinnerDeck);
 
-        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
-            }
-        });
-
-
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.addAll(getAllDecks());
 
@@ -58,29 +45,18 @@ public class NewDeck extends AppCompatActivity {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDeck.setAdapter(arrayAdapter);
 
-    }
+        spinnerDeck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        
+            }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            }
+        });
 
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            ImageView imageViewDeck = findViewById(R.id.imageViewDeck);
-            imageViewDeck.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-
-        }
     }
 
     private List<String> getAllDecks(){
