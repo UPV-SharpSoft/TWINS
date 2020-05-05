@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,13 +31,16 @@ public class NewDeck extends AppCompatActivity {
 
     private Spinner spinnerDeck;
 
+    private List<Bitmap> selectedDeck;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_deck);
 
-        Button buttonLoadImage = findViewById(R.id.buttonLoadImage);
-        Spinner spinnerDeck = findViewById(R.id.spinnerDeck);
+        buttonLoadImage = findViewById(R.id.buttonLoadImage);
+        spinnerDeck = findViewById(R.id.spinnerDeck);
+        imageViewDeck = findViewById(R.id.imageViewDeck);
 
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.addAll(getAllDecks());
@@ -48,7 +52,8 @@ public class NewDeck extends AppCompatActivity {
         spinnerDeck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                selectedDeck = DeckFactory.getAllImages(DeckFactory.Decks.values()[i], NewDeck.this);
+                imageViewDeck.setImageBitmap(selectedDeck.get(0));
             }
 
             @Override
