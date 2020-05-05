@@ -21,7 +21,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewDeck extends AppCompatActivity {
+public class NewDeckActivity extends AppCompatActivity {
 
     private Button buttonLoadImage;
     private ImageView imageViewDeck;

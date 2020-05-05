@@ -25,7 +25,7 @@ import java.text.DecimalFormat;
 import static com.sharpsoft.twinsapp.AndroidStudioLogic.Audio.Sounds.*;
 
 
-public class Game extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     private TextView chronoTV;
     private CountDownTimer chronometer;
@@ -101,7 +101,7 @@ public class Game extends AppCompatActivity {
             public void onSuccess() {
                 audioInstance.makeSound(correct);
                 if(board.isComplete()){ //Si se ha terminado el tablero
-                    Intent i = new Intent(Game.this, GameOver.class);
+                    Intent i = new Intent(GameActivity.this, GameOverActivity.class);
                     i.putExtra("gameOverBool", gameOverBool);
                     i.putExtra("timeLeft", timeLeft);
                     i.putExtra("score", board.getScore().getScore());
@@ -139,7 +139,7 @@ public class Game extends AppCompatActivity {
                 audioInstance.stopMusic();
                 chronoTV.setText(cronoFormatLong.format(0));
 
-                Intent i = new Intent(Game.this, GameOver.class);
+                Intent i = new Intent(GameActivity.this, GameOverActivity.class);
                 i.putExtra("gameOverBool", gameOverBool);
                 i.putExtra("score", board.getScore().getScore());
                 startActivity(i);
@@ -153,7 +153,7 @@ public class Game extends AppCompatActivity {
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Game.this, PausedActivity.class);
+                Intent intent = new Intent(GameActivity.this, PausedActivity.class);
                 startActivity(intent);
                 chronometer.cancel();
                 audioInstance.pauseMusic();

@@ -9,21 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".NewDeck"></activity>
+        <activity android:name=".NewDeckActivity"></activity>
         <activity
             android:name=".EditDeck"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AndroidStudioLogic.MainMenu"
+            android:name=".MainMenuActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GameOver"
+            android:name=".GameOverActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".PausedActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Game"
+            android:name=".GameActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"

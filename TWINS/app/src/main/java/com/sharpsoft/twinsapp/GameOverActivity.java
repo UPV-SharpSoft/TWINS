@@ -9,9 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.MainMenu;
 
-public class GameOver extends AppCompatActivity {
+public class GameOverActivity extends AppCompatActivity {
 
     private boolean isGameOver;
     private long timeLeft;
@@ -62,7 +61,7 @@ public class GameOver extends AppCompatActivity {
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(GameOver.this, MainMenu.class);
+                Intent i = new Intent(GameOverActivity.this, MainMenuActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -71,7 +70,7 @@ public class GameOver extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(GameOver.this, Game.class);
+                Intent i = new Intent(GameOverActivity.this, GameActivity.class);
                 startActivity(i);
                 finish();
             }

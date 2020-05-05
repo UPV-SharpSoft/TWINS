@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.MainMenu;
 
 public class PausedActivity extends AppCompatActivity {
 
@@ -91,7 +89,7 @@ public class PausedActivity extends AppCompatActivity {
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                Intent i = new Intent(PausedActivity.this, Game.class);
+                                Intent i = new Intent(PausedActivity.this, GameActivity.class);
                                 startActivity(i);
                             }
                         }).setNegativeButton("No", null)
@@ -109,7 +107,7 @@ public class PausedActivity extends AppCompatActivity {
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                Intent i = new Intent(PausedActivity.this, MainMenu.class);
+                                Intent i = new Intent(PausedActivity.this, MainMenuActivity.class);
                                 startActivity(i);
                             }
                         }).setNegativeButton("No", null)

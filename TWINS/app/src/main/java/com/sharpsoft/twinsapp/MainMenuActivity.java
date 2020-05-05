@@ -1,4 +1,4 @@
-package com.sharpsoft.twinsapp.AndroidStudioLogic;
+package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,14 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sharpsoft.twinsapp.EditDeck;
-import com.sharpsoft.twinsapp.Game;
-import com.sharpsoft.twinsapp.R;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
 
-public class MainMenu extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity {
     boolean onNewGame;
     private Audio audioInstance = Audio.getInstance();
 
@@ -45,7 +42,7 @@ public class MainMenu extends AppCompatActivity {
         buttonEditDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainMenu.this, EditDeck.class);
+                Intent intent = new Intent(MainMenuActivity.this, EditDeck.class);
                 startActivity(intent);
             }
         });
@@ -86,9 +83,11 @@ public class MainMenu extends AppCompatActivity {
     private void setNewGameUI(){
         setContentView(R.layout.new_game);
 
-        ImageButton homeImageButton = findViewById(R.id.homeImageButton);
+        final ImageButton homeImageButton = findViewById(R.id.homeImageButton);
         final ImageView partidaRapidaImageView = findViewById(R.id.partidaRapidaImageView);
-        TextView partidaRapidaTextView = findViewById(R.id.partidaRapidaTextView);
+        final TextView partidaRapidaTextView = findViewById(R.id.partidaRapidaTextView);
+        final ImageView partidaNivelesImageView = findViewById(R.id.partidaNivelesImageView);
+        final TextView partidaNivelesTextView = findViewById(R.id.partidaNivelesTextView);
 
         View.OnClickListener partidaRapidaClick = new View.OnClickListener() {
             @Override
@@ -103,13 +102,27 @@ public class MainMenu extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent i = new Intent(MainMenu.this, Game.class);
+                        Intent i = new Intent(MainMenuActivity.this, GameActivity.class);
                         startActivity(i);
                     }
                 }, 500);
 
             }
         };
+
+        View.OnClickListener nivelesClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(MainMenuActivity.this, GameActivity.class);
+                        startActivity(i);
+                    }
+                }, 500);
+            }
+        };
+
         homeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +132,9 @@ public class MainMenu extends AppCompatActivity {
 
         partidaRapidaImageView.setOnClickListener(partidaRapidaClick);
         partidaRapidaTextView.setOnClickListener(partidaRapidaClick);
+        partidaNivelesImageView.setOnClickListener(nivelesClick);
+        partidaNivelesTextView.setOnClickListener(nivelesClick);
+
 
         onNewGame = true;
     }
