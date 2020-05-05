@@ -20,6 +20,7 @@ import com.sharpsoft.twinsapp.R;
 
 public class MainMenu extends AppCompatActivity {
     boolean onNewGame;
+    private Audio audioInstance = Audio.getInstance();
 
     @Override
     public void onBackPressed(){
@@ -39,7 +40,7 @@ public class MainMenu extends AppCompatActivity {
         audioInstance.startMusic(this, R.raw.menus_default);
 
 
-        buttonEditDeck = findViewById(R.id.buttonEditDeck);
+        Button buttonEditDeck = findViewById(R.id.buttonEditDeck);
 
         buttonEditDeck.setOnClickListener(new View.OnClickListener() {
             @Override
