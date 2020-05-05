@@ -19,9 +19,17 @@ import com.sharpsoft.twinsapp.Game;
 import com.sharpsoft.twinsapp.R;
 
 public class MainMenu extends AppCompatActivity {
+    boolean onNewGame;
 
-    private Button buttonEditDeck;
-    private Audio audioInstance = Audio.getInstance();
+    @Override
+    public void onBackPressed(){
+        if(onNewGame){
+            setMainUI();
+        }else{
+            System.exit(0);
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +44,10 @@ public class MainMenu extends AppCompatActivity {
         buttonEditDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(MainMenu.this, EditDeck.class);
                 startActivity(intent);
             }
         });
-
     }
 
     private void setMainUI(){
@@ -73,6 +79,7 @@ public class MainMenu extends AppCompatActivity {
                 }, 500);
             }
         });
+        onNewGame = false;
     }
 
     private void setNewGameUI(){
@@ -111,6 +118,8 @@ public class MainMenu extends AppCompatActivity {
 
         partidaRapidaImageView.setOnClickListener(partidaRapidaClick);
         partidaRapidaTextView.setOnClickListener(partidaRapidaClick);
+
+        onNewGame = true;
     }
 
     private void showExitConfirmation(){
