@@ -21,11 +21,15 @@ import com.sharpsoft.twinsapp.R;
 public class MainMenu extends AppCompatActivity {
 
     private Button buttonEditDeck;
+    private Audio audioInstance = Audio.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setMainUI();
+
+        audioInstance.startMusic(this, R.raw.menus_default);
+
 
         buttonEditDeck = findViewById(R.id.buttonEditDeck);
 
@@ -81,6 +85,7 @@ public class MainMenu extends AppCompatActivity {
         View.OnClickListener partidaRapidaClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                audioInstance.makeSound(Audio.Sounds.button);
                 partidaRapidaImageView.animate()
                         .translationX(5000)
                         .scaleX(20)

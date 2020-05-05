@@ -57,6 +57,7 @@ public class Game extends AppCompatActivity {
 
         //float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME -
           //      audioInstance.getMusicSeekbarProgress()) / Math.log(Audio.MAX_VOLUME)));
+        audioInstance.stopMusic();
         float volume = Audio.getMusicVolume();
         audioInstance.startMusic(this, R.raw.partida_default);
         audioInstance.setMusicVolume(volume, volume);

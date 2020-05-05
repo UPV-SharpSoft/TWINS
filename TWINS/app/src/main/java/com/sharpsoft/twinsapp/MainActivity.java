@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         audioInstance.setOnPrepared(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int i, int i1) {
-                if(i1 == 0)audioInstance.makeSound(Audio.Sounds.shuffle);
+                if(i1 == 0 && i==6)audioInstance.makeSound(Audio.Sounds.shuffle);
             }
         });
 
@@ -40,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         Intent i = new Intent(MainActivity.this, MainMenu.class);
                         startActivity(i);
+                        audioInstance.stopSound(1);
+                        audioInstance.stopSound(2);
                         finish();
+
                     }
                 });
             }
