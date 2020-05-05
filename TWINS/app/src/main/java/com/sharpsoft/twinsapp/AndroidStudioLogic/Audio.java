@@ -21,8 +21,9 @@ public class Audio {
     private int victorySound;
     private int incorrectSound;
     private int shuffleSound;
+    private int buttonSound;
 
-    public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle}
+    public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle, button}
 
     private boolean muted;
 
@@ -90,7 +91,8 @@ public class Audio {
         correctSound = soundFX.load(context, R.raw.correct_default, 2);
         victorySound = soundFX.load(context, R.raw.victoria_default, 2);
         incorrectSound = soundFX.load(context, R.raw.incorrect_default, 2);
-        shuffleSound = soundFX.load(context, R.raw.shuffle, 1);
+        shuffleSound = soundFX.load(context, R.raw.shuffle, 5);
+        buttonSound = soundFX.load(context, R.raw.button, 2);
     }
 
     public void startMusic(Context context, int song) {
@@ -129,6 +131,15 @@ public class Audio {
         }
     }
 
+    public void stopSound(int streamID){
+        if(soundFX != null){
+            try{
+                soundFX.stop(streamID);
+            }catch(Exception e){
+                Log.w(Audio.class.getName(), String.format("Failed to stop the soundPool player: %s", e));
+            }
+        }
+    }
 
     /**
      * Próximamente, cuando hagamos más packs de Sonidos, habrá que precargar los sonidos
@@ -155,7 +166,11 @@ public class Audio {
                 soundFX.play(incorrectSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
             case shuffle:
-                soundFX.play(shuffleSound, soundVolume, soundVolume, 0, 0, 1);
+
+                Log.i("STREAM ID",  soundFX.play(shuffleSound, soundVolume, soundVolume, 0, 0, 1) + "");
+                break;
+            case button:
+                soundFX.play(buttonSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
 
         }
