@@ -17,7 +17,7 @@ public class Score extends com.sharpsoft.twins_clases.logic.Score {
         String StringLeftScore = "";
         if(leftScore > 0){
             StringLeftScore = "+" + leftScore;
-            scoreTextView.setTextColor(Color.BLACK);
+            scoreTextView.setTextColor(Color.GREEN);
         }else if (leftScore < 0){
             StringLeftScore = String.valueOf(leftScore);
             scoreTextView.setTextColor(Color.RED);
