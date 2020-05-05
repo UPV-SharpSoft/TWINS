@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -28,10 +29,12 @@ public class NewDeck extends AppCompatActivity {
     private Button buttonLoadImage;
     private ImageView imageViewDeck;
     private static int RESULT_LOAD_IMAGE = 1;
-
     private Spinner spinnerDeck;
+    private ImageView previousCard;
+    private ImageView nextCard;
 
     private List<Bitmap> selectedDeck;
+    private  int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,26 @@ public class NewDeck extends AppCompatActivity {
         buttonLoadImage = findViewById(R.id.buttonLoadImage);
         spinnerDeck = findViewById(R.id.spinnerDeck);
         imageViewDeck = findViewById(R.id.imageViewDeck);
+        previousCard = findViewById(R.id.previousCard);
+        nextCard = findViewById(R.id.nextCard);
 
+        selectDeck();
+
+        moveCard();
+
+    }
+
+    private List<String> getAllDecks(){
+        List<String> res = new ArrayList<>();
+        Dimension d = new Dimension(2, 1);
+        for(DeckFactory.Decks decks : DeckFactory.Decks.values()){
+            Deck deck = DeckFactory.getDeck(decks, d , this);
+            res.add(deck.getName());
+        }
+        return res;
+    }
+
+    private void selectDeck(){
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.addAll(getAllDecks());
 
@@ -58,19 +80,25 @@ public class NewDeck extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                    
+
+            }
+        });
+    }
+
+    private void moveCard() {
+
+        previousCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(count > -1) imageViewDeck.setImageBitmap(selectedDeck.get(count--));
             }
         });
 
-    }
-
-    private List<String> getAllDecks(){
-        List<String> res = new ArrayList<>();
-        Dimension d = new Dimension(2, 1);
-        for(DeckFactory.Decks decks : DeckFactory.Decks.values()){
-            Deck deck = DeckFactory.getDeck(decks, d , this);
-            res.add(deck.getName());
-        }
-        return res;
+        nextCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(count < selectedDeck.size()) imageViewDeck.setImageBitmap(selectedDeck.get(count++));
+            }
+        });
     }
 }
