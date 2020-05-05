@@ -32,7 +32,7 @@ public class DeckFactory {
                 Bitmap b = getBitmapFromAsset("CartasMinecraft/" + minecraftCards[i% minecraftCards.length], ctx);
                 cards.add(b); cards.add(b);
             }
-            reverse = getBitmapFromAsset("CartasMinecraft/stone.png", ctx);
+            reverse = getBitmapFromAsset("CartasMinecraft/back.png", ctx);
             name = "Minecraft";
         }
 

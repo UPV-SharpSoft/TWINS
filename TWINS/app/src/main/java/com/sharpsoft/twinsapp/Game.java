@@ -30,7 +30,7 @@ public class Game extends AppCompatActivity {
     private TextView chronoTV;
     private CountDownTimer chronometer;
     private long timeLeft;
-    private boolean primero = true;
+    private boolean first = true;
     private boolean gameOverBool = false;
 
     private LinearLayout tableLayout;
@@ -66,12 +66,12 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onResume() {
             super.onResume();
-            if(!primero) {
+            if(!first) {
                 instanceChronometer(timeLeft);
                 chronometer.start();
                 audioInstance.resumeMusic();
             }
-            primero = false;
+            first = false;
     }
 
     @Override
