@@ -35,6 +35,7 @@ public class NewDeck extends AppCompatActivity {
         setContentView(R.layout.activity_new_deck);
 
         Button buttonLoadImage = findViewById(R.id.buttonLoadImage);
+        Spinner spinnerDeck = findViewById(R.id.spinnerDeck);
 
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
