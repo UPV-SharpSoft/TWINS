@@ -16,7 +16,6 @@ public class DeckFactory {
 
     public enum Decks {
         minecraft,
-        ESPAÑOLA,
         fruits
     }
 
@@ -55,7 +54,7 @@ public class DeckFactory {
                 res.add(getBitmapFromAsset("CartasMinecraft/" + s, ctx));
             }
         }else if(deck == Decks.fruits){
-            for(String s : minecraftCards){
+            for(String s : fruitCards){
                 res.add(getBitmapFromAsset("FruitsDeck/" + s, ctx));
             }
         }
