@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -33,12 +34,14 @@ public class NewDeckActivity extends AppCompatActivity {
     private Spinner spinnerDeck;
     private ImageView previousCard;
     private ImageView nextCard;
+    private Button buttonSave;
+    private EditText editTextName;
 
     private List<Bitmap> selectedDeck;
     private int count = 0;
     private int position = 0;
 
-    private ArrayList<ImageView> newDeck;
+    private ArrayList<Bitmap> newList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,8 @@ public class NewDeckActivity extends AppCompatActivity {
         imageViewDeck = findViewById(R.id.imageViewDeck);
         previousCard = findViewById(R.id.previousCard);
         nextCard = findViewById(R.id.nextCard);
+        buttonSave = findViewById(R.id.buttonSave);
+        editTextName = findViewById(R.id.editTextName);
 
         selectDeck();
 
@@ -58,8 +63,6 @@ public class NewDeckActivity extends AppCompatActivity {
         addCard();
 
         uploadCard();
-
-        setName();
 
         createDeck();
 
@@ -171,11 +174,15 @@ public class NewDeckActivity extends AppCompatActivity {
 
     }
 
-    private void setName() {
-
-    }
-
     private void createDeck() {
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nameDeck = editTextName.getText().toString();
+                Deck newDeck = new Deck (newList, newList.get(0), nameDeck);
+            }
+        });
 
     }
 
