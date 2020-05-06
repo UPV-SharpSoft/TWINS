@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -37,6 +38,8 @@ public class NewDeckActivity extends AppCompatActivity {
     private int count = 0;
     private int position = 0;
 
+    private ArrayList<ImageView> newDeck;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +57,12 @@ public class NewDeckActivity extends AppCompatActivity {
 
         addCard();
 
-    }
+        uploadCard();
 
-    private List<String> getAllDecks(){
-        List<String> res = new ArrayList<>();
-        Dimension d = new Dimension(2, 1);
-        for(DeckFactory.Decks decks : DeckFactory.Decks.values()){
-            Deck deck = DeckFactory.getDeck(decks, d , this);
-            res.add(deck.getName());
-        }
-        return res;
+        setName();
+
+        createDeck();
+
     }
 
     private void selectDeck(){
@@ -118,11 +117,98 @@ public class NewDeckActivity extends AppCompatActivity {
         imageViewDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String image = "card" + position;
-                ImageView imageDeck = findViewById(R.id.image);
 
-                //imageDeck.setImageBitmap(imageViewDeck.setImageResource());
+                ImageView cardValue;
+
+                if (position == 0) {
+                    cardValue = findViewById(R.id.card0);
+                } else if (position == 1) {
+                     cardValue = findViewById(R.id.card1);
+                } else if(position == 2) {
+                     cardValue = findViewById(R.id.card2);
+                }else if(position == 3) {
+                     cardValue = findViewById(R.id.card3);
+                }else if(position == 4) {
+                     cardValue = findViewById(R.id.card4);
+                }else if(position == 5) {
+                     cardValue = findViewById(R.id.card5);
+                }else if(position == 6) {
+                     cardValue = findViewById(R.id.card6);
+                }else if(position == 7) {
+                     cardValue = findViewById(R.id.card7);
+                }else if(position == 8) {
+                     cardValue = findViewById(R.id.card8);
+                }else if(position == 9) {
+                     cardValue = findViewById(R.id.card9);
+                }else {
+                     cardValue = findViewById(R.id.card10);
+                }
+                
+                position++;
+
+                cardValue.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                cardValue.setImageDrawable(imageViewDeck.getDrawable());
+
             }
         });
+    }
+
+    private void uploadCard(){
+
+        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
+    }
+
+    private void setName() {
+
+    }
+
+    private void createDeck() {
+
+    }
+
+    private List<String> getAllDecks(){
+        List<String> res = new ArrayList<>();
+        Dimension d = new Dimension(2, 1);
+        for(DeckFactory.Decks decks : DeckFactory.Decks.values()){
+            Deck deck = DeckFactory.getDeck(decks, d , this);
+            res.add(deck.getName());
+        }
+        return res;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            ImageView card2 = findViewById(R.id.card2);
+            card2.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+        }
+
     }
 }
