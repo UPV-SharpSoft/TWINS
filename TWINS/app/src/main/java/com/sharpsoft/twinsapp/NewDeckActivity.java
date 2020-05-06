@@ -44,7 +44,7 @@ public class NewDeckActivity extends AppCompatActivity {
     private int count = 0;
     private int position = 0;
 
-    private ArrayList<Bitmap> newList;
+    private ArrayList<Bitmap> newDeckList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +98,6 @@ public class NewDeckActivity extends AppCompatActivity {
         previousCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*count--;
-                if(count > -1) {
-                    imageViewDeck.setImageBitmap(selectedDeck.get(count));
-                }
-                else{count++;}*/
                 count = (count + selectedDeck.size()-1) % selectedDeck.size();
                 imageViewDeck.setImageBitmap(selectedDeck.get(count));
             }
@@ -111,11 +106,6 @@ public class NewDeckActivity extends AppCompatActivity {
         nextCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*count++;
-                if(count < selectedDeck.size()) {
-                    imageViewDeck.setImageBitmap(selectedDeck.get(count));
-                }
-                else{count--;}*/
                 count = (count + 1) % selectedDeck.size();
                 imageViewDeck.setImageBitmap(selectedDeck.get(count));
             }
@@ -137,6 +127,15 @@ public class NewDeckActivity extends AppCompatActivity {
                 ImageView cardValue = new ImageView(NewDeckActivity.this);
                 cardValue.setImageDrawable(imageViewDeck.getDrawable());
                 cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(250, 300);
+                cardValue.setLayoutParams(layoutParams);
+
+                BitmapDrawable drawable = (BitmapDrawable) cardValue.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+
+                newDeckList.add(bitmap);
+
                 ll.addView(cardValue);
 
             }
@@ -166,7 +165,7 @@ public class NewDeckActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String nameDeck = editTextName.getText().toString();
-                Deck newDeck = new Deck (newList, newList.get(0), nameDeck);
+                Deck newDeck = new Deck (newDeckList, newDeckList.get(0), nameDeck);
             }
         });
 
@@ -187,7 +186,7 @@ public class NewDeckActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            /*Uri selectedImage = data.getData();
+            Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
             Cursor cursor = getContentResolver().query(selectedImage,
@@ -198,8 +197,8 @@ public class NewDeckActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView card2 = findViewById(R.id.card2);
-            card2.setImageBitmap(BitmapFactory.decodeFile(picturePath));*/
+            //ImageView card2 = findViewById(R.id.card2);
+            //card2.setImageBitmap(BitmapFactory.decodeFile(picturePath));*/
 
         }
 

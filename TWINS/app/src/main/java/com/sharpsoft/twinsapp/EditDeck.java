@@ -29,6 +29,11 @@ public class EditDeck extends AppCompatActivity {
         listView = findViewById(R.id.ListView);
         buttonCreateDeck = findViewById(R.id.buttonCreateDeck);
 
+        showList();
+
+    }
+
+    private void showList() {
         deck = new ArrayList<>();
         deck.addAll(getAllDecks());
 
