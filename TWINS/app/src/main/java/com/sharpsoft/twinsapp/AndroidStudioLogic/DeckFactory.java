@@ -24,7 +24,7 @@ public class DeckFactory {
                                         "LapislazuliOre.png", "EmeraldOre.png", "IronOre.png"};
     private final static String[] fruitCards = {"apple.png", "banana.png", "carrot.png", "eggplant.png", "kiwi.png", "lemon.png", "orange.png", "pear.png", "pineapple.png", "tomato.png", "watermelon.png"};
 
-    private final static String[] reversos = {"CartasMinecraft/back.png", "FruitsDeck/backFruit.png"};
+    private final static String[] reverseCards = {"CartasMinecraft/back.png", "FruitsDeck/backFruit.png"};
 
     public static Deck getDeck(Decks deck, Dimension dimension, Context ctx){
         List<Bitmap> cards = new ArrayList<>();
@@ -59,6 +59,11 @@ public class DeckFactory {
         }else if(deck == Decks.fruits){
             for(String s : fruitCards){
                 res.add(getBitmapFromAsset("FruitsDeck/" + s, ctx));
+            }
+        }else if(deck == Decks.reversos) {
+            for (String s : reverseCards) {
+                res.add(getBitmapFromAsset("FruitsDeck/" + s, ctx));
+                res.add(getBitmapFromAsset("CartasMinecraft/" + s, ctx));
             }
         }
         return res;
