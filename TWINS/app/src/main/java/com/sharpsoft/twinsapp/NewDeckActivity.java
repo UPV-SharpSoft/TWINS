@@ -34,7 +34,8 @@ public class NewDeckActivity extends AppCompatActivity {
     private ImageView nextCard;
 
     private List<Bitmap> selectedDeck;
-    private  int count = 0;
+    private int count = 0;
+    private int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class NewDeckActivity extends AppCompatActivity {
         selectDeck();
 
         moveCard();
+
+        addCard();
 
     }
 
@@ -74,7 +77,7 @@ public class NewDeckActivity extends AppCompatActivity {
         spinnerDeck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedDeck = DeckFactory.getAllImages(DeckFactory.Decks.values()[i], NewDeck.this);
+                selectedDeck = DeckFactory.getAllImages(DeckFactory.Decks.values()[i], NewDeckActivity.this);
                 imageViewDeck.setImageBitmap(selectedDeck.get(0));
             }
 
@@ -90,14 +93,35 @@ public class NewDeckActivity extends AppCompatActivity {
         previousCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(count > -1) imageViewDeck.setImageBitmap(selectedDeck.get(count--));
+                count--;
+                if(count > -1) {
+                    imageViewDeck.setImageBitmap(selectedDeck.get(count));
+                }
+                else{count++;}
             }
         });
 
         nextCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(count < selectedDeck.size()) imageViewDeck.setImageBitmap(selectedDeck.get(count++));
+                count++;
+                if(count < selectedDeck.size()) {
+                    imageViewDeck.setImageBitmap(selectedDeck.get(count));
+                }
+                else{count--;}
+            }
+        });
+    }
+
+    private void addCard(){
+
+        imageViewDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String image = "card" + position;
+                ImageView imageDeck = findViewById(R.id.image);
+
+                //imageDeck.setImageBitmap(imageViewDeck.setImageResource());
             }
         });
     }

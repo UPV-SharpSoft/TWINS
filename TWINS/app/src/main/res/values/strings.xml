@@ -2,4 +2,7 @@
     <string name="app_name">TWINS</string>
     <string name="twins">TWINS</string>
     <string name="a_adir_baraja_personalizada">Añadir baraja personalizada</string>
+    <string name="nombre">NOMBRE:</string>
+    <string name="quieres_escoger_una_carta_predeterminada">¿QUIERES ESCOGER UNA CARTA PREDETERMINADA?</string>
+    <string name="back">BACK</string>
 </resources>
