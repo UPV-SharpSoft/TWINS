@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,7 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
@@ -95,22 +98,26 @@ public class NewDeckActivity extends AppCompatActivity {
         previousCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count--;
+                /*count--;
                 if(count > -1) {
                     imageViewDeck.setImageBitmap(selectedDeck.get(count));
                 }
-                else{count++;}
+                else{count++;}*/
+                count = (count + selectedDeck.size()-1) % selectedDeck.size();
+                imageViewDeck.setImageBitmap(selectedDeck.get(count));
             }
         });
 
         nextCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count++;
+                /*count++;
                 if(count < selectedDeck.size()) {
                     imageViewDeck.setImageBitmap(selectedDeck.get(count));
                 }
-                else{count--;}
+                else{count--;}*/
+                count = (count + 1) % selectedDeck.size();
+                imageViewDeck.setImageBitmap(selectedDeck.get(count));
             }
         });
     }
@@ -120,38 +127,17 @@ public class NewDeckActivity extends AppCompatActivity {
         imageViewDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                LinearLayout ll = findViewById(R.id.upperLinearLayout);
 
-                ImageView cardValue;
-
-                if (position == 0) {
-                    cardValue = findViewById(R.id.card0);
-                } else if (position == 1) {
-                     cardValue = findViewById(R.id.card1);
-                } else if(position == 2) {
-                     cardValue = findViewById(R.id.card2);
-                }else if(position == 3) {
-                     cardValue = findViewById(R.id.card3);
-                }else if(position == 4) {
-                     cardValue = findViewById(R.id.card4);
-                }else if(position == 5) {
-                     cardValue = findViewById(R.id.card5);
-                }else if(position == 6) {
-                     cardValue = findViewById(R.id.card6);
-                }else if(position == 7) {
-                     cardValue = findViewById(R.id.card7);
-                }else if(position == 8) {
-                     cardValue = findViewById(R.id.card8);
-                }else if(position == 9) {
-                     cardValue = findViewById(R.id.card9);
-                }else {
-                     cardValue = findViewById(R.id.card10);
+                if(ll.getChildCount() >= 12){
+                    Toast.makeText(NewDeckActivity.this, "Has alcanzado el máximo de cartas!", Toast.LENGTH_LONG).show();
+                    return;
                 }
-                
-                position++;
 
-                cardValue.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
+                ImageView cardValue = new ImageView(NewDeckActivity.this);
                 cardValue.setImageDrawable(imageViewDeck.getDrawable());
+                cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                ll.addView(cardValue);
 
             }
         });
@@ -201,7 +187,7 @@ public class NewDeckActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
+            /*Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
             Cursor cursor = getContentResolver().query(selectedImage,
@@ -213,7 +199,7 @@ public class NewDeckActivity extends AppCompatActivity {
             cursor.close();
 
             ImageView card2 = findViewById(R.id.card2);
-            card2.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            card2.setImageBitmap(BitmapFactory.decodeFile(picturePath));*/
 
         }
 
