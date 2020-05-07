@@ -26,6 +26,8 @@ import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,6 @@ public class NewDeckActivity extends AppCompatActivity {
 
     private List<Bitmap> selectedDeck;
     private int count = 0;
-    private int position = 0;
 
     private ArrayList<Bitmap> newDeckList;
 
@@ -71,11 +72,11 @@ public class NewDeckActivity extends AppCompatActivity {
 
     }
 
-    private void selectDeck(){
+    private void selectDeck() {
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.addAll(getAllDecks());
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String> (this, android.R.layout.simple_spinner_item, arrayList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDeck.setAdapter(arrayAdapter);
 
@@ -98,7 +99,7 @@ public class NewDeckActivity extends AppCompatActivity {
         previousCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count = (count + selectedDeck.size()-1) % selectedDeck.size();
+                count = (count + selectedDeck.size() - 1) % selectedDeck.size();
                 imageViewDeck.setImageBitmap(selectedDeck.get(count));
             }
         });
@@ -112,14 +113,14 @@ public class NewDeckActivity extends AppCompatActivity {
         });
     }
 
-    private void addCard(){
+    private void addCard() {
 
         imageViewDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout ll = findViewById(R.id.upperLinearLayout);
+                LinearLayout layout = findViewById(R.id.upperLinearLayout);
 
-                if(ll.getChildCount() >= 12){
+                if (layout.getChildCount() >= 12) {
                     Toast.makeText(NewDeckActivity.this, "Has alcanzado el máximo de cartas!", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -131,29 +132,27 @@ public class NewDeckActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(250, 300);
                 cardValue.setLayoutParams(layoutParams);
 
-                BitmapDrawable drawable = (BitmapDrawable) cardValue.getDrawable();
-                Bitmap bitmap = drawable.getBitmap();
+                //BitmapDrawable drawable = (BitmapDrawable) cardValue.getDrawable();
+                //Bitmap bitmap = drawable.getBitmap();
 
-                newDeckList.add(bitmap);
+                //newDeckList.add(bitmap);
 
-                ll.addView(cardValue);
+                layout.addView(cardValue);
 
             }
         });
     }
 
-    private void uploadCard(){
+    private void uploadCard() {
 
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMAGE);
             }
         });
 
@@ -165,17 +164,17 @@ public class NewDeckActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String nameDeck = editTextName.getText().toString();
-                Deck newDeck = new Deck (newDeckList, newDeckList.get(0), nameDeck);
+                Deck newDeck = new Deck(newDeckList, newDeckList.get(0), nameDeck);
             }
         });
 
     }
 
-    private List<String> getAllDecks(){
+    private List<String> getAllDecks() {
         List<String> res = new ArrayList<>();
         Dimension d = new Dimension(2, 1);
-        for(DeckFactory.Decks decks : DeckFactory.Decks.values()){
-            Deck deck = DeckFactory.getDeck(decks, d , this);
+        for (DeckFactory.Decks decks : DeckFactory.Decks.values()) {
+            Deck deck = DeckFactory.getDeck(decks, d, this);
             res.add(deck.getName());
         }
         return res;
@@ -185,22 +184,37 @@ public class NewDeckActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        LinearLayout layout = findViewById(R.id.upperLinearLayout);
 
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            //ImageView card2 = findViewById(R.id.card2);
-            //card2.setImageBitmap(BitmapFactory.decodeFile(picturePath));*/
-
+        if (layout.getChildCount() >= 12) {
+            Toast.makeText(NewDeckActivity.this, "Has alcanzado el máximo de cartas!", Toast.LENGTH_LONG).show();
+            return;
         }
 
+        ImageView cardValue = new ImageView(NewDeckActivity.this);
+        cardValue.setImageDrawable(imageViewDeck.getDrawable());
+        cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(250, 300);
+        cardValue.setLayoutParams(layoutParams);
+
+        layout.addView(cardValue);
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                cardValue.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(NewDeckActivity.this, "Algo ha ido mal :(",
+                        Toast.LENGTH_LONG).show();
+            }
+
+        } else {
+            Toast.makeText(NewDeckActivity.this, "No has elegido foto!",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }
