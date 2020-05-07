@@ -18,7 +18,7 @@ public class Deck {
         this.deckName = name;
     }
 
-    public void setName(){
+    public void setName(String deckName){
         this.deckName = deckName;
     }
 
