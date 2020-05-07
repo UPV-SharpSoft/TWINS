@@ -74,7 +74,7 @@ public class NewDeckActivity extends AppCompatActivity {
         spinnerDeck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedDeck = DeckFactory.getAllImages(DeckFactory.Decks.values()[i], NewDeck.this);
+                selectedDeck = DeckFactory.getAllImages(DeckFactory.Decks.values()[i], NewDeckActivity.this);
                 imageViewDeck.setImageBitmap(selectedDeck.get(0));
             }
 
