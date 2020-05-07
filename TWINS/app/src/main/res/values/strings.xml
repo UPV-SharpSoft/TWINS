@@ -5,4 +5,5 @@
     <string name="nombre">NOMBRE:</string>
     <string name="quieres_escoger_una_carta_predeterminada">¿QUIERES ESCOGER UNA CARTA PREDETERMINADA?</string>
     <string name="back">BACK</string>
+    <string name="level1"></string>
 </resources>
