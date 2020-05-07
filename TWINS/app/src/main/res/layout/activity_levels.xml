@@ -24,78 +24,68 @@
             android:paddingTop="30dp"
             android:paddingBottom="30dp">
 
-            <Button
-                android:id="@+id/button2"
+            <ImageView
+                android:id="@+id/imageView10"
                 android:layout_width="275dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/mybutton"
-                android:fontFamily="@font/montserrat"
-                android:text="Level 1"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
+                app:srcCompat="@drawable/level1" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="275dp"
-                android:layout_height="match_parent"
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/mybutton"
-                android:fontFamily="@font/montserrat"
-                android:text="Level 2"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
+                app:srcCompat="@drawable/level2" />
 
-            <Button
-                android:id="@+id/button15"
-                android:layout_width="275dp"
-                android:layout_height="match_parent"
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/mybutton"
-                android:fontFamily="@font/montserrat"
-                android:text="Level 3"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
+                app:srcCompat="@drawable/level3" />
 
-            <Button
-                android:id="@+id/button16"
-                android:layout_width="275dp"
-                android:layout_height="match_parent"
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/mybutton"
-                android:fontFamily="@font/montserrat"
-                android:text="Level 4"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
+                app:srcCompat="@drawable/level4" />
 
-            <Button
-                android:id="@+id/button17"
-                android:layout_width="275dp"
-                android:layout_height="match_parent"
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                android:background="@drawable/mybutton"
-                android:fontFamily="@font/montserrat"
-                android:text="Level 5"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
+                app:srcCompat="@drawable/level5" />
 
         </LinearLayout>
     </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="Could you beat the machine?"
+        android:textColor="#288DE4"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="49dp"
+        tools:layout_editor_absoluteY="34dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="207dp"
+        android:layout_height="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="662dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
