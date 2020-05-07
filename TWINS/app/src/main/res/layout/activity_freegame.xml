@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:text="Game Configuration"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.131" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="58dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12"
+        app:srcCompat="@drawable/settings_img" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="44dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="68dp"
+        android:text="DECK"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/deckSpinner"
+        app:layout_constraintHorizontal_bias="0.245"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="52dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:text="BOARD"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/deckSpinner"
+        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="52dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:text="SOUND"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/deckSpinner"
+        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="52dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:text="TIME"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/deckSpinner"
+        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="77dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:text="SHIFT TIME"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/deckSpinner"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="81dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="40dp"
+        android:text="GAMEMODE"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/deckSpinner"
+        app:layout_constraintHorizontal_bias="0.783"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <Spinner
+        android:id="@+id/deckSpinner"
+        android:layout_width="190dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.132" />
+
+    <Spinner
+        android:id="@+id/boardSpinner"
+        android:layout_width="190dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deckSpinner"
+        app:layout_constraintVertical_bias="0.089" />
+
+    <Spinner
+        android:id="@+id/soundSpinner"
+        android:layout_width="190dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boardSpinner"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <Spinner
+        android:id="@+id/soundSpinner2"
+        android:layout_width="190dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintVertical_bias="0.148" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="189dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintTop_toBottomOf="@+id/soundSpinner"
+        tools:layout_editor_absoluteX="141dp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="189dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintTop_toBottomOf="@+id/soundSpinner"
+        tools:layout_editor_absoluteX="141dp" />
+
+    <ImageView
+        android:id="@+id/partidaRapidaImageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        app:layout_constraintTop_toBottomOf="@+id/soundSpinner2"
+        app:srcCompat="@drawable/play_img"
+        tools:layout_editor_absoluteX="192dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="87dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="68dp"
+        android:background="#FFFFFF"
+        android:text="PLAY"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/partidaRapidaImageView2"
+        app:layout_constraintHorizontal_bias="0.771"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
