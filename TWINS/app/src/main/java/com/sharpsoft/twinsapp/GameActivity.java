@@ -100,7 +100,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 audioInstance.makeSound(correct);
-                if(board.isComplete()){ //Si se ha terminado el tablero
+                if(board.isComplete()){
                     Intent i = new Intent(GameActivity.this, GameOverActivity.class);
                     i.putExtra("gameOverBool", gameOverBool);
                     i.putExtra("timeLeft", timeLeft);
