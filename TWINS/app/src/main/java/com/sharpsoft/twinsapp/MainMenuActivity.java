@@ -150,8 +150,8 @@ public class MainMenuActivity extends AppCompatActivity {
         ImageButton gmail = findViewById(R.id.gmailButton);
 
         store.setOnClickListener(openWeb("https://play.google.com"));
-        twitter.setOnClickListener(openWeb("https://www.twitter.com"));
-        facebook.setOnClickListener(openWeb("https://www.facebook.com"));
+        twitter.setOnClickListener(openWeb("https://twitter.com/MalakitoDeTWINS"));
+        facebook.setOnClickListener(openWeb("https://www.facebook.com/malakito.menfish.3"));
         gmail.setOnClickListener(sendEmail());
     }
 
