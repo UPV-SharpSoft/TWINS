@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -78,6 +80,8 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
         onNewGame = false;
+
+        setBottomButtons();
     }
 
     private void setNewGameUI(){
@@ -137,6 +141,43 @@ public class MainMenuActivity extends AppCompatActivity {
 
 
         onNewGame = true;
+    }
+
+    private void setBottomButtons(){
+        ImageButton store = findViewById(R.id.appStoreButton);
+        ImageButton twitter = findViewById(R.id.twitterButton);
+        ImageButton facebook = findViewById(R.id.facebookButton);
+        ImageButton gmail = findViewById(R.id.gmailButton);
+
+        store.setOnClickListener(openWeb("https://play.google.com"));
+        twitter.setOnClickListener(openWeb("https://www.twitter.com"));
+        facebook.setOnClickListener(openWeb("https://www.facebook.com"));
+        gmail.setOnClickListener(sendEmail());
+    }
+
+    private View.OnClickListener openWeb(final String url){
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        };
+    }
+
+    private View.OnClickListener sendEmail(){
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL, "emailaddress@emailaddress.com");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+
+                startActivity(Intent.createChooser(intent, "Send Email"));
+            }
+        };
     }
 
     private void showExitConfirmation(){

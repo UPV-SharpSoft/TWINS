@@ -32,11 +32,11 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="Editor Baraja"
-        app:layout_constraintEnd_toEndOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="@+id/archievementsButton"
         app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/archievementsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -46,11 +46,11 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="Logros"
-        app:layout_constraintEnd_toEndOf="@+id/button4"
+        app:layout_constraintEnd_toEndOf="@+id/rankingButton"
         app:layout_constraintTop_toBottomOf="@+id/buttonEditDeck" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/rankingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -60,11 +60,11 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="Ranking"
-        app:layout_constraintEnd_toEndOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintEnd_toEndOf="@+id/settingsButton"
+        app:layout_constraintTop_toBottomOf="@+id/archievementsButton" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -76,7 +76,7 @@
         android:paddingRight="20dp"
         android:text="Opciones"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/rankingButton" />
 
     <TextView
         android:id="@+id/textView2"
@@ -137,8 +137,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/archievementsButton"
+        app:layout_constraintTop_toTopOf="@+id/archievementsButton"
         app:srcCompat="@drawable/cup_img" />
 
     <ImageView
@@ -146,8 +146,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintTop_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@+id/rankingButton"
+        app:layout_constraintTop_toTopOf="@+id/rankingButton"
         app:srcCompat="@drawable/ranking_img" />
 
     <ImageView
@@ -155,8 +155,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
-        app:layout_constraintTop_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+        app:layout_constraintTop_toTopOf="@+id/settingsButton"
         app:srcCompat="@drawable/settings_img" />
 
     <LinearLayout
@@ -169,7 +169,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/appStoreButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -178,7 +178,7 @@
             app:srcCompat="@android:drawable/star_off" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/twitterButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -187,7 +187,7 @@
             app:srcCompat="@drawable/twitter_img" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/facebookButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -196,7 +196,7 @@
             app:srcCompat="@drawable/facebook_img" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/gmailButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
