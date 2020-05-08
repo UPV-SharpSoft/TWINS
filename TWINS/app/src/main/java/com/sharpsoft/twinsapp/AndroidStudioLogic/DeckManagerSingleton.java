@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DeckManagerSingleton {
@@ -19,17 +20,17 @@ public class DeckManagerSingleton {
         return instance;
     }
 
-    public void saveDeck(Deck deck, Context ctx) throws FileNotFoundException {
-        File path = new File(ctx.getFilesDir().getPath() + "/customDecks/" + deck.getName() + "/");
+    public void saveDeck(String name, List<Bitmap> images, Bitmap reverse, Context ctx) throws FileNotFoundException {
+        File path = new File(ctx.getFilesDir().getPath() + "/customDecks/" + name + "/");
         path.mkdirs();
         int count = 0;
-        while(deck.quedanCartas()){
+        for(Bitmap bitmap : images){
             FileOutputStream out = new FileOutputStream(new File(path.getPath() + count));
-            deck.sacarCarta().compress(Bitmap.CompressFormat.PNG, 100, out);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             count++;
         }
         FileOutputStream out = new FileOutputStream(new File(path.getPath() + "reverse"));
-        deck.getReverse().compress(Bitmap.CompressFormat.PNG, 100, out);
+        reverse.compress(Bitmap.CompressFormat.PNG, 100, out);
     }
 
     public Map<String, Bitmap> getAllDecks(Context ctx){
