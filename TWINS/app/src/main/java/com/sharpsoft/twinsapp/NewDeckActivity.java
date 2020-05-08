@@ -180,6 +180,9 @@ public class NewDeckActivity extends AppCompatActivity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+
+                Intent intent = new Intent(NewDeckActivity.this, MainMenuActivity.class);
+                startActivity(intent);
             }
         });
 
