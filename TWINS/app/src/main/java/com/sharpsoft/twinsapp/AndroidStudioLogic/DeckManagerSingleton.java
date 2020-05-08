@@ -43,6 +43,7 @@ public class DeckManagerSingleton {
         });
 
         Map<String, Bitmap> res = new HashMap<>();
+        if(directories == null) return res;
         for(String dir : directories){
             Log.i("info", ctx.getFilesDir().getPath() + "/customDecks/" + dir + "/reverse");
             Bitmap bitmap = BitmapFactory.decodeFile(ctx.getFilesDir().getPath() + "/customDecks/" + dir + "/reverse");
