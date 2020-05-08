@@ -1,6 +1,8 @@
 package com.sharpsoft.twins_clases.logic;
 
-public class Score {
+import java.io.Serializable;
+
+public class Score implements Serializable {
     private int numCorrect;
     private int numFails;
     private int missedTurns;

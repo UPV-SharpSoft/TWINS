@@ -1,5 +1,6 @@
 package com.sharpsoft.twins_clases.logic;
 
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Stack;
 
@@ -11,7 +12,7 @@ public class Board extends Observable {
     private Score score;
     private Turn turn;
 
-    public Board(Dimension dimension){
+    public Board(Dimension dimension, int segundosPorTurno){
         this.dimension = dimension;
 
         int width = dimension.width;
@@ -27,7 +28,7 @@ public class Board extends Observable {
 
         score = new Score();
 
-        turn = new Turn(score, 5*1000, this);
+        turn = new Turn(score, segundosPorTurno*1000, this);
     }
 
     public Dimension getDimension() {

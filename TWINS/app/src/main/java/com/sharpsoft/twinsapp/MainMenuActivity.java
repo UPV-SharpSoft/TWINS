@@ -16,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.GameActivityBuilder;
+
+import java.util.Random;
 
 public class MainMenuActivity extends AppCompatActivity {
     boolean onNewGame;
@@ -29,6 +33,18 @@ public class MainMenuActivity extends AppCompatActivity {
             System.exit(0);
             finish();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        audioInstance.resumeMusic();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        audioInstance.pauseMusic();
     }
 
     @Override
@@ -106,8 +122,25 @@ public class MainMenuActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent i = new Intent(MainMenuActivity.this, GameActivity.class);
-                        startActivity(i);
+                        Random r = new Random();
+                        int width = r.nextInt(5-2) + 2;
+                        int height = r.nextInt(7-3) + 3;
+                        while((width * height) % 2 == 1){
+                            width = r.nextInt(5-2) + 2;
+                            height = r.nextInt(7-3) + 3;
+                        }
+                        DeckFactory.Decks deck = DeckFactory.Decks.values()[r.nextInt(DeckFactory.Decks.values().length)];
+                        int time = (int) Math.floor(width*height*2.22)*1000;
+
+                        new GameActivityBuilder(MainMenuActivity.this)
+                                .setDimension(width,height)
+                                .setDeck(deck)
+                                .setMusic(R.raw.partida_default)
+                                .setTotalTime(time)
+                                .build();
+                        finish();
+                        /*Intent i = new Intent(MainMenuActivity.this, GameActivity.class);
+                        startActivity(i);*/
                     }
                 }, 500);
 
@@ -150,7 +183,7 @@ public class MainMenuActivity extends AppCompatActivity {
         ImageButton gmail = findViewById(R.id.gmailButton);
 
         store.setOnClickListener(openWeb("https://play.google.com"));
-        twitter.setOnClickListener(openWeb("https://www.twitter.com"));
+        twitter.setOnClickListener(openWeb("https://www.twitter.com/MalakitoDeTWINS"));
         facebook.setOnClickListener(openWeb("https://www.facebook.com"));
         gmail.setOnClickListener(sendEmail());
     }
@@ -169,13 +202,16 @@ public class MainMenuActivity extends AppCompatActivity {
         return new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_EMAIL, "emailaddress@emailaddress.com");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+                String[] TO = {"twinsmalakito@gmail.com"};
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.setType("text/plain");
 
-                startActivity(Intent.createChooser(intent, "Send Email"));
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             }
         };
     }

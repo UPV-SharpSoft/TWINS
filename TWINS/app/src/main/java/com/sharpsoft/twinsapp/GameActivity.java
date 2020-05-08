@@ -34,10 +34,11 @@ public class GameActivity extends AppCompatActivity {
     private boolean gameOverBool = false;
 
     private LinearLayout tableLayout;
-    private Board board;
+    //private Board board;
     private ImageButton imageButtonPause;
     private Audio audioInstance = Audio.getInstance();
 
+    public static Board board;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -48,20 +49,19 @@ public class GameActivity extends AppCompatActivity {
         tableLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
 
-        addBoard();
+        int music = getIntent().getIntExtra("music", R.raw.partida_default);
+        int time = getIntent().getIntExtra("time", 60*1000);
 
-        instanceChronometer(60000);
+        setBoard();
+        instanceChronometer(time);
+
         chronometer.start();
-
         ToPausedActivity();
 
-        //float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME -
-          //      audioInstance.getMusicSeekbarProgress()) / Math.log(Audio.MAX_VOLUME)));
         audioInstance.stopMusic();
         float volume = Audio.getMusicVolume();
-        audioInstance.startMusic(this, R.raw.partida_default);
+        audioInstance.startMusic(this, music);
         audioInstance.setMusicVolume(volume, volume);
-
     }
 
     @Override
@@ -81,10 +81,9 @@ public class GameActivity extends AppCompatActivity {
         audioInstance.pauseMusic();
     }
 
-    public void addBoard() {
-        Dimension dimension = new Dimension(4, 6);
-        Deck deck = DeckFactory.getDeck(DeckFactory.Decks.fruits, dimension, this);
-        board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, deck);
+    public void setBoard() {
+        //Dimension dimension = new Dimension(4, 6);
+        //board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, deck);
 
         View tableroView = ((com.sharpsoft.twinsapp.AndroidStudioLogic.Board) board).getView(this);
         tableLayout.addView(tableroView);
@@ -93,8 +92,6 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onFlip() {
                 audioInstance.makeSound(flip);
-
-                Log.i("tablero", "tablero " + board.isComplete());
             }
 
             @Override

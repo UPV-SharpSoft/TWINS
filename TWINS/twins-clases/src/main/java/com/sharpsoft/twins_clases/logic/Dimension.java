@@ -1,6 +1,8 @@
 package com.sharpsoft.twins_clases.logic;
 
-public class Dimension {
+import java.io.Serializable;
+
+public class Dimension implements Serializable{
     public int width;
     public int height;
 

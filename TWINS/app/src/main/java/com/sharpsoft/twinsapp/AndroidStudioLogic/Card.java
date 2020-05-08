@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import com.sharpsoft.twins_clases.logic.Board;
 import com.sharpsoft.twinsapp.R;
 
+import java.io.Serializable;
+
 public class Card implements com.sharpsoft.twins_clases.logic.Card {
     private Bitmap bitmapReverse, bitmapCard;
     private ImageView imageView;
