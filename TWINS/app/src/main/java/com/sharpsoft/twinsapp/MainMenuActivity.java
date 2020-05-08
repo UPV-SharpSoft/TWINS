@@ -171,7 +171,7 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_EMAIL, "emailaddress@emailaddress.com");
+                intent.putExtra(Intent.EXTRA_EMAIL, "twinsmalakito@gmail.com");
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
                 intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
 
