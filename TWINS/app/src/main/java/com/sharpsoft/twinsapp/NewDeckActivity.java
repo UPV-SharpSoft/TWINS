@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -164,7 +165,21 @@ public class NewDeckActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String nameDeck = editTextName.getText().toString();
-                Deck newDeck = new Deck(newDeckList, newDeckList.get(0), nameDeck);
+
+                LinearLayout layout = findViewById(R.id.upperLinearLayout);
+
+                Bitmap reverso = ((BitmapDrawable) ((ImageView) layout.getChildAt(0)).getDrawable()).getBitmap();
+                List<Bitmap> images = new ArrayList<>();
+                for(int i = 1; i < layout.getChildCount(); i++){
+                    BitmapDrawable bd = (BitmapDrawable) ((ImageView) layout.getChildAt(0)).getDrawable();
+                    images.add(bd.getBitmap());
+                }
+
+                try {
+                    DeckManagerSingleton.getInstance().saveDeck(nameDeck, images, reverso, NewDeckActivity.this);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

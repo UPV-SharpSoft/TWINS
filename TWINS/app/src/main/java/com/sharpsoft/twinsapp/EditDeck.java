@@ -3,6 +3,7 @@ package com.sharpsoft.twinsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,9 +12,11 @@ import android.widget.ListView;
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class EditDeck extends AppCompatActivity {
 
@@ -37,8 +40,12 @@ public class EditDeck extends AppCompatActivity {
         deck = new ArrayList<>();
         deck.addAll(getAllDecks());
 
-        AdapterEditDeck adapter = new AdapterEditDeck(this, R.layout.item_editor, deck);
+        Map<String, Bitmap> customDecks =  DeckManagerSingleton.getInstance().getAllDecks(this);
+
+        AdapterEditDeck adapter = new AdapterEditDeck(this, R.layout.item_editor, deck, customDecks);
         listView.setAdapter(adapter);
+
+
 
         buttonCreateDeck.setOnClickListener(new View.OnClickListener() {
             @Override

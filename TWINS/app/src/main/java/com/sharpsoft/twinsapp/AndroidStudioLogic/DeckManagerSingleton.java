@@ -25,11 +25,11 @@ public class DeckManagerSingleton {
         path.mkdirs();
         int count = 0;
         for(Bitmap bitmap : images){
-            FileOutputStream out = new FileOutputStream(new File(path.getPath() + count));
+            FileOutputStream out = new FileOutputStream(new File(path.getPath() + "/" + count));
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             count++;
         }
-        FileOutputStream out = new FileOutputStream(new File(path.getPath() + "reverse"));
+        FileOutputStream out = new FileOutputStream(new File(path.getPath() + "/reverse"));
         reverse.compress(Bitmap.CompressFormat.PNG, 100, out);
     }
 
@@ -44,8 +44,8 @@ public class DeckManagerSingleton {
 
         Map<String, Bitmap> res = new HashMap<>();
         for(String dir : directories){
-            Log.i("info", dir);
-            Bitmap bitmap = BitmapFactory.decodeFile(dir + "/reverse");
+            Log.i("info", ctx.getFilesDir().getPath() + "/customDecks/" + dir + "/reverse");
+            Bitmap bitmap = BitmapFactory.decodeFile(ctx.getFilesDir().getPath() + "/customDecks/" + dir + "/reverse");
             res.put(dir, bitmap);
         }
         return res;
