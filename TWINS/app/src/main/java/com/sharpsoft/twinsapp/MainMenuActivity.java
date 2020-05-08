@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -108,6 +107,11 @@ public class MainMenuActivity extends AppCompatActivity {
         final TextView partidaRapidaTextView = findViewById(R.id.partidaRapidaTextView);
         final ImageView partidaNivelesImageView = findViewById(R.id.partidaNivelesImageView);
         final TextView partidaNivelesTextView = findViewById(R.id.partidaNivelesTextView);
+        final ImageView freeGameImageView = findViewById(R.id.freeGameImageView);
+        final TextView freeGameTextView = findViewById(R.id.freeGameTextView);
+
+
+
 
         View.OnClickListener partidaRapidaClick = new View.OnClickListener() {
             @Override
@@ -160,6 +164,15 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         };
 
+        View.OnClickListener freeGameClick = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                audioInstance.makeSound(Audio.Sounds.button);
+                Intent i = new Intent(MainMenuActivity.this, FreeGamemodeActivity.class);
+                startActivity(i);
+            }
+        };
+
         homeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +184,8 @@ public class MainMenuActivity extends AppCompatActivity {
         partidaRapidaTextView.setOnClickListener(partidaRapidaClick);
         partidaNivelesImageView.setOnClickListener(nivelesClick);
         partidaNivelesTextView.setOnClickListener(nivelesClick);
+        freeGameImageView.setOnClickListener(freeGameClick);
+        freeGameTextView.setOnClickListener(freeGameClick);
 
 
         onNewGame = true;
