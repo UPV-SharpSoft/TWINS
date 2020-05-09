@@ -15,9 +15,9 @@ public class Audio {
 
     private boolean muted;
 
-    public static Audio getInstance() { return audioInstance; }
+    public static Audio getInstance() {return audioInstance;}
 
     public boolean isMuted() { return muted; }
     public void setMuted(boolean muted) { this.muted = muted; }
-    
+
 }

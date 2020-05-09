@@ -11,8 +11,12 @@ public class Music {
     private boolean muted;
     private static float musicVolume = 1;
 
+    private static final Music musicInstance = new Music();
+
 
     //MÉTODOS
+    public static Music getInstance(){return musicInstance;}
+
     public static float getMusicVolume() { return musicVolume; }
 
     public void setMusicVolume(float left, float right) {

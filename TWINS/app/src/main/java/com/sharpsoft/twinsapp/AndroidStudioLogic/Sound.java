@@ -25,10 +25,13 @@ public class Sound {
     public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle, button}
 
     private boolean muted;
-
     private float soundVolume = 1;
 
+    private static final Sound soundInstance = new Sound();
+
     //MÉTODOS
+
+    public static Sound getInstance(){return soundInstance;}
 
     public float getSoundVolume() {
         return soundVolume;
