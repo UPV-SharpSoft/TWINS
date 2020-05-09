@@ -19,7 +19,7 @@
             android:name=".LevelsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".EditDeck"
+            android:name=".EditDeckActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainMenuActivity"

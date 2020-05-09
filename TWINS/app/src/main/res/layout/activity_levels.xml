@@ -31,7 +31,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/level1" />
+                app:srcCompat="@drawable/level1notpassed" />
 
             <ImageView
                 android:id="@+id/imageView11"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/level2" />
+                app:srcCompat="@drawable/level2notpassed" />
 
             <ImageView
                 android:id="@+id/imageView12"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/level3" />
+                app:srcCompat="@drawable/level3notpassed" />
 
             <ImageView
                 android:id="@+id/imageView13"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/level4" />
+                app:srcCompat="@drawable/level4notpassed" />
 
             <ImageView
                 android:id="@+id/imageView14"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/level5" />
+                app:srcCompat="@drawable/level5notpassed" />
 
         </LinearLayout>
     </HorizontalScrollView>
@@ -72,13 +72,15 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/montserrat"
         android:text="Could you beat the machine?"
         android:textColor="#288DE4"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="34dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"

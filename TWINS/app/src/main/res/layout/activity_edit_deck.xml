@@ -41,7 +41,7 @@
         android:layout_height="630dp"
         android:background="#FFFF"
         android:backgroundTint="#FFFFFF"
-        tools:context=".EditDeck"
+        tools:context=".EditDeckActivity"
         tools:ignore="MissingConstraints">
 
         <ListView

@@ -15,7 +15,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditDeck extends AppCompatActivity {
+public class EditDeckActivity extends AppCompatActivity {
 
     private ListView listView;
     private List<Deck> deck;
@@ -23,6 +23,7 @@ public class EditDeck extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_deck);
 
@@ -43,7 +44,7 @@ public class EditDeck extends AppCompatActivity {
         buttonCreateDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EditDeck.this, NewDeckActivity.class);
+                Intent intent = new Intent(EditDeckActivity.this, NewDeckActivity.class);
                 startActivity(intent);
             }
         });
