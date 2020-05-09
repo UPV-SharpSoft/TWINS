@@ -14,7 +14,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.GameActivityBuilder;
 
@@ -134,11 +136,13 @@ public class MainMenuActivity extends AppCompatActivity {
                             width = r.nextInt(5-2) + 2;
                             height = r.nextInt(7-3) + 3;
                         }
-                        DeckFactory.Decks deck = DeckFactory.Decks.values()[r.nextInt(DeckFactory.Decks.values().length)];
+                        Dimension dimension = new Dimension(width, height);
+                        DeckFactory.Decks decks = DeckFactory.Decks.values()[r.nextInt(DeckFactory.Decks.values().length)];
+                        Deck deck = DeckFactory.getDeck(decks, dimension, MainMenuActivity.this);
                         int time = (int) Math.floor(width*height*2.22)*1000;
 
                         Intent i = new GameActivityBuilder(MainMenuActivity.this)
-                                .setDimension(width,height)
+                                .setDimension(dimension)
                                 .setDeck(deck)
                                 .setMusic(R.raw.partida_default)
                                 .setTotalTime(time)
