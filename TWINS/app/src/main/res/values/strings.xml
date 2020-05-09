@@ -6,4 +6,10 @@
     <string name="quieres_escoger_una_carta_predeterminada">¿QUIERES ESCOGER UNA CARTA PREDETERMINADA?</string>
     <string name="back">BACK</string>
     <string name="level1"></string>
+
+    <string-array name="gamemode">
+        <item>Estándar</item>
+        <item>Por Categoría</item>
+        <item>Por Carta</item>
+    </string-array>
 </resources>

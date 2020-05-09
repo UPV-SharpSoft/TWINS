@@ -34,7 +34,7 @@ public class GameActivityBuilder {
         return this;
     }
 
-    public GameActivityBuilder setDeck(DeckFactory.Decks deck){
+    public GameActivityBuilder getDeck(DeckFactory.Decks deck){
         this.deck = DeckFactory.getDeck(deck, dimension, ctx);
         return this;
     }
