@@ -1,28 +1,22 @@
 package com.sharpsoft.twinsapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.sharpsoft.twins_clases.logic.Board;
-import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
 import java.text.DecimalFormat;
-
-
-import static com.sharpsoft.twinsapp.AndroidStudioLogic.Audio.Sounds.*;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -36,7 +30,7 @@ public class GameActivity extends AppCompatActivity {
     private LinearLayout tableLayout;
     //private Board board;
     private ImageButton imageButtonPause;
-    private Audio audioInstance = Audio.getInstance();
+    private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
     public static Board board;
     @Override
@@ -58,10 +52,10 @@ public class GameActivity extends AppCompatActivity {
         chronometer.start();
         ToPausedActivity();
 
-        audioInstance.stopMusic();
-        float volume = Audio.getMusicVolume();
-        audioInstance.startMusic(this, music);
-        audioInstance.setMusicVolume(volume, volume);
+        audioFacadeInstance.stopMusic();
+        float volume = audioFacadeInstance.getMusicVolume();
+        audioFacadeInstance.startMusic(this, music);
+        audioFacadeInstance.setMusicVolume(volume);
     }
 
     @Override
@@ -70,7 +64,7 @@ public class GameActivity extends AppCompatActivity {
             if(!first) {
                 instanceChronometer(timeLeft);
                 chronometer.start();
-                audioInstance.resumeMusic();
+                audioFacadeInstance.resumeMusic();
             }
             first = false;
     }
@@ -78,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        audioInstance.pauseMusic();
+        audioFacadeInstance.pauseMusic();
     }
 
     public void setBoard() {
@@ -91,12 +85,12 @@ public class GameActivity extends AppCompatActivity {
         board.addObserver(new FlipObserver() {
             @Override
             public void onFlip() {
-                audioInstance.makeSound(flip);
+                audioFacadeInstance.makeSound(Sound.Sounds.flip);
             }
 
             @Override
             public void onSuccess() {
-                audioInstance.makeSound(correct);
+                audioFacadeInstance.makeSound(Sound.Sounds.correct);
                 if(board.isComplete()){
                     Intent i = new Intent(GameActivity.this, GameOverActivity.class);
                     i.putExtra("gameOverBool", gameOverBool);
@@ -110,7 +104,7 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onFailure() {
-                audioInstance.makeSound(incorrect);
+                audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
             }
         });
 
@@ -133,7 +127,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 gameOverBool = true;
-                audioInstance.stopMusic();
+                audioFacadeInstance.stopMusic();
                 chronoTV.setText(cronoFormatLong.format(0));
 
                 Intent i = new Intent(GameActivity.this, GameOverActivity.class);
@@ -153,7 +147,7 @@ public class GameActivity extends AppCompatActivity {
                 Intent intent = new Intent(GameActivity.this, PausedActivity.class);
                 startActivity(intent);
                 chronometer.cancel();
-                audioInstance.pauseMusic();
+                audioFacadeInstance.pauseMusic();
             }
         });
     }

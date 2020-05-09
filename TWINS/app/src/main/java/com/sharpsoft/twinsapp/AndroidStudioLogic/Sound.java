@@ -33,7 +33,7 @@ public class Sound {
 
     public static Sound getInstance(){return soundInstance;}
 
-    public SoundPool getSoundPool(){return soundFX};
+    public SoundPool getSoundPool(){return soundFX;}
 
     public float getSoundVolume() {
         return soundVolume;
@@ -51,7 +51,7 @@ public class Sound {
         soundFX.setOnLoadCompleteListener(listener);
     }
 
-    public void createSoundPool() {
+    public void createSoundPool(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_GAME)

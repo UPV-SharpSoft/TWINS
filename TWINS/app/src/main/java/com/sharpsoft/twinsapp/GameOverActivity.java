@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
 public class GameOverActivity extends AppCompatActivity {
 
@@ -17,7 +19,7 @@ public class GameOverActivity extends AppCompatActivity {
     private TextView resultTV, timeTV, scoreTV;
     private int score;
     private Button mainMenuButton, resetButton;
-    private Audio audioInstance = Audio.getInstance();
+    private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +37,9 @@ public class GameOverActivity extends AppCompatActivity {
         receiveData();
         createButtons();
         if(isGameOver) {
-            audioInstance.makeSound(Audio.Sounds.gameover);
+            audioFacadeInstance.makeSound(Sound.Sounds.gameover);
         }else{
-            audioInstance.makeSound(Audio.Sounds.victory);
+            audioFacadeInstance.makeSound(Sound.Sounds.victory);
         }
 
         timeTV.setText("Tu tiempo ha sido de " + (60000-timeLeft)/1000 + "s.");

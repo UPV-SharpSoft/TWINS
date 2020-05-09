@@ -15,11 +15,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AudioFacade audioFacade = AudioFacade.getInstance();s
+        final AudioFacade audioFacade = AudioFacade.getInstance();
 
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        audioFacade.initializeAudio(this);
 
 
 
@@ -36,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         Intent i = new Intent(MainActivity.this, MainMenuActivity.class);
                         startActivity(i);
-                        audioInstance.stopSound(1);
-                        audioInstance.stopSound(2);
+                        audioFacade.stopSound(1);
+                        audioFacade.stopSound(2);
                         finish();
 
                     }

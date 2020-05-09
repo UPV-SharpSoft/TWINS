@@ -17,15 +17,17 @@ import android.widget.TextView;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.GameActivityBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
 import java.util.Random;
 
 public class MainMenuActivity extends AppCompatActivity {
     boolean onNewGame;
-    private Audio audioInstance = Audio.getInstance();
+    private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
     @Override
     public void onBackPressed(){
@@ -40,13 +42,13 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        audioInstance.resumeMusic();
+        audioFacadeInstance.resumeMusic();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        audioInstance.pauseMusic();
+        audioFacadeInstance.pauseMusic();
     }
 
     @Override
@@ -55,7 +57,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setMainUI();
 
-        audioInstance.startMusic(this, R.raw.menus_default);
+        audioFacadeInstance.startMusic(this, R.raw.menus_default);
 
 
         Button buttonEditDeck = findViewById(R.id.buttonEditDeck);
@@ -120,7 +122,7 @@ public class MainMenuActivity extends AppCompatActivity {
         View.OnClickListener partidaRapidaClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                audioInstance.makeSound(Audio.Sounds.button);
+                audioFacadeInstance.makeSound(Sound.Sounds.button);
                 partidaRapidaImageView.animate()
                         .translationX(5000)
                         .scaleX(20)
@@ -173,7 +175,7 @@ public class MainMenuActivity extends AppCompatActivity {
         View.OnClickListener freeGameClick = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                audioInstance.makeSound(Audio.Sounds.button);
+                audioFacadeInstance.makeSound(Sound.Sounds.button);
                 Intent i = new Intent(MainMenuActivity.this, FreeGamemodeActivity.class);
                 startActivity(i);
             }

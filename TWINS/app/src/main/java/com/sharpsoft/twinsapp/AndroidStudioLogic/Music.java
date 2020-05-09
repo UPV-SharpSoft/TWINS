@@ -17,16 +17,16 @@ public class Music {
     //MÉTODOS
     public static Music getInstance(){return musicInstance;}
 
-    public static float getMusicVolume() { return musicVolume; }
+    public float getMusicVolume() { return musicVolume; }
 
-    public void setMusicVolume(float left, float right) {
-        if(left > 1) {
+    public void setMusicVolume(float volume) {
+        if(volume > 1) {
             this.musicVolume = 1;
         } else {
-            musicVolume = left;
+            musicVolume = volume;
         };
 
-        bgMusic.setVolume(left,right);
+        bgMusic.setVolume(volume, volume);
     }
 
     public void startMusic(Context context, int song) {
