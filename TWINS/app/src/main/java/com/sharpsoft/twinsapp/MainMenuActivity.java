@@ -137,15 +137,14 @@ public class MainMenuActivity extends AppCompatActivity {
                         DeckFactory.Decks deck = DeckFactory.Decks.values()[r.nextInt(DeckFactory.Decks.values().length)];
                         int time = (int) Math.floor(width*height*2.22)*1000;
 
-                        new GameActivityBuilder(MainMenuActivity.this)
+                        Intent i = new GameActivityBuilder(MainMenuActivity.this)
                                 .setDimension(width,height)
                                 .setDeck(deck)
                                 .setMusic(R.raw.partida_default)
                                 .setTotalTime(time)
                                 .build();
+                        startActivity(i);
                         finish();
-                        /*Intent i = new Intent(MainMenuActivity.this, GameActivity.class);
-                        startActivity(i);*/
                     }
                 }, 500);
 

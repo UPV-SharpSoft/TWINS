@@ -53,13 +53,13 @@ public class GameActivityBuilder {
         return this;
     }
 
-    public void build(){
+    public Intent build(){
         Deck d = DeckFactory.getDeck(deck, dimension, ctx);
         Board board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, timePerTurn, d);
         GameActivity.board = board;
         Intent i = new Intent(ctx, GameActivity.class);
         i.putExtra("music", music);
         i.putExtra("time", totalTime);
-        ctx.startActivity(i);
+        return i;
     }
 }
