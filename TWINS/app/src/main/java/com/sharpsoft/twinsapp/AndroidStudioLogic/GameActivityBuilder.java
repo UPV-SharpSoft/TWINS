@@ -9,12 +9,9 @@ import com.sharpsoft.twinsapp.R;
 
 public class GameActivityBuilder extends IGameActivityBuilder {
 
-    Intent i = new Intent(ctx, GameActivity.class);
-
     public GameActivityBuilder() {super.game = new GameActivity();}
 
     public void totalTime(){
-        i.putExtra("time", 60*1000);
     }
 
     public void timePerTurn(){
