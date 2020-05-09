@@ -7,6 +7,7 @@ import android.media.SoundPool;
 import android.os.Bundle;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 
 public class MainActivity extends AppCompatActivity {
     private Audio audioInstance = Audio.getInstance();
@@ -14,17 +15,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AudioFacade audioFacade = AudioFacade.getInstance();s
+
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        audioInstance.createSoundPool(this);
-        audioInstance.setOnPrepared(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int i, int i1) {
-                if(i1 == 0 && i==6)audioInstance.makeSound(Audio.Sounds.shuffle);
-            }
-        });
+
 
         Thread t = new Thread(){
             @Override

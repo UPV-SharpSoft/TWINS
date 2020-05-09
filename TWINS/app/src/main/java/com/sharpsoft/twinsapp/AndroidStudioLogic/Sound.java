@@ -22,7 +22,7 @@ public class Sound {
     private int shuffleSound;
     private int buttonSound;
 
-    public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle, button}
+    public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle, button};
 
     private boolean muted;
     private float soundVolume = 1;
@@ -32,6 +32,8 @@ public class Sound {
     //MÉTODOS
 
     public static Sound getInstance(){return soundInstance;}
+
+    public SoundPool getSoundPool(){return soundFX};
 
     public float getSoundVolume() {
         return soundVolume;
@@ -49,7 +51,7 @@ public class Sound {
         soundFX.setOnLoadCompleteListener(listener);
     }
 
-    public void createSoundPool(Context context) {
+    public void createSoundPool() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_GAME)
