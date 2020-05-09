@@ -22,21 +22,21 @@ public class DeckFactory {
     private final static String[] minecraftCards = {"RedstoneOre.png", "DiamondOre.png", "GoldOre.png", "LapislazuliOre.png", "EmeraldOre.png", "IronOre.png"};
     private final static String[] fruitCards = {"apple.png", "banana.png", "carrot.png", "eggplant.png", "kiwi.png", "lemon.png", "orange.png", "pear.png", "pineapple.png", "tomato.png", "watermelon.png"};
 
-    public static Deck getDeck(Decks deck, Dimension dimension, Context ctx){
+    public static Deck getDeck(Decks deck, Dimension dimension, int numCartas,Context ctx){
         List<Bitmap> cards = new ArrayList<>();
         Bitmap reverse = null;
         String name = null;
 
         if(deck == Decks.minecraft){
             for(int i = 0; i < dimension.getTotal()/2; i++){
-                Bitmap b = getBitmapFromAsset("CartasMinecraft/" + minecraftCards[i% minecraftCards.length], ctx);
+                Bitmap b = getBitmapFromAsset("CartasMinecraft/" + minecraftCards[i% minecraftCards.length % numCartas], ctx);
                 cards.add(b); cards.add(b);
             }
             reverse = getBitmapFromAsset("CartasMinecraft/back.png", ctx);
             name = "Minecraft";
         }else if(deck == Decks.fruits){
             for(int i = 0; i < dimension.getTotal()/2; i++){
-                Bitmap b = getBitmapFromAsset("FruitsDeck/" + fruitCards[i% fruitCards.length], ctx);
+                Bitmap b = getBitmapFromAsset("FruitsDeck/" + fruitCards[i% fruitCards.length % numCartas], ctx);
                 cards.add(b); cards.add(b);
             }
             reverse = getBitmapFromAsset("FruitsDeck/backFruit.png", ctx);
