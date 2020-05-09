@@ -9,32 +9,28 @@ import com.sharpsoft.twinsapp.R;
 
 public class GameActivityBuilder extends IGameActivityBuilder {
 
+    Intent i = new Intent(ctx, GameActivity.class);
+
     public GameActivityBuilder() {super.game = new GameActivity();}
 
-    public GameActivityBuilder totalTime(){
+    public void totalTime(){
+        i.putExtra("time", 60*1000);
     }
 
-    public GameActivityBuilder timePerTurn(){
-    }
-
-    public GameActivityBuilder deck(){
-
-    }
-
-    public GameActivityBuilder dimension(){
+    public void timePerTurn(){
 
     }
 
-    public GameActivityBuilder music(){
+    public void deck(){
 
     }
 
-    public Intent build(){
-        Board board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, timePerTurn, deck);
-        GameActivity.board = board;
-        Intent i = new Intent(ctx, GameActivity.class);
-        i.putExtra("music", music);
-        i.putExtra("time", totalTime);
-        return i;
+    public void dimension(){
+
     }
+
+    public void music(){
+
+    }
+
 }

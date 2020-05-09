@@ -8,7 +8,6 @@ public class GameActivityDirector {
             gameBuilder.deck();
             gameBuilder.dimension();
             gameBuilder.music();
-            gameBuilder.build();
     }
 
 }

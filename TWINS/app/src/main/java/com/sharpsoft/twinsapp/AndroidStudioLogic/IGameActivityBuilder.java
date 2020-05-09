@@ -7,21 +7,20 @@ import com.sharpsoft.twinsapp.GameActivity;
 
 public abstract class IGameActivityBuilder {
 
-    protected GameActivity game;
+    GameActivity game;
 
     public GameActivity getGame() {
         return game;
     }
 
-    public abstract GameActivityBuilder totalTime();
+    public abstract void totalTime();
 
-    public abstract GameActivityBuilder timePerTurn();
+    public abstract void timePerTurn();
 
-    public abstract GameActivityBuilder deck();
+    public abstract void deck();
 
-    public abstract GameActivityBuilder dimension();
+    public abstract void dimension();
 
-    public abstract GameActivityBuilder music();
+    public abstract void music();
 
-    public abstract Intent build();
 }
