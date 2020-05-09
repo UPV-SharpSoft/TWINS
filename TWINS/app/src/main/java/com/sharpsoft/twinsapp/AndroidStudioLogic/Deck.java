@@ -26,7 +26,7 @@ public class Deck {
         return this.deckName;
     }
 
-    public boolean quedanCartas(){
+    public boolean EmptyDeck(){
         return !cards.isEmpty();
     }
 

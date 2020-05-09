@@ -7,7 +7,7 @@ import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.GameActivity;
 import com.sharpsoft.twinsapp.R;
 
-public class GameActivityBuilder {
+public class GameActivityBuilder implements IBuilder{
     private Context ctx;
 
     private Integer totalTime;
