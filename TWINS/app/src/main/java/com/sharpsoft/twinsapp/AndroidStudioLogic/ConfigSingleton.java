@@ -27,6 +27,7 @@ public class ConfigSingleton {
     }
 
     public void setSelectedDeck(String customDeckName){
+        this.isCustomDeck = true;
         this.customDeck = customDeckName;
     }
 }
