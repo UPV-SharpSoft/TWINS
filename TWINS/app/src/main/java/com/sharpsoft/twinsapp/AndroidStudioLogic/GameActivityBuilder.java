@@ -5,12 +5,13 @@ import android.content.Intent;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.GameActivity;
+import com.sharpsoft.twinsapp.R;
 
 public class GameActivityBuilder {
     private Context ctx;
 
     private Integer totalTime;
-    private Deck deck;
+    private DeckFactory.Decks deck;
     private Dimension dimension;
     private Integer music;
     private Integer timePerTurn;
@@ -21,6 +22,9 @@ public class GameActivityBuilder {
 
     public GameActivityBuilder setTotalTime(int totalTime){
         this.totalTime = totalTime;
+        this.timePerTurn = 5;
+        this.music = R.raw.partida_default;
+        this.totalTime = 60*1000;
         return this;
     }
 
@@ -29,13 +33,8 @@ public class GameActivityBuilder {
         return this;
     }
 
-    public GameActivityBuilder setDeck(Deck deck){
+    public GameActivityBuilder setDeck(DeckFactory.Decks deck){
         this.deck = deck;
-        return this;
-    }
-
-    public GameActivityBuilder getDeck(DeckFactory.Decks deck){
-        this.deck = DeckFactory.getDeck(deck, dimension, ctx);
         return this;
     }
 
@@ -55,8 +54,8 @@ public class GameActivityBuilder {
     }
 
     public void build(){
-        timePerTurn = timePerTurn==null ? 5 : timePerTurn;
-        Board board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, timePerTurn, deck);
+        Deck d = DeckFactory.getDeck(deck, dimension, ctx);
+        Board board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, timePerTurn, d);
         GameActivity.board = board;
         Intent i = new Intent(ctx, GameActivity.class);
         i.putExtra("music", music);
