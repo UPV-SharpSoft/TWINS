@@ -22,6 +22,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.GameActivityBuilder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelEasyBuilder;
 
 import java.util.Random;
 
@@ -145,7 +146,7 @@ public class MainMenuActivity extends AppCompatActivity {
                         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(dimension, numCartas,MainMenuActivity.this);
                         int time = (int) Math.floor(width*height*2.22)*1000;
 
-                        Intent i = new GameActivityBuilder(MainMenuActivity.this)
+                        Intent i = new LevelEasyBuilder(MainMenuActivity.this)
                                 .setDimension(dimension)
                                 .setDeck(deck)
                                 .setMusic(R.raw.partida_default)
