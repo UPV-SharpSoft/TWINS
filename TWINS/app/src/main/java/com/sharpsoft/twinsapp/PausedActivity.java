@@ -26,10 +26,6 @@ public class PausedActivity extends AppCompatActivity {
     float soundVolume;
     float musicVolume;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.zoom_enter,R.anim.zoom_exit);
