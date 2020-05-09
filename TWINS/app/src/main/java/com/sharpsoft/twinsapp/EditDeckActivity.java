@@ -61,7 +61,7 @@ public class EditDeckActivity extends AppCompatActivity {
         List<Deck> res = new ArrayList<>();
         Dimension d = new Dimension(2, 1);
         for(DeckFactory.Decks decks : DeckFactory.Decks.values()){
-            Deck deck = DeckFactory.getDeck(decks, d , this);
+            Deck deck = DeckFactory.getDeck(decks, d , 1,this);
             res.add(deck);
         }
         return res;

@@ -5,10 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.sharpsoft.twins_clases.logic.Dimension;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,10 +48,30 @@ public class DeckManagerSingleton {
         Map<String, Bitmap> res = new HashMap<>();
         if(directories == null) return res;
         for(String dir : directories){
-            Log.i("info", ctx.getFilesDir().getPath() + "/customDecks/" + dir + "/reverse");
             Bitmap bitmap = BitmapFactory.decodeFile(ctx.getFilesDir().getPath() + "/customDecks/" + dir + "/reverse");
             res.put(dir, bitmap);
         }
         return res;
+    }
+
+    public Deck getDeck(Dimension d, String deckName, int numCartas,Context ctx){
+        List<Bitmap> allImages = new ArrayList<>();
+        int cont = 0;
+        String filePath = ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/" + cont;
+        while(new File(filePath).exists()){
+            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+            allImages.add(bitmap);
+
+            cont++;
+            filePath = ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/" + cont;
+        }
+        List<Bitmap> cartas = new ArrayList<>();
+        Bitmap reverse = BitmapFactory.decodeFile(ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/reverse");
+        for(int i = 0; i < d.getTotal()/2; i++){
+            Bitmap img = allImages.get(i % allImages.size() % numCartas);
+            cartas.add(img); cartas.add(img);
+        }
+
+        return new Deck(cartas, reverse, deckName);
     }
 }

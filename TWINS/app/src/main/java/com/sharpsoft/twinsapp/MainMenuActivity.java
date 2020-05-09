@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.GameActivityBuilder;
@@ -137,8 +139,9 @@ public class MainMenuActivity extends AppCompatActivity {
                             height = r.nextInt(7-3) + 3;
                         }
                         Dimension dimension = new Dimension(width, height);
-                        DeckFactory.Decks decks = DeckFactory.Decks.values()[r.nextInt(DeckFactory.Decks.values().length)];
-                        Deck deck = DeckFactory.getDeck(decks, dimension, MainMenuActivity.this);
+                        int numCartas = r.nextInt(((dimension.getTotal()+1)/2)-2) + 2;
+                        Log.i("numCartas", numCartas + "");
+                        Deck deck = ConfigSingleton.getInstance().getSelectedDeck(dimension, numCartas,MainMenuActivity.this);
                         int time = (int) Math.floor(width*height*2.22)*1000;
 
                         Intent i = new GameActivityBuilder(MainMenuActivity.this)
