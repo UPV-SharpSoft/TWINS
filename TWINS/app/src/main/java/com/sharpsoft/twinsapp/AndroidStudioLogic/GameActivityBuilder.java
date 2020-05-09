@@ -11,7 +11,7 @@ public class GameActivityBuilder {
     private Context ctx;
 
     private Integer totalTime;
-    private DeckFactory.Decks deck;
+    private Deck deck;
     private Dimension dimension;
     private Integer music;
     private Integer timePerTurn;
@@ -33,7 +33,7 @@ public class GameActivityBuilder {
         return this;
     }
 
-    public GameActivityBuilder setDeck(DeckFactory.Decks deck){
+    public GameActivityBuilder setDeck(Deck deck){
         this.deck = deck;
         return this;
     }
@@ -54,8 +54,7 @@ public class GameActivityBuilder {
     }
 
     public Intent build(){
-        Deck d = DeckFactory.getDeck(deck, dimension, ctx);
-        Board board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, timePerTurn, d);
+        Board board = new com.sharpsoft.twinsapp.AndroidStudioLogic.Board(dimension, timePerTurn, deck);
         GameActivity.board = board;
         Intent i = new Intent(ctx, GameActivity.class);
         i.putExtra("music", music);
