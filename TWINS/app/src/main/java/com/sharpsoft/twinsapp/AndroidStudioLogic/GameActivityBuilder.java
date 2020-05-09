@@ -18,13 +18,13 @@ public class GameActivityBuilder {
 
     public GameActivityBuilder(Context ctx){
         this.ctx = ctx;
+        this.timePerTurn = 5;
+        this.music = R.raw.partida_default;
+        this.totalTime = 60*1000;
     }
 
     public GameActivityBuilder setTotalTime(int totalTime){
         this.totalTime = totalTime;
-        this.timePerTurn = 5;
-        this.music = R.raw.partida_default;
-        this.totalTime = 60*1000;
         return this;
     }
 
