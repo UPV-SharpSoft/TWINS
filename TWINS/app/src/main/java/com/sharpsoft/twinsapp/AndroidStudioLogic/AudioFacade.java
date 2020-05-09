@@ -6,13 +6,13 @@ public class AudioFacade {
 
     private static final AudioFacade audioFacadeInstance = new AudioFacade();
 
-    private static AudioFacade getInstance(){return audioFacadeInstance};
+    private static AudioFacade getInstance(){ return audioFacadeInstance; }
 
     private Music music = Music.getInstance();
 
     private Sound sound = Sound.getInstance();
 
-    public void inicializarAudio(){
+    public void beginAudio(){
         sound.createSoundPool();
         sound.setOnPrepared(new SoundPool.OnLoadCompleteListener() {
             @Override
