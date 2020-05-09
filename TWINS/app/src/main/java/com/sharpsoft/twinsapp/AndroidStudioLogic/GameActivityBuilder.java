@@ -7,50 +7,26 @@ import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.GameActivity;
 import com.sharpsoft.twinsapp.R;
 
-public class GameActivityBuilder implements IBuilder{
-    private Context ctx;
+public class GameActivityBuilder extends IGameActivityBuilder {
 
-    private Integer totalTime;
-    private Deck deck;
-    private Dimension dimension;
-    private Integer music;
-    private Integer timePerTurn;
+    public GameActivityBuilder() {super.game = new GameActivity();}
 
-    public GameActivityBuilder(Context ctx){
-        this.ctx = ctx;
-        this.timePerTurn = 5;
-        this.music = R.raw.partida_default;
-        this.totalTime = 60*1000;
+    public GameActivityBuilder totalTime(){
     }
 
-    public GameActivityBuilder setTotalTime(int totalTime){
-        this.totalTime = totalTime;
-        return this;
+    public GameActivityBuilder timePerTurn(){
     }
 
-    public GameActivityBuilder setTimePerTurn(int timePerTurn){
-        this.timePerTurn = timePerTurn;
-        return this;
+    public GameActivityBuilder deck(){
+
     }
 
-    public GameActivityBuilder setDeck(Deck deck){
-        this.deck = deck;
-        return this;
+    public GameActivityBuilder dimension(){
+
     }
 
-    public GameActivityBuilder setDimension(Dimension dimension){
-        this.dimension = dimension;
-        return this;
-    }
+    public GameActivityBuilder music(){
 
-    public GameActivityBuilder setDimension(int width, int height){
-        this.dimension = new Dimension(width, height);
-        return this;
-    }
-
-    public GameActivityBuilder setMusic(int music){
-        this.music = music;
-        return this;
     }
 
     public Intent build(){
