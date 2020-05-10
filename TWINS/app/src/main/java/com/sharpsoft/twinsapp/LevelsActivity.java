@@ -1,6 +1,7 @@
 package com.sharpsoft.twinsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ILevelBuilder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelDirector;
@@ -43,11 +45,25 @@ public class LevelsActivity extends AppCompatActivity {
 
     private ImageView []levels;
 
-    private String fileName = "levels.txt";
-
     private Level level;
     private ILevelBuilder levelBuilder;
     private final LevelDirector levelDirector = new LevelDirector();
+
+    @Override
+    protected void onResume(Bundle savedInstanceState){
+        passedLevels = ConfigSingleton.getInstance().levelsPassed(this);
+
+        for(int i = 0; i < passedLevels; i++){
+            levels[i].setImageBitmap(getBitmapFromAsset("Levels/level" + (i+1) + "passed.png", this));
+        }
+
+        imagesListeners();
+
+        for(int i = passedLevels + 1; i < NUMBERLEVELS; i++){
+            levels[i].setImageAlpha(150);
+            levels[i].setClickable(false);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +71,7 @@ public class LevelsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
 
-        File root = new File(this.getFilesDir().getPath());
-        File levelsPassed = new File(root, fileName);
-        Log.d("info", this.getFilesDir().getPath() + "/levels.txt");
-        if(levelsPassed.exists()){
-            passedLevels = Integer.valueOf(readFromFile(levelsPassed));
-        } else {
-            writeToFile("0", levelsPassed);
-            passedLevels = 0;
-        }
-
+        passedLevels = ConfigSingleton.getInstance().levelsPassed(this);
 
         level1 = findViewById(R.id.level1);
         level2 = findViewById(R.id.level2);
@@ -97,6 +104,11 @@ public class LevelsActivity extends AppCompatActivity {
                 //Time: 120s
                 levelBuilder = new LevelOneBuilder();
                 levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                startActivity(i);
             }
         });
 
@@ -109,6 +121,11 @@ public class LevelsActivity extends AppCompatActivity {
                 //Time: 100s
                 levelBuilder = new LevelTwoBuilder();
                 levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                startActivity(i);
             }
         });
 
@@ -121,6 +138,11 @@ public class LevelsActivity extends AppCompatActivity {
                 //Time: 80s
                 levelBuilder = new LevelThreeBuilder();
                 levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                startActivity(i);
             }
         });
 
@@ -133,6 +155,11 @@ public class LevelsActivity extends AppCompatActivity {
                 //Time: 60s
                 levelBuilder = new LevelFourBuilder();
                 levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                startActivity(i);
 
             }
         });
@@ -146,33 +173,13 @@ public class LevelsActivity extends AppCompatActivity {
                 //Time: 60s
                 levelBuilder = new LevelFiveBuilder();
                 levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                startActivity(i);
             }
         });
-    }
-
-    private void writeToFile(String data, File file) {
-        try {
-            FileOutputStream stream = new FileOutputStream(file);
-            stream.write(data.getBytes());
-            stream.close();
-        }
-        catch (Exception e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
-    private String readFromFile(File file){
-        try {
-            byte[] bytes = new byte[(int) file.length()];
-            FileInputStream in = new FileInputStream(file);
-            in.read(bytes);
-            in.close();
-            return new String(bytes);
-
-        } catch (Exception e){
-            Log.e("Exception", "File read failed: " + e.toString());
-            return "error";
-        }
     }
 
     private Bitmap getBitmapFromAsset(String path, Context ctx) {

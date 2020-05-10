@@ -1,9 +1,14 @@
 package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.R;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class ConfigSingleton {
     private static ConfigSingleton instance = new ConfigSingleton();
@@ -48,4 +53,42 @@ public class ConfigSingleton {
     public int getSelectedMusic(){
         return this.selectedMusic;
     }
+
+    public int levelsPassed(Context context){
+        File root = new File(context.getFilesDir().getPath());
+        File levelsPassed = new File(root, "levels.txt");
+        Log.d("info", context.getFilesDir().getPath() + "/levels.txt");
+        if(levelsPassed.exists()){
+            return Integer.valueOf(readFromFile(levelsPassed));
+        } else {
+            writeToFile("0", levelsPassed);
+            return 0;
+        }
+    }
+
+    private void writeToFile(String data, File file) {
+        try {
+            FileOutputStream stream = new FileOutputStream(file);
+            stream.write(data.getBytes());
+            stream.close();
+        }
+        catch (Exception e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private String readFromFile(File file){
+        try {
+            byte[] bytes = new byte[(int) file.length()];
+            FileInputStream in = new FileInputStream(file);
+            in.read(bytes);
+            in.close();
+            return new String(bytes);
+
+        } catch (Exception e){
+            Log.e("Exception", "File read failed: " + e.toString());
+            return "error";
+        }
+    }
 }
+
