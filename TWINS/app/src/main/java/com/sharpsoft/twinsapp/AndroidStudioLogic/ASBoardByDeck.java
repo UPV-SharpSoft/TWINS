@@ -6,19 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.sharpsoft.twins_clases.logic.BoardByDeck;
 import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twins_clases.logic.MalformedBoardException;
+import com.sharpsoft.twins_clases.logic.Score;
+import com.sharpsoft.twins_clases.logic.Turn;
 
+import java.util.Stack;
 
-public class Board extends com.sharpsoft.twins_clases.logic.Board {
+public class ASBoardByDeck extends BoardByDeck {
 
-    public Board(Dimension dimension, int segundosPorTurno,Deck set) {
+    public ASBoardByDeck(Dimension dimension, int segundosPorTurno,Deck set) {
         super(dimension, segundosPorTurno);
         if(set.getNumCartas() != dimension.getTotal()) throw new MalformedBoardException("La dimension de la baraja y el tablero no coinciden!");
 
         for(int x = 0; x < dimension.width; x++){
             for(int y = 0; y < dimension.height; y++){
-                final Card card = new Card(set.getReverse(), set.sacarCarta());
+                final com.sharpsoft.twinsapp.AndroidStudioLogic.Card card = new com.sharpsoft.twinsapp.AndroidStudioLogic.Card(set.getReverse(), set.sacarCarta());
                 card.setDeck(set.getName());
                 card.setBoard(this, x, y);
                 this.cards[x][y] = card;
@@ -36,7 +41,7 @@ public class Board extends com.sharpsoft.twins_clases.logic.Board {
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
             horizontalLayout.setGravity(Gravity.CENTER);
             for(int x = 0; x < getDimension().width; x++){
-                Card card = (Card) this.getCard(x, y);
+                com.sharpsoft.twinsapp.AndroidStudioLogic.Card card = (Card) this.getCard(x, y);
                 View cardView = card.getCardView(ctx, horizontalLayout);
 
                 ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(cardView.getLayoutParams());
