@@ -5,9 +5,8 @@ public class LevelDirector {
     public void Construct(ILevelBuilder levelBuilder){
         levelBuilder.totalTime();
         levelBuilder.timePerTurn();
-        levelBuilder.deck();
+        levelBuilder.numPairs();
         levelBuilder.dimension();
-        levelBuilder.gameMode();
     }
 
 }

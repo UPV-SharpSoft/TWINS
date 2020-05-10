@@ -14,17 +14,12 @@ public class LevelEasyBuilder extends ILevelBuilder {
         level.setTimePerTurn(5*1000);
     }
 
-    public void deck(){
-        level.setDeck(DeckFactory.Decks.fruits);
+    public void numPairs(){
+        level.setNumPairs(4);
     }
 
     public void dimension(){
         Dimension dimension = new Dimension(2,3);
         level.setDimension(dimension);
     }
-
-    public void gameMode(){
-        level.setGameMode("Estándar");
-    }
-
 }

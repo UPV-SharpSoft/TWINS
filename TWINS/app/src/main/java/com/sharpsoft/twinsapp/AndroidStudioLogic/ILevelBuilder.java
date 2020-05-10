@@ -14,10 +14,9 @@ public abstract class ILevelBuilder {
 
     public abstract void timePerTurn();
 
-    public abstract void deck();
+    public abstract void numPairs();
 
     public abstract void dimension();
 
-    public abstract void gameMode();
 
 }
