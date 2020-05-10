@@ -2,9 +2,9 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 
-public class LevelTwoBuilder extends ILevelBuilder {
+public class Level2Builder extends ILevelBuilder {
 
-    public LevelTwoBuilder() {super.level = new Level();}
+    public Level2Builder() {super.level = new Level();}
 
     public void totalTime(){
         level.setTotalTime(100*1000);

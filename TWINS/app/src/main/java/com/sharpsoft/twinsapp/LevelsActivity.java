@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,19 +14,17 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ILevelBuilder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelDirector;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelFiveBuilder;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelFourBuilder;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelOneBuilder;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelThreeBuilder;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelTwoBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level5Builder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level4Builder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level1Builder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level3Builder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level2Builder;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -103,7 +100,7 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 4
                 //Game mode: Standard
                 //Time: 120s
-                levelBuilder = new LevelOneBuilder();
+                levelBuilder = new Level1Builder();
                 levelDirector.Construct(levelBuilder);
                 level = levelBuilder.getLevel();
 
@@ -120,7 +117,7 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 4
                 //Game mode: Standard
                 //Time: 100s
-                levelBuilder = new LevelTwoBuilder();
+                levelBuilder = new Level2Builder();
                 levelDirector.Construct(levelBuilder);
                 level = levelBuilder.getLevel();
 
@@ -137,7 +134,7 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 6
                 //Game mode: Standard
                 //Time: 80s
-                levelBuilder = new LevelThreeBuilder();
+                levelBuilder = new Level3Builder();
                 levelDirector.Construct(levelBuilder);
                 level = levelBuilder.getLevel();
 
@@ -154,7 +151,7 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 6
                 //Game mode: Standard
                 //Time: 60s
-                levelBuilder = new LevelFourBuilder();
+                levelBuilder = new Level4Builder();
                 levelDirector.Construct(levelBuilder);
                 level = levelBuilder.getLevel();
 
@@ -172,7 +169,7 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 8
                 //Game mode: Standard
                 //Time: 60s
-                levelBuilder = new LevelFiveBuilder();
+                levelBuilder = new Level5Builder();
                 levelDirector.Construct(levelBuilder);
                 level = levelBuilder.getLevel();
 
