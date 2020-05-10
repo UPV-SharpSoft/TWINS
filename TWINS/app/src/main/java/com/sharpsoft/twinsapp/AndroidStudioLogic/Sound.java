@@ -24,7 +24,6 @@ public class Sound {
 
     public enum Sounds {flip, gameover, correct, victory, incorrect, shuffle, button};
 
-    private boolean muted;
     private float soundVolume = 1;
 
     private static final Sound soundInstance = new Sound();
@@ -79,7 +78,7 @@ public class Sound {
             try{
                 soundFX.stop(streamID);
             }catch(Exception e){
-                Log.w(Audio.class.getName(), String.format("Failed to stop the soundPool player: %s", e));
+                Log.w(Sound.class.getName(), String.format("Failed to stop the soundPool player: %s", e));
             }
         }
     }

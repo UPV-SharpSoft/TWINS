@@ -3,15 +3,11 @@ package com.sharpsoft.twinsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.SoundPool;
 import android.os.Bundle;
 
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 
 public class MainActivity extends AppCompatActivity {
-    private Audio audioInstance = Audio.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         audioFacade.initializeAudio(this);
-
-
 
         Thread t = new Thread(){
             @Override

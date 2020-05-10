@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
