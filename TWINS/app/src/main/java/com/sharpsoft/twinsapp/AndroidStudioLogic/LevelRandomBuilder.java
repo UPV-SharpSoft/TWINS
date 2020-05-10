@@ -8,6 +8,7 @@ public class LevelRandomBuilder extends ILevelBuilder {
     private Random random;
 
     public LevelRandomBuilder(){
+        super.level = new Level();
         this.random = new Random();
     }
 
