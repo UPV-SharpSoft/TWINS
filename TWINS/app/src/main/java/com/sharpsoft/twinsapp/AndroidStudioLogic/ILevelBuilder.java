@@ -1,7 +1,5 @@
 package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
-import com.sharpsoft.twinsapp.LevelsActivity;
-
 public abstract class ILevelBuilder {
 
     Level level;
@@ -20,3 +18,4 @@ public abstract class ILevelBuilder {
 
 
 }
+

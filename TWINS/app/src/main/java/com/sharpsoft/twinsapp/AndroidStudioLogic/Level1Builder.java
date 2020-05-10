@@ -22,3 +22,4 @@ public class Level1Builder extends ILevelBuilder {
         level.setDimension(new Dimension(4,5));
     }
 }
+
