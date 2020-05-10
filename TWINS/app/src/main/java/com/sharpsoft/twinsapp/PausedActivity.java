@@ -100,8 +100,7 @@ public class PausedActivity extends AppCompatActivity {
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                Intent i = new Intent(PausedActivity.this, MainMenuActivity.class);
-                                startActivity(i);
+                                GameActivity.closedMethod();
                             }
                         }).setNegativeButton("No", null)
                         .setIcon(android.R.drawable.ic_dialog_alert)

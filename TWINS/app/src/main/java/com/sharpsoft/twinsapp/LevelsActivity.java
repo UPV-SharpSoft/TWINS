@@ -49,7 +49,7 @@ public class LevelsActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        passedLevels = ConfigSingleton.getInstance().levelsPassed(this);
+        passedLevels = ConfigSingleton.getInstance().getLevelsPassed(this);
 
         for(int i = 0; i < passedLevels; i++){
             levels[i].setImageBitmap(getBitmapFromAsset("Levels/level" + (i+1) + "passed.png", this));
@@ -57,9 +57,14 @@ public class LevelsActivity extends AppCompatActivity {
 
         imagesListeners();
 
-        for(int i = passedLevels + 1; i < NUMBERLEVELS; i++){
-            levels[i].setImageAlpha(150);
-            levels[i].setClickable(false);
+        for(int i = 0; i < NUMBERLEVELS; i++) {
+            if (i < passedLevels + 1) {
+                levels[i].setImageAlpha(255);
+                levels[i].setClickable(true);
+            } else {
+                levels[i].setImageAlpha(150);
+                levels[i].setClickable(false);
+            }
         }
     }
 
@@ -69,7 +74,7 @@ public class LevelsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
 
-        passedLevels = ConfigSingleton.getInstance().levelsPassed(this);
+        passedLevels = ConfigSingleton.getInstance().getLevelsPassed(this);
 
         level1 = findViewById(R.id.level1);
         level2 = findViewById(R.id.level2);
@@ -85,11 +90,15 @@ public class LevelsActivity extends AppCompatActivity {
 
         imagesListeners();
 
-        for(int i = passedLevels + 1; i < NUMBERLEVELS; i++){
-            levels[i].setImageAlpha(150);
-            levels[i].setClickable(false);
+        for(int i = 0; i < NUMBERLEVELS; i++) {
+            if (i < passedLevels + 1) {
+                levels[i].setImageAlpha(255);
+                levels[i].setClickable(true);
+            } else {
+                levels[i].setImageAlpha(150);
+                levels[i].setClickable(false);
+            }
         }
-
     }
 
     private void imagesListeners(){
@@ -106,6 +115,7 @@ public class LevelsActivity extends AppCompatActivity {
 
                 Intent i = new Intent(LevelsActivity.this, GameActivity.class);
                 i.putExtra("level", level);
+                i.putExtra("levelNumber", 1);
                 startActivity(i);
             }
         });
@@ -123,6 +133,7 @@ public class LevelsActivity extends AppCompatActivity {
 
                 Intent i = new Intent(LevelsActivity.this, GameActivity.class);
                 i.putExtra("level", level);
+                i.putExtra("levelNumber", 2);
                 startActivity(i);
             }
         });
@@ -140,6 +151,7 @@ public class LevelsActivity extends AppCompatActivity {
 
                 Intent i = new Intent(LevelsActivity.this, GameActivity.class);
                 i.putExtra("level", level);
+                i.putExtra("levelNumber", 3);
                 startActivity(i);
             }
         });
@@ -157,6 +169,7 @@ public class LevelsActivity extends AppCompatActivity {
 
                 Intent i = new Intent(LevelsActivity.this, GameActivity.class);
                 i.putExtra("level", level);
+                i.putExtra("levelNumber", 4);
                 startActivity(i);
 
             }
@@ -175,6 +188,7 @@ public class LevelsActivity extends AppCompatActivity {
 
                 Intent i = new Intent(LevelsActivity.this, GameActivity.class);
                 i.putExtra("level", level);
+                i.putExtra("levelNumber", 5);
                 startActivity(i);
             }
         });

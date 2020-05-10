@@ -54,22 +54,28 @@ public class ConfigSingleton {
         return this.selectedMusic;
     }
 
-    public int levelsPassed(Context context){
+    public int getLevelsPassed(Context context){
         File root = new File(context.getFilesDir().getPath());
         File levelsPassed = new File(root, "levels.txt");
-        Log.d("info", context.getFilesDir().getPath() + "/levels.txt");
         if(levelsPassed.exists()){
             return Integer.valueOf(readFromFile(levelsPassed));
         } else {
-            writeToFile("0", levelsPassed);
+            writeToFile(0, levelsPassed);
             return 0;
         }
     }
 
-    private void writeToFile(String data, File file) {
+    public void setLevelsPassed(int number, Context context) {
+        File root = new File(context.getFilesDir().getPath());
+        File levelsPassed = new File(root, "levels.txt");
+        if (number > readFromFile(levelsPassed))
+            writeToFile(number, levelsPassed);
+    }
+
+    private void writeToFile(int data, File file) {
         try {
             FileOutputStream stream = new FileOutputStream(file);
-            stream.write(data.getBytes());
+            stream.write(String.valueOf(data).getBytes());
             stream.close();
         }
         catch (Exception e) {
@@ -77,17 +83,17 @@ public class ConfigSingleton {
         }
     }
 
-    private String readFromFile(File file){
+    private int readFromFile(File file){
         try {
             byte[] bytes = new byte[(int) file.length()];
             FileInputStream in = new FileInputStream(file);
             in.read(bytes);
             in.close();
-            return new String(bytes);
+            return Integer.valueOf(new String(bytes));
 
         } catch (Exception e){
             Log.e("Exception", "File read failed: " + e.toString());
-            return "error";
+            return -1;
         }
     }
 }

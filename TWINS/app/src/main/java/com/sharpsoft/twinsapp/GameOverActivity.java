@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
 public class GameOverActivity extends AppCompatActivity {
@@ -63,9 +64,8 @@ public class GameOverActivity extends AppCompatActivity {
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(GameOverActivity.this, MainMenuActivity.class);
-                startActivity(i);
                 finish();
+                GameActivity.closedMethod();
             }
         });
 
