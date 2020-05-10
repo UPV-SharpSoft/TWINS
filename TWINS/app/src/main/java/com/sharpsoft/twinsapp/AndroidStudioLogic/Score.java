@@ -17,15 +17,35 @@ public class Score extends com.sharpsoft.twins_clases.logic.Score {
         String StringLeftScore = "";
         if(leftScore > 0){
             StringLeftScore = "+" + leftScore;
-            scoreTextView.setTextColor(Color.GREEN);
+            ((Activity)scoreTextView.getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    scoreTextView.setTextColor(Color.GREEN);
+                }
+            });
         }else if (leftScore < 0){
             StringLeftScore = String.valueOf(leftScore);
-            scoreTextView.setTextColor(Color.RED);
+            ((Activity)scoreTextView.getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    scoreTextView.setTextColor(Color.RED);
+                }
+            });
         }else{
             if (score < 0) {
-                scoreTextView.setTextColor(Color.RED);
+                ((Activity)scoreTextView.getContext()).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        scoreTextView.setTextColor(Color.RED);
+                    }
+                });
             }else{
-                scoreTextView.setTextColor(Color.BLACK);
+                ((Activity)scoreTextView.getContext()).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        scoreTextView.setTextColor(Color.BLACK);
+                    }
+                });
             }
         }
 
