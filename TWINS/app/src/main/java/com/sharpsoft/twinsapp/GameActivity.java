@@ -50,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
         tableLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
 
-        int music = ConfigSingleton.getInstance().getSelectedMusic();
+        int song = ConfigSingleton.getInstance().getSelectedMusic();
         level = (Level) getIntent().getExtras().get("level");
         levelNumber = getIntent().getExtras().getInt("levelNumber", -1);
 
