@@ -22,8 +22,8 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ILevelBuilder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelDirector;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelRandomBuilder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelEasyBuilder;
 
 import java.util.Random;
 
@@ -134,22 +134,13 @@ public class MainMenuActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Random r = new Random();
-                        int width = r.nextInt(5-2) + 2;
-                        int height = r.nextInt(7-3) + 3;
-                        while((width * height) % 2 == 1){
-                            width = r.nextInt(5-2) + 2;
-                            height = r.nextInt(7-3) + 3;
-                        }
-
-                        ILevelBuilder builder = new LevelEasyBuilder();
+                        ILevelBuilder builder = new LevelRandomBuilder();
                         new LevelDirector().Construct(builder);
                         Level level = builder.getLevel();
 
                         Intent i = new Intent(MainMenuActivity.this, GameActivity.class);
                         i.putExtra("level", level);
                         startActivity(i);
-
                     }
                 }, 500);
 
