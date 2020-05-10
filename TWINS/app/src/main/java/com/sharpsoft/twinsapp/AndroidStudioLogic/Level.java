@@ -22,4 +22,20 @@ public class Level implements Serializable {
     public void setDimension(Dimension dimension) {
         this.dimension = dimension;
     }
+
+    public int getTotalTime(){
+        return this.totalTime;
+    }
+
+    public int getTimePerTurn(){
+        return this.timePerTurn;
+    }
+
+    public int getNumPairs(){
+        return this.numPairs;
+    }
+
+    public Dimension getDimension(){
+        return this.dimension;
+    }
 }

@@ -10,9 +10,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sharpsoft.twins_clases.logic.Board;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
@@ -28,11 +31,10 @@ public class GameActivity extends AppCompatActivity {
     private boolean gameOverBool = false;
 
     private LinearLayout tableLayout;
-    //private Board board;
+    private com.sharpsoft.twinsapp.AndroidStudioLogic.Board board;
     private ImageButton imageButtonPause;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
-    public static Board board;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -43,8 +45,12 @@ public class GameActivity extends AppCompatActivity {
         tableLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
 
-        int music = getIntent().getIntExtra("music", R.raw.partida_default);
-        int time = getIntent().getIntExtra("time", 60*1000);
+        int music = ConfigSingleton.getInstance().getSelectedMusic();
+        Level level = (Level) getIntent().getExtras().get("level");
+
+        Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
+        board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
+        int time = level.getTotalTime();
 
         setBoard();
         instanceChronometer(time);
