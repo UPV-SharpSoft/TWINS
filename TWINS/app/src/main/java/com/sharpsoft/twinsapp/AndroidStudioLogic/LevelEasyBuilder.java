@@ -19,7 +19,7 @@ public class LevelEasyBuilder extends ILevelBuilder {
     }
 
     public void dimension(){
-        Dimension dimension = new Dimension(4,6);
+        Dimension dimension = new Dimension(2,3);
         level.setDimension(dimension);
     }
 
