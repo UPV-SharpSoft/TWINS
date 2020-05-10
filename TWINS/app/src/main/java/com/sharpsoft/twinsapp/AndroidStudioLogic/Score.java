@@ -47,6 +47,7 @@ public class Score extends com.sharpsoft.twins_clases.logic.Score {
     }
 
     private void animAux(final boolean firstTime){
+        //problema hilo
         Thread t = new Thread(){
             public void run(){
                 int textViewCurrentScore = Integer.parseInt(String.valueOf(scoreTextView.getText()).split(" ")[0]);

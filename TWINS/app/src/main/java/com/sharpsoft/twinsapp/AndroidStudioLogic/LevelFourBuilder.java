@@ -19,6 +19,6 @@ public class LevelFourBuilder extends ILevelBuilder {
     }
 
     public void dimension(){
-        level.setDimension(new Dimension(6,4));
+        level.setDimension(new Dimension(4,6));
     }
 }

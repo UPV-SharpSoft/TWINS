@@ -50,7 +50,8 @@ public class LevelsActivity extends AppCompatActivity {
     private final LevelDirector levelDirector = new LevelDirector();
 
     @Override
-    protected void onResume(Bundle savedInstanceState){
+    protected void onResume(){
+        super.onResume();
         passedLevels = ConfigSingleton.getInstance().levelsPassed(this);
 
         for(int i = 0; i < passedLevels; i++){
