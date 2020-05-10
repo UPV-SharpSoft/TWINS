@@ -144,14 +144,14 @@ public class MainMenuActivity extends AppCompatActivity {
                         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(dimension, numCartas,MainMenuActivity.this);
                         int time = (int) Math.floor(width*height*2.22)*1000;
 
-                        Intent i = new LevelEasyBuilder(MainMenuActivity.this)
+                        /*Intent i = new LevelEasyBuilder(MainMenuActivity.this)
                                 .setDimension(dimension)
                                 .setDeck(deck)
                                 .setMusic(R.raw.partida_default)
                                 .setTotalTime(time)
                                 .build();
                         startActivity(i);
-                        finish();
+                        finish();*/
                     }
                 }, 500);
 
