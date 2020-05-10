@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
 
 import java.io.FileNotFoundException;

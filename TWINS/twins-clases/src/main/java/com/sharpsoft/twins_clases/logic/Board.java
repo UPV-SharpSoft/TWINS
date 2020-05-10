@@ -7,10 +7,10 @@ import java.util.Stack;
 public class Board extends Observable {
     protected Card[][] cards;
     private Dimension dimension;
-    protected Stack<Card> cardsUpside; //cartasGiradas
-    private boolean isWaiting;
-    private Score score;
-    private Turn turn;
+    Stack<Card> cardsUpside; //cartasGiradas
+    boolean isWaiting;
+    Score score;
+    Turn turn;
 
     public Board(Dimension dimension, int segundosPorTurno){
         this.dimension = dimension;
@@ -35,7 +35,7 @@ public class Board extends Observable {
         return dimension;
     }
 
-    private void turnCards(final Card c1, final Card c2){
+    void turnCards(final Card c1, final Card c2){
         isWaiting = true;
         new Thread(){
             public void run(){

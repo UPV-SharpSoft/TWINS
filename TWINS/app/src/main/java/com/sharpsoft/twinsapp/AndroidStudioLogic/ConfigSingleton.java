@@ -3,13 +3,23 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 import android.content.Context;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.R;
 
 public class ConfigSingleton {
     private static ConfigSingleton instance = new ConfigSingleton();
 
     private DeckFactory.Decks selectedDeck = DeckFactory.Decks.minecraft;
     private String customDeck;
-    private boolean isCustomDeck = false;
+    private boolean isCustomDeck;
+
+    private int selectedMusic;
+
+    public ConfigSingleton(){
+        selectedMusic = R.raw.partida_default;
+
+        isCustomDeck = false;
+        selectedDeck = DeckFactory.Decks.minecraft;
+    }
 
     public static ConfigSingleton getInstance(){return instance;}
 
@@ -29,5 +39,13 @@ public class ConfigSingleton {
     public void setSelectedDeck(String customDeckName){
         this.isCustomDeck = true;
         this.customDeck = customDeckName;
+    }
+
+    public void setSelectedMusic(int selectedMusic){
+        this.selectedMusic = selectedMusic;
+    }
+
+    public int getSelectedMusic(){
+        return this.selectedMusic;
     }
 }

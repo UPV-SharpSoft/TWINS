@@ -19,6 +19,9 @@ import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ILevelBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelDirector;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelEasyBuilder;
 
@@ -138,20 +141,15 @@ public class MainMenuActivity extends AppCompatActivity {
                             width = r.nextInt(5-2) + 2;
                             height = r.nextInt(7-3) + 3;
                         }
-                        Dimension dimension = new Dimension(width, height);
-                        int numCartas = r.nextInt(((dimension.getTotal()+1)/2)-2) + 2;
-                        Log.i("numCartas", numCartas + "");
-                        Deck deck = ConfigSingleton.getInstance().getSelectedDeck(dimension, numCartas,MainMenuActivity.this);
-                        int time = (int) Math.floor(width*height*2.22)*1000;
 
-                        /*Intent i = new LevelEasyBuilder(MainMenuActivity.this)
-                                .setDimension(dimension)
-                                .setDeck(deck)
-                                .setMusic(R.raw.partida_default)
-                                .setTotalTime(time)
-                                .build();
+                        ILevelBuilder builder = new LevelEasyBuilder();
+                        new LevelDirector().Construct(builder);
+                        Level level = builder.getLevel();
+
+                        Intent i = new Intent(MainMenuActivity.this, GameActivity.class);
+                        i.putExtra("level", level);
                         startActivity(i);
-                        finish();*/
+
                     }
                 }, 500);
 
