@@ -1,22 +1,30 @@
 package com.sharpsoft.twinsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ILevelBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelDirector;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level5Builder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level4Builder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level1Builder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level3Builder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level2Builder;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,7 +42,31 @@ public class LevelsActivity extends AppCompatActivity {
 
     private ImageView []levels;
 
-    private String fileName = "levels.txt";
+    private Level level;
+    private ILevelBuilder levelBuilder;
+    private final LevelDirector levelDirector = new LevelDirector();
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        passedLevels = ConfigSingleton.getInstance().getLevelsPassed(this);
+
+        for(int i = 0; i < passedLevels; i++){
+            levels[i].setImageBitmap(getBitmapFromAsset("Levels/level" + (i+1) + "passed.png", this));
+        }
+
+        imagesListeners();
+
+        for(int i = 0; i < NUMBERLEVELS; i++) {
+            if (i < passedLevels + 1) {
+                levels[i].setImageAlpha(255);
+                levels[i].setClickable(true);
+            } else {
+                levels[i].setImageAlpha(150);
+                levels[i].setClickable(false);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +74,7 @@ public class LevelsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
 
-        File root = new File(this.getFilesDir().getPath());
-        File levelsPassed = new File(root, fileName);
-        Log.d("info", this.getFilesDir().getPath() + "/levels.txt");
-        if(levelsPassed.exists()){
-            passedLevels = Integer.valueOf(readFromFile(levelsPassed));
-        } else {
-            writeToFile("0", levelsPassed);
-            passedLevels = 0;
-        }
-
+        passedLevels = ConfigSingleton.getInstance().getLevelsPassed(this);
 
         level1 = findViewById(R.id.level1);
         level2 = findViewById(R.id.level2);
@@ -67,11 +90,15 @@ public class LevelsActivity extends AppCompatActivity {
 
         imagesListeners();
 
-        for(int i = passedLevels + 1; i < NUMBERLEVELS; i++){
-            levels[i].setImageAlpha(150);
-            levels[i].setClickable(false);
+        for(int i = 0; i < NUMBERLEVELS; i++) {
+            if (i < passedLevels + 1) {
+                levels[i].setImageAlpha(255);
+                levels[i].setClickable(true);
+            } else {
+                levels[i].setImageAlpha(150);
+                levels[i].setClickable(false);
+            }
         }
-
     }
 
     private void imagesListeners(){
@@ -82,6 +109,14 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 4
                 //Game mode: Standard
                 //Time: 120s
+                levelBuilder = new Level1Builder();
+                levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                i.putExtra("levelNumber", 1);
+                startActivity(i);
             }
         });
 
@@ -92,6 +127,14 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 4
                 //Game mode: Standard
                 //Time: 100s
+                levelBuilder = new Level2Builder();
+                levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                i.putExtra("levelNumber", 2);
+                startActivity(i);
             }
         });
 
@@ -102,6 +145,14 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 6
                 //Game mode: Standard
                 //Time: 80s
+                levelBuilder = new Level3Builder();
+                levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                i.putExtra("levelNumber", 3);
+                startActivity(i);
             }
         });
 
@@ -109,9 +160,18 @@ public class LevelsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Board: 6x4
-                //Different cards: 4
+                //Different cards: 6
                 //Game mode: Standard
                 //Time: 60s
+                levelBuilder = new Level4Builder();
+                levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                i.putExtra("levelNumber", 4);
+                startActivity(i);
+
             }
         });
 
@@ -122,33 +182,16 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 8
                 //Game mode: Standard
                 //Time: 60s
+                levelBuilder = new Level5Builder();
+                levelDirector.Construct(levelBuilder);
+                level = levelBuilder.getLevel();
+
+                Intent i = new Intent(LevelsActivity.this, GameActivity.class);
+                i.putExtra("level", level);
+                i.putExtra("levelNumber", 5);
+                startActivity(i);
             }
         });
-    }
-
-    private void writeToFile(String data, File file) {
-        try {
-            FileOutputStream stream = new FileOutputStream(file);
-            stream.write(data.getBytes());
-            stream.close();
-        }
-        catch (Exception e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
-    private String readFromFile(File file){
-        try {
-            byte[] bytes = new byte[(int) file.length()];
-            FileInputStream in = new FileInputStream(file);
-            in.read(bytes);
-            in.close();
-            return new String(bytes);
-
-        } catch (Exception e){
-            Log.e("Exception", "File read failed: " + e.toString());
-            return "error";
-        }
     }
 
     private Bitmap getBitmapFromAsset(String path, Context ctx) {

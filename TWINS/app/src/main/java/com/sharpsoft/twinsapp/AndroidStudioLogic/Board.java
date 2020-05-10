@@ -19,6 +19,7 @@ public class Board extends com.sharpsoft.twins_clases.logic.Board {
         for(int x = 0; x < dimension.width; x++){
             for(int y = 0; y < dimension.height; y++){
                 final Card card = new Card(set.getReverse(), set.sacarCarta());
+                card.setDeck(set.getName());
                 card.setBoard(this, x, y);
                 this.cards[x][y] = card;
             }
@@ -29,7 +30,6 @@ public class Board extends com.sharpsoft.twins_clases.logic.Board {
         LinearLayout boardLayout = new LinearLayout(ctx);
         boardLayout.setOrientation(LinearLayout.VERTICAL);
         boardLayout.setGravity(Gravity.CENTER);
-
 
         for(int y = 0; y < getDimension().height; y++){
             LinearLayout horizontalLayout = new LinearLayout(ctx);

@@ -19,6 +19,7 @@ public class Card implements com.sharpsoft.twins_clases.logic.Card {
     private ImageView imageView;
     private View layout;
     private boolean faceUp; //bocaArriba
+    private String deck;
 
     private Board board;
     private int x, y;
@@ -63,6 +64,21 @@ public class Card implements com.sharpsoft.twins_clases.logic.Card {
         Card o = (Card) c;
 
         return this.bitmapCard.sameAs(o.bitmapCard);
+    }
+
+    @Override
+    public boolean isSameDeck(com.sharpsoft.twins_clases.logic.Card c) {
+        return this.deck.equals(c.getDeck());
+    }
+
+    @Override
+    public void setDeck(String name) {
+        this.deck = name;
+    }
+
+    @Override
+    public String getDeck() {
+        return this.deck;
     }
 
     @Override

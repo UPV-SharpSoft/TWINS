@@ -1,5 +1,6 @@
 package com.sharpsoft.twinsapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -29,6 +30,10 @@ public class GameActivity extends AppCompatActivity {
     private long timeLeft;
     private boolean first = true;
     private boolean gameOverBool = false;
+    private static boolean closed = false;
+    private int levelNumber;
+    private Level level;
+    private Context thisContext;
 
     private LinearLayout tableLayout;
     private com.sharpsoft.twinsapp.AndroidStudioLogic.Board board;
@@ -45,8 +50,11 @@ public class GameActivity extends AppCompatActivity {
         tableLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
 
-        int song = ConfigSingleton.getInstance().getSelectedMusic();
-        Level level = (Level) getIntent().getExtras().get("level");
+        int music = ConfigSingleton.getInstance().getSelectedMusic();
+        level = (Level) getIntent().getExtras().get("level");
+        levelNumber = getIntent().getExtras().getInt("levelNumber", -1);
+
+        thisContext = this;
 
         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
         board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
@@ -63,13 +71,18 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-            super.onResume();
-            if(!first) {
-                instanceChronometer(timeLeft);
-                chronometer.start();
-                audioFacadeInstance.resumeMusic();
-            }
-            first = false;
+        super.onResume();
+        if(!first) {
+            instanceChronometer(timeLeft);
+            chronometer.start();
+            audioFacadeInstance.resumeMusic();
+        }
+        first = false;
+
+        if(closed){
+            finish();
+            closed = false;
+        }
     }
 
     @Override
@@ -99,6 +112,8 @@ public class GameActivity extends AppCompatActivity {
                     i.putExtra("gameOverBool", gameOverBool);
                     i.putExtra("timeLeft", timeLeft);
                     i.putExtra("score", board.getScore().getScore());
+                    i.putExtra("totalTime", level.getTotalTime());
+                    ConfigSingleton.getInstance().setLevelsPassed(levelNumber, thisContext);
                     chronometer.cancel();
                     startActivity(i);
                     finish();
@@ -114,7 +129,7 @@ public class GameActivity extends AppCompatActivity {
         TextView puntuacionTextView = findViewById(R.id.puntuacionTextView);
         board.setScore(new Score(puntuacionTextView));
     }
-    
+
     private void instanceChronometer(long time){
         chronometer = new CountDownTimer(time, 100) {
 
@@ -155,4 +170,7 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
+    public static void closedMethod(){
+        closed = true;
+    }
 }
