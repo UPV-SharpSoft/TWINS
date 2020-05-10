@@ -45,7 +45,7 @@ public class GameActivity extends AppCompatActivity {
         tableLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
 
-        int music = ConfigSingleton.getInstance().getSelectedMusic();
+        int song = ConfigSingleton.getInstance().getSelectedMusic();
         Level level = (Level) getIntent().getExtras().get("level");
 
         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
@@ -58,10 +58,7 @@ public class GameActivity extends AppCompatActivity {
         chronometer.start();
         ToPausedActivity();
 
-        audioFacadeInstance.stopMusic();
-        float volume = audioFacadeInstance.getMusicVolume();
-        audioFacadeInstance.startMusic(this, music);
-        audioFacadeInstance.setMusicVolume(volume);
+        audioFacadeInstance.setMusicGame(this, song);
     }
 
     @Override

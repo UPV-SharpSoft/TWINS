@@ -32,8 +32,6 @@ public class Sound {
 
     public static Sound getInstance(){return soundInstance;}
 
-    public SoundPool getSoundPool(){return soundFX;}
-
     public float getSoundVolume() {
         return soundVolume;
     }
@@ -101,7 +99,7 @@ public class Sound {
                 soundFX.play(incorrectSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
             case shuffle:
-                Log.i("STREAM ID",  soundFX.play(shuffleSound, soundVolume, soundVolume, 0, 0, 1) + "");
+                soundFX.play(shuffleSound, soundVolume, soundVolume, 0, 0, 1);
                 break;
             case button:
                 soundFX.play(buttonSound, soundVolume, soundVolume, 0, 0, 1);

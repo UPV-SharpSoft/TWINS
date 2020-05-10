@@ -18,12 +18,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 
 public class PausedActivity extends AppCompatActivity {
 
-    private ImageButton imageButtonClose;
-    private SeekBar seekBarMusic;
-    private SeekBar seekBarSounds;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
-    float soundVolume;
-    float musicVolume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +40,6 @@ public class PausedActivity extends AppCompatActivity {
             muteAllButton.setImageResource(android.R.drawable.ic_lock_silent_mode_off);
         }
 
-        soundVolume = audioFacadeInstance.getSoundVolume();
-        musicVolume = audioFacadeInstance.getMusicVolume();
-
         resumeGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,17 +49,12 @@ public class PausedActivity extends AppCompatActivity {
 
         muteAllButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Log.i("volumenes", soundVolume + " " + musicVolume);
                 if(!audioFacadeInstance.isMutedAll()){
-                    soundVolume = audioFacadeInstance.getSoundVolume();
-                    musicVolume = audioFacadeInstance.getMusicVolume();
                     muteAllButton.setImageResource(android.R.drawable.ic_lock_silent_mode);
-                    audioFacadeInstance.setMusicVolume(0);
-                    audioFacadeInstance.setSoundVolume(0);
+                    audioFacadeInstance.muteAll();
                 }else{
                     muteAllButton.setImageResource(android.R.drawable.ic_lock_silent_mode_off);
-                    audioFacadeInstance.setMusicVolume(1);
-                    audioFacadeInstance.setSoundVolume(1);
+                    audioFacadeInstance.unMuteAll();
                 }
             }
 

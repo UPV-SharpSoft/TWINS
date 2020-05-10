@@ -11,13 +11,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final AudioFacade audioFacade = AudioFacade.getInstance();
+        final AudioFacade audioInstanceFacade = AudioFacade.getInstance();
 
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        audioFacade.initializeAudio(this);
+        audioInstanceFacade.initializeSound(this);
 
         Thread t = new Thread(){
             @Override
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         Intent i = new Intent(MainActivity.this, MainMenuActivity.class);
                         startActivity(i);
-                        audioFacade.stopSound(1);
-                        audioFacade.stopSound(2);
+                        audioInstanceFacade.stopSound(1);
+                        audioInstanceFacade.stopSound(2);
                         finish();
 
                     }
