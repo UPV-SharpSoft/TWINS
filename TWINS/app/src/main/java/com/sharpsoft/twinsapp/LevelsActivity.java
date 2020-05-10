@@ -10,6 +10,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ILevelBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelDirector;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelFiveBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelFourBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelOneBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelThreeBuilder;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelTwoBuilder;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,6 +44,10 @@ public class LevelsActivity extends AppCompatActivity {
     private ImageView []levels;
 
     private String fileName = "levels.txt";
+
+    private Level level;
+    private ILevelBuilder levelBuilder;
+    private final LevelDirector levelDirector = new LevelDirector();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +95,8 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 4
                 //Game mode: Standard
                 //Time: 120s
+                levelBuilder = new LevelOneBuilder();
+                levelDirector.Construct(levelBuilder);
             }
         });
 
@@ -92,6 +107,8 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 4
                 //Game mode: Standard
                 //Time: 100s
+                levelBuilder = new LevelTwoBuilder();
+                levelDirector.Construct(levelBuilder);
             }
         });
 
@@ -102,6 +119,8 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 6
                 //Game mode: Standard
                 //Time: 80s
+                levelBuilder = new LevelThreeBuilder();
+                levelDirector.Construct(levelBuilder);
             }
         });
 
@@ -109,9 +128,12 @@ public class LevelsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Board: 6x4
-                //Different cards: 4
+                //Different cards: 6
                 //Game mode: Standard
                 //Time: 60s
+                levelBuilder = new LevelFourBuilder();
+                levelDirector.Construct(levelBuilder);
+
             }
         });
 
@@ -122,6 +144,8 @@ public class LevelsActivity extends AppCompatActivity {
                 //Different cards: 8
                 //Game mode: Standard
                 //Time: 60s
+                levelBuilder = new LevelFiveBuilder();
+                levelDirector.Construct(levelBuilder);
             }
         });
     }

@@ -5,10 +5,10 @@ import com.sharpsoft.twins_clases.logic.Dimension;
 import java.io.Serializable;
 
 public class Level implements Serializable {
-    private int totalTime = 0;
-    private int timePerTurn = 0;
-    private int numPairs = 0;
-    private Dimension dimension = null;
+    private int totalTime;
+    private int timePerTurn;
+    private int numPairs;
+    private Dimension dimension;
 
     public void setTotalTime(int totalTime)  {
         this.totalTime = totalTime;

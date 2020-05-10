@@ -2,12 +2,12 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 
-public class LevelEasyBuilder extends ILevelBuilder {
+public class LevelThreeBuilder extends ILevelBuilder {
 
-    public LevelEasyBuilder() {super.level = new Level();}
+    public LevelThreeBuilder() {super.level = new Level();}
 
     public void totalTime(){
-        level.setTotalTime(60*1000);
+        level.setTotalTime(80*1000);
     }
 
     public void timePerTurn(){
@@ -15,11 +15,10 @@ public class LevelEasyBuilder extends ILevelBuilder {
     }
 
     public void numPairs(){
-        level.setNumPairs(4);
+        level.setNumPairs(6);
     }
 
     public void dimension(){
-        Dimension dimension = new Dimension(2,3);
-        level.setDimension(dimension);
+        level.setDimension(new Dimension(5,4));
     }
 }
