@@ -32,6 +32,7 @@ public class GameActivity extends AppCompatActivity {
     private boolean gameOverBool = false;
     private static boolean closed = false;
     private int levelNumber;
+    private Level level;
     private Context thisContext;
 
     private LinearLayout tableLayout;
@@ -50,8 +51,8 @@ public class GameActivity extends AppCompatActivity {
         imageButtonPause = findViewById(R.id.imageButtonPause);
 
         int music = ConfigSingleton.getInstance().getSelectedMusic();
-        Level level = (Level) getIntent().getExtras().get("level");
-        levelNumber = (int) getIntent().getExtras().getInt("levelNumber", -1);
+        level = (Level) getIntent().getExtras().get("level");
+        levelNumber = getIntent().getExtras().getInt("levelNumber", -1);
 
         thisContext = this;
 
@@ -114,6 +115,7 @@ public class GameActivity extends AppCompatActivity {
                     i.putExtra("gameOverBool", gameOverBool);
                     i.putExtra("timeLeft", timeLeft);
                     i.putExtra("score", board.getScore().getScore());
+                    i.putExtra("totalTime", level.getTotalTime());
                     ConfigSingleton.getInstance().setLevelsPassed(levelNumber, thisContext);
                     chronometer.cancel();
                     startActivity(i);
