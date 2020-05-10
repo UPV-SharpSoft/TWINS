@@ -16,11 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Audio;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.GameActivityBuilder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.LevelEasyBuilder;
 

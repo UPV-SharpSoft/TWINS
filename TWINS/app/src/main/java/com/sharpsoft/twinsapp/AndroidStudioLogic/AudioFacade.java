@@ -13,6 +13,7 @@ public class AudioFacade {
 
     private Sound sound = Sound.getInstance();
 
+    public boolean isMutedAll() { return getSoundVolume()==0 && getMusicVolume()==0; }
 
     public void resumeMusic(){
         music.resumeMusic();
@@ -55,5 +56,11 @@ public class AudioFacade {
     public void makeSound(Sound.Sounds soundID){
         sound.makeSound(soundID);
     }
+
+    public float getSoundVolume() {
+        return sound.getSoundVolume();
+    }
+
+    public void setSoundVolume(float soundVolume) {sound.setSoundVolume(soundVolume);}
 
 }

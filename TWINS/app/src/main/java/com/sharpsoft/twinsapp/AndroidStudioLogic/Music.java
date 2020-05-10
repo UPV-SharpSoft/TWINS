@@ -8,9 +8,7 @@ public class Music {
 
     //VARIABLES
     private MediaPlayer bgMusic;
-    private boolean muted;
     private static float musicVolume = 1;
-
     private static final Music musicInstance = new Music();
 
 
@@ -44,7 +42,7 @@ public class Music {
                     bgMusic.release();
                 }
             }catch (Exception e){
-                Log.w(Audio.class.getName(), String.format("Failed to stop and release media player: %s", e));
+                Log.w(Music.class.getName(), String.format("Failed to stop and release media player: %s", e));
             }
         }
     }
@@ -60,7 +58,7 @@ public class Music {
                     bgMusic.pause();
                 }
             }catch (Exception e){
-                Log.w(Audio.class.getName(), String.format("Failed to pause media player: %s", e));
+                Log.w(Music.class.getName(), String.format("Failed to pause media player: %s", e));
             }
         }
     }
