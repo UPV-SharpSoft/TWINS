@@ -42,4 +42,5 @@ public class FreeGamemodeActivity extends AppCompatActivity {
         adapterGamemodes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gamemodeSpinner.setAdapter(adapterGamemodes);
     }
+
 }
