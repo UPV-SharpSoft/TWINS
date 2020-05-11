@@ -23,3 +23,4 @@ public abstract class FlipObserver implements Observer {
     public abstract void onSuccess();
     public abstract void onFailure();
 }
+

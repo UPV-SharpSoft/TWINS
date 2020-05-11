@@ -7,12 +7,12 @@ import java.util.Stack;
 public class Board extends Observable {
     protected Card[][] cards;
     private Dimension dimension;
-    Stack<Card> cardsUpside; //cartasGiradas
+    Stack<Card> cardsUpside;
     boolean isWaiting;
     Score score;
     Turn turn;
 
-    public Board(Dimension dimension, int segundosPorTurno){
+    public Board(Dimension dimension, int secondsPerTurn){
         this.dimension = dimension;
 
         int width = dimension.width;
@@ -28,7 +28,7 @@ public class Board extends Observable {
 
         score = new Score();
 
-        turn = new Turn(score, segundosPorTurno*1000, this);
+        turn = new Turn(score, secondsPerTurn*1000, this);
     }
 
     public Dimension getDimension() {
@@ -105,3 +105,5 @@ public class Board extends Observable {
     }
 
 }
+
+
