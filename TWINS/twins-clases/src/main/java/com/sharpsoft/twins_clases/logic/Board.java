@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Stack;
 
-public class Board extends Observable {
+public abstract class Board extends Observable {
     protected Card[][] cards;
     private Dimension dimension;
     Stack<Card> cardsUpside;
@@ -66,7 +66,7 @@ public class Board extends Observable {
             turn.endTurn();
             Card c1 = cardsUpside.pop();
             Card c2 = cardsUpside.pop();
-            if(c1.sameImage(c2)){ //Coinciden
+            if(isSameCard(c1, c2)){ //Coinciden
                 cardsUpside.push(c1);
                 cardsUpside.push(c2);
 
@@ -104,6 +104,7 @@ public class Board extends Observable {
         turn.setScore(score);
     }
 
+    protected abstract boolean isSameCard(Card c1, Card c2);
 }
 
 

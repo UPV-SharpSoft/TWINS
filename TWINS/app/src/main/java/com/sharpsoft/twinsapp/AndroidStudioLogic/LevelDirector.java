@@ -7,6 +7,7 @@ public class LevelDirector {
         levelBuilder.totalTime();
         levelBuilder.timePerTurn();
         levelBuilder.numPairs();
+        levelBuilder.type();
     }
 
 }

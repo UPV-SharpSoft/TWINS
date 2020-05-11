@@ -16,6 +16,7 @@ public abstract class ILevelBuilder {
 
     public abstract void dimension();
 
+    public abstract void type();
 
 }
 

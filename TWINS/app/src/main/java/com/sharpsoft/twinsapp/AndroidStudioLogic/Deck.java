@@ -47,4 +47,8 @@ public class Deck {
     public boolean equals(@Nullable Object obj) {
         return (obj instanceof Deck && ((Deck) obj).deckName.equals(this.deckName));
     }
+
+    public void mergeDeck(Deck oDeck){
+        cards.addAll(oDeck.cards);
+    }
 }

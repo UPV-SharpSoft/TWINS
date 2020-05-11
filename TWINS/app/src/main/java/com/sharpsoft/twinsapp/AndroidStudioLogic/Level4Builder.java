@@ -21,4 +21,8 @@ public class Level4Builder extends ILevelBuilder {
     public void dimension(){
         level.setDimension(new Dimension(4,6));
     }
+
+    public void type() {
+        level.setType(Level.Type.standard);
+    }
 }

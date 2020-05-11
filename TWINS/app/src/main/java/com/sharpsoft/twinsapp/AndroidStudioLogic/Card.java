@@ -115,4 +115,8 @@ public class Card implements com.sharpsoft.twins_clases.logic.Card {
     public boolean isFacedUp() {
         return faceUp;
     }
+
+    public Bitmap getBitmapCard(){
+        return this.bitmapCard;
+    }
 }

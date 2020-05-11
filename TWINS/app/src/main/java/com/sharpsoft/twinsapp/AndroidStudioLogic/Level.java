@@ -9,6 +9,13 @@ public class Level implements Serializable {
     private int timePerTurn;
     private int numPairs;
     private Dimension dimension;
+    private Type type;
+
+    public enum Type{
+        standard,
+        byCard,
+        bySet
+    }
 
     public void setTotalTime(int totalTime)  {
         this.totalTime = totalTime;
@@ -22,6 +29,7 @@ public class Level implements Serializable {
     public void setDimension(Dimension dimension) {
         this.dimension = dimension;
     }
+    public void setType(Type type){this.type = type;}
 
     public int getTotalTime(){
         return this.totalTime;
@@ -37,6 +45,10 @@ public class Level implements Serializable {
 
     public Dimension getDimension(){
         return this.dimension;
+    }
+
+    public Type getType(){
+        return this.type;
     }
 }
 

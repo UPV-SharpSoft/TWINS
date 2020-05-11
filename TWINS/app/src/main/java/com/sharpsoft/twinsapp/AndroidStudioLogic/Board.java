@@ -52,4 +52,8 @@ public class Board extends com.sharpsoft.twins_clases.logic.Board {
         return boardLayout;
     }
 
+    @Override
+    protected boolean isSameCard(com.sharpsoft.twins_clases.logic.Card c1, com.sharpsoft.twins_clases.logic.Card c2) {
+        return c1.sameImage(c2);
+    }
 }

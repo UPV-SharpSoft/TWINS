@@ -41,4 +41,8 @@ public class LevelRandomBuilder extends ILevelBuilder {
         }
         level.setDimension(new Dimension(width, height));
     }
+
+    public void type() {
+        level.setType(Level.Type.byCard);
+    }
 }
