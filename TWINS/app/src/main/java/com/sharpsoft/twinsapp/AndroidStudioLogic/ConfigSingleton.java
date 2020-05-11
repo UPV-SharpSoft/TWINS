@@ -2,7 +2,6 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.EditDeckActivity;
@@ -15,7 +14,7 @@ import java.io.FileOutputStream;
 public class ConfigSingleton {
     private static ConfigSingleton instance = new ConfigSingleton();
 
-    private DeckFactory.Decks selectedDeck = DeckFactory.Decks.minecraft;
+    private DeckFactory.Decks selectedDeck;
     private String customDeck;
     private boolean isCustomDeck;
 
@@ -49,17 +48,12 @@ public class ConfigSingleton {
     }
 
     public void removeCustomDeck(String deckName, Context ctx) {
-
-        if (this.isCustomDeck) {
-
-            String filePath = ctx.getFilesDir().getPath() + "/customDecks/" + deckName;
-            
-
+        File deckPath = new File(ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/");
+        String[] files = deckPath.list();
+        for(String s : files){
+            new File(deckPath, s).delete();
         }
-        else{
-            Toast.makeText(ctx, "No tienes permiso para eliminar esta baraja!",
-                    Toast.LENGTH_LONG).show();
-        }
+        deckPath.delete();
     }
 
     public void setSelectedMusic(int selectedMusic){
