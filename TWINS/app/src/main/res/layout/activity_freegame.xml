@@ -42,15 +42,15 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/deckSpinner"
-        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintHorizontal_bias="0.225"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.016" />
 
     <Spinner
         android:id="@+id/deckSpinner"
-        android:layout_width="190dp"
-        android:layout_height="19dp"
+        android:layout_width="187dp"
+        android:layout_height="32dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="60dp"
         android:backgroundTint="#000000"
@@ -88,7 +88,7 @@
         android:layout_width="109dp"
         android:layout_height="18dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="48dp"
         android:text="TIEMPO VOLTEO"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,14 +105,14 @@
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.229" />
+        app:layout_constraintVertical_bias="0.263" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="123dp"
         android:layout_height="21dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="108dp"
         android:text="MOSTRAR CARTAS"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,131 +120,136 @@
 
     <Spinner
         android:id="@+id/soundSpinner"
-        android:layout_width="190dp"
-        android:layout_height="22dp"
+        android:layout_width="186dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="60dp"
         android:backgroundTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/deckSpinner"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintTop_toBottomOf="@+id/deckSpinner" />
 
     <Spinner
         android:id="@+id/gamemodeSpinner"
-        android:layout_width="190dp"
-        android:layout_height="22dp"
+        android:layout_width="192dp"
+        android:layout_height="34dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="60dp"
         android:backgroundTint="#000000"
         app:layout_constraintBottom_toTopOf="@+id/showCardTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/turnTime"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/totalTime"
-        android:layout_width="187dp"
-        android:layout_height="19dp"
+        android:layout_width="202dp"
+        android:layout_height="38dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:inputType="time"
         android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="8sp"
         app:layout_constraintBottom_toTopOf="@+id/turnTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/soundSpinner"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/turnTime"
-        android:layout_width="189dp"
-        android:layout_height="21dp"
+        android:layout_width="181dp"
+        android:layout_height="35dp"
         android:layout_marginTop="92dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:inputType="time"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColorHighlight="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.314"
+        app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/soundSpinner"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/soundSpinner" />
 
     <Spinner
         android:id="@+id/boardSpinner"
-        android:layout_width="70dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="56dp"
+        android:layout_width="75dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="33dp"
         android:backgroundTint="#000000"
         app:layout_constraintBottom_toTopOf="@+id/soundSpinner"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/deckSpinner"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.086" />
 
     <Spinner
         android:id="@+id/boardSpinner2"
-        android:layout_width="71dp"
-        android:layout_height="21dp"
+        android:layout_width="72dp"
+        android:layout_height="27dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="35dp"
         android:backgroundTint="#000000"
         app:layout_constraintBottom_toTopOf="@+id/soundSpinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/boardSpinner"
         app:layout_constraintTop_toBottomOf="@+id/deckSpinner"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.416" />
 
     <EditText
         android:id="@+id/showCardTime"
-        android:layout_width="190dp"
-        android:layout_height="23dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="160dp"
+        android:layout_width="166dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="76dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:foregroundTint="#FFFFFF"
         android:inputType="number"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColorHighlight="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/turnTime" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="67dp"
         android:layout_height="21dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="52dp"
         android:text="TABLERO"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#000000"
         android:text="JUGAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gamemodeSpinner"
-        app:layout_constraintVertical_bias="0.617" />
+        app:layout_constraintVertical_bias="0.772" />
 
     <TextView
         android:id="@+id/textView13"
@@ -256,9 +261,9 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/soundSpinner"
         app:layout_constraintEnd_toStartOf="@+id/boardSpinner2"
-        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintHorizontal_bias="0.176"
         app:layout_constraintStart_toEndOf="@+id/boardSpinner"
         app:layout_constraintTop_toBottomOf="@+id/deckSpinner"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.222" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
