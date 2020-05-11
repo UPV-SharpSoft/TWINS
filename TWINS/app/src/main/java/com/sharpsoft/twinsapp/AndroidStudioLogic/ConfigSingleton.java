@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.EditDeckActivity;
 import com.sharpsoft.twinsapp.R;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import java.io.FileOutputStream;
 public class ConfigSingleton {
     private static ConfigSingleton instance = new ConfigSingleton();
 
-    private DeckFactory.Decks selectedDeck = DeckFactory.Decks.minecraft;
+    private DeckFactory.Decks selectedDeck;
     private String customDeck;
     private boolean isCustomDeck;
 
@@ -46,8 +47,13 @@ public class ConfigSingleton {
         this.customDeck = customDeckName;
     }
 
-    public void removeCustomDeck(String deckname, Context ctx){
-
+    public void removeCustomDeck(String deckName, Context ctx) {
+        File deckPath = new File(ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/");
+        String[] files = deckPath.list();
+        for(String s : files){
+            new File(deckPath, s).delete();
+        }
+        deckPath.delete();
     }
 
     public void setSelectedMusic(int selectedMusic){

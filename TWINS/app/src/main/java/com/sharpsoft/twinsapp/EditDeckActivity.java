@@ -23,6 +23,7 @@ public class EditDeckActivity extends AppCompatActivity {
     private ListView listView;
     private List<Deck> deck;
     private Button buttonCreateDeck;
+    private Button buttonDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,10 @@ public class EditDeckActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.ListView);
         buttonCreateDeck = findViewById(R.id.buttonCreateDeck);
+        buttonDelete = findViewById(R.id.buttonDelete);
 
         showList();
+        deleteCard();
 
     }
 
@@ -55,6 +58,17 @@ public class EditDeckActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void deleteCard(){
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
     private List<Deck> getAllDecks(){
