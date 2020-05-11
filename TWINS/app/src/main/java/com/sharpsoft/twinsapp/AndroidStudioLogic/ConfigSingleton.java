@@ -46,8 +46,8 @@ public class ConfigSingleton {
         this.customDeck = customDeckName;
     }
 
-    public void removeCustomDeck(String deckname){
-        
+    public void removeCustomDeck(String deckname, Context ctx){
+
     }
 
     public void setSelectedMusic(int selectedMusic){
