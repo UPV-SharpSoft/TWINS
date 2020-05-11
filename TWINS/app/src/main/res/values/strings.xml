@@ -12,4 +12,23 @@
         <item>Por Categoría</item>
         <item>Por Carta</item>
     </string-array>
+
+    <string-array name="audioPack">
+        <item>Pack 1</item>
+        <item>Pack 2</item>
+    </string-array>
+
+    <string-array name="deck">
+        <item>Minecraft</item>
+        <item>Fruits</item>
+    </string-array>
+
+    <string-array name="boardDimension">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+
 </resources>

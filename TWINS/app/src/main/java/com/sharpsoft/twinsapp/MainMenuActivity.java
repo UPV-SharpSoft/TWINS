@@ -163,7 +163,6 @@ public class MainMenuActivity extends AppCompatActivity {
         View.OnClickListener freeGameClick = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                audioFacadeInstance.makeSound(Sound.Sounds.button);
                 Intent i = new Intent(MainMenuActivity.this, FreeGamemodeActivity.class);
                 startActivity(i);
             }
