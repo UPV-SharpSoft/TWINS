@@ -31,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class NewDeckActivity extends AppCompatActivity {
 
@@ -167,23 +168,31 @@ public class NewDeckActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String nameDeck = editTextName.getText().toString();
 
-                LinearLayout layout = findViewById(R.id.upperLinearLayout);
+                if (Pattern.matches("^[a-zA-Z]*$", nameDeck)  && !nameDeck.isEmpty()  ) {
 
-                Bitmap reverso = ((BitmapDrawable) ((ImageView) layout.getChildAt(0)).getDrawable()).getBitmap();
-                List<Bitmap> images = new ArrayList<>();
-                for(int i = 1; i < layout.getChildCount(); i++){
-                    BitmapDrawable bd = (BitmapDrawable) ((ImageView) layout.getChildAt(0)).getDrawable();
-                    images.add(bd.getBitmap());
+                    LinearLayout layout = findViewById(R.id.upperLinearLayout);
+
+                    Bitmap reverso = ((BitmapDrawable) ((ImageView) layout.getChildAt(0)).getDrawable()).getBitmap();
+                    List<Bitmap> images = new ArrayList<>();
+                    for (int i = 1; i < layout.getChildCount(); i++) {
+                        BitmapDrawable bd = (BitmapDrawable) ((ImageView) layout.getChildAt(0)).getDrawable();
+                        images.add(bd.getBitmap());
+                    }
+
+                    try {
+                        DeckManagerSingleton.getInstance().saveDeck(nameDeck, images, reverso, NewDeckActivity.this);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    Intent intent = new Intent(NewDeckActivity.this, MainMenuActivity.class);
+                    startActivity(intent);
                 }
 
-                try {
-                    DeckManagerSingleton.getInstance().saveDeck(nameDeck, images, reverso, NewDeckActivity.this);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                else {
+                    Toast.makeText(NewDeckActivity.this, "Tienes que especificar el nombre con carácteres alfanuméricos!",
+                            Toast.LENGTH_SHORT).show();
                 }
-
-                Intent intent = new Intent(NewDeckActivity.this, MainMenuActivity.class);
-                startActivity(intent);
             }
         });
 
