@@ -32,7 +32,9 @@ import java.text.DecimalFormat;
 public class GameActivity extends AppCompatActivity {
 
     private TextView chronoTV, turnTimer;
+    private int turnSeconds;
     private CountDownTimer chronometer;
+    private CountDownTimer turnCrono;
     private long timeLeft;
     private boolean first = true;
     private boolean gameOverBool = false;
@@ -45,6 +47,8 @@ public class GameActivity extends AppCompatActivity {
     private com.sharpsoft.twins_clases.logic.Board board;
     private ImageButton imageButtonPause;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
+    private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,31 +94,34 @@ public class GameActivity extends AppCompatActivity {
 
         Integer startTimeFlip = level.getFlipStartTime();
         if(startTimeFlip != null) board.flipAllCardsDuring(startTimeFlip);
+
+        turnSeconds = board.getTurn().getDuration();
         board.getTurn().addObserver(new Turn.TurnObserver() {
             @Override
             public void onStart() {
-                new CountDownTimer(board.getTurn().getDuration(), 100){
-                    private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
+                turnCrono = new CountDownTimer(board.getTurn().getDuration(), 100){
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        turnTimer.setText("" + millisUntilFinished);
+                        turnTimer.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
                     }
 
                     @Override
                     public void onFinish() {
-
+                        turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
                     }
-                };
+                }.start();
             }
 
             @Override
             public void onEnd() {
-
+                turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
+                turnCrono.cancel();
             }
 
             @Override
             public void lost() {
-
+                turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
+                turnCrono.cancel();
             }
         });
     }
