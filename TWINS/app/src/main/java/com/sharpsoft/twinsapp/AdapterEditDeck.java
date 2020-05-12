@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
@@ -70,10 +71,10 @@ public class AdapterEditDeck extends BaseAdapter {
 
             v.setOnClickListener(selectDeck(position));
 
-            if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).equals(deck)){
+            /*if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).equals(deck)){
                 ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
                 imageSelected.setVisibility(View.VISIBLE);
-            }
+            }*/
         }else{
             String name = new ArrayList<String>(customDecks.keySet()).get(position - decks.size());
 
@@ -85,10 +86,10 @@ public class AdapterEditDeck extends BaseAdapter {
 
             v.setOnClickListener(selectCustomDeck(name, position));
 
-            if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).getName().equals(name)){
+            /*if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).getName().equals(name)){
                 ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
                 imageSelected.setVisibility(View.VISIBLE);
-            }
+            }*/
         }
 
         return v;
@@ -115,15 +116,16 @@ public class AdapterEditDeck extends BaseAdapter {
     }
 
     private void setSelected(int position){
-        for(int i = 0; i < views.size(); i++){
+        /*for(int i = 0; i < views.size(); i++){
             View v = views.get(i);
             ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
+            Log.i("position", position + " " + views.size());
             if(i == position){
                 imageSelected.setVisibility(View.VISIBLE);
             }else{
                 imageSelected.setVisibility(View.INVISIBLE);
             }
-        }
-
+        }*/
+        Toast.makeText(context, "Baraja " + decks.get(position).getName() + " seleccionada", Toast.LENGTH_SHORT).show();
     }
 }

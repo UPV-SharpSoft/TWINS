@@ -47,6 +47,13 @@ public class EditDeckActivity extends AppCompatActivity {
         deleteCard();
 
         audioFacadeInstance.resumeMusic();
+        buttonCreateDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EditDeckActivity.this, NewDeckActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void showList() {
@@ -57,16 +64,6 @@ public class EditDeckActivity extends AppCompatActivity {
 
         AdapterEditDeck adapter = new AdapterEditDeck(this, R.layout.item_editor, deck, customDecks);
         listView.setAdapter(adapter);
-
-
-
-        buttonCreateDeck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EditDeckActivity.this, NewDeckActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void deleteCard(){

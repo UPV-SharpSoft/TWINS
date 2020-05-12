@@ -71,17 +71,6 @@ public class MainMenuActivity extends AppCompatActivity {
         setMainUI();
 
         audioFacadeInstance.startMusic(this, R.raw.menus_default);
-
-
-        Button buttonEditDeck = findViewById(R.id.buttonEditDeck);
-
-        buttonEditDeck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainMenuActivity.this, EditDeckActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void setMainUI(){
@@ -113,9 +102,19 @@ public class MainMenuActivity extends AppCompatActivity {
                 }, 500);
             }
         });
-        onNewGame = false;
+
+        Button buttonEditDeck = findViewById(R.id.buttonEditDeck);
+
+        buttonEditDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainMenuActivity.this, EditDeckActivity.class);
+                startActivity(intent);
+            }
+        });
 
         setBottomButtons();
+        onNewGame = false;
     }
 
     private void setNewGameUI(){
@@ -128,8 +127,6 @@ public class MainMenuActivity extends AppCompatActivity {
         final TextView partidaNivelesTextView = findViewById(R.id.partidaNivelesTextView);
         final ImageView freeGameImageView = findViewById(R.id.freeGameImageView);
         final TextView freeGameTextView = findViewById(R.id.freeGameTextView);
-
-
 
 
         View.OnClickListener partidaRapidaClick = new View.OnClickListener() {

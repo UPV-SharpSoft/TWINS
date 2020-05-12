@@ -1,5 +1,6 @@
 package com.sharpsoft.twinsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,8 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 
 
 public class FreeGamemodeActivity extends AppCompatActivity{
@@ -116,8 +119,39 @@ public class FreeGamemodeActivity extends AppCompatActivity{
     }
 
     public void setGame(){
+        int width = Integer.valueOf(boardSpinner.getSelectedItem().toString());
+        int height = Integer.valueOf(boardSpinner2.getSelectedItem().toString());
 
+        int tiempoTurno = Integer.valueOf(turnTime.getText().toString());
+        int totalTime = Integer.valueOf(this.totalTime.getText().toString());
+        Level.Type type = null;
 
+        int typePosition = gamemodeSpinner.getSelectedItemPosition();
+        switch (typePosition){
+            case 1:
+                type = Level.Type.standard;
+                break;
+            case 2:
+                type = Level.Type.bySet;
+                height /= 2;
+                break;
+            case 3:
+                type = Level.Type.byCard;
+                break;
+        }
 
+        Dimension d = new Dimension(width, height);
+        int numPairs = d.getTotal()/2;
+
+        Level level = new Level();
+        level.setDimension(d);
+        level.setNumPairs(numPairs);
+        level.setTimePerTurn(tiempoTurno*1000);
+        level.setTotalTime(totalTime*1000);
+        level.setType(type);
+
+        Intent i = new Intent(this, GameActivity.class);
+        i.putExtra("level", level);
+        startActivity(i);
     }
 }
