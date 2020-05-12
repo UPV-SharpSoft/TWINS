@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
@@ -71,7 +72,12 @@ public class EditDeckActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ConfigSingleton instance = ConfigSingleton.getInstance();
                 String deckNameDelete = editTextDeck.getText().toString();
-                instance.removeCustomDeck(deckNameDelete,EditDeckActivity.this);
+                try{
+                    instance.removeCustomDeck(deckNameDelete,EditDeckActivity.this);
+                    editTextDeck.setText("");
+                }catch (Exception e){
+                    Toast.makeText(EditDeckActivity.this, "No existe esa baraja personalizada!", Toast.LENGTH_LONG).show();
+                }
                 showList();
             }
         });
