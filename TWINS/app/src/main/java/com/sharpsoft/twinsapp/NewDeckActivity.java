@@ -175,7 +175,7 @@ public class NewDeckActivity extends AppCompatActivity {
                     Bitmap reverso = ((BitmapDrawable) ((ImageView) layout.getChildAt(0)).getDrawable()).getBitmap();
                     List<Bitmap> images = new ArrayList<>();
                     for (int i = 1; i < layout.getChildCount(); i++) {
-                        BitmapDrawable bd = (BitmapDrawable) ((ImageView) layout.getChildAt(0)).getDrawable();
+                        BitmapDrawable bd = (BitmapDrawable) ((ImageView) layout.getChildAt(i)).getDrawable();
                         images.add(bd.getBitmap());
                     }
 

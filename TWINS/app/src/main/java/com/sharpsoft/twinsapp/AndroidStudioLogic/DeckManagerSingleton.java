@@ -68,10 +68,9 @@ public class DeckManagerSingleton {
         List<Bitmap> cartas = new ArrayList<>();
         Bitmap reverse = BitmapFactory.decodeFile(ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/reverse");
         for(int i = 0; i < d.getTotal()/2; i++){
-            Bitmap img = allImages.get(i % allImages.size() % numCartas);
+            Bitmap img = allImages.get( (i % allImages.size()) % numCartas);
             cartas.add(img); cartas.add(img);
         }
-
         return new Deck(cartas, reverse, deckName);
     }
 }

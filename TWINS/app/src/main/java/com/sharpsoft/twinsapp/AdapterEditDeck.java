@@ -57,7 +57,8 @@ public class AdapterEditDeck extends BaseAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
         View v = layoutInflater.inflate(this.layout, null);
 
-        views.add(v);
+        views.add(position, v);
+        Log.i("asd", position + "");
 
         if(position < decks.size()){
             Deck deck =  decks.get(position);
@@ -71,10 +72,10 @@ public class AdapterEditDeck extends BaseAdapter {
 
             v.setOnClickListener(selectDeck(position));
 
-            /*if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).equals(deck)){
+            if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).equals(deck)){
                 ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
                 imageSelected.setVisibility(View.VISIBLE);
-            }*/
+            }
         }else{
             String name = new ArrayList<String>(customDecks.keySet()).get(position - decks.size());
 
@@ -86,10 +87,10 @@ public class AdapterEditDeck extends BaseAdapter {
 
             v.setOnClickListener(selectCustomDeck(name, position));
 
-            /*if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).getName().equals(name)){
+            if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).getName().equals(name)){
                 ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
                 imageSelected.setVisibility(View.VISIBLE);
-            }*/
+            }
         }
 
         return v;
@@ -119,7 +120,7 @@ public class AdapterEditDeck extends BaseAdapter {
         for(int i = 0; i < views.size(); i++){
             View v = views.get(i);
             ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
-            Log.i("position", position + " " + views.size());
+            Log.i("position", position + " " + views.size() + " " + i);
             if(i == position){
                 imageSelected.setVisibility(View.VISIBLE);
             }else{

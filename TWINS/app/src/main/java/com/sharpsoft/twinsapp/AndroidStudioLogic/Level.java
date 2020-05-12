@@ -10,7 +10,7 @@ public class Level implements Serializable {
     private int numPairs;
     private Dimension dimension;
     private Type type;
-    private int flipTime;
+    private Integer flipTime;
     private Integer startTime;
 
     public enum Type{
@@ -59,7 +59,7 @@ public class Level implements Serializable {
         return this.type;
     }
 
-    public int getFlipTime(){
+    public Integer getFlipTime(){
         return this.flipTime;
     }
 
