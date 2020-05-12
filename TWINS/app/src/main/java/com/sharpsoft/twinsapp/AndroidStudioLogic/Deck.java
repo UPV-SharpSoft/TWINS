@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +18,14 @@ public class Deck {
         this.reverse = reverse;
         this.deckName = name;
     }
+
+    public Deck(Deck deck){
+        this.cards = new ArrayList<>(deck.cards);
+        this.reverse = deck.reverse;
+        this.deckName = deck.deckName;
+    }
+
+    public List<Bitmap> getAllBitmaps(){return this.cards;}
 
     public void setName(String deckName){
         this.deckName = deckName;
@@ -48,7 +57,4 @@ public class Deck {
         return (obj instanceof Deck && ((Deck) obj).deckName.equals(this.deckName));
     }
 
-    public void mergeDeck(Deck oDeck){
-        cards.addAll(oDeck.cards);
-    }
 }

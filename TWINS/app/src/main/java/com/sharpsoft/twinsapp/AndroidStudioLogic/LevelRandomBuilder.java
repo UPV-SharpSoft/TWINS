@@ -43,6 +43,6 @@ public class LevelRandomBuilder extends ILevelBuilder {
     }
 
     public void type() {
-        level.setType(Level.Type.byCard);
+        level.setType(Level.Type.standard);
     }
 }

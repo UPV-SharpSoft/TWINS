@@ -6,11 +6,11 @@ import java.util.Stack;
 
 public abstract class Board extends Observable {
     protected Card[][] cards;
-    private Dimension dimension;
-    Stack<Card> cardsUpside;
-    boolean isWaiting;
-    Score score;
-    Turn turn;
+    protected Dimension dimension;
+    protected Stack<Card> cardsUpside;
+    protected boolean isWaiting;
+    protected Score score;
+    protected Turn turn;
 
     public Board(Dimension dimension, int secondsPerTurn){
         this.dimension = dimension;
@@ -18,7 +18,7 @@ public abstract class Board extends Observable {
         int width = dimension.width;
         int height = dimension.height;
 
-        if( ((width*height) % 2 != 0) || (width * height == 0)) throw new MalformedBoardException("The cards are odd");
+        if( ((width*height) % 2 != 0) ) throw new MalformedBoardException("The cards are odd");
 
         cards = new Card[width][height];
 

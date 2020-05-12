@@ -14,7 +14,7 @@ public class Board extends com.sharpsoft.twins_clases.logic.Board {
 
     public Board(Dimension dimension, int segundosPorTurno,Deck set) {
         super(dimension, segundosPorTurno);
-        if(set.getNumCartas() != dimension.getTotal()) throw new MalformedBoardException("La dimension de la baraja y el tablero no coinciden!");
+        //if(set.getNumCartas() != dimension.getTotal()) throw new MalformedBoardException("La dimension de la baraja y el tablero no coinciden!");
 
         for(int x = 0; x < dimension.width; x++){
             for(int y = 0; y < dimension.height; y++){

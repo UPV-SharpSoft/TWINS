@@ -1,10 +1,12 @@
 package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,9 +20,11 @@ import java.util.Random;
 public class BoardBySet extends Board {
     private TextView suggestedTextView;
     protected com.sharpsoft.twins_clases.logic.Card suggestedCard;
+    private Deck set2;
+
 
     public BoardBySet(Dimension dimension, int segundosPorTurno, Deck set, Deck set2) {
-        super(dimension, segundosPorTurno, set);
+        super(new Dimension(0,0), segundosPorTurno, null);
 
         super.addObserver(new FlipObserver() {
             @Override
@@ -30,7 +34,7 @@ public class BoardBySet extends Board {
 
             @Override
             public void onSuccess() {
-                if(BoardBySet.super.isComplete()) setSuggestedSet();
+                if(!BoardBySet.super.isComplete()) setSuggestedSet();
             }
 
             @Override
@@ -38,6 +42,27 @@ public class BoardBySet extends Board {
 
             }
         });
+
+        super.dimension = new Dimension(dimension.width, dimension.height * 2);
+        super.cards = new com.sharpsoft.twins_clases.logic.Card[dimension.width][dimension.height * 2];
+        List<Bitmap> allBitmaps = set.getAllBitmaps();
+        allBitmaps.addAll(set2.getAllBitmaps());
+        int firstSecondDeck = allBitmaps.size()/2;
+
+        Random random = new Random();
+
+        for(int x = 0; x < super.dimension.width; x++){
+            for(int y = 0; y < super.dimension.height; y++){
+                int rand = random.nextInt(allBitmaps.size());
+                Bitmap b = allBitmaps.remove(rand);
+                final Card card = new Card(set.getReverse(), b);
+                card.setDeck(rand < firstSecondDeck ? set.getName(): set2.getName());
+                card.setBoard(this, x, y);
+                this.cards[x][y] = card;
+
+                if(rand < firstSecondDeck) firstSecondDeck--;
+            }
+        }
     }
 
     public View getView(Context ctx){
@@ -63,13 +88,12 @@ public class BoardBySet extends Board {
             boardLayout.addView(horizontalLayout);
         }
 
-
-        /*suggestedImageView = new ImageView(ctx);
-        boardLayout.addView(suggestedImageView);
-
-        LinearLayout.LayoutParams imageViewParams = new LinearLayout.LayoutParams(200,200);
-        suggestedImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        suggestedImageView.setLayoutParams(imageViewParams);*/
+        suggestedTextView = new TextView(ctx);
+        suggestedTextView.setText("asdasdasdasdasdasdasdasdasdasdasdasdasdasdasd");
+        LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        suggestedTextView.setLayoutParams(tvParams);
+        suggestedTextView.setTextColor(Color.BLACK);
+        boardLayout.addView(suggestedTextView);
 
         setSuggestedSet();
 
@@ -81,7 +105,7 @@ public class BoardBySet extends Board {
 
     @Override
     protected boolean isSameCard(com.sharpsoft.twins_clases.logic.Card c1, com.sharpsoft.twins_clases.logic.Card c2) {
-        return c1.sameImage(c2) && c1.sameImage(suggestedCard);
+        return c1.sameImage(c2) && c1.getDeck().equals(suggestedTextView.getText()) && c2.getDeck().equals(suggestedTextView.getText());
     }
 
     private List<com.sharpsoft.twins_clases.logic.Card> getDownsideCards(){

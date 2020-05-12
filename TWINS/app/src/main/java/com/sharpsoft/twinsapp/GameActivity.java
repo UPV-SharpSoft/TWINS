@@ -15,8 +15,10 @@ import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardByCard;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardBySet;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
@@ -62,6 +64,10 @@ public class GameActivity extends AppCompatActivity {
             board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
         }else if(level.getType() == Level.Type.byCard){
             board = new BoardByCard(level.getDimension(), level.getTimePerTurn(), deck);
+        }else if(level.getType() == Level.Type.bySet){
+            DeckFactory.Decks decks = deck.getName().equals("Minecraft")? DeckFactory.Decks.fruits : DeckFactory.Decks.fruits;
+            Deck deck2 = DeckFactory.getDeck(decks, level.getDimension(), level.getDimension().getTotal()/2, this);
+            board = new BoardBySet(level.getDimension(), level.getTimePerTurn(), deck, deck2);
         }
         int time = level.getTotalTime();
 
