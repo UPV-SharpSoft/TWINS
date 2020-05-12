@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -117,14 +118,41 @@ public class FreeGamemodeActivity extends AppCompatActivity{
     }
 
     public void setGame(){  //falta comprobar los parametros(que esten todos puestos, poner un toast diciendo si falta algo) y lo de la musica/
-        int width = Integer.valueOf(boardSpinner.getSelectedItem().toString());
-        int height = Integer.valueOf(boardSpinner2.getSelectedItem().toString());
+        int width = Integer.parseInt(boardSpinner.getSelectedItem().toString());
+        int height = Integer.parseInt(boardSpinner2.getSelectedItem().toString());
 
-        int tiempoTurno = Integer.valueOf(turnTime.getText().toString());
-        int totalTime = Integer.valueOf(this.totalTime.getText().toString());
+        int tiempoTurno;
+        int totalTime;
 
-        int tiempoVolteo = Integer.valueOf(failTime.getText().toString());
-        int tiempoVolteoInicio = Integer.valueOf(showCardTime.getText().toString());
+        int tiempoVolteo;
+        int tiempoVolteoInicio;
+        try{
+            tiempoTurno = Integer.parseInt(turnTime.getText().toString());
+            totalTime = Integer.parseInt(this.totalTime.getText().toString());
+
+            tiempoVolteo = Integer.parseInt(failTime.getText().toString());
+            tiempoVolteoInicio = Integer.parseInt(showCardTime.getText().toString());
+        }catch(Exception e){
+            Toast.makeText(this, "Has de introducir todos los campos!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(totalTime < 20 || totalTime > 120) {
+            Toast.makeText(this, "El tiempo total debe estar entre 20-120 segundos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(tiempoTurno < 3 || tiempoTurno > 10){
+            Toast.makeText(this, "El tiempo por turno debe estar entre 3-10 segundos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(tiempoVolteoInicio < 0 || tiempoVolteoInicio > 10){
+            Toast.makeText(this, "El tiempo de inicio debe estar entre 0-10 segundos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(tiempoVolteo < 1 || tiempoVolteo > 5){
+            Toast.makeText(this, "El tiempo de fallo debe estar entre 1-5 segundos", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Level.Type type = null;
         int typePosition = gamemodeSpinner.getSelectedItemPosition();

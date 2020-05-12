@@ -28,7 +28,6 @@ public class Music {
     }
 
     public void startMusic(Context context, int song) {
-        if(bgMusic != null && bgMusic.isPlaying()) bgMusic.stop();
         bgMusic = MediaPlayer.create(context, song);
         bgMusic.setLooping(true);
         bgMusic.setVolume(100, 100);
