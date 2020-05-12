@@ -48,7 +48,7 @@ public class Music {
     }
 
     public void resumeMusic() {
-        bgMusic.start();
+        if(bgMusic != null) bgMusic.start();
     }
 
     public void pauseMusic() {
