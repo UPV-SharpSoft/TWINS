@@ -187,8 +187,8 @@ public class MainMenuActivity extends AppCompatActivity {
         partidaRapidaTextView.setOnClickListener(partidaRapidaClick);
         partidaNivelesImageView.setOnClickListener(nivelesClick);
         partidaNivelesTextView.setOnClickListener(nivelesClick);
-       // freeGameImageView.setOnClickListener(freeGameClick);
-       // freeGameTextView.setOnClickListener(freeGameClick);
+        freeGameImageView.setOnClickListener(freeGameClick);
+        freeGameTextView.setOnClickListener(freeGameClick);
 
 
         onNewGame = true;

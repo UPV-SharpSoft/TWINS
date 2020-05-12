@@ -10,6 +10,8 @@ public class Level implements Serializable {
     private int numPairs;
     private Dimension dimension;
     private Type type;
+    private int flipTime;
+    private Integer startTime;
 
     public enum Type{
         standard,
@@ -30,6 +32,12 @@ public class Level implements Serializable {
         this.dimension = dimension;
     }
     public void setType(Type type){this.type = type;}
+    public void setFlipTime(int flipTime){
+        this.flipTime = flipTime;
+    }
+    public void setFlipStartTime(int tiempoVolteoInicio){
+        this.startTime = tiempoVolteoInicio;
+    }
 
     public int getTotalTime(){
         return this.totalTime;
@@ -49,6 +57,14 @@ public class Level implements Serializable {
 
     public Type getType(){
         return this.type;
+    }
+
+    public int getFlipTime(){
+        return this.flipTime;
+    }
+
+    public Integer getFlipStartTime(){
+        return this.startTime;
     }
 }
 

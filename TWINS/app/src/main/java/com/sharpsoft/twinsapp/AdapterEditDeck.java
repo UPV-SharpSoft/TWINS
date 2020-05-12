@@ -116,7 +116,7 @@ public class AdapterEditDeck extends BaseAdapter {
     }
 
     private void setSelected(int position){
-        /*for(int i = 0; i < views.size(); i++){
+        for(int i = 0; i < views.size(); i++){
             View v = views.get(i);
             ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
             Log.i("position", position + " " + views.size());
@@ -125,7 +125,6 @@ public class AdapterEditDeck extends BaseAdapter {
             }else{
                 imageSelected.setVisibility(View.INVISIBLE);
             }
-        }*/
-        Toast.makeText(context, "Baraja " + decks.get(position).getName() + " seleccionada", Toast.LENGTH_SHORT).show();
+        }
     }
 }

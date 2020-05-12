@@ -71,6 +71,8 @@ public class GameActivity extends AppCompatActivity {
         }
         int time = level.getTotalTime();
 
+        board.setTiempoVolteo(level.getFlipTime());
+
         setBoard();
         instanceChronometer(time);
 
@@ -78,6 +80,9 @@ public class GameActivity extends AppCompatActivity {
         ToPausedActivity();
 
         audioFacadeInstance.setMusicGame(this, song);
+
+        Integer startTimeFlip = level.getFlipStartTime();
+        if(startTimeFlip != null) board.flipAllCardsDuring(startTimeFlip);
     }
 
     @Override

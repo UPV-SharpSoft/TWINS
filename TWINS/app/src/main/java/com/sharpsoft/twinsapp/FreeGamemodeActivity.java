@@ -26,6 +26,7 @@ public class FreeGamemodeActivity extends AppCompatActivity{
     private EditText totalTime;
     private EditText turnTime;
     private EditText showCardTime;
+    private EditText failTime;
 
     private Button playButton;
 
@@ -43,7 +44,6 @@ public class FreeGamemodeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freegame);
 
-        deckSpinner = findViewById(R.id.deckSpinner);
         boardSpinner = findViewById(R.id.boardSpinner);
         boardSpinner2 = findViewById(R.id.boardSpinner2);
         soundSpinner = findViewById(R.id.soundSpinner);
@@ -51,6 +51,7 @@ public class FreeGamemodeActivity extends AppCompatActivity{
         totalTime = findViewById(R.id.totalTime);
         turnTime = findViewById(R.id.turnTime);
         showCardTime = findViewById(R.id.showCardTime);
+        failTime = findViewById(R.id.failTime);
 
         playButton = findViewById(R.id.playButton);
 
@@ -109,33 +110,32 @@ public class FreeGamemodeActivity extends AppCompatActivity{
         boardSpinner.setAdapter(adapterBoard);
         boardSpinner2.setAdapter(adapterBoard);
 
-        adapterDeck = ArrayAdapter.createFromResource(this, R.array.deck, android.R.layout.simple_spinner_item);
-        adapterDeck.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        deckSpinner.setAdapter(adapterDeck);
-
         turnTime.setHint("3-10 segundos");
         showCardTime.setHint("0-10 segundos");
         totalTime.setHint("20 - 120 segundos");
     }
 
-    public void setGame(){
+    public void setGame(){  //falta comprobar los parametros(que esten todos puestos, poner un toast diciendo si falta algo) y lo de la musica/
         int width = Integer.valueOf(boardSpinner.getSelectedItem().toString());
         int height = Integer.valueOf(boardSpinner2.getSelectedItem().toString());
 
         int tiempoTurno = Integer.valueOf(turnTime.getText().toString());
         int totalTime = Integer.valueOf(this.totalTime.getText().toString());
-        Level.Type type = null;
 
+        int tiempoVolteo = Integer.valueOf(failTime.getText().toString());
+        int tiempoVolteoInicio = Integer.valueOf(showCardTime.getText().toString());
+
+        Level.Type type = null;
         int typePosition = gamemodeSpinner.getSelectedItemPosition();
         switch (typePosition){
-            case 1:
+            case 0:
                 type = Level.Type.standard;
                 break;
-            case 2:
+            case 1:
                 type = Level.Type.bySet;
                 height /= 2;
                 break;
-            case 3:
+            case 2:
                 type = Level.Type.byCard;
                 break;
         }
@@ -149,6 +149,8 @@ public class FreeGamemodeActivity extends AppCompatActivity{
         level.setTimePerTurn(tiempoTurno*1000);
         level.setTotalTime(totalTime*1000);
         level.setType(type);
+        level.setFlipTime(tiempoVolteo*1000);
+        level.setFlipStartTime(tiempoVolteoInicio*1000);
 
         Intent i = new Intent(this, GameActivity.class);
         i.putExtra("level", level);

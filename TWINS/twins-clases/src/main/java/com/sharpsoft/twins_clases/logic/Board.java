@@ -1,6 +1,5 @@
 package com.sharpsoft.twins_clases.logic;
 
-import java.io.Serializable;
 import java.util.Observable;
 import java.util.Stack;
 
@@ -11,6 +10,7 @@ public abstract class Board extends Observable {
     protected boolean isWaiting;
     protected Score score;
     protected Turn turn;
+    private Integer tiempoVolteo;
 
     public Board(Dimension dimension, int secondsPerTurn){
         this.dimension = dimension;
@@ -35,18 +35,46 @@ public abstract class Board extends Observable {
         return dimension;
     }
 
+    public void setTiempoVolteo(int tiempoVolteo){
+        this.tiempoVolteo = tiempoVolteo;
+    }
+
     void turnCards(final Card c1, final Card c2){
         isWaiting = true;
         new Thread(){
             public void run(){
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(tiempoVolteo == null ? 500: tiempoVolteo);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 c1.turn();
                 c2.turn();
                 isWaiting = false;
+            }
+        }.start();
+    }
+
+    public void flipAllCardsDuring(final int time){
+        isWaiting = true;
+        new Thread(){
+            public void run(){
+                for(Card[] c1 : cards){
+                    for(Card card : c1){
+                        card.turn();
+                    }
+                }
+                try {
+                    Thread.sleep(time);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                isWaiting = false;
+                for(Card[] c1 : cards){
+                    for(Card card : c1){
+                        card.turn();
+                    }
+                }
             }
         }.start();
     }
