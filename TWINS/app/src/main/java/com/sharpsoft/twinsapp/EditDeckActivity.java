@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
@@ -28,6 +29,8 @@ public class EditDeckActivity extends AppCompatActivity {
     private Button buttonCreateDeck;
     private Button buttonDelete;
     private EditText editTextDeck;
+    private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class EditDeckActivity extends AppCompatActivity {
         showList();
         deleteCard();
 
+        audioFacadeInstance.resumeMusic();
     }
 
     private void showList() {

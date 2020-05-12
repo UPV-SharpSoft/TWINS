@@ -121,6 +121,7 @@ public class GameActivity extends AppCompatActivity {
                     i.putExtra("timeLeft", timeLeft);
                     i.putExtra("score", board.getScore().getScore());
                     i.putExtra("totalTime", level.getTotalTime());
+                    i.putExtra("level", level);
                     ConfigSingleton.getInstance().setLevelsPassed(levelNumber, thisContext);
                     chronometer.cancel();
                     startActivity(i);
@@ -159,6 +160,7 @@ public class GameActivity extends AppCompatActivity {
                 Intent i = new Intent(GameActivity.this, GameOverActivity.class);
                 i.putExtra("gameOverBool", gameOverBool);
                 i.putExtra("score", board.getScore().getScore());
+                i.putExtra("level", level);
                 startActivity(i);
                 finish();
             }
@@ -171,9 +173,11 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GameActivity.this, PausedActivity.class);
+                intent.putExtra("level", level);
                 startActivity(intent);
                 chronometer.cancel();
                 audioFacadeInstance.pauseMusic();
+
             }
         });
     }

@@ -10,6 +10,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 
 
 public class FreeGamemodeActivity extends AppCompatActivity{
@@ -31,6 +32,7 @@ public class FreeGamemodeActivity extends AppCompatActivity{
     private ArrayAdapter<CharSequence> adapterBoard2;
     private ArrayAdapter<CharSequence> adapterDeck;
 
+    private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
 
     @Override
@@ -50,6 +52,7 @@ public class FreeGamemodeActivity extends AppCompatActivity{
         playButton = findViewById(R.id.playButton);
 
         setValues();
+        audioFacadeInstance.resumeMusic();
 
         boardSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override

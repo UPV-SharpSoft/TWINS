@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ILevelBuilder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
@@ -45,11 +46,14 @@ public class LevelsActivity extends AppCompatActivity {
     private Level level;
     private ILevelBuilder levelBuilder;
     private final LevelDirector levelDirector = new LevelDirector();
+    private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
     @Override
     protected void onResume(){
         super.onResume();
         passedLevels = ConfigSingleton.getInstance().getLevelsPassed(this);
+
+        audioFacadeInstance.resumeMusic();
 
         for(int i = 0; i < passedLevels; i++){
             levels[i].setImageBitmap(getBitmapFromAsset("Levels/level" + (i+1) + "passed.png", this));
@@ -73,6 +77,8 @@ public class LevelsActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
+
+        audioFacadeInstance.resumeMusic();
 
         passedLevels = ConfigSingleton.getInstance().getLevelsPassed(this);
 

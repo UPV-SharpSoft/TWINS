@@ -15,10 +15,13 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 
 public class PausedActivity extends AppCompatActivity {
 
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
+    private Level level;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class PausedActivity extends AppCompatActivity {
         Button mainMenuButton = findViewById(R.id.mainMenu);
         final ImageButton muteAllButton = findViewById(R.id.muteAll);
 
+        bundle = getIntent().getExtras();
+        level = (Level) bundle.get("level");
 
         if (audioFacadeInstance.isMutedAll()) {
             muteAllButton.setImageResource(android.R.drawable.ic_lock_silent_mode);

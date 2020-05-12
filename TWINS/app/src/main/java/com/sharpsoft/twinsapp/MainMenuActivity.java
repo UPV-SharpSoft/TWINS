@@ -36,8 +36,19 @@ public class MainMenuActivity extends AppCompatActivity {
         if(onNewGame){
             setMainUI();
         }else{
-            System.exit(0);
-            finish();
+            new AlertDialog.Builder(this)
+                    .setTitle("Salir de la partida")
+                    .setMessage("¿Estás seguro de que quieres salir del juego?")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            System.exit(0);
+                            finish();
+                        }
+                    }).setNegativeButton("No", null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+
         }
     }
 

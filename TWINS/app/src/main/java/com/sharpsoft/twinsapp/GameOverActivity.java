@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
 public class GameOverActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class GameOverActivity extends AppCompatActivity {
     private int score;
     private Button mainMenuButton, resetButton;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
+    private Level level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class GameOverActivity extends AppCompatActivity {
         totalTime = data.getInt("totalTime");
         isGameOver = data.getBoolean("gameOverBool");
         score = data.getInt("score");
+        level = (Level) data.get("level");
 
     }
 
@@ -75,6 +78,7 @@ public class GameOverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GameOverActivity.this, GameActivity.class);
+                i.putExtra("level", level);
                 startActivity(i);
                 finish();
             }
