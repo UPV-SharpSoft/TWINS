@@ -148,6 +148,12 @@ public class GameActivity extends AppCompatActivity {
         audioFacadeInstance.pauseMusic();
     }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        chronometer.cancel();
+    }
+
     public void setBoard() {
         View tableroView = ((Board) board).getView(this);
         tableLayout.addView(tableroView);

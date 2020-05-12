@@ -121,7 +121,7 @@ public class NewDeckActivity extends AppCompatActivity {
         imageViewDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout layout = findViewById(R.id.upperLinearLayout);
+                final LinearLayout layout = findViewById(R.id.upperLinearLayout);
 
                 if (layout.getChildCount() >= 12) {
                     Toast.makeText(NewDeckActivity.this, "Has alcanzado el máximo de cartas!", Toast.LENGTH_LONG).show();
@@ -135,10 +135,12 @@ public class NewDeckActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(250, 300);
                 cardValue.setLayoutParams(layoutParams);
 
-                //BitmapDrawable drawable = (BitmapDrawable) cardValue.getDrawable();
-                //Bitmap bitmap = drawable.getBitmap();
-
-                //newDeckList.add(bitmap);
+                cardValue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        layout.removeView(view);
+                    }
+                });
 
                 layout.addView(cardValue);
 

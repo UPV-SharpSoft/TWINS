@@ -47,15 +47,23 @@ public class MainMenuActivity extends AppCompatActivity {
                     }).setNegativeButton("No", null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-
-
         }
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        audioFacadeInstance.startMusic(this, R.raw.menus_default);
+
+        setMainUI();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        audioFacadeInstance.resumeMusic();
+        //audioFacadeInstance.startMusic(this, R.raw.menus_default);
+
+        setMainUI();
     }
 
     @Override

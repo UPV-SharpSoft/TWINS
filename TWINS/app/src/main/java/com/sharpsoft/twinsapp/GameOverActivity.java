@@ -62,7 +62,6 @@ public class GameOverActivity extends AppCompatActivity {
         isGameOver = data.getBoolean("gameOverBool");
         score = data.getInt("score");
         level = (Level) data.get("level");
-
     }
 
     private void createButtons(){

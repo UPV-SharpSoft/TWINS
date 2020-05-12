@@ -113,6 +113,7 @@ public class FreeGamemodeActivity extends AppCompatActivity{
         turnTime.setHint("3-10 segundos");
         showCardTime.setHint("0-10 segundos");
         totalTime.setHint("20 - 120 segundos");
+        failTime.setHint("1 - 5 segundos");
     }
 
     public void setGame(){  //falta comprobar los parametros(que esten todos puestos, poner un toast diciendo si falta algo) y lo de la musica/
