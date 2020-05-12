@@ -28,7 +28,7 @@ public abstract class Board extends Observable {
 
         score = new Score();
 
-        turn = new Turn(score, secondsPerTurn*1000, this);
+        turn = new Turn(score, secondsPerTurn, this);
     }
 
     public Dimension getDimension() {
