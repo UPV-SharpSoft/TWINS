@@ -132,6 +132,10 @@ public abstract class Board extends Observable {
         turn.setScore(score);
     }
 
+    public Turn getTurn() {
+        return turn;
+    }
+
     protected abstract boolean isSameCard(Card c1, Card c2);
 }
 

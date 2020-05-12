@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sharpsoft.twins_clases.logic.FlipObserver;
+import com.sharpsoft.twins_clases.logic.Turn;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardByCard;
@@ -29,7 +31,7 @@ import java.text.DecimalFormat;
 
 public class GameActivity extends AppCompatActivity {
 
-    private TextView chronoTV;
+    private TextView chronoTV, turnTimer;
     private CountDownTimer chronometer;
     private long timeLeft;
     private boolean first = true;
@@ -53,6 +55,8 @@ public class GameActivity extends AppCompatActivity {
         chronoTV = findViewById(R.id.cronoTV);
         tableLayout = findViewById(R.id.tableroLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
+        turnTimer = findViewById(R.id.turnTimer);
+
 
         int song = ConfigSingleton.getInstance().getSelectedMusic();
         level = (Level) getIntent().getExtras().get("level");
@@ -86,6 +90,33 @@ public class GameActivity extends AppCompatActivity {
 
         Integer startTimeFlip = level.getFlipStartTime();
         if(startTimeFlip != null) board.flipAllCardsDuring(startTimeFlip);
+        board.getTurn().addObserver(new Turn.TurnObserver() {
+            @Override
+            public void onStart() {
+                new CountDownTimer(board.getTurn().getDuration(), 100){
+                    private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        turnTimer.setText("" + millisUntilFinished);
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                    }
+                };
+            }
+
+            @Override
+            public void onEnd() {
+
+            }
+
+            @Override
+            public void lost() {
+
+            }
+        });
     }
 
     @Override
