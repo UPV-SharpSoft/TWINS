@@ -7,9 +7,11 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
@@ -24,6 +26,7 @@ public class EditDeckActivity extends AppCompatActivity {
     private List<Deck> deck;
     private Button buttonCreateDeck;
     private Button buttonDelete;
+    private EditText editTextDeck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class EditDeckActivity extends AppCompatActivity {
         listView = findViewById(R.id.ListView);
         buttonCreateDeck = findViewById(R.id.buttonCreateDeck);
         buttonDelete = findViewById(R.id.buttonDelete);
+        editTextDeck = findViewById(R.id.editTextDeck);
 
         showList();
         deleteCard();
@@ -65,7 +69,10 @@ public class EditDeckActivity extends AppCompatActivity {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ConfigSingleton instance = ConfigSingleton.getInstance();
+                String deckNameDelete = editTextDeck.getText().toString();
+                instance.removeCustomDeck(deckNameDelete,EditDeckActivity.this);
+                showList();
             }
         });
 
