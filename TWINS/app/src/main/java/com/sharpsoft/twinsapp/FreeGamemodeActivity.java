@@ -168,7 +168,7 @@ public class FreeGamemodeActivity extends AppCompatActivity{
                 break;
         }
 
-        Dimension d = new Dimension(width, height);
+        Dimension d = new Dimension(width, height/2);
         int numPairs = d.getTotal()/2;
 
         Level level = new Level();
