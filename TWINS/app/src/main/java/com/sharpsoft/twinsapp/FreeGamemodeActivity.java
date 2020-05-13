@@ -162,7 +162,6 @@ public class FreeGamemodeActivity extends AppCompatActivity{
                 break;
             case 1:
                 type = Level.Type.bySet;
-                height /= 2;
                 break;
             case 2:
                 type = Level.Type.byCard;
