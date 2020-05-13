@@ -75,7 +75,7 @@ public class GameActivity extends AppCompatActivity {
             board = new BoardByCard(level.getDimension(), level.getTimePerTurn(), deck);
         }else if(level.getType() == Level.Type.bySet){
             DeckFactory.Decks decks = deck.getName().equals("Minecraft")? DeckFactory.Decks.fruits : DeckFactory.Decks.fruits;
-            Deck deck2 = DeckFactory.getDeck(decks, level.getDimension(), level.getDimension().getTotal(), this);
+            Deck deck2 = DeckFactory.getDeck(decks, level.getDimension(), level.getDimension().getTotal()/2, this);
             board = new BoardBySet(level.getDimension(), level.getTimePerTurn(), deck, deck2);
         }
         int time = level.getTotalTime();
