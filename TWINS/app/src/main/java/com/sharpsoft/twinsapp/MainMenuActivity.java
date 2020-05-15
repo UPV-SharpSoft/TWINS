@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
@@ -48,9 +49,10 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_menu);
 
-        final ImageView partidaNivelesImageView = findViewById(R.id.partidaNivelesImageView);
-        final ImageView freeGameImageView = findViewById(R.id.freeGameImageView);
+        Button partidaNivelesImageView = findViewById(R.id.partidaNivelesImageView);
+        Button freeGameImageView = findViewById(R.id.freeGameImageView);
 
         partidaNivelesImageView.setOnClickListener(new View.OnClickListener() {
             @Override
