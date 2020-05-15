@@ -7,58 +7,56 @@
     android:layout_height="match_parent"
     android:background="#FFFF">
 
+
+    <ListView
+        android:id="@+id/ListView"
+        android:layout_width="407dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#FF0000"
         android:text="ELIMINAR"
         android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <EditText
         android:id="@+id/editTextDeck"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonCreateDeck"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/square_button"
-        android:text="@string/a_adir_baraja_personalizada"
-        android:textColor="#000000"
+        android:layout_width="50dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/circle"
+        android:backgroundTint="#2E2C2C"
+        android:elevation="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/buttonAddDeck"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFF"
-        android:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCreateDeck"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDeck"
-        tools:context=".EditDeckActivity"
-        tools:ignore="MissingConstraints">
-
-        <ListView
-            android:id="@+id/ListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-    </RelativeLayout>
+        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

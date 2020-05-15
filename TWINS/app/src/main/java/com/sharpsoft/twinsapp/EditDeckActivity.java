@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,9 +26,10 @@ public class EditDeckActivity extends AppCompatActivity {
 
     private ListView listView;
     private List<Deck> deck;
-    private Button buttonCreateDeck;
-    private Button buttonDelete;
+    private ImageButton buttonCreateDeck;
     private EditText editTextDeck;
+    private ImageButton modifyDeckButton;
+    private ImageButton deleteDeckButton;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private Bundle bundle;
 
@@ -41,10 +41,10 @@ public class EditDeckActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.ListView);
         buttonCreateDeck = findViewById(R.id.buttonCreateDeck);
-        buttonDelete = findViewById(R.id.buttonDelete);
         editTextDeck = findViewById(R.id.editTextDeck);
 
         showList();
+
         deleteCard();
 
         audioFacadeInstance.resumeMusic();
@@ -65,11 +65,12 @@ public class EditDeckActivity extends AppCompatActivity {
 
         AdapterEditDeck adapter = new AdapterEditDeck(this, R.layout.item_editor, deck, customDecks);
         listView.setAdapter(adapter);
+
     }
 
     private void deleteCard(){
 
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
+        deleteDeckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ConfigSingleton instance = ConfigSingleton.getInstance();

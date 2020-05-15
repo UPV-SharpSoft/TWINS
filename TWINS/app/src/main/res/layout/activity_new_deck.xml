@@ -23,8 +23,8 @@
 
     <HorizontalScrollView
         android:id="@+id/scrollViewDeck"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="411dp"
+        android:layout_height="248dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/square_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,11 +37,11 @@
         <LinearLayout
             android:id="@+id/upperLinearLayout"
             android:layout_width="match_parent"
-            android:showDividers="middle"
-            android:divider="@drawable/empty_tall_divider"
-            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:layout_marginLeft="10dp"
+            android:divider="@drawable/empty_tall_divider"
+            android:orientation="horizontal"
+            android:showDividers="middle" />
     </HorizontalScrollView>
 
     <TextView
@@ -83,7 +83,7 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/scrollViewDeck"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.127"
+        app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />

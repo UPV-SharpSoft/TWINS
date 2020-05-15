@@ -130,24 +130,23 @@ public class NewDeckActivity extends AppCompatActivity {
         }
 
         ImageView cardValue = new ImageView(NewDeckActivity.this);
-        cardValue.setImageDrawable(buttonLoadImage.getDrawable());
         cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        cardValue.setPadding(0,0,20,0);
 
-
-        /*if(layout.getChildCount()==0){
+        if(layout.getChildCount()==0){
             TextView textReverse = new TextView(NewDeckActivity.this);
             textReverse.setText("Reverso");
-            textReverse.setTextColor(111125);
-            layout.addView(textReverse, 800,800);
+            textReverse.setTextColor(000000);
+            layout.addView(textReverse);
 
 
-        }*/
+        }
 
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 600);
         cardValue.setLayoutParams(layoutParams);
 
-        layout.addView(cardValue);
+
 
         if (resultCode == RESULT_OK) {
             try {
@@ -155,6 +154,8 @@ public class NewDeckActivity extends AppCompatActivity {
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 cardValue.setImageBitmap(selectedImage);
+                layout.addView(cardValue);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(NewDeckActivity.this, "Algo ha ido mal :(",
@@ -165,5 +166,7 @@ public class NewDeckActivity extends AppCompatActivity {
             Toast.makeText(NewDeckActivity.this, "No has elegido foto!",
                     Toast.LENGTH_LONG).show();
         }
+
+
     }
 }

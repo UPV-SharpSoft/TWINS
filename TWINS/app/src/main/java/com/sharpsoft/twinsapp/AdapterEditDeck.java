@@ -9,13 +9,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +55,7 @@ public class AdapterEditDeck extends BaseAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
         View v = layoutInflater.inflate(this.layout, null);
 
+
         views.add(position, v);
         Log.i("asd", position + "");
 
@@ -70,10 +69,9 @@ public class AdapterEditDeck extends BaseAdapter {
             ImageView deckImageView = v.findViewById(R.id.DeckimageView);
             deckImageView.setImageBitmap(decks.get(position).getReverse());
 
-            v.setOnClickListener(selectDeck(position));
 
             if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).equals(deck)){
-                ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
+                ImageView imageSelected = v.findViewById(R.id.modifyDeck);
                 imageSelected.setVisibility(View.VISIBLE);
             }
         }else{
@@ -85,10 +83,11 @@ public class AdapterEditDeck extends BaseAdapter {
             ImageView deckImageView = v.findViewById(R.id.DeckimageView);
             deckImageView.setImageBitmap(customDecks.get(name));
 
-            v.setOnClickListener(selectCustomDeck(name, position));
+            ImageView deleteDeckButton = v.findViewById(R.id.deleteDeck);
+            ImageView modifyDeckButton = v.findViewById(R.id.modifyDeck);
 
             if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).getName().equals(name)){
-                ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
+                ImageView imageSelected = v.findViewById(R.id.modifyDeck);
                 imageSelected.setVisibility(View.VISIBLE);
             }
         }
@@ -119,7 +118,7 @@ public class AdapterEditDeck extends BaseAdapter {
     private void setSelected(int position){
         for(int i = 0; i < views.size(); i++){
             View v = views.get(i);
-            ImageView imageSelected = v.findViewById(R.id.selectedTickImageView);
+            ImageView imageSelected = v.findViewById(R.id.modifyDeck);
             Log.i("position", position + " " + views.size() + " " + i);
             if(i == position){
                 imageSelected.setVisibility(View.VISIBLE);
