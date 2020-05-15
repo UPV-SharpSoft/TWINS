@@ -13,15 +13,14 @@ import android.widget.ImageView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 
-import java.util.Random;
 
 public class MainMenuActivity extends AppCompatActivity {
-    boolean onNewGame;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
     private Button partidaNivelesImageView;
     private Button freeGameImageView;
     private Button buttonEditDeck;
+    private Button buttonRanking;
     private ImageView closeAppButton;
 
     @Override
@@ -34,6 +33,7 @@ public class MainMenuActivity extends AppCompatActivity {
         freeGameImageView = findViewById(R.id.freeGameImageView);
         buttonEditDeck = findViewById(R.id.buttonEditDeck);
         closeAppButton = findViewById(R.id.closeAppButton);
+        buttonRanking = findViewById(R.id.buttonRanking);
 
         onClickButton();
         showExitConfirmation();
@@ -74,6 +74,14 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainMenuActivity.this, EditDeckActivity.class);
+                startActivity(i);
+            }
+        });
+
+        buttonRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainMenuActivity.this, RankingActivity.class);
                 startActivity(i);
             }
         });
