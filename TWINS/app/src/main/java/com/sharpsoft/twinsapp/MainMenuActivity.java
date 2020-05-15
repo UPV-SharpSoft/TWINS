@@ -19,31 +19,10 @@ public class MainMenuActivity extends AppCompatActivity {
     boolean onNewGame;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
-   /* @Override
-    public void onBackPressed(){
-        if(onNewGame){
-            setMainUI();
-        }else{
-            new AlertDialog.Builder(this)
-                    .setTitle("Salir de la partida")
-                    .setMessage("¿Estás seguro de que quieres salir del juego?")
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            System.exit(0);
-                            finish();
-                        }
-                    }).setNegativeButton("No", null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-        }
-    }*/
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        audioFacadeInstance.pauseMusic();
-    }
+    private Button partidaNivelesImageView;
+    private Button freeGameImageView;
+    private Button buttonEditDeck;
+    private ImageView closeAppButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +30,25 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        Button partidaNivelesImageView = findViewById(R.id.partidaNivelesImageView);
-        Button freeGameImageView = findViewById(R.id.freeGameImageView);
+        partidaNivelesImageView = findViewById(R.id.partidaNivelesImageView);
+        freeGameImageView = findViewById(R.id.freeGameImageView);
+        buttonEditDeck = findViewById(R.id.buttonEditDeck);
+        closeAppButton = findViewById(R.id.closeAppButton);
 
+        onClickButton();
+        showExitConfirmation();
+
+        audioFacadeInstance.startMusic(this, R.raw.menus_default);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        audioFacadeInstance.pauseMusic();
+    }
+
+
+    private void onClickButton(){
         partidaNivelesImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,21 +70,32 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        audioFacadeInstance.startMusic(this, R.raw.menus_default);
+        buttonEditDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainMenuActivity.this, EditDeckActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
 
     private void showExitConfirmation(){
-        new AlertDialog.Builder(this)
-                .setTitle("Salir")
-                .setMessage("¿Estás seguro que quieres salir?")
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                        System.exit(0);
-                    }
-                }).setNegativeButton("No", null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        closeAppButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(MainMenuActivity.this)
+                        .setTitle("Salir")
+                        .setMessage("¿Estás seguro que quieres salir?")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                System.exit(0);
+                            }
+                        }).setNegativeButton("No", null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
     }
 }
