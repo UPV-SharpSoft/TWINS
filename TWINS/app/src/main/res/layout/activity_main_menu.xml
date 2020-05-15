@@ -4,56 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenuActivity"
+    android:background="#FFFF"
     android:theme="@style/AppTheme"
-    android:background="#FFFF">
+    tools:context=".MainMenuActivity">
 
     <Button
-        android:id="@+id/newGameButton"
+        android:id="@+id/freeGameImageView"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="50dp"
         android:height="60dp"
         android:background="@drawable/square_button"
-        android:text="Nueva Partida"
+        android:text="JUEGO LIBRE"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.317" />
 
     <Button
         android:id="@+id/buttonEditDeck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="172dp"
         android:width="150dp"
         android:height="50dp"
         android:background="@drawable/square_button"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="Editor Baraja"
-        app:layout_constraintEnd_toEndOf="@+id/archievementsButton"
-        app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
-
-    <Button
-        android:id="@+id/archievementsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:width="150dp"
-        android:height="50dp"
-        android:background="@drawable/square_button"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="Logros"
-        app:layout_constraintEnd_toEndOf="@+id/rankingButton"
-        app:layout_constraintTop_toBottomOf="@+id/buttonEditDeck" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.712"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/freeGameImageView"
+        app:layout_constraintVertical_bias="0.033" />
 
     <Button
         android:id="@+id/rankingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:width="150dp"
         android:height="50dp"
         android:background="@drawable/square_button"
@@ -61,7 +53,7 @@
         android:paddingRight="20dp"
         android:text="Ranking"
         app:layout_constraintEnd_toEndOf="@+id/settingsButton"
-        app:layout_constraintTop_toBottomOf="@+id/archievementsButton" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonEditDeck" />
 
     <Button
         android:id="@+id/settingsButton"
@@ -78,29 +70,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rankingButton" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/app_name"
-        android:textColor="#000000"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="50dp"
+    <Button
+        android:id="@+id/partidaNivelesImageView"
+        android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@null"
-        android:scaleType="centerInside"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/square_button"
+        android:text="NIVELES"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.712"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/user_img" />
+        app:layout_constraintTop_toBottomOf="@+id/freeGameImageView" />
 
     <ImageButton
         android:id="@+id/closeAppButton"
@@ -119,9 +99,9 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/newGameButton"
-        app:layout_constraintTop_toTopOf="@+id/newGameButton"
-        app:srcCompat="@drawable/play_img" />
+        app:layout_constraintEnd_toStartOf="@+id/freeGameImageView"
+        app:layout_constraintTop_toTopOf="@+id/freeGameImageView"
+        app:srcCompat="@drawable/brush_img" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -131,15 +111,6 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonEditDeck"
         app:layout_constraintTop_toTopOf="@+id/buttonEditDeck"
         app:srcCompat="@drawable/compass_img" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/archievementsButton"
-        app:layout_constraintTop_toTopOf="@+id/archievementsButton"
-        app:srcCompat="@drawable/cup_img" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -159,50 +130,51 @@
         app:layout_constraintTop_toTopOf="@+id/settingsButton"
         app:srcCompat="@drawable/settings_img" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:orientation="horizontal"
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/partidaNivelesImageView"
+        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.245"
+        app:srcCompat="@drawable/lock_img" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/square_button"
+        android:text="MULTIJUGADOR"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEditDeck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.712"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/partidaNivelesImageView" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9"
+        app:layout_constraintVertical_bias="0.488"
+        app:srcCompat="@drawable/multi" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="241dp"
+        android:layout_height="83dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.141"
+        app:srcCompat="@drawable/titulo" />
 
-        <ImageButton
-            android:id="@+id/appStoreButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:tint="#000000"
-            app:srcCompat="@android:drawable/star_off" />
-
-        <ImageButton
-            android:id="@+id/twitterButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/twitter_img" />
-
-        <ImageButton
-            android:id="@+id/facebookButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/facebook_img" />
-
-        <ImageButton
-            android:id="@+id/gmailButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/gmail_img" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
