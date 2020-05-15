@@ -42,7 +42,7 @@
         app:layout_constraintVertical_bias="0.033" />
 
     <Button
-        android:id="@+id/rankingButton"
+        android:id="@+id/buttonRanking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -68,7 +68,7 @@
         android:paddingRight="20dp"
         android:text="Opciones"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rankingButton" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonRanking" />
 
     <Button
         android:id="@+id/partidaNivelesImageView"
@@ -117,8 +117,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/rankingButton"
-        app:layout_constraintTop_toTopOf="@+id/rankingButton"
+        app:layout_constraintEnd_toStartOf="@+id/buttonRanking"
+        app:layout_constraintTop_toTopOf="@+id/buttonRanking"
         app:srcCompat="@drawable/ranking_img" />
 
     <ImageView
