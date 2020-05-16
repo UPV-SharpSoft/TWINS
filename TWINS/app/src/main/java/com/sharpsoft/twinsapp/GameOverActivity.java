@@ -13,6 +13,12 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 public class GameOverActivity extends AppCompatActivity {
 
     private boolean isGameOver;
@@ -23,6 +29,7 @@ public class GameOverActivity extends AppCompatActivity {
     private Button mainMenuButton, resetButton;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private Level level;
+    public ArrayList<RankingActivity> results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,19 @@ public class GameOverActivity extends AppCompatActivity {
         isGameOver = data.getBoolean("gameOverBool");
         score = data.getInt("score");
         level = (Level) data.get("level");
+
+        Date todayDate = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+        String todayString = formatter.format(todayDate);
+
+        Time hour2 = null;
+
+        RankingActivity resultsCurrentGame = new RankingActivity("", score, todayString, hour2, totalTime);
+
+        results.add(resultsCurrentGame);
+
+        Intent i = new Intent(GameOverActivity.this, RankingActivity.class);
+        i.putExtra("results", results);
     }
 
     private void createButtons(){

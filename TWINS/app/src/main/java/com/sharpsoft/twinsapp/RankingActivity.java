@@ -4,17 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class RankingActivity extends AppCompatActivity {
     TableLayout table;
     TextView partidasJugadasTextView;
+
+    String type;
+    int points;
+    String date;
+    Time hour;
+    int time;
+
+     ArrayList<RankingActivity> results;
+
+
+    public RankingActivity (String type, int points, String date, Time hour, int time) {
+        this.type = type;
+        this.points = points;
+        this.date = date;
+        this.hour = hour;
+        this.time = time;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +43,14 @@ public class RankingActivity extends AppCompatActivity {
 
         fillTable();
         partidasJugadasTextView.setText(String.valueOf(table.getChildCount() - 1));
+
     }
 
     private void fillTable(){
+
+        Bundle data = getIntent().getExtras();
+        //results = data.getParcelableArrayList("results");
+
         for(int i = 0; i < 100; i++){
             TableRow tr = new TableRow(this);
 
@@ -57,6 +79,7 @@ public class RankingActivity extends AppCompatActivity {
         res.setText(text);
         res.setTextColor(Color.BLACK);
         res.setBackgroundResource(R.drawable.square_button);
+        res.setHeight(67);
 
         return res;
     }
