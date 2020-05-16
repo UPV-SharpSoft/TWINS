@@ -4,12 +4,15 @@ import android.content.Context;
 import android.util.Log;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
-import com.sharpsoft.twinsapp.EditDeckActivity;
+import com.sharpsoft.twins_clases.logic.FinalScore;
 import com.sharpsoft.twinsapp.R;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.List;
 
 public class ConfigSingleton {
     private static ConfigSingleton instance = new ConfigSingleton();
@@ -25,6 +28,14 @@ public class ConfigSingleton {
 
         isCustomDeck = false;
         selectedDeck = DeckFactory.Decks.minecraft;
+    }
+
+    public void saveFinalScore(FinalScore finalScore){
+
+    }
+
+    public List<FinalScore> getFinalScores(){
+        return null;
     }
 
     public static ConfigSingleton getInstance(){return instance;}

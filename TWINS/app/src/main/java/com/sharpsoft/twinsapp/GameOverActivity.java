@@ -70,18 +70,7 @@ public class GameOverActivity extends AppCompatActivity {
         score = data.getInt("score");
         level = (Level) data.get("level");
 
-        Date todayDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
-        String todayString = formatter.format(todayDate);
-
-        Time hour2 = null;
-
-        RankingActivity resultsCurrentGame = new RankingActivity("", score, todayString, hour2, totalTime);
-
-        results.add(resultsCurrentGame);
-
-        Intent i = new Intent(GameOverActivity.this, RankingActivity.class);
-        i.putExtra("results", results);
+        Calendar cal = Calendar.getInstance();
     }
 
     private void createButtons(){

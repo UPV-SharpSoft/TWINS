@@ -16,23 +16,6 @@ public class RankingActivity extends AppCompatActivity {
     TableLayout table;
     TextView partidasJugadasTextView;
 
-    String type;
-    int points;
-    String date;
-    Time hour;
-    int time;
-
-     ArrayList<RankingActivity> results;
-
-
-    public RankingActivity (String type, int points, String date, Time hour, int time) {
-        this.type = type;
-        this.points = points;
-        this.date = date;
-        this.hour = hour;
-        this.time = time;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
