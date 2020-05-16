@@ -26,6 +26,8 @@ public class AdapterEditDeck extends BaseAdapter {
     private List<Deck> decks;
     private Map<String, Bitmap> customDecks;
     private List<View> views;
+    ImageView deleteDeckButton;
+    ImageView modifyDeckButton;
 
     public AdapterEditDeck (Context context , int layout, List<Deck> decks, Map<String, Bitmap> customDecks) {
         this.context = context;
@@ -69,11 +71,6 @@ public class AdapterEditDeck extends BaseAdapter {
             ImageView deckImageView = v.findViewById(R.id.DeckimageView);
             deckImageView.setImageBitmap(decks.get(position).getReverse());
 
-
-            if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).equals(deck)){
-                ImageView imageSelected = v.findViewById(R.id.modifyDeck);
-                imageSelected.setVisibility(View.VISIBLE);
-            }
         }else{
             String name = new ArrayList<String>(customDecks.keySet()).get(position - decks.size());
 
@@ -83,8 +80,10 @@ public class AdapterEditDeck extends BaseAdapter {
             ImageView deckImageView = v.findViewById(R.id.DeckimageView);
             deckImageView.setImageBitmap(customDecks.get(name));
 
-            ImageView deleteDeckButton = v.findViewById(R.id.deleteDeck);
-            ImageView modifyDeckButton = v.findViewById(R.id.modifyDeck);
+            deleteDeckButton = v.findViewById(R.id.deleteDeck);
+            modifyDeckButton = v.findViewById(R.id.modifyDeck);
+            deleteDeckButton.setVisibility(View.VISIBLE);
+            modifyDeckButton.setVisibility(View.VISIBLE);
 
             if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).getName().equals(name)){
                 ImageView imageSelected = v.findViewById(R.id.modifyDeck);
@@ -92,10 +91,19 @@ public class AdapterEditDeck extends BaseAdapter {
             }
         }
 
+        /*deleteDeckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+*/
         return v;
     }
 
-    private View.OnClickListener selectDeck(final int position){
+
+    /*
+    private View.OnClickListener delete(final int position){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,5 +134,5 @@ public class AdapterEditDeck extends BaseAdapter {
                 imageSelected.setVisibility(View.INVISIBLE);
             }
         }
-    }
+    }*/
 }

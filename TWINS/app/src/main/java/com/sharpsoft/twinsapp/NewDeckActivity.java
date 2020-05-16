@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Layout;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,7 +47,7 @@ public class NewDeckActivity extends AppCompatActivity {
     private ImageView nextCard;
     private Button buttonSave;
     private EditText editTextName;
-
+    private Animation rotateAnim;
     private List<Bitmap> selectedDeck;
     private int count = 0;
 
@@ -60,6 +62,8 @@ public class NewDeckActivity extends AppCompatActivity {
         buttonSave = findViewById(R.id.buttonSave);
         editTextName = findViewById(R.id.editTextName);
 
+        rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotation);
+
         uploadCard();
 
         createDeck();
@@ -72,10 +76,24 @@ public class NewDeckActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
+                buttonLoadImage.startAnimation(rotateAnim);
 
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMAGE);
+                rotateAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {}
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                        photoPickerIntent.setType("image/*");
+                        startActivityForResult(photoPickerIntent, RESULT_LOAD_IMAGE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {}
+
+                });
+
             }
         });
 

@@ -24,7 +24,7 @@
     <HorizontalScrollView
         android:id="@+id/scrollViewDeck"
         android:layout_width="411dp"
-        android:layout_height="248dp"
+        android:layout_height="200dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/square_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,31 +32,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384">
+        app:layout_constraintVertical_bias="0.501">
 
-        <LinearLayout
-            android:id="@+id/upperLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:divider="@drawable/empty_tall_divider"
-            android:orientation="horizontal"
-            android:showDividers="middle" />
     </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/nombre"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
 
     <EditText
         android:id="@+id/editTextName"
@@ -69,10 +47,34 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toEndOf="@+id/textViewName"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.232" />
+
+    <LinearLayout
+        android:id="@+id/upperLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/empty_tall_divider"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="259dp" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/nombre"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.244" />
 
     <TextView
         android:id="@+id/backText"
@@ -92,12 +94,12 @@
         android:id="@+id/buttonLoadImage"
         android:layout_width="43dp"
         android:layout_height="44dp"
-        android:layout_marginBottom="144dp"
+        android:layout_marginBottom="156dp"
         android:background="@drawable/circle"
-        android:backgroundTint="#2E2C2C"
+        android:backgroundTint="#3549B8"
+        android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 
@@ -113,5 +115,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLoadImage"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="267dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Crear una baraja"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/ListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

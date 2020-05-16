@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,18 +45,33 @@ public class EditDeckActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.ListView);
         buttonCreateDeck = findViewById(R.id.buttonCreateDeck);
-        editTextDeck = findViewById(R.id.editTextDeck);
+        //editTextDeck = findViewById(R.id.editTextDeck);
 
         showList();
 
-        deleteCard();
+        //deleteCard();
 
         audioFacadeInstance.resumeMusic();
+
+        final Animation rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotation);
         buttonCreateDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EditDeckActivity.this, NewDeckActivity.class);
-                startActivity(intent);
+                buttonCreateDeck.startAnimation(rotateAnim);
+                rotateAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {}
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Intent intent = new Intent(EditDeckActivity.this, NewDeckActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {}
+                });
+
             }
         });
     }
@@ -70,7 +87,7 @@ public class EditDeckActivity extends AppCompatActivity {
 
     }
 
-    private void deleteCard(){
+    /*private void deleteCard(){
 
         deleteDeckButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +104,7 @@ public class EditDeckActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     private List<Deck> getAllDecks(){
         List<Deck> res = new ArrayList<>();
