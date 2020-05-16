@@ -11,7 +11,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigSingleton {
@@ -30,12 +32,37 @@ public class ConfigSingleton {
         selectedDeck = DeckFactory.Decks.minecraft;
     }
 
-    public void saveFinalScore(FinalScore finalScore){
+    public boolean saveFinalScore(FinalScore finalScore, Context ctx){
+        List<FinalScore> scores = getFinalScores(ctx);
+        scores.add(0, finalScore);
 
+        try {
+            FileOutputStream  fos = new FileOutputStream("t.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(scores);
+            oos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public List<FinalScore> getFinalScores(){
-        return null;
+    public List<FinalScore> getFinalScores(Context ctx){
+        List<FinalScore> res = new ArrayList<>();
+        File finalScores = new File(ctx.getFilesDir().getPath() + "/scores.txt");
+        if(!finalScores.exists()) return res;
+
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(finalScores));
+
+            res = (List<FinalScore>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return res;
     }
 
     public static ConfigSingleton getInstance(){return instance;}
