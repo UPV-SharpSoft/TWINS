@@ -37,7 +37,7 @@ public class RankingActivity extends AppCompatActivity {
     private void actualValues(){
 
         ConfigSingleton config =  ConfigSingleton.getInstance();
-        List<FinalScore> results = config.getFinalScores(this);
+        List<FinalScore> results = config.getFinalScores(RankingActivity.this);
 
         for(int i = 0; i < results.size(); i++){
             TableRow tr = new TableRow(this);

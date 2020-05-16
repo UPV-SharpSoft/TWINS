@@ -75,7 +75,7 @@ public class GameOverActivity extends AppCompatActivity {
         FinalScore results = new FinalScore(level.getType().toString(), score, totalTime, cal);
 
         ConfigSingleton config =  ConfigSingleton.getInstance();
-        config.saveFinalScore(results, this);
+        config.saveFinalScore(results, GameOverActivity.this);
     }
 
     private void createButtons(){
