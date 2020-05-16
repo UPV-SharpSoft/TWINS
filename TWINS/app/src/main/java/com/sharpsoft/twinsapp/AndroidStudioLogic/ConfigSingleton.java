@@ -37,7 +37,7 @@ public class ConfigSingleton {
         scores.add(0, finalScore);
 
         try {
-            FileOutputStream  fos = new FileOutputStream("t.ser");
+            FileOutputStream  fos = new FileOutputStream(new File(ctx.getFilesDir().getPath() + "/scores.txt"));
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
             oos.writeObject(scores);

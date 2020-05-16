@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -60,17 +61,15 @@ public class RankingActivity extends AppCompatActivity {
             tr.addView(tvTiempo);
             table.addView(tr);
 
-            int games = Integer.parseInt(gamesPlayed.getText().toString());
-            games++;
-            gamesPlayed.setText(games);
+            gamesPlayed.setText(String.valueOf(results.size()));
 
             int time = Integer.parseInt(timePlayed.getText().toString());
             time = time + results.get(i).getTime();
-            timePlayed.setText(time);
+            timePlayed.setText(String.valueOf(time));
 
             int points = Integer.parseInt(pointsEarned.getText().toString());
             points = points + results.get(i).getPoints();
-            pointsEarned.setText(points);
+            pointsEarned.setText(String.valueOf(points));
         }
 
     }
