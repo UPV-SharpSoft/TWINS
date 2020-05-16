@@ -11,11 +11,15 @@ import android.widget.TextView;
 import com.sharpsoft.twins_clases.logic.FinalScore;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
-    TableLayout table;
-    TextView partidasJugadasTextView;
+
+     TableLayout table;
+     TextView gamesPlayed;
+     TextView timePlayed;
+     TextView pointsEarned;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,28 +27,29 @@ public class RankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         table = findViewById(R.id.tableLayout);
-        partidasJugadasTextView = findViewById(R.id.partidasJugadasTextView);
+        gamesPlayed = findViewById(R.id.gamesPlayed);
+        timePlayed = findViewById(R.id.timePlayed);
+        pointsEarned = findViewById(R.id.pointsEarned);
 
-        fillTable();
-        partidasJugadasTextView.setText(String.valueOf(table.getChildCount() - 1));
-
+        actualValues();
     }
 
-    private void fillTable(){
+    private void actualValues(){
 
         ConfigSingleton config =  ConfigSingleton.getInstance();
         List<FinalScore> results = config.getFinalScores(this);
 
         for(int i = 0; i < results.size(); i++){
             TableRow tr = new TableRow(this);
+            String calendar = results.get(i).getDate().getTime().toString();
 
             TextView tvTipo = createTextView(results.get(i).getType());
 
             TextView tvPuntos = createTextView(String.valueOf(results.get(i).getPoints()));
 
-            TextView tvFecha = createTextView("Doctor dame una fecha que me duele el tobillo");
+            TextView tvFecha = createTextView(calendar.substring(4,10));
 
-            TextView tvHora = createTextView("Tienes hora nena? Pues introducela aqui");
+            TextView tvHora = createTextView(calendar.substring(11,16));
 
             TextView tvTiempo = createTextView(String.valueOf(results.get(i).getTime()));
 
@@ -54,7 +59,20 @@ public class RankingActivity extends AppCompatActivity {
             tr.addView(tvHora);
             tr.addView(tvTiempo);
             table.addView(tr);
+
+            int games = Integer.parseInt(gamesPlayed.getText().toString());
+            games++;
+            gamesPlayed.setText(games);
+
+            int time = Integer.parseInt(timePlayed.getText().toString());
+            time = time + results.get(i).getTime();
+            timePlayed.setText(time);
+
+            int points = Integer.parseInt(pointsEarned.getText().toString());
+            points = points + results.get(i).getPoints();
+            pointsEarned.setText(points);
         }
+
     }
 
     private TextView createTextView(String text){
