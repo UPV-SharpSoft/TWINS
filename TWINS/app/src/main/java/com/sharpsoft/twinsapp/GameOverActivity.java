@@ -8,10 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sharpsoft.twins_clases.logic.FinalScore;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
+
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class GameOverActivity extends AppCompatActivity {
 
@@ -62,6 +69,13 @@ public class GameOverActivity extends AppCompatActivity {
         isGameOver = data.getBoolean("gameOverBool");
         score = data.getInt("score");
         level = (Level) data.get("level");
+
+        Calendar cal = Calendar.getInstance();
+
+        FinalScore results = new FinalScore(level.getType().toString(), score, totalTime, cal);
+
+        ConfigSingleton config =  ConfigSingleton.getInstance();
+        config.saveFinalScore(results, this);
     }
 
     private void createButtons(){
