@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sharpsoft.twins_clases.logic.FinalScore;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
@@ -29,7 +30,6 @@ public class GameOverActivity extends AppCompatActivity {
     private Button mainMenuButton, resetButton;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private Level level;
-    public ArrayList<RankingActivity> results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,11 @@ public class GameOverActivity extends AppCompatActivity {
         level = (Level) data.get("level");
 
         Calendar cal = Calendar.getInstance();
+
+        FinalScore results = new FinalScore(level.getType().toString(), score, totalTime, cal);
+
+        ConfigSingleton config =  ConfigSingleton.getInstance();
+        config.saveFinalScore(results, this);
     }
 
     private void createButtons(){
