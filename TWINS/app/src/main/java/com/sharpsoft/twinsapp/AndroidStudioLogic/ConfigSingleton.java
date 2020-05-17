@@ -32,6 +32,31 @@ public class ConfigSingleton {
         selectedDeck = DeckFactory.Decks.minecraft;
     }
 
+    public Level getLevelConfig(Context ctx){
+        Level res;
+        File level = new File(ctx.getFilesDir().getPath() + "/configLevel.txt");
+
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(level));
+
+            res = (Level) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            Level defaulLevel = new Level();
+            Dimension d = new Dimension(4,6);
+            defaulLevel.setType(Level.Type.standard);
+            defaulLevel.setTotalTime(60*1000);
+            defaulLevel.setDimension(d);
+            defaulLevel.setFlipStartTime(2*1000);
+            defaulLevel.setFlipTime(1000);
+            defaulLevel.setTimePerTurn(5*1000);
+            defaulLevel.setNumPairs(d.getTotal()/2);
+            return defaulLevel;
+        }
+
+        return res;
+    }
+
     public boolean saveFinalScore(FinalScore finalScore, Context ctx){
         List<FinalScore> scores = getFinalScores(ctx);
         scores.add(0, finalScore);

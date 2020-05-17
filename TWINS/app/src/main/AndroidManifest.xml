@@ -35,7 +35,7 @@
             android:name=".GameActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".FreeGamemodeActivity"
+            android:name=".ConfigActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
