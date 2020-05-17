@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -52,7 +53,7 @@ public class RankingActivity extends AppCompatActivity {
 
             TextView tvHora = createTextView(calendar.substring(11,16));
 
-            TextView tvTiempo = createTextView(String.valueOf(results.get(i).getTime()));
+            TextView tvTiempo = createTextView(String.valueOf(((results.get(i).getTime())/1000)));
 
             tr.addView(tvTipo);
             tr.addView(tvPuntos);
@@ -64,7 +65,7 @@ public class RankingActivity extends AppCompatActivity {
             gamesPlayed.setText(String.valueOf(results.size()));
 
             int time = Integer.parseInt(timePlayed.getText().toString());
-            time = time + results.get(i).getTime();
+            time = time + ((results.get(i).getTime())/1000);
             timePlayed.setText(String.valueOf(time));
 
             int points = Integer.parseInt(pointsEarned.getText().toString());
@@ -81,6 +82,7 @@ public class RankingActivity extends AppCompatActivity {
         res.setTextColor(Color.BLACK);
         res.setBackgroundResource(R.drawable.square_button);
         res.setHeight(67);
+        res.setGravity(Gravity.CENTER);
 
         return res;
     }
