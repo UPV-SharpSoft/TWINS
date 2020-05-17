@@ -7,6 +7,30 @@
     android:background="#FDFDFD">
 
     <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="65dp"
+        android:layout_height="66dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.251"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <com.divyanshu.colorseekbar.ColorSeekBar
+        android:id="@+id/color_seek_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74" />
+
+    <ImageView
         android:id="@+id/imageView10"
         android:layout_width="92dp"
         android:layout_height="115dp"
@@ -24,7 +48,7 @@
         android:layout_height="66dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.251"
@@ -39,22 +63,24 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:layout_constraintVertical_bias="0.018" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="65dp"
-        android:layout_height="66dp"
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:text="Jugador 1"
+        android:textColor="#000000"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.251"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.245" />
 
     <TextView
         android:id="@+id/textView16"
@@ -65,25 +91,27 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.876"
+        app:layout_constraintHorizontal_bias="0.858"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:layout_constraintVertical_bias="0.018" />
 
     <EditText
         android:id="@+id/nickname1"
-        android:layout_width="245dp"
-        android:layout_height="49dp"
+        android:layout_width="250dp"
+        android:layout_height="39dp"
         android:backgroundTint="#000000"
         android:ems="10"
+        android:hint="Introduce el nick del jugador 1"
         android:inputType="textPersonName"
-        android:text="Introduce el nick del jugador 1"
         android:textColor="#000000"
+        android:textColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10"
-        app:layout_constraintVertical_bias="0.305" />
+        app:layout_constraintVertical_bias="0.41" />
 
     <TextView
         android:id="@+id/textView17"
@@ -98,5 +126,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.095" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"
+        android:backgroundTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:layout_constraintVertical_bias="0.081" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona un color:"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/color_seek_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nickname1"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button buttonEditDeck;
     private Button buttonRanking;
     private Button settingsButton;
+    private Button multiplayerButton;
     private ImageView closeAppButton;
 
     @Override
@@ -38,7 +39,7 @@ public class MainMenuActivity extends AppCompatActivity {
         closeAppButton = findViewById(R.id.closeAppButton);
         buttonRanking = findViewById(R.id.buttonRanking);
         settingsButton = findViewById(R.id.settingsButton);
-
+        multiplayerButton = findViewById(R.id.multiplayerButton);
 
         onClickButton();
         showExitConfirmation();
@@ -96,6 +97,14 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainMenuActivity.this, ConfigActivity.class);
+                startActivity(i);
+            }
+        });
+
+        multiplayerButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainMenuActivity.this, NicknamesActivity.class);
                 startActivity(i);
             }
         });
