@@ -71,8 +71,9 @@ public class GameOverActivity extends AppCompatActivity {
         level = (Level) data.get("level");
 
         Calendar cal = Calendar.getInstance();
+        int timeSpent = totalTime - (int)timeLeft;
 
-        FinalScore results = new FinalScore(level.getType().toString(), score, totalTime, cal);
+        FinalScore results = new FinalScore(level.getType().toString(), score, timeSpent , cal);
 
         ConfigSingleton config =  ConfigSingleton.getInstance();
         config.saveFinalScore(results, GameOverActivity.this);
@@ -82,8 +83,10 @@ public class GameOverActivity extends AppCompatActivity {
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(GameOverActivity.this, MainMenuActivity.class);
+                i.putExtra("level", level);
+                startActivity(i);
                 finish();
-                GameActivity.closedMethod();
             }
         });
 
