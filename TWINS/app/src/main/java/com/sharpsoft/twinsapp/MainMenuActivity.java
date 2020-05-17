@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button freeGameImageView;
     private Button buttonEditDeck;
     private Button buttonRanking;
+    private Button settingsButton;
     private ImageView closeAppButton;
 
     @Override
@@ -34,6 +37,8 @@ public class MainMenuActivity extends AppCompatActivity {
         buttonEditDeck = findViewById(R.id.buttonEditDeck);
         closeAppButton = findViewById(R.id.closeAppButton);
         buttonRanking = findViewById(R.id.buttonRanking);
+        settingsButton = findViewById(R.id.settingsButton);
+
 
         onClickButton();
         showExitConfirmation();
@@ -65,7 +70,8 @@ public class MainMenuActivity extends AppCompatActivity {
         freeGameImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainMenuActivity.this, FreeGamemodeActivity.class);
+                Intent i = new Intent(MainMenuActivity.this, GameActivity.class);
+                i.putExtra("level", ConfigSingleton.getInstance().getLevelConfig(MainMenuActivity.this));
                 startActivity(i);
             }
         });
@@ -85,6 +91,15 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainMenuActivity.this, ConfigActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
 
