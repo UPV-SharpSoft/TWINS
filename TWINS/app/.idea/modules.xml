@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../TWINS.iml" filepath="$PROJECT_DIR$/../TWINS.iml" group="TWINS" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/app.iml" filepath="$PROJECT_DIR$/.idea/app.iml" group="TWINS/app" />
+      <module fileurl="file://$PROJECT_DIR$/../twins-clases/twins-clases.iml" filepath="$PROJECT_DIR$/../twins-clases/twins-clases.iml" group="TWINS/twins-clases" />
+    </modules>
+  </component>
+</project>

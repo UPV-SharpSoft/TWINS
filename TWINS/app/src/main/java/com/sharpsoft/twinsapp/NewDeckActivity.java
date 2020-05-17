@@ -151,20 +151,8 @@ public class NewDeckActivity extends AppCompatActivity {
         cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
         cardValue.setPadding(0,0,20,0);
 
-        if(layout.getChildCount()==0){
-            TextView textReverse = new TextView(NewDeckActivity.this);
-            textReverse.setText("Reverso");
-            textReverse.setTextColor(000000);
-            layout.addView(textReverse);
-
-
-        }
-
-
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 600);
         cardValue.setLayoutParams(layoutParams);
-
-
 
         if (resultCode == RESULT_OK) {
             try {

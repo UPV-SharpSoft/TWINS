@@ -34,6 +34,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.501">
 
+        <LinearLayout
+            android:id="@+id/upperLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:divider="@drawable/empty_tall_divider"
+            android:orientation="horizontal"
+            android:showDividers="middle" />
     </HorizontalScrollView>
 
     <EditText
@@ -51,16 +58,6 @@
         app:layout_constraintStart_toEndOf="@+id/textViewName"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.232" />
-
-    <LinearLayout
-        android:id="@+id/upperLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/empty_tall_divider"
-        android:orientation="horizontal"
-        android:showDividers="middle"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="259dp" />
 
     <TextView
         android:id="@+id/textViewName"

@@ -45,6 +45,7 @@ public class EditDeckActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.ListView);
         buttonCreateDeck = findViewById(R.id.buttonCreateDeck);
+        deleteDeckButton = findViewById(R.id.deleteDeck);
         //editTextDeck = findViewById(R.id.editTextDeck);
 
         showList();
@@ -87,7 +88,7 @@ public class EditDeckActivity extends AppCompatActivity {
 
     }
 
-    /*private void deleteCard(){
+    private void deleteCard(){
 
         deleteDeckButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +105,7 @@ public class EditDeckActivity extends AppCompatActivity {
             }
         });
 
-    }*/
+    }
 
     private List<Deck> getAllDecks(){
         List<Deck> res = new ArrayList<>();

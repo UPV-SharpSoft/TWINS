@@ -96,8 +96,8 @@ public class AdapterEditDeck extends BaseAdapter {
             public void onClick(View v) {
 
             }
-        });
-*/
+        });*/
+
         return v;
     }
 
