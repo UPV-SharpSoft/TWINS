@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".NicknamesActivity"></activity>
+        <activity android:name=".MultiGameActivity"></activity>
+        <activity android:name=".NicknamesActivity" />
         <activity android:name=".RankingActivity" />
         <activity
             android:name=".NewDeckActivity"
