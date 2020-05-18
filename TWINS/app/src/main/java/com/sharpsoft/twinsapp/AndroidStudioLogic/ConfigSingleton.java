@@ -9,12 +9,15 @@ import com.sharpsoft.twinsapp.R;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ConfigSingleton {
     private static ConfigSingleton instance = new ConfigSingleton();
@@ -55,6 +58,69 @@ public class ConfigSingleton {
         }
 
         return res;
+    }
+
+    public boolean setLevelConfig(Level level, Context ctx){
+        File levelFile = new File(ctx.getFilesDir().getPath() + "/configLevel.txt");
+        try{
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(levelFile));
+            oos.writeObject(level);
+            oos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean setMusicVolume(int volume, Context ctx){
+        File musicVolumeFile = new File(ctx.getFilesDir().getPath() + "/musicVolume.txt");
+        try {
+            PrintWriter pw = new PrintWriter(musicVolumeFile);
+            pw.println(volume);
+            pw.close();
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean setFXVolume(int volume, Context ctx){
+        File musicVolumeFile = new File(ctx.getFilesDir().getPath() + "/FXVolume.txt");
+        try {
+            PrintWriter pw = new PrintWriter(musicVolumeFile);
+            pw.println(volume);
+            pw.close();
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public int getMusicVolume(Context ctx){
+        File musicVolumeFile = new File(ctx.getFilesDir().getPath() + "/musicVolume.txt");
+
+        try {
+            Scanner sc = new Scanner(musicVolumeFile);
+            return sc.nextInt();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return 100;
+        }
+    }
+
+    public int getFXVolume(Context ctx){
+        File musicVolumeFile = new File(ctx.getFilesDir().getPath() + "/FXVolume.txt");
+
+        try {
+            Scanner sc = new Scanner(musicVolumeFile);
+            return sc.nextInt();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return 100;
+        }
     }
 
     public boolean saveFinalScore(FinalScore finalScore, Context ctx){

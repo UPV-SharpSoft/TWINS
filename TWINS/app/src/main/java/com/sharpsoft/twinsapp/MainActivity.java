@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         audioInstanceFacade.initializeSound(this);
+        //audioInstanceFacade.setMusicVolume(ConfigSingleton.getInstance().getMusicVolume(this));
+        //audioInstanceFacade.setSoundVolume(ConfigSingleton.getInstance().getFXVolume(this));
 
         Thread t = new Thread(){
             @Override
