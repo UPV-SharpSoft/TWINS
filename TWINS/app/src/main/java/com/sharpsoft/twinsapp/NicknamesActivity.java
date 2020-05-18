@@ -39,6 +39,8 @@ public class NicknamesActivity extends AppCompatActivity {
         colorSeekBar2 = findViewById(R.id.colorSeekBar2);
         player1 = findViewById(R.id.player1);
         player2 = findViewById(R.id.player2);
+        nickname1 = findViewById(R.id.nickname);
+        nickname2 = findViewById(R.id.nickname2);
         startButton = findViewById(R.id.startButton);
 
         colorSeekBar1.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
@@ -60,15 +62,17 @@ public class NicknamesActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(colorPlayer1 == colorPlayer2 || nickname1 == nickname2) {
-                    Intent i = new Intent(NicknamesActivity.this, GameActivity.class);
+                if (colorPlayer1 == colorPlayer2 || nickname1.getText().equals(nickname2.getText())) {
+                    Toast.makeText(getApplicationContext(),"El color o el nickname de los" +
+                            " jugadores no puede ser igual", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent i = new Intent(NicknamesActivity.this, MultiGameActivity.class);
                     i.putExtra("nickname1", nickname1.getText());
                     i.putExtra("nickname2", nickname2.getText());
                     i.putExtra("color1", colorPlayer1);
                     i.putExtra("color2", colorPlayer2);
-                } else {
-                    Toast.makeText(getApplicationContext(),"El color o el nickname de los" +
-                            " jugadores no puede ser igual", Toast.LENGTH_SHORT).show();
+                    startActivity(i);
+                    finish();
                 }
             }
         });

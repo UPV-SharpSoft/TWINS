@@ -10,9 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MultiGameActivity"></activity>
-        <activity android:name=".NicknamesActivity" />
-        <activity android:name=".RankingActivity" />
+        <activity
+            android:name=".NicknamesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RankingActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NewDeckActivity"
             android:screenOrientation="portrait"
@@ -38,6 +41,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ConfigActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MultiGameActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"

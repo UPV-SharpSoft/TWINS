@@ -126,6 +126,7 @@ public class MultiGameActivity extends AppCompatActivity {
 
             @Override
             public void lost() {
+                turnCrono.cancel();
                 CountDownTimer changePlayer = new CountDownTimer(2000, 100) {
 
                     @Override
@@ -138,7 +139,7 @@ public class MultiGameActivity extends AppCompatActivity {
                         turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
                     }
                 };
-                turnCrono.cancel();
+
             }
         });
     }
