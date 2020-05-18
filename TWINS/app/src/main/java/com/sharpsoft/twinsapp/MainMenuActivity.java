@@ -105,6 +105,7 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainMenuActivity.this, NicknamesActivity.class);
+                i.putExtra("level", ConfigSingleton.getInstance().getLevelConfig(MainMenuActivity.this));
                 startActivity(i);
             }
         });

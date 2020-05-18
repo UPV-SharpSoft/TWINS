@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,6 +48,14 @@ public class MultiGameActivity extends AppCompatActivity {
     private int levelNumber;
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
 
+    //UI
+    private int colorPlayer1;
+    private int colorPlayer2;
+    private String nickname1;
+    private String nickname2;
+    private TextView player1TV, player2TV;
+    private ImageView avatar1, avatar2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -58,11 +67,17 @@ public class MultiGameActivity extends AppCompatActivity {
         turnTimer = findViewById(R.id.turnTimer);
         puntuacionTextView = findViewById(R.id.puntuacionTextView);
         puntuacion2TextView = findViewById(R.id.puntuacion2TextView);
+        player1TV = findViewById(R.id.player1TV);
+        player2TV = findViewById(R.id.player2TV);
+        avatar1 = findViewById(R.id.avatar1);
+        avatar2 = findViewById(R.id.avatar2);
+
+
+        receiveData();
 
         int song = ConfigSingleton.getInstance().getSelectedMusic();
         thisContext = this;
-        level = (Level) getIntent().getExtras().get("level");
-        levelNumber = getIntent().getExtras().getInt("levelNumber", -1);
+
 
         thisContext = this;
 
@@ -144,6 +159,34 @@ public class MultiGameActivity extends AppCompatActivity {
         });
     }
 
+    private void receiveData() {
+        level = (Level) getIntent().getExtras().get("level");
+        levelNumber = getIntent().getExtras().getInt("levelNumber", -1);
+        colorPlayer1 = getIntent().getExtras().getInt("color1");
+        colorPlayer2 = getIntent().getExtras().getInt("color2");
+        nickname1 = getIntent().getExtras().getString("nickname1");
+        nickname2 = getIntent().getExtras().getString("nickname2");
+
+
+        player1TV.setTextColor(colorPlayer1);
+        player2TV.setTextColor(colorPlayer2);
+        avatar1.setColorFilter(colorPlayer1);
+        avatar2.setColorFilter(colorPlayer2);
+
+
+    }
+
+    private void sendData(Intent i) {
+        i.putExtra("score1", board.getScore().getScore());
+        //score2
+        i.putExtra("level", level);
+        i.putExtra("color1", colorPlayer1);
+        i.putExtra("color2", colorPlayer2);
+        i.putExtra("nick1", nickname1);
+        i.putExtra("nick2", nickname2);
+
+    }
+
     public void setBoard() {
         View tableroView = ((Board) board).getView(this);
         tableLayout.addView(tableroView);
@@ -159,11 +202,7 @@ public class MultiGameActivity extends AppCompatActivity {
                 audioFacadeInstance.makeSound(Sound.Sounds.correct);
                 if(board.isComplete()){
                     Intent i = new Intent(MultiGameActivity.this, GameOverActivity.class);
-                    i.putExtra("gameOverBool", gameOverBool);
-                    i.putExtra("timeLeft", timeLeft);
-                    i.putExtra("score", board.getScore().getScore());
-                    i.putExtra("totalTime", level.getTotalTime());
-                    i.putExtra("level", level);
+                    sendData(i);
                     ConfigSingleton.getInstance().setLevelsPassed(levelNumber, thisContext);
                     chronometer.cancel();
                     startActivity(i);
@@ -195,7 +234,7 @@ public class MultiGameActivity extends AppCompatActivity {
             public void onFinish() {
                 gameOverBool = true;
                 audioFacadeInstance.stopMusic();
-                Intent i = new Intent(MultiGameActivity.this, GameOverActivity.class);
+                Intent i = new Intent(MultiGameActivity.this, MultiGameOverActivity.class);
                 i.putExtra("gameOverBool", gameOverBool);
                 i.putExtra("score", board.getScore().getScore());
                 i.putExtra("level", level);

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.divyanshu.colorseekbar.ColorSeekBar;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +26,7 @@ public class NicknamesActivity extends AppCompatActivity {
     private EditText nickname1;
     private EditText nickname2;
 
+    Level level;
     private int colorPlayer1;
     private int colorPlayer2;
 
@@ -59,6 +61,10 @@ public class NicknamesActivity extends AppCompatActivity {
             }
         });
 
+        //Receive Level
+        level = (Level) getIntent().getExtras().get("level");
+        level.setTotalTime(Integer.MAX_VALUE);
+
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +77,7 @@ public class NicknamesActivity extends AppCompatActivity {
                     i.putExtra("nickname2", nickname2.getText());
                     i.putExtra("color1", colorPlayer1);
                     i.putExtra("color2", colorPlayer2);
+                    i.putExtra("level", level);
                     startActivity(i);
                     finish();
                 }
