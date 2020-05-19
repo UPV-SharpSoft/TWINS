@@ -21,6 +21,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.RemoveCustomDeckObservable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,14 @@ public class EditDeckActivity extends AppCompatActivity {
         //editTextDeck = findViewById(R.id.editTextDeck);
 
         showList();
+
+        ConfigSingleton instance = ConfigSingleton.getInstance();
+        instance.addObserver(new RemoveCustomDeckObservable() {
+            @Override
+            public void onRemove(String deckName) {
+                showList();
+            }
+        });
 
         //deleteCard();
 
@@ -83,12 +92,12 @@ public class EditDeckActivity extends AppCompatActivity {
 
         Map<String, Bitmap> customDecks =  DeckManagerSingleton.getInstance().getAllDecks(this);
 
-        AdapterEditDeck adapter = new AdapterEditDeck(this, R.layout.item_editor, deck, customDecks);
+        AdapterEditDeck adapter = new AdapterEditDeck(this, R.layout.item_editor, customDecks);
         listView.setAdapter(adapter);
 
     }
 
-    private void deleteCard(){
+    /*private void deleteCard(){
 
         deleteDeckButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,11 +110,11 @@ public class EditDeckActivity extends AppCompatActivity {
                 }catch (Exception e){
                     Toast.makeText(EditDeckActivity.this, "No existe esa baraja personalizada!", Toast.LENGTH_LONG).show();
                 }
-                showList();
+
             }
         });
 
-    }
+    }*/
 
     private List<Deck> getAllDecks(){
         List<Deck> res = new ArrayList<>();

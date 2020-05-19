@@ -17,9 +17,10 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Scanner;
 
-public class ConfigSingleton {
+public class ConfigSingleton extends Observable {
     private static ConfigSingleton instance = new ConfigSingleton();
 
     private DeckFactory.Decks selectedDeck;
@@ -166,6 +167,10 @@ public class ConfigSingleton {
         }
     }
 
+    public Deck getEditDeck(Dimension d, int numCartas, Context ctx, String deckName){
+        return DeckManagerSingleton.getInstance().getDeck(d, deckName, numCartas, ctx);
+    }
+
     public void setSelectedDeck(DeckFactory.Decks decks){
         this.isCustomDeck = false;
         this.selectedDeck = decks;
@@ -183,6 +188,8 @@ public class ConfigSingleton {
             new File(deckPath, s).delete();
         }
         deckPath.delete();
+        setChanged();
+        notifyObservers(deckName);
     }
 
     public void setSelectedMusic(int selectedMusic){

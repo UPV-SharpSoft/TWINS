@@ -54,7 +54,7 @@ public class DeckManagerSingleton {
         return res;
     }
 
-    public Deck getDeck(Dimension d, String deckName, int numCartas,Context ctx){
+    public Deck getDeck(Dimension d, String deckName, int numCartas, Context ctx){
         List<Bitmap> allImages = new ArrayList<>();
         int cont = 0;
         String filePath = ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/" + cont;

@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
@@ -52,6 +53,7 @@ public class NewDeckActivity extends AppCompatActivity {
     private int count = 0;
 
     private ArrayList<Bitmap> newDeckList;
+    private String editedDeckStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,30 @@ public class NewDeckActivity extends AppCompatActivity {
         editTextName = findViewById(R.id.editTextName);
 
         rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotation);
+
+        Bundle data = getIntent().getExtras();
+        if(data != null){
+            editedDeckStr = data.getString("deckName");
+            editTextName.setText(editedDeckStr);
+            ConfigSingleton instance = ConfigSingleton.getInstance();
+            Deck editDeck= instance.getEditDeck(new Dimension(5,5), 12, this, editedDeckStr);
+            List<Bitmap> cards = editDeck.getAllBitmaps();
+
+            for (int i = 0; i < cards.size(); i++){
+                LinearLayout layout = findViewById(R.id.upperLinearLayout);
+                ImageView cardValue = new ImageView(NewDeckActivity.this);
+                cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                cardValue.setPadding(0,0,20,0);
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 600);
+                cardValue.setLayoutParams(layoutParams);
+
+                cardValue.setImageBitmap(cards.get(i));
+                layout.addView(cardValue);
+
+            }
+
+        }
 
         uploadCard();
 

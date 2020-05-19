@@ -1,6 +1,7 @@
 package com.sharpsoft.twinsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,28 +24,26 @@ public class AdapterEditDeck extends BaseAdapter {
 
     private Context context;
     private int layout;
-    private List<Deck> decks;
     private Map<String, Bitmap> customDecks;
     private List<View> views;
     ImageView deleteDeckButton;
     ImageView modifyDeckButton;
 
-    public AdapterEditDeck (Context context , int layout, List<Deck> decks, Map<String, Bitmap> customDecks) {
+    public AdapterEditDeck(Context context, int layout, Map<String, Bitmap> customDecks) {
         this.context = context;
         this.layout = layout;
-        this.decks = decks;
         this.customDecks = customDecks;
         this.views = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return this.decks.size() + this.customDecks.size();
+        return this.customDecks.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.decks.get(position);
+        return this.customDecks.get(position);
     }
 
     @Override
@@ -61,42 +60,41 @@ public class AdapterEditDeck extends BaseAdapter {
         views.add(position, v);
         Log.i("asd", position + "");
 
-        if(position < decks.size()){
-            Deck deck =  decks.get(position);
-            String currentName = decks.get(position).getName();
+        final String name = new ArrayList<String>(customDecks.keySet()).get(position);
 
-            TextView textView = v.findViewById(R.id.textView);
-            textView.setText(currentName);
+        TextView textView = v.findViewById(R.id.textView);
+        textView.setText(name);
 
-            ImageView deckImageView = v.findViewById(R.id.DeckimageView);
-            deckImageView.setImageBitmap(decks.get(position).getReverse());
+        ImageView deckImageView = v.findViewById(R.id.DeckimageView);
+        deckImageView.setImageBitmap(customDecks.get(name));
 
-        }else{
-            String name = new ArrayList<String>(customDecks.keySet()).get(position - decks.size());
+        deleteDeckButton = v.findViewById(R.id.deleteDeck);
+        modifyDeckButton = v.findViewById(R.id.modifyDeck);
+        deleteDeckButton.setVisibility(View.VISIBLE);
+        modifyDeckButton.setVisibility(View.VISIBLE);
 
-            TextView textView = v.findViewById(R.id.textView);
-            textView.setText(name);
-
-            ImageView deckImageView = v.findViewById(R.id.DeckimageView);
-            deckImageView.setImageBitmap(customDecks.get(name));
-
-            deleteDeckButton = v.findViewById(R.id.deleteDeck);
-            modifyDeckButton = v.findViewById(R.id.modifyDeck);
-            deleteDeckButton.setVisibility(View.VISIBLE);
-            modifyDeckButton.setVisibility(View.VISIBLE);
-
-            if(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2,2),1, context).getName().equals(name)){
-                ImageView imageSelected = v.findViewById(R.id.modifyDeck);
-                imageSelected.setVisibility(View.VISIBLE);
-            }
+        if (ConfigSingleton.getInstance().getSelectedDeck(new Dimension(2, 2), 1, context).getName().equals(name)) {
+            ImageView imageSelected = v.findViewById(R.id.modifyDeck);
+            imageSelected.setVisibility(View.VISIBLE);
         }
 
-        /*deleteDeckButton.setOnClickListener(new View.OnClickListener() {
+
+        deleteDeckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ConfigSingleton instance = ConfigSingleton.getInstance();
+                instance.removeCustomDeck(name, context);
             }
-        });*/
+        });
+
+        modifyDeckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, NewDeckActivity.class);
+                i.putExtra("deckName", name);
+                context.startActivity(i);
+            }
+        });
 
         return v;
     }
