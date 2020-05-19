@@ -54,7 +54,18 @@ public class DeckManagerSingleton {
         return res;
     }
 
-    public Deck getDeck(Dimension d, String deckName, int numCartas, Context ctx){
+    public Deck getDeck(Dimension d, String deckName, int numCartas,Context ctx){
+        List<Bitmap> allImages = getAllImages(deckName, ctx);
+        List<Bitmap> cartas = new ArrayList<>();
+        Bitmap reverse = getReverse(deckName, ctx);
+        for(int i = 0; i < d.getTotal()/2; i++){
+            Bitmap img = allImages.get( (i % allImages.size()) % numCartas);
+            cartas.add(img); cartas.add(img);
+        }
+        return new Deck(cartas, reverse, deckName);
+    }
+
+    public List<Bitmap> getAllImages(String deckName, Context ctx){
         List<Bitmap> allImages = new ArrayList<>();
         int cont = 0;
         String filePath = ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/" + cont;
@@ -65,12 +76,10 @@ public class DeckManagerSingleton {
             cont++;
             filePath = ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/" + cont;
         }
-        List<Bitmap> cartas = new ArrayList<>();
-        Bitmap reverse = BitmapFactory.decodeFile(ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/reverse");
-        for(int i = 0; i < d.getTotal()/2; i++){
-            Bitmap img = allImages.get( (i % allImages.size()) % numCartas);
-            cartas.add(img); cartas.add(img);
-        }
-        return new Deck(cartas, reverse, deckName);
+        return allImages;
+    }
+
+    public Bitmap getReverse(String deckName, Context ctx){
+        return BitmapFactory.decodeFile(ctx.getFilesDir().getPath() + "/customDecks/" + deckName + "/reverse");
     }
 }
