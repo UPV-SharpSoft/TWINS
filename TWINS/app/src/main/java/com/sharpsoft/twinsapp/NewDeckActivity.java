@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Layout;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -48,10 +49,12 @@ public class NewDeckActivity extends AppCompatActivity {
     private ImageView nextCard;
     private Button buttonSave;
     private EditText editTextName;
+    private TextView titleTV;
     private Animation rotateAnim;
     private List<Bitmap> selectedDeck;
     private int count = 0;
 
+    Bundle data;
     private ArrayList<Bitmap> newDeckList;
     private String editedDeckStr;
 
@@ -63,37 +66,45 @@ public class NewDeckActivity extends AppCompatActivity {
         buttonLoadImage = findViewById(R.id.buttonLoadImage);
         buttonSave = findViewById(R.id.buttonSave);
         editTextName = findViewById(R.id.editTextName);
+        titleTV = findViewById(R.id.titleTV);
 
         rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotation);
 
-        Bundle data = getIntent().getExtras();
+        data = getIntent().getExtras();
         if(data != null){
-            editedDeckStr = data.getString("deckName");
-            editTextName.setText(editedDeckStr);
-            ConfigSingleton instance = ConfigSingleton.getInstance();
-            Deck editDeck= instance.getEditDeck(new Dimension(5,5), 12, this, editedDeckStr);
-            List<Bitmap> cards = editDeck.getAllBitmaps();
-
-            for (int i = 0; i < cards.size(); i++){
-                LinearLayout layout = findViewById(R.id.upperLinearLayout);
-                ImageView cardValue = new ImageView(NewDeckActivity.this);
-                cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                cardValue.setPadding(0,0,20,0);
-
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 600);
-                cardValue.setLayoutParams(layoutParams);
-
-                cardValue.setImageBitmap(cards.get(i));
-                layout.addView(cardValue);
-
-            }
-
+            modifyDeck();
         }
+        titleTV.setText("Crear baraja");
+        titleTV.setGravity(Gravity.CENTER);
 
         uploadCard();
 
         createDeck();
 
+    }
+
+    private void modifyDeck() {
+        titleTV.setText("Modificar baraja");
+        titleTV.setGravity(Gravity.CENTER);
+        editedDeckStr = data.getString("deckName");
+        editTextName.setText(editedDeckStr);
+        ConfigSingleton instance = ConfigSingleton.getInstance();
+        List<Bitmap> cards = instance.getEditDeck(this, editedDeckStr);
+
+
+        for (int i = 0; i < cards.size(); i++){
+            LinearLayout layout = findViewById(R.id.upperLinearLayout);
+            ImageView cardValue = new ImageView(NewDeckActivity.this);
+            cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            cardValue.setPadding(0,0,20,0);
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 600);
+            cardValue.setLayoutParams(layoutParams);
+
+            cardValue.setImageBitmap(cards.get(i));
+            layout.addView(cardValue);
+
+        }
     }
 
     private void uploadCard() {
@@ -149,7 +160,7 @@ public class NewDeckActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    Intent intent = new Intent(NewDeckActivity.this, MainMenuActivity.class);
+                    Intent intent = new Intent(NewDeckActivity.this, EditDeckActivity.class);
                     startActivity(intent);
                 }
 

@@ -1,6 +1,7 @@
 package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.sharpsoft.twins_clases.logic.Dimension;
@@ -28,6 +29,8 @@ public class ConfigSingleton extends Observable {
     private boolean isCustomDeck;
 
     private int selectedMusic;
+    private ArrayList<Bitmap> listaBitmapsCartas = new ArrayList<Bitmap>() {
+    };
 
     public ConfigSingleton(){
         selectedMusic = R.raw.partida_default;
@@ -167,8 +170,11 @@ public class ConfigSingleton extends Observable {
         }
     }
 
-    public Deck getEditDeck(Dimension d, int numCartas, Context ctx, String deckName){
-        return DeckManagerSingleton.getInstance().getDeck(d, deckName, numCartas, ctx);
+    public List<Bitmap> getEditDeck(Context ctx, String deckName){
+        listaBitmapsCartas.add(DeckManagerSingleton.getInstance().getReverse(deckName, ctx));
+        listaBitmapsCartas.addAll(DeckManagerSingleton.getInstance().getAllImages(deckName, ctx));
+        return listaBitmapsCartas;
+
     }
 
     public void setSelectedDeck(DeckFactory.Decks decks){
