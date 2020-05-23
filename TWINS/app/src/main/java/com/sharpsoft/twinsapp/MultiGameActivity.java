@@ -133,11 +133,22 @@ public class MultiGameActivity extends AppCompatActivity {
             public void lost() {
                 if(player1Turn) {
                     player1.getScore().missedTurn();
-                    puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+
+                        }
+                    });
                     player1Turn=false;
                 }else{
                     player2.getScore().missedTurn();
-                    puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                        }
+                    });
                     player1Turn=true;
                 }
 
@@ -187,12 +198,24 @@ public class MultiGameActivity extends AppCompatActivity {
                 audioFacadeInstance.makeSound(Sound.Sounds.correct);
                 if(player1Turn) {
                     player1.getScore().correct();
-                    puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                        }
+                    });
+
                     player1Turn=false;
                     turnCrono.cancel();
                 }else{
                     player2.getScore().correct();
-                    puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                        }
+                    });
+
                     player1Turn=true;
                     turnCrono.cancel();
                 }
@@ -210,11 +233,23 @@ public class MultiGameActivity extends AppCompatActivity {
             public void onFailure() {
                 if(player1Turn) {
                     player1.getScore().fail();
-                    puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                        }
+                    });
+
                     player1Turn=false;
                 }else{
                     player2.getScore().fail();
-                    puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                        }
+                    });
+
                     player1Turn=true;
                 }
                 audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
