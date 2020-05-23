@@ -125,35 +125,11 @@ public class MultiGameActivity extends AppCompatActivity {
 
             @Override
             public void onEnd() {
-                CountDownTimer changePlayer = new CountDownTimer(2000, 100) {
 
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        turnTimer.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
-                    }
-                };
             }
 
             @Override
             public void lost() {
-                turnCrono.cancel();
-                CountDownTimer changePlayer = new CountDownTimer(2000, 100) {
-
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        turnTimer.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
-                    }
-                };
 
             }
         });
