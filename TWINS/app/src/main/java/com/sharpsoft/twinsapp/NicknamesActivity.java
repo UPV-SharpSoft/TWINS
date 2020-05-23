@@ -3,6 +3,8 @@ package com.sharpsoft.twinsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.divyanshu.colorseekbar.ColorSeekBar;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -77,10 +80,15 @@ public class NicknamesActivity extends AppCompatActivity {
                                 " no puede estar vacío", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent i = new Intent(NicknamesActivity.this, MultiGameActivity.class);
-                        i.putExtra("nickname1", nickname1.getText());
-                        i.putExtra("nickname2", nickname2.getText());
-                        i.putExtra("color1", colorPlayer1);
-                        i.putExtra("color2", colorPlayer2);
+                        Player player1 = new Player(colorPlayer1, nickname1.toString());
+                        Player player2 = new Player(colorPlayer2, nickname2.toString());
+                        try{
+                            i.putExtra("player1", (Parcelable) player1);
+                            i.putExtra("player2", (Parcelable) player2);
+                        }catch(Exception e){
+                            Log.i("casting", "The cast to Parcelable wasn't succesful.");
+                        }
+
                         i.putExtra("level", level);
                         startActivity(i);
                         finish();

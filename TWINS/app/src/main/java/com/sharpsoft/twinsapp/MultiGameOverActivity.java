@@ -13,6 +13,7 @@ import com.sharpsoft.twins_clases.logic.FinalScore;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
 import java.util.Calendar;
@@ -25,6 +26,8 @@ public class MultiGameOverActivity extends AppCompatActivity {
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private Level level;
 
+    private Player player1;
+    private Player player2;
     private int colorPlayer1;
     private int colorPlayer2;
     private String nickname1;
@@ -71,10 +74,12 @@ public class MultiGameOverActivity extends AppCompatActivity {
         score1 = data.getInt("score1");
         score2 = data.getInt("score2");
         level = (Level) data.get("level");
-        colorPlayer1 = getIntent().getExtras().getInt("color1");
-        colorPlayer2 = getIntent().getExtras().getInt("color2");
-        nickname1 = getIntent().getExtras().getString("nickname1");
-        nickname2 = getIntent().getExtras().getString("nickname2");
+        player1 = (Player) getIntent().getExtras().get("player1");
+        player2 = (Player) getIntent().getExtras().get("player2");
+        colorPlayer1 = player1.getColor();
+        colorPlayer2 = player2.getColor();
+        nickname1 = player1.getNickname();
+        nickname2 = player2.getNickname();
 
 
 

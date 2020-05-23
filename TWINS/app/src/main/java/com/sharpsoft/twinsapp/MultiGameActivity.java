@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -23,6 +24,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
@@ -47,6 +49,8 @@ public class MultiGameActivity extends AppCompatActivity {
     private Level level;
     private int levelNumber;
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
+    private Player player1;
+    private Player player2;
 
     //UI
     private int colorPlayer1;
@@ -55,6 +59,7 @@ public class MultiGameActivity extends AppCompatActivity {
     private String nickname2;
     private TextView player1TV, player2TV;
     private ImageView avatar1, avatar2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,11 +143,12 @@ public class MultiGameActivity extends AppCompatActivity {
     private void receiveData() {
         level = (Level) getIntent().getExtras().get("level");
         levelNumber = getIntent().getExtras().getInt("levelNumber", -1);
-        colorPlayer1 = getIntent().getExtras().getInt("color1");
-        colorPlayer2 = getIntent().getExtras().getInt("color2");
-        nickname1 = getIntent().getExtras().getString("nickname1");
-        nickname2 = getIntent().getExtras().getString("nickname2");
-
+        player1 = (Player) getIntent().getExtras().get("player1");
+        player2 = (Player) getIntent().getExtras().get("player2");
+        colorPlayer1 = player1.getColor();
+        colorPlayer2 = player2.getColor();
+        nickname1 = player1.getNickname();
+        nickname2 = player2.getNickname();
 
         player1TV.setTextColor(colorPlayer1);
         player2TV.setTextColor(colorPlayer2);
@@ -156,11 +162,8 @@ public class MultiGameActivity extends AppCompatActivity {
         i.putExtra("score1", board.getScore().getScore());
         //score2
         i.putExtra("level", level);
-        i.putExtra("color1", colorPlayer1);
-        i.putExtra("color2", colorPlayer2);
-        i.putExtra("nick1", nickname1);
-        i.putExtra("nick2", nickname2);
-
+        i.putExtra("player1", (Parcelable) player1);
+        i.putExtra("player2", (Parcelable) player2);
     }
 
     public void setBoard() {
