@@ -7,6 +7,7 @@ public class Turn extends Observable {
     private Score score;
     private int duration;
     private Board board;
+    private Player player;
     private Thread thread;
 
     private enum type{startTurn, endTurn, lostTurn}
@@ -30,10 +31,11 @@ public class Turn extends Observable {
         notifyObservers(type.lostTurn);
     }
 
-    public Turn(Score score, int duration, Board board){
+    public Turn(Score score, int duration, Board board, Player player){
         this.score = score;
         this.duration = duration;
         this.board = board;
+        this.player = player;
     }
 
     public void setScore(Score score){
