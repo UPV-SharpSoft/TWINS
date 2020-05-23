@@ -2,7 +2,9 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import com.sharpsoft.twins_clases.logic.Turn;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private int color;
     private String nickname;
     private Turn turno;

@@ -102,6 +102,7 @@ public class LevelsActivity extends AppCompatActivity {
                 levels[i].setClickable(true);
             } else {
                 levels[i].setImageAlpha(150);
+                levels[i].setImageBitmap(getBitmapFromAsset("Levels/level" + (i+1) + "blocked.png", this));
                 levels[i].setClickable(false);
             }
         }
