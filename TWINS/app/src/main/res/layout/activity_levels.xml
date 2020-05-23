@@ -7,83 +7,102 @@
     android:background="#FFFFFF"
     tools:context=".LevelsActivity">
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="413dp"
-        android:layout_height="575dp"
-        android:fadingEdge="horizontal"
-        android:scrollbars="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="412dp"
+        android:layout_height="645dp"
+        android:layout_marginTop="85dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingTop="30dp"
-            android:paddingBottom="30dp">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/level1"
-                android:layout_width="275dp"
-                android:layout_height="515dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="30dp"
-                android:layout_weight="1"
+                android:layout_width="130dp"
+                android:layout_height="176dp"
                 android:clickable="false"
+                android:paddingLeft="7.5dp"
+                android:paddingTop="7.5dp"
+                android:paddingRight="7.5dp"
+                android:paddingBottom="7.5dp"
                 app:srcCompat="@drawable/level1notpassed" />
 
             <ImageView
                 android:id="@+id/level2"
-                android:layout_width="275dp"
-                android:layout_height="515dp"
-                android:layout_marginRight="30dp"
-                android:layout_weight="1"
+                android:layout_width="130dp"
+                android:layout_height="176dp"
+                android:paddingLeft="7.5dp"
+                android:paddingTop="7.5dp"
+                android:paddingRight="7.5dp"
+                android:paddingBottom="7.5dp"
                 app:srcCompat="@drawable/level2notpassed" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/level3"
-                android:layout_width="275dp"
-                android:layout_height="515dp"
-                android:layout_marginRight="30dp"
-                android:layout_weight="1"
+                android:layout_width="130dp"
+                android:layout_height="176dp"
+                android:paddingLeft="7.5dp"
+                android:paddingTop="7.5dp"
+                android:paddingRight="7.5dp"
+                android:paddingBottom="7.5dp"
                 app:srcCompat="@drawable/level3notpassed" />
 
             <ImageView
                 android:id="@+id/level4"
-                android:layout_width="275dp"
-                android:layout_height="515dp"
-                android:layout_marginRight="30dp"
-                android:layout_weight="1"
+                android:layout_width="130dp"
+                android:layout_height="176dp"
+                android:paddingLeft="7.5dp"
+                android:paddingTop="7.5dp"
+                android:paddingRight="7.5dp"
+                android:paddingBottom="7.5dp"
                 app:srcCompat="@drawable/level4notpassed" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/level5"
-                android:layout_width="275dp"
-                android:layout_height="515dp"
-                android:layout_marginRight="15dp"
-                android:layout_weight="1"
+                android:layout_width="130dp"
+                android:layout_height="176dp"
+                android:paddingLeft="7.5dp"
+                android:paddingTop="7.5dp"
+                android:paddingRight="7.5dp"
+                android:paddingBottom="7.5dp"
                 app:srcCompat="@drawable/level5notpassed" />
+        </TableRow>
 
-        </LinearLayout>
-    </HorizontalScrollView>
+    </TableLayout>
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:layout_marginBottom="1dp"
         android:fontFamily="@font/montserrat"
         android:text="¿Podrás pasártelos todos?"
         android:textColor="#288DE4"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

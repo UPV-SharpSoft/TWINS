@@ -86,11 +86,14 @@ public class NicknamesActivity extends AppCompatActivity {
                                 " no puede estar vacío", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent i = new Intent(NicknamesActivity.this, MultiGameActivity.class);
-                        Player player1 = new Player(colorPlayer1, nickname1.getText().toString());
-                        Player player2 = new Player(colorPlayer2, nickname2.getText().toString());
-                        i.putExtra("player1", player1);
-                        i.putExtra("player2", player2);
-
+                        Player player1 = new Player(colorPlayer1, nickname1.toString());
+                        Player player2 = new Player(colorPlayer2, nickname2.toString());
+                        try{
+                            i.putExtra("player1", player1);
+                            i.putExtra("player2", player2);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
 
                         i.putExtra("level", level);
                         startActivity(i);
