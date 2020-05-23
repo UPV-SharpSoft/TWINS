@@ -2,7 +2,7 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 public class Player {
     private int color;
-    privString nickname;
+    private String nickname;
 
     public String getNickname() {
         return nickname;
