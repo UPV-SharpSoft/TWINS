@@ -29,6 +29,7 @@ public class Turn extends Observable {
         lastFlipCard.turn();
         setChanged();
         notifyObservers(type.lostTurn);
+
     }
 
     public Turn(Score score, int duration, Board board, Player player){

@@ -115,6 +115,7 @@ public class GameActivity extends AppCompatActivity {
             public void onEnd() {
                 turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
                 turnCrono.cancel();
+
             }
 
             @Override
