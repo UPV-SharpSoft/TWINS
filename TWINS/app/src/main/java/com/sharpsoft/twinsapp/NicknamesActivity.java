@@ -51,6 +51,9 @@ public class NicknamesActivity extends AppCompatActivity {
         nickname2 = findViewById(R.id.nickname2);
         startButton = findViewById(R.id.startButton);
 
+        colorPlayer1 = -5687754;
+        colorPlayer2 = -12616451;
+
         colorSeekBar1.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
             public void onColorChangeListener(int i) {
@@ -83,14 +86,11 @@ public class NicknamesActivity extends AppCompatActivity {
                                 " no puede estar vacío", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent i = new Intent(NicknamesActivity.this, MultiGameActivity.class);
-                        Player player1 = new Player(colorPlayer1, nickname1.toString());
-                        Player player2 = new Player(colorPlayer2, nickname2.toString());
-                        try{
-                            i.putExtra("player1", player1);
-                            i.putExtra("player2", player2);
-                        }catch(Exception e){
-                            Log.i("casting", "The cast to Parcelable wasn't succesful.");
-                        }
+                        Player player1 = new Player(colorPlayer1, nickname1.getText().toString());
+                        Player player2 = new Player(colorPlayer2, nickname2.getText().toString());
+                        i.putExtra("player1", player1);
+                        i.putExtra("player2", player2);
+
 
                         i.putExtra("level", level);
                         startActivity(i);

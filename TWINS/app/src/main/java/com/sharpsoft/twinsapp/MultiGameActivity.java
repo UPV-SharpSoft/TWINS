@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -47,7 +48,7 @@ public class MultiGameActivity extends AppCompatActivity {
     private Player player1;
     private Player player2;
     private int turnCounter;
-    private boolean player1Turn;
+    private boolean player1Turn = true;
 
     //UI
     private int colorPlayer1;
@@ -126,7 +127,6 @@ public class MultiGameActivity extends AppCompatActivity {
 
             @Override
             public void onEnd() {
-
             }
 
             @Override
@@ -134,9 +134,11 @@ public class MultiGameActivity extends AppCompatActivity {
                 if(player1Turn) {
                     player1.getScore().missedTurn();
                     puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                    player1Turn=false;
                 }else{
                     player2.getScore().missedTurn();
                     puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                    player1Turn=true;
                 }
 
             }
@@ -152,9 +154,9 @@ public class MultiGameActivity extends AppCompatActivity {
         colorPlayer2 = player2.getColor();
         nickname1 = player1.getNickname();
         nickname2 = player2.getNickname();
-
-        player1TV.setText(player1.getNickname());
-        player2TV.setText(player2.getNickname());
+        Log.i("nick", ""+nickname1+nickname2);
+        player1TV.setText(String.valueOf(nickname1));
+        player2TV.setText(String.valueOf(nickname2));
         player1TV.setTextColor(colorPlayer1);
         player2TV.setTextColor(colorPlayer2);
         avatar1.setColorFilter(colorPlayer1);
@@ -186,9 +188,13 @@ public class MultiGameActivity extends AppCompatActivity {
                 if(player1Turn) {
                     player1.getScore().correct();
                     puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                    player1Turn=false;
+                    turnCrono.cancel();
                 }else{
                     player2.getScore().correct();
                     puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                    player1Turn=true;
+                    turnCrono.cancel();
                 }
                 if(board.isComplete()){
                     Intent i = new Intent(MultiGameActivity.this, GameOverActivity.class);
@@ -205,9 +211,11 @@ public class MultiGameActivity extends AppCompatActivity {
                 if(player1Turn) {
                     player1.getScore().fail();
                     puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                    player1Turn=false;
                 }else{
                     player2.getScore().fail();
                     puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                    player1Turn=true;
                 }
                 audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
             }
