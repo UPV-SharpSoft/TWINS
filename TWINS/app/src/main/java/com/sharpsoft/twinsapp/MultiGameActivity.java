@@ -220,7 +220,7 @@ public class MultiGameActivity extends AppCompatActivity {
                     turnCrono.cancel();
                 }
                 if(board.isComplete()){
-                    Intent i = new Intent(MultiGameActivity.this, GameOverActivity.class);
+                    Intent i = new Intent(MultiGameActivity.this, MultiGameOverActivity.class);
                     sendData(i);
                     ConfigSingleton.getInstance().setLevelsPassed(levelNumber, thisContext);
                     chronometer.cancel();
@@ -323,5 +323,10 @@ public class MultiGameActivity extends AppCompatActivity {
     protected void onDestroy(){
         super.onDestroy();
         chronometer.cancel();
+    }
+
+    @Override
+    public void onBackPressed() {
+        
     }
 }

@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MultiGameOverActivity"></activity>
+        <activity
+            android:name=".MultiGameOverActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".NicknamesActivity"
             android:screenOrientation="portrait" />
