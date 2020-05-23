@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,7 +17,6 @@ import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twins_clases.logic.Turn;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardByCard;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardBySet;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
@@ -29,8 +27,6 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
 import java.text.DecimalFormat;
-
-import android.os.Bundle;
 
 public class MultiGameActivity extends AppCompatActivity {
 
@@ -51,6 +47,8 @@ public class MultiGameActivity extends AppCompatActivity {
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
     private Player player1;
     private Player player2;
+    private int turnCounter;
+    private boolean player1Turn = true;
 
     //UI
     private int colorPlayer1;
@@ -59,7 +57,6 @@ public class MultiGameActivity extends AppCompatActivity {
     private String nickname2;
     private TextView player1TV, player2TV;
     private ImageView avatar1, avatar2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +87,7 @@ public class MultiGameActivity extends AppCompatActivity {
         if(level.getType() == Level.Type.standard){
             board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
         }else if(level.getType() == Level.Type.byCard){
-            board = new BoardByCard(level.getDimension(), level.getTimePerTurn(), deck);
+            board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
         }else if(level.getType() == Level.Type.bySet){
             DeckFactory.Decks decks = deck.getName().equals("Minecraft")? DeckFactory.Decks.fruits : DeckFactory.Decks.fruits;
             Deck deck2 = DeckFactory.getDeck(decks, level.getDimension(), level.getDimension().getTotal()/2, this);
@@ -130,11 +127,30 @@ public class MultiGameActivity extends AppCompatActivity {
 
             @Override
             public void onEnd() {
-
             }
 
             @Override
             public void lost() {
+                if(player1Turn) {
+                    player1.getScore().missedTurn();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+
+                        }
+                    });
+                    player1Turn=false;
+                }else{
+                    player2.getScore().missedTurn();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                        }
+                    });
+                    player1Turn=true;
+                }
 
             }
         });
@@ -149,7 +165,9 @@ public class MultiGameActivity extends AppCompatActivity {
         colorPlayer2 = player2.getColor();
         nickname1 = player1.getNickname();
         nickname2 = player2.getNickname();
-
+        Log.i("nick", ""+nickname1+nickname2);
+        player1TV.setText(String.valueOf(nickname1));
+        player2TV.setText(String.valueOf(nickname2));
         player1TV.setTextColor(colorPlayer1);
         player2TV.setTextColor(colorPlayer2);
         avatar1.setColorFilter(colorPlayer1);
@@ -160,10 +178,9 @@ public class MultiGameActivity extends AppCompatActivity {
 
     private void sendData(Intent i) {
         i.putExtra("score1", board.getScore().getScore());
-        //score2
         i.putExtra("level", level);
-        i.putExtra("player1", (Parcelable) player1);
-        i.putExtra("player2", (Parcelable) player2);
+        i.putExtra("player1", player1);
+        i.putExtra("player2", player2);
     }
 
     public void setBoard() {
@@ -179,6 +196,29 @@ public class MultiGameActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 audioFacadeInstance.makeSound(Sound.Sounds.correct);
+                if(player1Turn) {
+                    player1.getScore().correct();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                        }
+                    });
+
+                    player1Turn=false;
+                    turnCrono.cancel();
+                }else{
+                    player2.getScore().correct();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                        }
+                    });
+
+                    player1Turn=true;
+                    turnCrono.cancel();
+                }
                 if(board.isComplete()){
                     Intent i = new Intent(MultiGameActivity.this, GameOverActivity.class);
                     sendData(i);
@@ -191,13 +231,33 @@ public class MultiGameActivity extends AppCompatActivity {
 
             @Override
             public void onFailure() {
+                if(player1Turn) {
+                    player1.getScore().fail();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                        }
+                    });
+
+                    player1Turn=false;
+                }else{
+                    player2.getScore().fail();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                        }
+                    });
+
+                    player1Turn=true;
+                }
                 audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
             }
         });
 
-        TextView puntuacionTextView = findViewById(R.id.puntuacionTextView);
-        board.setScore(new Score(puntuacionTextView));
     }
+
 
     private void instanceChronometer(long time){
         chronometer = new CountDownTimer(time, 100) {

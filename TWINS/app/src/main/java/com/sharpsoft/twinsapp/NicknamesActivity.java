@@ -15,8 +15,11 @@ import com.divyanshu.colorseekbar.ColorSeekBar;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.Serializable;
 
 public class NicknamesActivity extends AppCompatActivity {
 
@@ -47,6 +50,9 @@ public class NicknamesActivity extends AppCompatActivity {
         nickname1 = findViewById(R.id.nickname);
         nickname2 = findViewById(R.id.nickname2);
         startButton = findViewById(R.id.startButton);
+
+        colorPlayer1 = -5687754;
+        colorPlayer2 = -12616451;
 
         colorSeekBar1.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
