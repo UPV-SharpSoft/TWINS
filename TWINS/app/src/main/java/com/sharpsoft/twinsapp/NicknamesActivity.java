@@ -15,8 +15,11 @@ import com.divyanshu.colorseekbar.ColorSeekBar;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.Serializable;
 
 public class NicknamesActivity extends AppCompatActivity {
 
@@ -83,8 +86,8 @@ public class NicknamesActivity extends AppCompatActivity {
                         Player player1 = new Player(colorPlayer1, nickname1.toString());
                         Player player2 = new Player(colorPlayer2, nickname2.toString());
                         try{
-                            i.putExtra("player1", (Parcelable) player1);
-                            i.putExtra("player2", (Parcelable) player2);
+                            i.putExtra("player1", player1);
+                            i.putExtra("player2", player2);
                         }catch(Exception e){
                             Log.i("casting", "The cast to Parcelable wasn't succesful.");
                         }
