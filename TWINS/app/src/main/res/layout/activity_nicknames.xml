@@ -13,7 +13,7 @@
         android:backgroundTint="#000000"
         android:ems="10"
         android:fontFamily="@font/montserrat"
-        android:hint="Introduce el nick del jugador 1"
+        android:hint="Introduce el nick del jugador 2"
 
         android:inputType="textPersonName"
         android:textAlignment="center"

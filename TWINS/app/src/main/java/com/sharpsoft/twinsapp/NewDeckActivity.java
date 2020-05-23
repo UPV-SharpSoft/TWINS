@@ -105,6 +105,8 @@ public class NewDeckActivity extends AppCompatActivity {
             layout.addView(cardValue);
 
         }
+        if(data.getBoolean("modificado"))
+        instance.removeCustomDeck(editedDeckStr, this);
     }
 
     private void uploadCard() {

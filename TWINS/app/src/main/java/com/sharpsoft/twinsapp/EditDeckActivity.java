@@ -75,6 +75,7 @@ public class EditDeckActivity extends AppCompatActivity {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         Intent intent = new Intent(EditDeckActivity.this, NewDeckActivity.class);
+                        intent.putExtra("modificado", false);
                         startActivity(intent);
                     }
 
