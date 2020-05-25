@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class ConfigActivity extends AppCompatActivity{
     private Spinner musicPackSpinner;
     private SeekBar FXSeekbar;
     private SeekBar musicSeekbar;
+    private Spinner deckSpinner;
 
     private Level level;
 
@@ -65,6 +68,7 @@ public class ConfigActivity extends AppCompatActivity{
         musicPackSpinner = findViewById(R.id.musicSpinner);
         FXSeekbar = findViewById(R.id.FXSeekbar);
         musicSeekbar = findViewById(R.id.musicSeekbar);
+        deckSpinner = findViewById(R.id.deckSpinner);
 
         level = ConfigSingleton.getInstance().getLevelConfig(this);
 
@@ -79,10 +83,10 @@ public class ConfigActivity extends AppCompatActivity{
     }
 
     private void setValues(){
-        totalTimeSeekbar.setProgress((level.getTotalTime()-1)/1000);
-        timePerTurnSeekbar.setProgress((level.getTimePerTurn()-1)/1000);
-        timeStartSeekbar.setProgress((level.getFlipStartTime()-1)/1000);
-        failureSeekbar.setProgress((level.getFlipTime()-1)/1000);
+        totalTimeSeekbar.setProgress(level.getTotalTime()/1000);
+        timePerTurnSeekbar.setProgress(level.getTimePerTurn()/1000);
+        timeStartSeekbar.setProgress(level.getFlipStartTime()/1000);
+        failureSeekbar.setProgress(level.getFlipTime()/1000);
     }
 
     private void setSoundValues(){
@@ -226,11 +230,19 @@ public class ConfigActivity extends AppCompatActivity{
             }
         });
 
+        List<String> decks = new ArrayList<>();
+        for(DeckFactory.Decks deck : DeckFactory.Decks.values()){
+            decks.add(deck.toString());
+        }
+        decks.addAll(DeckManagerSingleton.getInstance().getAllDecks(this).keySet());
+        ArrayAdapter decksAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, decks);
+        deckSpinner.setAdapter(decksAdapter);
+
     }
 
     private void initSeekBarTextView(SeekBar seekBar, final TextView textView, int max, int increment){
         seekBar.setMax(max);
-        seekBar.incrementProgressBy(increment);
+        //seekBar.incrementProgressBy(increment);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -265,6 +277,13 @@ public class ConfigActivity extends AppCompatActivity{
         level.setType(Level.Type.values()[levelTypeSpinner.getSelectedItemPosition()]);
 
         ConfigSingleton.getInstance().setLevelConfig(level, this);
+
+        if(deckSpinner.getSelectedItemPosition() < DeckFactory.Decks.values().length){
+            ConfigSingleton.getInstance().setSelectedDeck(DeckFactory.Decks.values()[deckSpinner.getSelectedItemPosition()]);
+        }else{
+            String selectedDeck = (String) deckSpinner.getSelectedItem();
+            ConfigSingleton.getInstance().setSelectedDeck(selectedDeck);
+        }
 
         super.onBackPressed();
     }
