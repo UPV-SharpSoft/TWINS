@@ -19,8 +19,8 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 import java.util.Calendar;
 
 public class MultiGameOverActivity extends AppCompatActivity {
-    private TextView winnerTV, winnerScoreTV, loserScoreTV;
-    private ImageView avatarWinner, avatarLoser;
+    private TextView winnerTV, winnerScoreTV;
+    private ImageView avatarWinner;
     private int score1, score2;
     private Button mainMenuButton, restartGameButton;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
@@ -56,14 +56,10 @@ public class MultiGameOverActivity extends AppCompatActivity {
         if(score1 > score2) {
             winnerScoreTV.setText("Puntuación:  " + score1);
             avatarWinner.setColorFilter(colorPlayer1);
-            loserScoreTV.setText("Puntuación:  " + score2);
-            avatarLoser.setColorFilter(colorPlayer2);
             winnerTV.setText("Ha ganado " + nickname1);
         } else{
             winnerScoreTV.setText("Puntuación: " + score2);
             avatarWinner.setColorFilter(colorPlayer1);
-            loserScoreTV.setText("Puntuación:  " + score1);
-            avatarLoser.setColorFilter(colorPlayer1);
             winnerTV.setText("Ha ganado " + nickname2);
         }
 
@@ -71,11 +67,11 @@ public class MultiGameOverActivity extends AppCompatActivity {
 
     private void receiveData(){
         Bundle data = getIntent().getExtras();
-        score1 = data.getInt("score1");
-        score2 = data.getInt("score2");
         level = (Level) data.get("level");
         player1 = (Player) getIntent().getExtras().get("player1");
         player2 = (Player) getIntent().getExtras().get("player2");
+        score1 = player1.getScore().getScore();
+        score2 = player2.getScore().getScore();
         colorPlayer1 = player1.getColor();
         colorPlayer2 = player2.getColor();
         nickname1 = player1.getNickname();
@@ -108,6 +104,8 @@ public class MultiGameOverActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MultiGameOverActivity.this, MultiGameActivity.class);
                 i.putExtra("level", level);
+                i.putExtra("player1", player1);
+                i.putExtra("player2", player2);
                 startActivity(i);
                 finish();
             }

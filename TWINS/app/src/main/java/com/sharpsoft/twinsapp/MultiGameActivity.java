@@ -232,7 +232,6 @@ public class MultiGameActivity extends AppCompatActivity {
                 if(board.isComplete()){
                     Intent i = new Intent(MultiGameActivity.this, MultiGameOverActivity.class);
                     sendData(i);
-                    ConfigSingleton.getInstance().setLevelsPassed(levelNumber, MultiGameActivity.this);
                     startActivity(i);
                     finish();
                 }
