@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.251"
+        app:layout_constraintVertical_bias="0.406"
         app:srcCompat="@drawable/winner" />
 
     <TextView
@@ -64,29 +64,16 @@
 
     <TextView
         android:id="@+id/scoreWinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_width="98dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
         android:text="Puntuación: "
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
+        app:layout_constraintHorizontal_bias="0.725"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatarWinner" />
-
-    <TextView
-        android:id="@+id/scoreLoser"
-        android:layout_width="75dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Puntuación"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.651"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatarLoser" />
 
     <ImageView
         android:id="@+id/avatarWinner"
@@ -94,32 +81,10 @@
         android:layout_height="116dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.701"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintVertical_bias="0.404"
         app:srcCompat="@drawable/avatar" />
 
-    <ImageView
-        android:id="@+id/avatarLoser"
-        android:layout_width="58dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="400dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.62"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="49dp"
-        android:layout_height="49dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.361"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612"
-        app:srcCompat="@drawable/silver" />
 </androidx.constraintlayout.widget.ConstraintLayout>
