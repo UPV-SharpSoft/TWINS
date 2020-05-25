@@ -3,8 +3,6 @@ package com.sharpsoft.twinsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,14 +10,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.divyanshu.colorseekbar.ColorSeekBar;
-import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.Serializable;
 
 public class NicknamesActivity extends AppCompatActivity {
 
@@ -29,8 +23,8 @@ public class NicknamesActivity extends AppCompatActivity {
     private ImageView player1;
     private ImageView player2;
     private Button startButton;
-    private EditText nickname1;
-    private EditText nickname2;
+    private EditText nickname1TV, nickname2TV;
+    private String nickname1, nickname2;
 
     Level level;
     private int colorPlayer1;
@@ -47,13 +41,15 @@ public class NicknamesActivity extends AppCompatActivity {
         colorSeekBar2 = findViewById(R.id.colorSeekBar2);
         player1 = findViewById(R.id.player1);
         player2 = findViewById(R.id.player2);
-        nickname1 = findViewById(R.id.nickname);
-        nickname2 = findViewById(R.id.nickname2);
+        nickname1TV = findViewById(R.id.nickname);
+        nickname2TV = findViewById(R.id.nickname2);
         startButton = findViewById(R.id.startButton);
 
         colorPlayer1 = -5687754;
         colorPlayer2 = -12616451;
 
+        nickname1TV.setText("");
+        nickname2TV.setText("");
 
         colorSeekBar1.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
@@ -78,21 +74,20 @@ public class NicknamesActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (colorPlayer1 == colorPlayer2 || nickname1.getText().equals(nickname2.getText())) {
-                    Toast.makeText(getApplicationContext(),"El color o el nickname de los" +
+
+                nickname1 = nickname1TV.getText().toString();
+                nickname2 = nickname2TV.getText().toString();
+
+                if (nickname1.equals(nickname2)) {
+                    Toast.makeText(getApplicationContext(),"El nickname de los" +
                             " jugadores no puede ser igual", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (nickname1.getText().equals("") || nickname2.getText().equals("")) {
+                    if (nickname1.equals("") || nickname2.equals("")) {
                         Toast.makeText(getApplicationContext(),"El campo de nombre" +
                                 " no puede estar vacío", Toast.LENGTH_SHORT).show();
                     } else {
-                        if(nickname1.equals("")){
-                            Player player1 = new Player(colorPlayer1, "Jugador 1");
-                        }else if(nickname2.toString().startsWith("android")){
-                            Player player2 = new Player(colorPlayer2, "Jugador 2");
-                        }
-                        Player player1 = new Player(colorPlayer1, nickname1.toString());
-                        Player player2 = new Player(colorPlayer2, nickname2.toString());
+                        Player player1 = new Player(colorPlayer1, nickname1);
+                        Player player2 = new Player(colorPlayer2, nickname2);
                         Intent i = new Intent(NicknamesActivity.this, MultiGameActivity.class);
                         try{
                             i.putExtra("player1", player1);
