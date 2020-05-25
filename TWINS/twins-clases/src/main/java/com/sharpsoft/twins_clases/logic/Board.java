@@ -11,6 +11,7 @@ public abstract class Board extends Observable {
     protected Score score;
     protected Turn turn;
     private Integer tiempoVolteo;
+    boolean firstTime = true;
 
     public Board(Dimension dimension, int secondsPerTurn){
         this.dimension = dimension;
@@ -83,7 +84,7 @@ public abstract class Board extends Observable {
         Card c = cards[x][y];
         if(c.isFacedUp()) return; //salir si la carta ya ha sido girada
         if(isWaiting) return;
-        if(cardsUpside.size() == 0) turn.startTurn();
+        if(firstTime) turn.startTurn(); firstTime = false;
         c.turn();
 
         setChanged();
