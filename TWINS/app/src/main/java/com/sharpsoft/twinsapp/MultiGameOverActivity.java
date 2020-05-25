@@ -40,11 +40,11 @@ public class MultiGameOverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gameovermultiplayer);
 
 
-        avatarLoser = findViewById(R.id.avatarLoser);
+
         avatarWinner = findViewById(R.id.avatarWinner);
         winnerTV = findViewById(R.id.winnerTextView);
         winnerScoreTV = findViewById(R.id.scoreWinner);
-        loserScoreTV = findViewById(R.id.scoreLoser);
+
         mainMenuButton = findViewById(R.id.mainMenuButton);
         restartGameButton = findViewById(R.id.restartGameButton);
 
