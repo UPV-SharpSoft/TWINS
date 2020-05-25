@@ -91,7 +91,7 @@ public class AdapterEditDeck extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, NewDeckActivity.class);
-                i.putExtra("modificado", true);
+                i.putExtra("modificar", true);
                 i.putExtra("deckName", name);
                 context.startActivity(i);
             }

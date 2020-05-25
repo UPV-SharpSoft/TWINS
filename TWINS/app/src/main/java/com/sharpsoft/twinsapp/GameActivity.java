@@ -99,23 +99,18 @@ public class GameActivity extends AppCompatActivity {
         board.getTurn().addObserver(new Turn.TurnObserver() {
             @Override
             public void onStart() {
-                runOnUiThread(new Runnable(){
+                if(turnCrono != null) turnCrono.cancel();
+                turnCrono = new CountDownTimer(board.getTurn().getDuration(), 100){
                     @Override
-                    public void run() {
-                        if(turnCrono != null) turnCrono.cancel();
-                        turnCrono = new CountDownTimer(board.getTurn().getDuration(), 100){
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                                turnTimer.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
-                            }
-                        }.start();
+                    public void onTick(long millisUntilFinished) {
+                        turnTimer.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
                     }
-                });
+
+                    @Override
+                    public void onFinish() {
+                        turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
+                    }
+                }.start();
             }
 
             @Override

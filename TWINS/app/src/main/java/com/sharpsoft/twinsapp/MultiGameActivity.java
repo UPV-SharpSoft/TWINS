@@ -31,12 +31,14 @@ import java.text.DecimalFormat;
 public class MultiGameActivity extends AppCompatActivity {
 
     private TextView turnTimer, puntuacionTextView, puntuacion2TextView;
-    private CountDownTimer turnCrono;
+    private CountDownTimer chronometer, turnCrono;
+    private long timeLeft;
     private int turnSeconds;
     private LinearLayout tableLayout;
     private com.sharpsoft.twins_clases.logic.Board board;
     private ImageButton imageButtonPause;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
+    private Context thisContext;
     private boolean first = true;
     private boolean gameOverBool = false;
     private static boolean closed = false;
@@ -45,6 +47,7 @@ public class MultiGameActivity extends AppCompatActivity {
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
     private Player player1;
     private Player player2;
+    private int turnCounter;
     private boolean player1Turn = true;
 
     //UI
@@ -75,6 +78,10 @@ public class MultiGameActivity extends AppCompatActivity {
         receiveData();
 
         int song = ConfigSingleton.getInstance().getSelectedMusic();
+        thisContext = this;
+
+
+        thisContext = this;
 
         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
         if(level.getType() == Level.Type.standard){
@@ -86,10 +93,14 @@ public class MultiGameActivity extends AppCompatActivity {
             Deck deck2 = DeckFactory.getDeck(decks, level.getDimension(), level.getDimension().getTotal()/2, this);
             board = new BoardBySet(level.getDimension(), level.getTimePerTurn(), deck, deck2);
         }
+        int time = level.getTotalTime();
 
         board.setTiempoVolteo(level.getFlipTime() == null? 500 : level.getFlipTime());
 
         setBoard();
+        //instanceChronometer(time);
+
+        //chronometer.start();
         ToPausedActivity();
 
         audioFacadeInstance.setMusicGame(this, song);
@@ -101,23 +112,17 @@ public class MultiGameActivity extends AppCompatActivity {
         board.getTurn().addObserver(new Turn.TurnObserver() {
             @Override
             public void onStart() {
-                runOnUiThread(new Runnable(){
+                turnCrono = new CountDownTimer(board.getTurn().getDuration(), 100){
                     @Override
-                    public void run() {
-                        if(turnCrono != null) turnCrono.cancel();
-                        turnCrono = new CountDownTimer(board.getTurn().getDuration(), 100){
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                                turnTimer.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
-                            }
-                        }.start();
+                    public void onTick(long millisUntilFinished) {
+                        turnTimer.setText("" + cronoFormatLong.format(millisUntilFinished / 1000.0));
                     }
-                });
+
+                    @Override
+                    public void onFinish() {
+
+                    }
+                }.start();
             }
 
             @Override
@@ -135,7 +140,7 @@ public class MultiGameActivity extends AppCompatActivity {
 
                         }
                     });
-                    changeTurn();
+                    player1Turn=false;
                 }else{
                     player2.getScore().missedTurn();
                     runOnUiThread(new Runnable() {
@@ -144,15 +149,11 @@ public class MultiGameActivity extends AppCompatActivity {
                             puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
                         }
                     });
-                    changeTurn();
+                    player1Turn=true;
                 }
 
             }
         });
-    }
-
-    private void changeTurn(){
-        player1Turn = !player1Turn;
     }
 
     private void receiveData() {
@@ -171,6 +172,8 @@ public class MultiGameActivity extends AppCompatActivity {
         player2TV.setTextColor(colorPlayer2);
         avatar1.setColorFilter(colorPlayer1);
         avatar2.setColorFilter(colorPlayer2);
+
+
     }
 
     private void sendData(Intent i) {
@@ -202,7 +205,7 @@ public class MultiGameActivity extends AppCompatActivity {
                         }
                     });
 
-                    changeTurn();
+                    player1Turn=false;
                     //turnCrono.cancel();
                 }else{
                     player2.getScore().correct();
@@ -213,13 +216,14 @@ public class MultiGameActivity extends AppCompatActivity {
                         }
                     });
 
-                    changeTurn();
+                    player1Turn=true;
                     //turnCrono.cancel();
                 }
                 if(board.isComplete()){
                     Intent i = new Intent(MultiGameActivity.this, MultiGameOverActivity.class);
                     sendData(i);
-                    ConfigSingleton.getInstance().setLevelsPassed(levelNumber, MultiGameActivity.this);
+                    ConfigSingleton.getInstance().setLevelsPassed(levelNumber, thisContext);
+                    chronometer.cancel();
                     startActivity(i);
                     finish();
                 }
@@ -236,7 +240,7 @@ public class MultiGameActivity extends AppCompatActivity {
                         }
                     });
 
-                    changeTurn();
+                    player1Turn=false;
                 }else{
                     player2.getScore().fail();
                     runOnUiThread(new Runnable() {
@@ -246,7 +250,7 @@ public class MultiGameActivity extends AppCompatActivity {
                         }
                     });
 
-                    changeTurn();
+                    player1Turn=true;
                 }
                 audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
             }
@@ -255,6 +259,30 @@ public class MultiGameActivity extends AppCompatActivity {
     }
 
 
+    private void instanceChronometer(long time){
+       /* chronometer = new CountDownTimer(time, 100) {
+
+            private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeft = millisUntilFinished;
+            }
+
+            @Override
+            public void onFinish() {
+                gameOverBool = true;
+                audioFacadeInstance.stopMusic();
+                Intent i = new Intent(MultiGameActivity.this, MultiGameOverActivity.class);
+                i.putExtra("gameOverBool", gameOverBool);
+                i.putExtra("score", board.getScore().getScore());
+                i.putExtra("level", level);
+                startActivity(i);
+                finish();
+            }
+        };*/
+    }
+
     public void ToPausedActivity() {
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -262,6 +290,7 @@ public class MultiGameActivity extends AppCompatActivity {
                 Intent intent = new Intent(MultiGameActivity.this, PausedActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
+                chronometer.cancel();
                 audioFacadeInstance.pauseMusic();
 
             }
@@ -272,6 +301,8 @@ public class MultiGameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(!first) {
+            instanceChronometer(timeLeft);
+            chronometer.start();
             audioFacadeInstance.resumeMusic();
         }
         first = false;
@@ -291,6 +322,7 @@ public class MultiGameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
+        chronometer.cancel();
     }
 
     @Override

@@ -60,13 +60,6 @@ public class GameOverActivity extends AppCompatActivity {
         }
         score = score + (int)timeLeft/1000;
         scoreTV.setText("Puntuación final: " + score);
-
-        Calendar cal = Calendar.getInstance();
-        int timeSpent = totalTime - (int)timeLeft;
-        FinalScore results = new FinalScore(level.getType().toString(), score, timeSpent , cal);
-
-        ConfigSingleton config =  ConfigSingleton.getInstance();
-        config.saveFinalScore(results, GameOverActivity.this);
     }
 
     private void receiveData(){
@@ -76,6 +69,14 @@ public class GameOverActivity extends AppCompatActivity {
         isGameOver = data.getBoolean("gameOverBool");
         score = data.getInt("score");
         level = (Level) data.get("level");
+
+        Calendar cal = Calendar.getInstance();
+        int timeSpent = totalTime - (int)timeLeft;
+
+        FinalScore results = new FinalScore(level.getType().toString(), score, timeSpent , cal);
+
+        ConfigSingleton config =  ConfigSingleton.getInstance();
+        config.saveFinalScore(results, GameOverActivity.this);
     }
 
     private void createButtons(){
