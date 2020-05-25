@@ -83,7 +83,7 @@ public abstract class Board extends Observable {
         Card c = cards[x][y];
         if(c.isFacedUp()) return; //salir si la carta ya ha sido girada
         if(isWaiting) return;
-
+        if(cardsUpside.size() == 0) turn.startTurn();
         c.turn();
 
         setChanged();
@@ -111,7 +111,7 @@ public abstract class Board extends Observable {
                notifyObservers(FlipObserver.On.failure);
             }
         }else{  //Se ha girado la primera carta
-            turn.startTurn();
+
         }
     }
 

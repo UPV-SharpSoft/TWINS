@@ -95,9 +95,11 @@ public class GameActivity extends AppCompatActivity {
         if(startTimeFlip != null) board.flipAllCardsDuring(startTimeFlip);
 
         turnSeconds = board.getTurn().getDuration();
+        turnTimer.setText(cronoFormatLong.format(turnSeconds / 10.0));
         board.getTurn().addObserver(new Turn.TurnObserver() {
             @Override
             public void onStart() {
+                if(turnCrono != null) turnCrono.cancel();
                 turnCrono = new CountDownTimer(board.getTurn().getDuration(), 100){
                     @Override
                     public void onTick(long millisUntilFinished) {
@@ -113,15 +115,12 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onEnd() {
-                turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
-                turnCrono.cancel();
 
             }
 
             @Override
             public void lost() {
-                turnTimer.setText("" + cronoFormatLong.format(turnSeconds/1000));
-                turnCrono.cancel();
+
             }
         });
     }

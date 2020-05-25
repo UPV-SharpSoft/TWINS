@@ -98,9 +98,9 @@ public class MultiGameActivity extends AppCompatActivity {
         board.setTiempoVolteo(level.getFlipTime() == null? 500 : level.getFlipTime());
 
         setBoard();
-        instanceChronometer(time);
+        //instanceChronometer(time);
 
-        chronometer.start();
+        //chronometer.start();
         ToPausedActivity();
 
         audioFacadeInstance.setMusicGame(this, song);
@@ -206,7 +206,7 @@ public class MultiGameActivity extends AppCompatActivity {
                     });
 
                     player1Turn=false;
-                    turnCrono.cancel();
+                    //turnCrono.cancel();
                 }else{
                     player2.getScore().correct();
                     runOnUiThread(new Runnable() {
@@ -217,7 +217,7 @@ public class MultiGameActivity extends AppCompatActivity {
                     });
 
                     player1Turn=true;
-                    turnCrono.cancel();
+                    //turnCrono.cancel();
                 }
                 if(board.isComplete()){
                     Intent i = new Intent(MultiGameActivity.this, MultiGameOverActivity.class);
@@ -260,7 +260,7 @@ public class MultiGameActivity extends AppCompatActivity {
 
 
     private void instanceChronometer(long time){
-        chronometer = new CountDownTimer(time, 100) {
+       /* chronometer = new CountDownTimer(time, 100) {
 
             private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
 
@@ -280,7 +280,7 @@ public class MultiGameActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        };
+        };*/
     }
 
     public void ToPausedActivity() {
