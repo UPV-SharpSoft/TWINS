@@ -54,6 +54,7 @@ public class NicknamesActivity extends AppCompatActivity {
         colorPlayer1 = -5687754;
         colorPlayer2 = -12616451;
 
+
         colorSeekBar1.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
             public void onColorChangeListener(int i) {
@@ -85,9 +86,14 @@ public class NicknamesActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"El campo de nombre" +
                                 " no puede estar vacío", Toast.LENGTH_SHORT).show();
                     } else {
-                        Intent i = new Intent(NicknamesActivity.this, MultiGameActivity.class);
+                        if(nickname1.toString().startsWith("android")){
+                            Player player1 = new Player(colorPlayer1, "Jugador 1");
+                        }else if(nickname2.toString().startsWith("android")){
+                            Player player2 = new Player(colorPlayer2, "Jugador 2");
+                        }
                         Player player1 = new Player(colorPlayer1, nickname1.toString());
                         Player player2 = new Player(colorPlayer2, nickname2.toString());
+                        Intent i = new Intent(NicknamesActivity.this, MultiGameActivity.class);
                         try{
                             i.putExtra("player1", player1);
                             i.putExtra("player2", player2);
