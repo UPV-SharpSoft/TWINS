@@ -16,20 +16,22 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/square_button"
-        android:backgroundTint="#E8EAF6"
+        android:backgroundTint="#0024FF"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5">
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/turnTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#E8EAF6"
+        android:background="#CCFFFFFF"
         android:text="5.0"
         android:textColor="#000000"
         android:textSize="30sp"
@@ -132,4 +134,5 @@
         app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatar2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

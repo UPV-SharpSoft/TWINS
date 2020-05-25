@@ -2,6 +2,8 @@ package com.sharpsoft.twinsapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -153,6 +155,14 @@ public class MultiGameActivity extends AppCompatActivity {
 
     private void changeTurn(){
         player1Turn = !player1Turn;
+        Log.i("color", ""+colorPlayer1);
+        if(player1Turn){
+            tableLayout.getBackground().setAlpha(50);
+            tableLayout.getBackground().setTint(colorPlayer1);
+        }else{
+            tableLayout.getBackground().setAlpha(50);
+            tableLayout.getBackground().setTint(colorPlayer2);
+        }
     }
 
     private void receiveData() {
@@ -171,6 +181,9 @@ public class MultiGameActivity extends AppCompatActivity {
         player2TV.setTextColor(colorPlayer2);
         avatar1.setColorFilter(colorPlayer1);
         avatar2.setColorFilter(colorPlayer2);
+        tableLayout.getBackground().setAlpha(50);
+        tableLayout.getBackground().setTint(colorPlayer1);
+
     }
 
     private void sendData(Intent i) {
