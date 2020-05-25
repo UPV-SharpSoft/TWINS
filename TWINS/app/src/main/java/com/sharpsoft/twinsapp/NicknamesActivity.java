@@ -82,7 +82,7 @@ public class NicknamesActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"El color o el nickname de los" +
                             " jugadores no puede ser igual", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (nickname1.equals("") || nickname2.getText().equals("")) {
+                    if (nickname1.getText().equals("") || nickname2.getText().equals("")) {
                         Toast.makeText(getApplicationContext(),"El campo de nombre" +
                                 " no puede estar vacío", Toast.LENGTH_SHORT).show();
                     } else {
