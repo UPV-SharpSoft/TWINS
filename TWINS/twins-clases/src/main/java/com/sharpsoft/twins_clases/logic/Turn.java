@@ -3,8 +3,6 @@ package com.sharpsoft.twins_clases.logic;
 import java.util.Observable;
 import java.util.Observer;
 
-import sun.rmi.runtime.Log;
-
 public class Turn extends Observable {
     private Score score;
     private int duration;
@@ -19,7 +17,7 @@ public class Turn extends Observable {
                 try{
                     Thread.sleep(duration);
                     lostTurn();
-                } catch (InterruptedException | RuntimeException e) {this.interrupt();}
+                } catch (InterruptedException | RuntimeException e) {this.interrupt(); e.printStackTrace();}
             }
         };
     }
@@ -37,14 +35,15 @@ public class Turn extends Observable {
     public void startTurn(){
         initThread();
         thread.start();
+
         setChanged();
         notifyObservers(type.startTurn);
     }
 
     public void endTurn(){
         thread.interrupt();
-        //setChanged();
-        //notifyObservers(type.endTurn);
+        setChanged();
+        notifyObservers(type.endTurn);
 
         startTurn();
     }
@@ -56,8 +55,8 @@ public class Turn extends Observable {
             Card lastFlipCard = board.cardsUpside.pop();
             lastFlipCard.turn();
         }
-        //setChanged();
-        //notifyObservers(type.lostTurn);
+        setChanged();
+        notifyObservers(type.lostTurn);
 
         startTurn();
     }

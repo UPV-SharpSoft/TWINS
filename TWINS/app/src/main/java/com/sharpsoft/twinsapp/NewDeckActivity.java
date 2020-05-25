@@ -71,7 +71,8 @@ public class NewDeckActivity extends AppCompatActivity {
         rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotation);
 
         data = getIntent().getExtras();
-        if(data != null){
+        Boolean modificado = data.getBoolean("modificado");
+        if(modificado){
             modifyDeck();
         }
         titleTV.setText("Crear baraja");
@@ -96,7 +97,7 @@ public class NewDeckActivity extends AppCompatActivity {
             LinearLayout layout = findViewById(R.id.upperLinearLayout);
             ImageView cardValue = new ImageView(NewDeckActivity.this);
             cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            cardValue.setPadding(0,0,20,0);
+            cardValue.setPadding(20,0,20,0);
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 600);
             cardValue.setLayoutParams(layoutParams);
@@ -188,7 +189,7 @@ public class NewDeckActivity extends AppCompatActivity {
 
         ImageView cardValue = new ImageView(NewDeckActivity.this);
         cardValue.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        cardValue.setPadding(0,0,20,0);
+        cardValue.setPadding(20,0,20,0);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 600);
         cardValue.setLayoutParams(layoutParams);
