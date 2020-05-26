@@ -72,17 +72,18 @@ public class ConfigActivity extends AppCompatActivity{
 
         level = ConfigSingleton.getInstance().getLevelConfig(this);
 
-        setValues();
-        setSoundValues();
-        setSpinners();
-
         initSeekBarTextView(totalTimeSeekbar, totalTimeValueTextView, 120, 1);
         initSeekBarTextView(timePerTurnSeekbar, timePerTurnValueTextView, 10, 1);
         initSeekBarTextView(timeStartSeekbar, timeStartValueTextView, 10, 1);
         initSeekBarTextView(failureSeekbar, failureValueTextView, 3, 1);
+
+        setValues();
+        setSoundValues();
+        setSpinners();
     }
 
     private void setValues(){
+        Log.i("total time",level.getTotalTime() + "");
         totalTimeSeekbar.setProgress(level.getTotalTime()/1000);
         timePerTurnSeekbar.setProgress(level.getTimePerTurn()/1000);
         timeStartSeekbar.setProgress(level.getFlipStartTime()/1000);
@@ -237,6 +238,7 @@ public class ConfigActivity extends AppCompatActivity{
         decks.addAll(DeckManagerSingleton.getInstance().getAllDecks(this).keySet());
         ArrayAdapter decksAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, decks);
         deckSpinner.setAdapter(decksAdapter);
+        deckSpinner.setSelection(decks.indexOf(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(1, 1), 1, this).getName()));
 
     }
 
