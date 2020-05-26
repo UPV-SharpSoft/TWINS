@@ -6,13 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
@@ -24,6 +21,7 @@ public class PausedActivity extends AppCompatActivity {
     private Level level;
     private Bundle bundle;
     private Player player1, player2;
+    Boolean isMultiplayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class PausedActivity extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         receiveData();
-        final Boolean multiplayer = bundle.getBoolean("multiplayer");
+
 
         if (audioFacadeInstance.isMutedAll()) {
             muteAllButton.setImageResource(android.R.drawable.ic_lock_silent_mode);
@@ -76,22 +74,19 @@ public class PausedActivity extends AppCompatActivity {
                         .setMessage("¿Estás seguro de que quieres reiniciar la partida? \n\nPerderás todo el progreso de la partida en curso")
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-
-                                if(multiplayer){
+                                if(isMultiplayer){
                                     MultiGameActivity.closedMethod();
-                                    finish();
                                     Intent i = new Intent(PausedActivity.this, MultiGameActivity.class);
                                     sendData(i);
                                     startActivity(i);
-                                }else {
-                                    //GameActivity.closedMethod();
                                     finish();
+                                }else {
+                                    GameActivity.closedMethod();
                                     Intent i = new Intent(PausedActivity.this, GameActivity.class);
                                     sendData(i);
                                     startActivity(i);
+                                    finish();
                                 }
-
-
                             }
                         }).setNegativeButton("No", null)
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -108,7 +103,7 @@ public class PausedActivity extends AppCompatActivity {
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                if(multiplayer){
+                                if(isMultiplayer){
                                     MultiGameActivity.closedMethod();
                                 }else{
                                     GameActivity.closedMethod();
@@ -181,9 +176,12 @@ public class PausedActivity extends AppCompatActivity {
     }
 
     private void receiveData() {
+        isMultiplayer = bundle.getBoolean("multiplayer");
         level = (Level) bundle.get("level");
-        player1 = (Player) bundle.get("player1");
-        player2 = (Player) bundle.get("player2");
+        if(isMultiplayer) {
+            player1 = (Player) bundle.get("player1");
+            player2 = (Player) bundle.get("player2");
+        }
     }
 
     @Override
@@ -193,7 +191,12 @@ public class PausedActivity extends AppCompatActivity {
 
     private void sendData(Intent intent){
         intent.putExtra("level", level);
-        intent.putExtra("player1", player1);
-        intent.putExtra("player2", player2);
+        if(isMultiplayer) {
+            player1.resetScore();
+            player2.resetScore();
+            intent.putExtra("player1", player1);
+            intent.putExtra("player2", player2);
+
+        }
     }
 }

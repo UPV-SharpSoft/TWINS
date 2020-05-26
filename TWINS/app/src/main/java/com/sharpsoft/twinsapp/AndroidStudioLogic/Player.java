@@ -28,4 +28,8 @@ public class Player implements Serializable {
         return score;
     }
 
+    public void resetScore(){
+        score = new Score();
+    }
+
 }

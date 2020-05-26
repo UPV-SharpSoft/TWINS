@@ -26,4 +26,5 @@ public class Score implements Serializable {
     public int getScore(){
         return (10* numCorrect) - (4* numFails) - (2* missedTurns);
     }
+
 }
