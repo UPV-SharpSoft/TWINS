@@ -126,4 +126,10 @@ public class EditDeckActivity extends AppCompatActivity {
         }
         return res;
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        showList();
+    }
 }

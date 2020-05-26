@@ -2,6 +2,7 @@ package com.sharpsoft.twinsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -139,6 +140,26 @@ public class NewDeckActivity extends AppCompatActivity {
 
     }
 
+    private Thread saveDeck(final String name, final List<Bitmap> images, final Bitmap reverso){
+        final ProgressDialog progress = ProgressDialog.show(this, "Guardando baraja", "Guardando las cartas...", true);
+        return new Thread(){
+            public void run(){
+                try {
+                    DeckManagerSingleton.getInstance().saveDeck(name, images, reverso, NewDeckActivity.this);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                runOnUiThread(new Thread(){
+                    public void run(){
+                        progress.dismiss();
+                        finish();
+                    }
+                });
+            }
+        };
+    }
+
     private void createDeck() {
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -157,14 +178,8 @@ public class NewDeckActivity extends AppCompatActivity {
                         images.add(bd.getBitmap());
                     }
 
-                    try {
-                        DeckManagerSingleton.getInstance().saveDeck(nameDeck, images, reverso, NewDeckActivity.this);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
 
-                    Intent intent = new Intent(NewDeckActivity.this, EditDeckActivity.class);
-                    startActivity(intent);
+                    saveDeck(nameDeck, images, reverso).start();
                 }
 
                 else {

@@ -72,17 +72,18 @@ public class ConfigActivity extends AppCompatActivity{
 
         level = ConfigSingleton.getInstance().getLevelConfig(this);
 
-        setValues();
-        setSoundValues();
-        setSpinners();
-
         initSeekBarTextView(totalTimeSeekbar, totalTimeValueTextView, 120, 1);
         initSeekBarTextView(timePerTurnSeekbar, timePerTurnValueTextView, 10, 1);
         initSeekBarTextView(timeStartSeekbar, timeStartValueTextView, 10, 1);
         initSeekBarTextView(failureSeekbar, failureValueTextView, 3, 1);
+
+        setValues();
+        setSoundValues();
+        setSpinners();
     }
 
     private void setValues(){
+        Log.i("total time",level.getTotalTime() + "");
         totalTimeSeekbar.setProgress(level.getTotalTime()/1000);
         timePerTurnSeekbar.setProgress(level.getTimePerTurn()/1000);
         timeStartSeekbar.setProgress(level.getFlipStartTime()/1000);
@@ -138,8 +139,9 @@ public class ConfigActivity extends AppCompatActivity{
 
     private void setSpinners(){
         String[] aux = new String[]{"2", "3", "4", "5", "6"};
+        String[] aux2 = new String[]{"2", "3", "4"};
         final List<String> valuesRows = new ArrayList<>(Arrays.asList(aux));
-        final List<String> valuesColumns = new ArrayList<>(Arrays.asList(aux));
+        final List<String> valuesColumns = new ArrayList<>(Arrays.asList(aux2));
         final ArrayAdapter<String> adapterRows = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, valuesRows);
         ArrayAdapter<String> adapterColumns = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, valuesColumns);
         rowsSpinner.setAdapter(adapterRows);
@@ -161,7 +163,7 @@ public class ConfigActivity extends AppCompatActivity{
                 int selected = Integer.parseInt((String) rowsSpinner.getSelectedItem());
                 rows = selected;
                 valuesColumns.clear();
-                for(int j = 2; j <= 6; j++){
+                for(int j = 2; j <= 4; j++){
                     if( (j*selected) % 2 == 0) valuesColumns.add(String.valueOf(j));
                 }
                 columnsSpinner.setSelection(valuesColumns.indexOf(String.valueOf(columns)));
@@ -232,11 +234,12 @@ public class ConfigActivity extends AppCompatActivity{
 
         List<String> decks = new ArrayList<>();
         for(DeckFactory.Decks deck : DeckFactory.Decks.values()){
-            decks.add(deck.toString());
+            decks.add(deck.toString().toLowerCase());
         }
         decks.addAll(DeckManagerSingleton.getInstance().getAllDecks(this).keySet());
         ArrayAdapter decksAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, decks);
         deckSpinner.setAdapter(decksAdapter);
+        deckSpinner.setSelection(decks.indexOf(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(1, 1), 1, this).getName().toLowerCase()));
 
     }
 
