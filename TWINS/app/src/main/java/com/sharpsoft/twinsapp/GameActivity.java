@@ -91,6 +91,7 @@ public class GameActivity extends AppCompatActivity {
         chronometer.start();
         ToPausedActivity();
 
+
         audioFacadeInstance.setMusicGame(this, song);
 
         Integer startTimeFlip = level.getFlipStartTime();

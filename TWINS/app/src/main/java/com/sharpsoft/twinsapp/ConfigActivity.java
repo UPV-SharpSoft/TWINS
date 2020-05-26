@@ -1,18 +1,13 @@
 package com.sharpsoft.twinsapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,7 +20,9 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ConfigActivity extends AppCompatActivity{
@@ -49,6 +46,8 @@ public class ConfigActivity extends AppCompatActivity{
 
     private int columns, rows;
 
+    private Map<String, Integer> songs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +68,7 @@ public class ConfigActivity extends AppCompatActivity{
         FXSeekbar = findViewById(R.id.FXSeekbar);
         musicSeekbar = findViewById(R.id.musicSeekbar);
         deckSpinner = findViewById(R.id.deckSpinner);
+        musicPackSpinner = findViewById(R.id.musicSpinner);
 
         level = ConfigSingleton.getInstance().getLevelConfig(this);
 
@@ -205,6 +205,12 @@ public class ConfigActivity extends AppCompatActivity{
         deckSpinner.setAdapter(decksAdapter);
         deckSpinner.setSelection(decks.indexOf(ConfigSingleton.getInstance().getSelectedDeck(new Dimension(1, 1), 1, this).getName().toLowerCase()));
 
+        songs = new HashMap<>();
+        songs.put("Default", R.raw.partida_default);
+        songs.put("Minecraft", R.raw.minecraft);
+        List<String> songsList = new ArrayList<>(songs.keySet());
+        ArrayAdapter songsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, songsList);
+        musicPackSpinner.setAdapter(songsAdapter);
     }
 
     private void initSeekBarTextView(SeekBar seekBar, final TextView textView, int max, int increment){
@@ -259,6 +265,9 @@ public class ConfigActivity extends AppCompatActivity{
         ConfigSingleton.getInstance().setFXVolume(fxLevel, this);
 
         AudioFacade.getInstance().setSoundVolume(fxLevel/100f);
+
+        int songPack = songs.get((String) musicPackSpinner.getSelectedItem());
+        ConfigSingleton.getInstance().setSelectedMusic(songPack);
 
         super.onBackPressed();
     }
