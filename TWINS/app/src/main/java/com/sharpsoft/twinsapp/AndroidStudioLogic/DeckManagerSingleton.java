@@ -25,7 +25,11 @@ public class DeckManagerSingleton {
 
     public void saveDeck(String name, List<Bitmap> images, Bitmap reverse, Context ctx) throws FileNotFoundException {
         File path = new File(ctx.getFilesDir().getPath() + "/customDecks/" + name + "/");
-        path.mkdirs();
+        if(path.exists()){
+            ConfigSingleton.getInstance().removeCustomDeck(name, ctx);
+        }else{
+            path.mkdirs();
+        }
         int count = 0;
         for(Bitmap bitmap : images){
             FileOutputStream out = new FileOutputStream(new File(path.getPath() + "/" + count));
