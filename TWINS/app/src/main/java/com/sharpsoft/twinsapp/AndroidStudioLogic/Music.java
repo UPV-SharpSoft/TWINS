@@ -30,7 +30,8 @@ public class Music {
     public void startMusic(Context context, int song) {
         bgMusic = MediaPlayer.create(context, song);
         bgMusic.setLooping(true);
-        bgMusic.setVolume(100, 100);
+        int volume = ConfigSingleton.getInstance().getMusicVolume(context);
+        bgMusic.setVolume(volume, volume);
         bgMusic.start();
     }
 

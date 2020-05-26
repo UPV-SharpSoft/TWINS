@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         audioInstanceFacade.initializeSound(this);
-        //audioInstanceFacade.setMusicVolume(ConfigSingleton.getInstance().getMusicVolume(this));
-        //audioInstanceFacade.setSoundVolume(ConfigSingleton.getInstance().getFXVolume(this));
 
         Thread t = new Thread(){
             @Override

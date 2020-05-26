@@ -99,42 +99,6 @@ public class ConfigActivity extends AppCompatActivity{
 
         musicSeekbar.setMax(100);
         musicSeekbar.setProgress(music);
-
-        musicSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                ConfigSingleton.getInstance().setMusicVolume(i, ConfigActivity.this);
-                AudioFacade.getInstance().setMusicVolume(i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        FXSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                ConfigSingleton.getInstance().setFXVolume(i, ConfigActivity.this);
-                AudioFacade.getInstance().setSoundVolume(i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
     }
 
     private void setSpinners(){
@@ -287,6 +251,14 @@ public class ConfigActivity extends AppCompatActivity{
             String selectedDeck = (String) deckSpinner.getSelectedItem();
             ConfigSingleton.getInstance().setSelectedDeck(selectedDeck);
         }
+
+        int musicaLevel = musicSeekbar.getProgress();
+        int fxLevel = FXSeekbar.getProgress();
+
+        ConfigSingleton.getInstance().setMusicVolume(musicaLevel, this);
+        ConfigSingleton.getInstance().setFXVolume(fxLevel, this);
+
+        AudioFacade.getInstance().setSoundVolume(fxLevel/100f);
 
         super.onBackPressed();
     }

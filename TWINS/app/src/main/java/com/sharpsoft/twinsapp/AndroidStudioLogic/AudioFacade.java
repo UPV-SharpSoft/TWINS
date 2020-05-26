@@ -71,11 +71,13 @@ public class AudioFacade {
 
     public void setSoundVolume(float soundVolume) {sound.setSoundVolume(soundVolume);}
 
-    public void initializeSound(Context ctx){
+    public void initializeSound(final Context ctx){
         sound.createSoundPool(ctx);
         sound.setOnPrepared(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int i, int i1) {
+                //setMusicVolume(ConfigSingleton.getInstance().getMusicVolume(ctx)/100f);
+                setSoundVolume(ConfigSingleton.getInstance().getFXVolume(ctx)/100f);
                 if(i1 == 0 && i==7) sound.makeSound(Sound.Sounds.shuffle);
             }
         });
