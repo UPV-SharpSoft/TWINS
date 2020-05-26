@@ -16,12 +16,14 @@ import android.widget.SeekBar;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
 
 public class PausedActivity extends AppCompatActivity {
 
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private Level level;
     private Bundle bundle;
+    private Player player1, player2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,8 @@ public class PausedActivity extends AppCompatActivity {
         final ImageButton muteAllButton = findViewById(R.id.muteAll);
 
         bundle = getIntent().getExtras();
-        level = (Level) bundle.get("level");
+        receiveData();
+        final Boolean multiplayer = bundle.getBoolean("multiplayer");
 
         if (audioFacadeInstance.isMutedAll()) {
             muteAllButton.setImageResource(android.R.drawable.ic_lock_silent_mode);
@@ -73,9 +76,22 @@ public class PausedActivity extends AppCompatActivity {
                         .setMessage("¿Estás seguro de que quieres reiniciar la partida? \n\nPerderás todo el progreso de la partida en curso")
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                                Intent i = new Intent(PausedActivity.this, GameActivity.class);
-                                startActivity(i);
+
+                                if(multiplayer){
+                                    MultiGameActivity.closedMethod();
+                                    finish();
+                                    Intent i = new Intent(PausedActivity.this, MultiGameActivity.class);
+                                    sendData(i);
+                                    startActivity(i);
+                                }else {
+                                    //GameActivity.closedMethod();
+                                    finish();
+                                    Intent i = new Intent(PausedActivity.this, GameActivity.class);
+                                    sendData(i);
+                                    startActivity(i);
+                                }
+
+
                             }
                         }).setNegativeButton("No", null)
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -92,7 +108,11 @@ public class PausedActivity extends AppCompatActivity {
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                GameActivity.closedMethod();
+                                if(multiplayer){
+                                    MultiGameActivity.closedMethod();
+                                }else{
+                                    GameActivity.closedMethod();
+                                }
                             }
                         }).setNegativeButton("No", null)
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -160,10 +180,20 @@ public class PausedActivity extends AppCompatActivity {
          */
     }
 
+    private void receiveData() {
+        level = (Level) bundle.get("level");
+        player1 = (Player) bundle.get("player1");
+        player2 = (Player) bundle.get("player2");
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+    }
 
-
+    private void sendData(Intent intent){
+        intent.putExtra("level", level);
+        intent.putExtra("player1", player1);
+        intent.putExtra("player2", player2);
     }
 }

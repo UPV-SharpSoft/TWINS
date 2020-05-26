@@ -230,6 +230,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(GameActivity.this, PausedActivity.class);
                 intent.putExtra("level", level);
+                intent.putExtra("multiplayer", false);
                 startActivity(intent);
                 chronometer.cancel();
                 audioFacadeInstance.pauseMusic();

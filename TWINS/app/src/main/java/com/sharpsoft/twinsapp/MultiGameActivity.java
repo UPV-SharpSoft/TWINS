@@ -187,7 +187,7 @@ public class MultiGameActivity extends AppCompatActivity {
     }
 
     private void sendData(Intent i) {
-        i.putExtra("score1", board.getScore().getScore());
+        // ESTO ES NECESARIO? i.putExtra("score1", board.getScore().getScore());
         i.putExtra("level", level);
         i.putExtra("player1", player1);
         i.putExtra("player2", player2);
@@ -272,7 +272,9 @@ public class MultiGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MultiGameActivity.this, PausedActivity.class);
+                sendData(intent);
                 intent.putExtra("level", level);
+                intent.putExtra("multiplayer", true);
                 startActivity(intent);
                 audioFacadeInstance.pauseMusic();
 
@@ -308,5 +310,9 @@ public class MultiGameActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         
+    }
+
+    public static void closedMethod(){
+        closed = true;
     }
 }

@@ -64,14 +64,14 @@
 
     <TextView
         android:id="@+id/scoreWinner"
-        android:layout_width="98dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="144dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/montserrat"
         android:text="Puntuación: "
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.725"
+        app:layout_constraintHorizontal_bias="0.866"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatarWinner" />
 
