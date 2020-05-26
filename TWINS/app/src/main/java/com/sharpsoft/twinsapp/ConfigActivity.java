@@ -72,7 +72,7 @@ public class ConfigActivity extends AppCompatActivity{
 
         level = ConfigSingleton.getInstance().getLevelConfig(this);
 
-        initSeekBarTextView(totalTimeSeekbar, totalTimeValueTextView, 120, 1);
+        initSeekBarTextView(totalTimeSeekbar, totalTimeValueTextView, 300, 1);
         initSeekBarTextView(timePerTurnSeekbar, timePerTurnValueTextView, 10, 1);
         initSeekBarTextView(timeStartSeekbar, timeStartValueTextView, 10, 1);
         initSeekBarTextView(failureSeekbar, failureValueTextView, 3, 1);
