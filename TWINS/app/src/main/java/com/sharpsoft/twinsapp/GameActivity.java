@@ -37,7 +37,6 @@ public class GameActivity extends AppCompatActivity {
     private long timeLeft;
     private boolean first = true;
     private boolean gameOverBool = false;
-    private static boolean closed = false;
     private int levelNumber;
     private Level level;
     private Context thisContext;
@@ -47,6 +46,8 @@ public class GameActivity extends AppCompatActivity {
     private ImageButton imageButtonPause;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
+
+    private static GameActivity instance;
 
 
     @Override
@@ -60,6 +61,7 @@ public class GameActivity extends AppCompatActivity {
         imageButtonPause = findViewById(R.id.imageButtonPause);
         turnTimer = findViewById(R.id.turnTimer);
 
+        instance = this;
 
         int song = ConfigSingleton.getInstance().getSelectedMusic();
         level = (Level) getIntent().getExtras().get("level");
@@ -140,10 +142,6 @@ public class GameActivity extends AppCompatActivity {
         }
         first = false;
 
-        if(closed){
-            finish();
-            closed = false;
-        }
     }
 
     @Override
@@ -239,7 +237,12 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
     public static void closedMethod(){
-        closed = true;
+        instance.finish();
     }
 }

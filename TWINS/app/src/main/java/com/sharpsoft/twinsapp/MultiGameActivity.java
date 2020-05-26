@@ -49,6 +49,8 @@ public class MultiGameActivity extends AppCompatActivity {
     private Player player2;
     private boolean player1Turn = true;
 
+    private static MultiGameActivity instance;
+
     //UI
     private int colorPlayer1;
     private int colorPlayer2;
@@ -73,6 +75,7 @@ public class MultiGameActivity extends AppCompatActivity {
         avatar1 = findViewById(R.id.avatar1);
         avatar2 = findViewById(R.id.avatar2);
 
+        instance = this;
 
         receiveData();
 
@@ -289,11 +292,6 @@ public class MultiGameActivity extends AppCompatActivity {
             audioFacadeInstance.resumeMusic();
         }
         first = false;
-
-        if(closed){
-            finish();
-            closed = false;
-        }
     }
 
     @Override
@@ -313,6 +311,6 @@ public class MultiGameActivity extends AppCompatActivity {
     }
 
     public static void closedMethod(){
-        closed = true;
+        instance.finish();
     }
 }
