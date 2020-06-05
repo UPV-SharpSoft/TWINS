@@ -39,7 +39,6 @@ public class GameActivity extends AppCompatActivity {
     private boolean gameOverBool = false;
     private int levelNumber;
     private Level level;
-    private Context thisContext;
 
     private LinearLayout tableLayout;
     private com.sharpsoft.twins_clases.logic.Board board;
@@ -67,8 +66,6 @@ public class GameActivity extends AppCompatActivity {
         level = (Level) getIntent().getExtras().get("level");
         levelNumber = getIntent().getExtras().getInt("levelNumber", -1);
 
-        thisContext = this;
-
         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
         if(level.getType() == Level.Type.standard){
             board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
@@ -87,16 +84,17 @@ public class GameActivity extends AppCompatActivity {
 
         setBoard();
         instanceChronometer(time);
-
+        instanceSoundFX();
         chronometer.start();
         ToPausedActivity();
-
-
         audioFacadeInstance.setMusicGame(this, song);
+        instanceTurn();
 
         Integer startTimeFlip = level.getFlipStartTime();
         if(startTimeFlip != null) board.flipAllCardsDuring(startTimeFlip);
+    }
 
+    public void instanceTurn(){
         turnSeconds = board.getTurn().getDuration();
         turnTimer.setText(cronoFormatLong.format(turnSeconds / 10.0));
         board.getTurn().addObserver(new Turn.TurnObserver() {
@@ -133,30 +131,6 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(!first) {
-            instanceChronometer(timeLeft);
-            chronometer.start();
-            audioFacadeInstance.resumeMusic();
-        }
-        first = false;
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        audioFacadeInstance.pauseMusic();
-    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        chronometer.cancel();
-    }
-
     public void setBoard() {
         View tableroView = ((Board) board).getView(this);
         tableLayout.addView(tableroView);
@@ -164,12 +138,11 @@ public class GameActivity extends AppCompatActivity {
         board.addObserver(new FlipObserver() {
             @Override
             public void onFlip() {
-                audioFacadeInstance.makeSound(Sound.Sounds.flip);
+
             }
 
             @Override
             public void onSuccess() {
-                audioFacadeInstance.makeSound(Sound.Sounds.correct);
                 if(board.isComplete()){
                     Intent i = new Intent(GameActivity.this, GameOverActivity.class);
                     i.putExtra("gameOverBool", gameOverBool);
@@ -177,7 +150,7 @@ public class GameActivity extends AppCompatActivity {
                     i.putExtra("score", board.getScore().getScore());
                     i.putExtra("totalTime", level.getTotalTime());
                     i.putExtra("level", level);
-                    ConfigSingleton.getInstance().setLevelsPassed(levelNumber, thisContext);
+                    ConfigSingleton.getInstance().setLevelsPassed(levelNumber, GameActivity.this);
                     chronometer.cancel();
                     startActivity(i);
                     finish();
@@ -186,7 +159,7 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onFailure() {
-                audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
+
             }
         });
 
@@ -234,6 +207,49 @@ public class GameActivity extends AppCompatActivity {
                 chronometer.cancel();
                 audioFacadeInstance.pauseMusic();
 
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!first) {
+            instanceChronometer(timeLeft);
+            chronometer.start();
+            audioFacadeInstance.resumeMusic();
+        }
+        first = false;
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        audioFacadeInstance.pauseMusic();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        chronometer.cancel();
+    }
+
+    public void instanceSoundFX(){
+        board.addObserver(new FlipObserver() {
+            @Override
+            public void onFlip() {
+                audioFacadeInstance.makeSound(Sound.Sounds.flip);
+            }
+
+            @Override
+            public void onSuccess() {
+                audioFacadeInstance.makeSound(Sound.Sounds.correct);
+            }
+
+            @Override
+            public void onFailure() {
+                audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
             }
         });
     }
