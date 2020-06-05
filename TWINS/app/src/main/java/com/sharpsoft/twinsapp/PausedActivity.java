@@ -114,65 +114,6 @@ public class PausedActivity extends AppCompatActivity {
                         .show();
             }
         });
-
-
-
-
-        /** Todo Música a Opciones
-
-        seekBarMusic = findViewById(R.id.seekBarMusic);
-        seekBarSounds = findViewById(R.id.seekBarSound);
-
-
-        //Volumen música
-        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        seekBarMusic.setMax(Audio.MAX_VOLUME);
-        seekBarMusic.setProgress(audioInstance.getMusicSeekbarProgress());
-        seekBarMusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
-                float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME - progress) / Math.log(Audio.MAX_VOLUME)));
-                if(volume > 1) volume = 1;
-                audioInstance.setMusicVolume(volume, volume);
-                audioInstance.setMusicSeekbarProgress(progress);
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-
-        //Volumen efectos
-        seekBarSounds.setMax(Audio.MAX_VOLUME);
-        seekBarSounds.setProgress(audioInstance.getSoundPoolProgress());
-        seekBarSounds.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float volume = (float) (1 - (Math.log(Audio.MAX_VOLUME - progress) / Math.log(Audio.MAX_VOLUME)));
-                if(volume > 1) volume = 1;
-                audioInstance.setSoundPoolProgress(progress);
-                audioInstance.setSoundVolume(volume);
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.i("vol", ""+audioInstance.getSoundVolume());
-                Log.i("progress", ""+audioInstance.getSoundPoolProgress());
-
-            }
-        });
-         */
     }
 
     private void receiveData() {
