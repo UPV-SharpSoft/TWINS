@@ -1,9 +1,6 @@
 package com.sharpsoft.twinsapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -18,14 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twins_clases.logic.Turn;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardStandard;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardBySet;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Score;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
 
 import java.text.DecimalFormat;
@@ -83,9 +79,9 @@ public class MultiGameActivity extends AppCompatActivity {
 
         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
         if(level.getType() == Level.Type.standard){
-            board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
+            board = new BoardStandard(level.getDimension(), level.getTimePerTurn(), deck);
         }else if(level.getType() == Level.Type.byCard){
-            board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
+            board = new BoardStandard(level.getDimension(), level.getTimePerTurn(), deck);
         }else if(level.getType() == Level.Type.bySet){
             DeckFactory.Decks decks = deck.getName().equals("Minecraft")? DeckFactory.Decks.fruits : DeckFactory.Decks.fruits;
             Deck deck2 = DeckFactory.getDeck(decks, level.getDimension(), level.getDimension().getTotal()/2, this);
@@ -197,7 +193,7 @@ public class MultiGameActivity extends AppCompatActivity {
     }
 
     public void setBoard() {
-        View tableroView = ((Board) board).getView(this);
+        View tableroView = ((BoardStandard) board).getView(this);
         tableLayout.addView(tableroView);
 
         board.addObserver(new FlipObserver() {

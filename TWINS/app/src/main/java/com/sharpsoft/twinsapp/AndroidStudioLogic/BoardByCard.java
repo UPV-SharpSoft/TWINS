@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BoardByCard extends Board {
+public class BoardByCard extends BoardStandard {
     private ImageView suggestedImageView;
     protected com.sharpsoft.twins_clases.logic.Card suggestedCard;
 
