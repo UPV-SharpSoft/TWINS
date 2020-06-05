@@ -195,6 +195,24 @@ public class GameActivity extends AppCompatActivity {
         };
     }
 
+    public void instanceSoundFX(){
+        board.addObserver(new FlipObserver() {
+            @Override
+            public void onFlip() {
+                audioFacadeInstance.makeSound(Sound.Sounds.flip);
+            }
+
+            @Override
+            public void onSuccess() {
+                audioFacadeInstance.makeSound(Sound.Sounds.correct);
+            }
+
+            @Override
+            public void onFailure() {
+                audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
+            }
+        });
+    }
 
     public void ToPausedActivity() {
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
@@ -233,25 +251,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onDestroy(){
         super.onDestroy();
         chronometer.cancel();
-    }
-
-    public void instanceSoundFX(){
-        board.addObserver(new FlipObserver() {
-            @Override
-            public void onFlip() {
-                audioFacadeInstance.makeSound(Sound.Sounds.flip);
-            }
-
-            @Override
-            public void onSuccess() {
-                audioFacadeInstance.makeSound(Sound.Sounds.correct);
-            }
-
-            @Override
-            public void onFailure() {
-                audioFacadeInstance.makeSound(Sound.Sounds.incorrect);
-            }
-        });
     }
 
     @Override
