@@ -3,7 +3,6 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BoardBySet extends Board {
+public class BoardBySet extends BoardStandard {
     private TextView suggestedTextView;
     protected com.sharpsoft.twins_clases.logic.Card suggestedCard;
     private Deck set2;

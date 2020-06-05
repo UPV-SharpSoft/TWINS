@@ -1,6 +1,5 @@
 package com.sharpsoft.twinsapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sharpsoft.twins_clases.logic.FlipObserver;
 import com.sharpsoft.twins_clases.logic.Turn;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardStandard;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardByCard;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardBySet;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
@@ -68,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
 
         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
         if(level.getType() == Level.Type.standard){
-            board = new Board(level.getDimension(), level.getTimePerTurn(), deck);
+            board = new BoardStandard(level.getDimension(), level.getTimePerTurn(), deck);
         }else if(level.getType() == Level.Type.byCard){
             board = new BoardByCard(level.getDimension(), level.getTimePerTurn(), deck);
         }else if(level.getType() == Level.Type.bySet){
@@ -132,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void setBoard() {
-        View tableroView = ((Board) board).getView(this);
+        View tableroView = ((BoardStandard) board).getView(this);
         tableLayout.addView(tableroView);
 
         board.addObserver(new FlipObserver() {

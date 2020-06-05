@@ -10,9 +10,9 @@ import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twins_clases.logic.MalformedBoardException;
 
 
-public class Board extends com.sharpsoft.twins_clases.logic.Board {
+public class BoardStandard extends com.sharpsoft.twins_clases.logic.Board {
 
-    public Board(Dimension dimension, int segundosPorTurno,Deck set) {
+    public BoardStandard(Dimension dimension, int segundosPorTurno, Deck set) {
         super(dimension, segundosPorTurno);
         //if(set.getNumCartas() != dimension.getTotal()) throw new MalformedBoardException("La dimension de la baraja y el tablero no coinciden!");
 
