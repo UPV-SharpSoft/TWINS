@@ -111,8 +111,6 @@ public abstract class Board extends Observable {
                setChanged();
                notifyObservers(FlipObserver.On.failure);
             }
-        }else{  //Se ha girado la primera carta
-
         }
     }
 
