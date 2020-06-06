@@ -23,7 +23,6 @@ import java.util.Scanner;
 
 public class ConfigSingleton extends Observable {
     private static ConfigSingleton instance = new ConfigSingleton();
-
     private DeckFactory.Decks selectedDeck;
     private String customDeck;
     private boolean isCustomDeck;

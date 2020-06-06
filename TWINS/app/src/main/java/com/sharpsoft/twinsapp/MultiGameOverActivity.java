@@ -60,7 +60,7 @@ public class MultiGameOverActivity extends AppCompatActivity {
             winnerTV.setText("Ha ganado " + nickname1);
         } else{
            winnerScoreTV.setText("Puntuación: " + score2);
-            avatarWinner.setColorFilter(colorPlayer1);
+            avatarWinner.setColorFilter(colorPlayer2);
             winnerTV.setText("Ha ganado " + nickname2);
         }
 
