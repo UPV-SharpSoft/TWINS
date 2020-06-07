@@ -78,15 +78,10 @@ public class MultiGameActivity extends AppCompatActivity {
         int song = ConfigSingleton.getInstance().getSelectedMusic();
 
         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
-        if(level.getType() == Level.Type.standard){
-            board = new BoardStandard(level.getDimension(), level.getTimePerTurn(), deck);
-        }else if(level.getType() == Level.Type.byCard){
-            board = new BoardStandard(level.getDimension(), level.getTimePerTurn(), deck);
-        }else if(level.getType() == Level.Type.bySet){
-            DeckFactory.Decks decks = deck.getName().equals("Minecraft")? DeckFactory.Decks.fruits : DeckFactory.Decks.fruits;
-            Deck deck2 = DeckFactory.getDeck(decks, level.getDimension(), level.getDimension().getTotal()/2, this);
-            board = new BoardBySet(level.getDimension(), level.getTimePerTurn(), deck, deck2);
-        }
+        
+        level.setType(Level.Type.standard);
+        board = new BoardStandard(level.getDimension(), level.getTimePerTurn(), deck);
+
 
         board.setTiempoVolteo(level.getFlipTime() == null? 500 : level.getFlipTime());
 

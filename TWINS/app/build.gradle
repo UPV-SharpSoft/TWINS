@@ -27,6 +27,7 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -40,4 +41,6 @@ dependencies {
     implementation project(path: ':twins-clases')
     implementation 'com.android.support:design:28.0.0'
     compile 'com.github.divyanshub024:ColorSeekBar:v1.0.2'
+    testImplementation 'junit:junit:4.12'
+
 }
