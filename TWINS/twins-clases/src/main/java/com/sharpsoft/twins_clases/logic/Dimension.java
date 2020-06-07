@@ -11,9 +11,7 @@ public class Dimension implements Serializable{
         this.height = height;
     }
 
-    public int getTotal(){
-        return width*height;
-    }
+    public int getTotal(){return width*height;}
 
     public int getHeight() {
         return height;

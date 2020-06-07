@@ -78,7 +78,7 @@ public class MultiGameActivity extends AppCompatActivity {
         int song = ConfigSingleton.getInstance().getSelectedMusic();
 
         Deck deck = ConfigSingleton.getInstance().getSelectedDeck(level.getDimension(), level.getNumPairs(), this);
-        
+
         level.setType(Level.Type.standard);
         board = new BoardStandard(level.getDimension(), level.getTimePerTurn(), deck);
 
