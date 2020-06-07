@@ -23,6 +23,9 @@ import java.util.Scanner;
 
 public class ConfigSingleton extends Observable {
     private static ConfigSingleton instance = new ConfigSingleton();
+
+    public static ConfigSingleton getInstance(){return instance;}
+
     private DeckFactory.Decks selectedDeck;
     private String customDeck;
     private boolean isCustomDeck;
@@ -31,7 +34,7 @@ public class ConfigSingleton extends Observable {
     private ArrayList<Bitmap> listaBitmapsCartas = new ArrayList<Bitmap>() {
     };
 
-    public ConfigSingleton(){
+    private ConfigSingleton(){
         selectedMusic = R.raw.partida_default;
 
         isCustomDeck = false;
@@ -159,7 +162,6 @@ public class ConfigSingleton extends Observable {
         return res;
     }
 
-    public static ConfigSingleton getInstance(){return instance;}
 
     public Deck getSelectedDeck(Dimension d, int numCartas, Context ctx){
         if(isCustomDeck){
