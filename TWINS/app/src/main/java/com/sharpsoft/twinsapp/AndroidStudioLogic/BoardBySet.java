@@ -9,21 +9,35 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
-import com.sharpsoft.twins_clases.logic.FlipObserver;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BoardBySet extends BoardStandard {
+public class BoardBySet extends Board {
     private TextView suggestedTextView;
-    protected com.sharpsoft.twins_clases.logic.Card suggestedCard;
+    protected CardInterface suggestedCard;
     private Deck set2;
 
 
     public BoardBySet(Dimension dimension, int segundosPorTurno, Deck set, Deck set2) {
-        super(new Dimension(0,0), segundosPorTurno, null);
+        super(dimension, segundosPorTurno);
+        for(int x = 0; x < dimension.width; x++){
+            for(int y = 0; y < dimension.height; y++){
+                final Card card = new Card(set.getReverse(), set.sacarCarta());
+                card.setDeck(set.getName());
+                card.setBoard(this, x, y);
+                this.cards[x][y] = card;
+            }
+        }
+
+        for(int x = 0; x < dimension.width; x++){
+            for(int y = 0; y < dimension.height; y++){
+                final Card card = new Card(set.getReverse(), set.sacarCarta());
+                card.setDeck(set.getName());
+                card.setBoard(this, x, y);
+                this.cards[x][y] = card;
+            }
+        }
 
         super.addObserver(new FlipObserver() {
             @Override
@@ -43,7 +57,7 @@ public class BoardBySet extends BoardStandard {
         });
 
         super.dimension = new Dimension(dimension.width, dimension.height * 2);
-        super.cards = new com.sharpsoft.twins_clases.logic.Card[dimension.width][dimension.height * 2];
+        super.cards = new CardInterface[dimension.width][dimension.height * 2];
         List<Bitmap> allBitmaps = set.getAllBitmaps();
         allBitmaps.addAll(set2.getAllBitmaps());
         int firstSecondDeck = allBitmaps.size()/2;
@@ -103,14 +117,14 @@ public class BoardBySet extends BoardStandard {
     }
 
     @Override
-    protected boolean isSameCard(com.sharpsoft.twins_clases.logic.Card c1, com.sharpsoft.twins_clases.logic.Card c2) {
+    protected boolean isSameCard(CardInterface c1, CardInterface c2) {
         return c1.sameImage(c2) && c1.getDeck().equals(suggestedTextView.getText()) && c2.getDeck().equals(suggestedTextView.getText());
     }
 
-    private List<com.sharpsoft.twins_clases.logic.Card> getDownsideCards(){
-        List<com.sharpsoft.twins_clases.logic.Card> res = new ArrayList<>();
-        for(com.sharpsoft.twins_clases.logic.Card[] aux : cards){
-            for(com.sharpsoft.twins_clases.logic.Card card : aux){
+    private List<CardInterface> getDownsideCards(){
+        List<CardInterface> res = new ArrayList<>();
+        for(CardInterface[] aux : cards){
+            for(CardInterface card : aux){
                 if(!card.isFacedUp()) res.add(card);
             }
         }
@@ -119,7 +133,7 @@ public class BoardBySet extends BoardStandard {
 
     protected void setSuggestedSet(){
         Random r = new Random();
-        List<com.sharpsoft.twins_clases.logic.Card> downsideCards = getDownsideCards();
+        List<CardInterface> downsideCards = getDownsideCards();
         int randomIndex =  r.nextInt(downsideCards.size());
         suggestedCard = downsideCards.get(randomIndex);
 

@@ -9,12 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.sharpsoft.twins_clases.logic.Board;
 import com.sharpsoft.twinsapp.R;
 
-import java.io.Serializable;
-
-public class Card implements com.sharpsoft.twins_clases.logic.Card {
+public class Card implements CardInterface {
     private Bitmap bitmapReverse, bitmapCard;
     private ImageView imageView;
     private View layout;
@@ -59,7 +56,7 @@ public class Card implements com.sharpsoft.twins_clases.logic.Card {
     }
 
     @Override
-    public boolean sameImage(com.sharpsoft.twins_clases.logic.Card c) {
+    public boolean sameImage(CardInterface c) {
         if(!(c instanceof Card)) throw new RuntimeException("No son mismo tipo");
         Card o = (Card) c;
 
@@ -67,7 +64,7 @@ public class Card implements com.sharpsoft.twins_clases.logic.Card {
     }
 
     @Override
-    public boolean isSameDeck(com.sharpsoft.twins_clases.logic.Card c) {
+    public boolean isSameDeck(CardInterface c) {
         return this.deck.equals(c.getDeck());
     }
 

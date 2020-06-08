@@ -7,19 +7,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
-import com.sharpsoft.twins_clases.logic.FlipObserver;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BoardByCard extends BoardStandard {
+public class BoardByCard extends Board {
     private ImageView suggestedImageView;
-    protected com.sharpsoft.twins_clases.logic.Card suggestedCard;
+    protected CardInterface suggestedCard;
 
     public BoardByCard(Dimension dimension, int segundosPorTurno, Deck set) {
-        super(dimension, segundosPorTurno, set);
+        super(dimension, segundosPorTurno);
+
+        for(int x = 0; x < dimension.width; x++){
+            for(int y = 0; y < dimension.height; y++){
+                final Card card = new Card(set.getReverse(), set.sacarCarta());
+                card.setDeck(set.getName());
+                card.setBoard(this, x, y);
+                this.cards[x][y] = card;
+            }
+        }
 
         super.addObserver(new FlipObserver() {
             @Override
@@ -79,14 +85,14 @@ public class BoardByCard extends BoardStandard {
     }
 
     @Override
-    protected boolean isSameCard(com.sharpsoft.twins_clases.logic.Card c1, com.sharpsoft.twins_clases.logic.Card c2) {
+    protected boolean isSameCard(CardInterface c1, CardInterface c2) {
         return c1.sameImage(c2) && c1.sameImage(suggestedCard);
     }
 
-    private List<com.sharpsoft.twins_clases.logic.Card> getDownsideCards(){
-        List<com.sharpsoft.twins_clases.logic.Card> res = new ArrayList<>();
-        for(com.sharpsoft.twins_clases.logic.Card[] aux : cards){
-            for(com.sharpsoft.twins_clases.logic.Card card : aux){
+    private List<CardInterface> getDownsideCards(){
+        List<CardInterface> res = new ArrayList<>();
+        for(CardInterface[] aux : cards){
+            for(CardInterface card : aux){
                 if(!card.isFacedUp()) res.add(card);
             }
         }
@@ -95,7 +101,7 @@ public class BoardByCard extends BoardStandard {
 
     protected void setSuggestedCard(){
         Random r = new Random();
-        List<com.sharpsoft.twins_clases.logic.Card> downsideCards = getDownsideCards();
+        List<CardInterface> downsideCards = getDownsideCards();
         int randomIndex =  r.nextInt(downsideCards.size());
         suggestedCard = downsideCards.get(randomIndex);
 

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.widget.TextView;
 
-public class Score extends com.sharpsoft.twins_clases.logic.Score {
+public class Score extends ScoreSuperclass {
     private TextView scoreTextView;
 
     public Score(TextView scoreTextView){

@@ -11,10 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
-import com.sharpsoft.twins_clases.logic.FinalScore;
 import com.sharpsoft.twinsapp.R;
 
 import java.io.File;

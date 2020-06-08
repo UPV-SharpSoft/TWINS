@@ -1,6 +1,6 @@
 package com.sharpsoft.twinsapp;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ILevelBuilder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level1Builder;

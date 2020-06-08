@@ -6,16 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
-import com.sharpsoft.twins_clases.logic.MalformedBoardException;
 
-
-public class BoardStandard extends com.sharpsoft.twins_clases.logic.Board {
+public class BoardStandard extends Board {
 
     public BoardStandard(Dimension dimension, int segundosPorTurno, Deck set) {
         super(dimension, segundosPorTurno);
-        //if(set.getNumCartas() != dimension.getTotal()) throw new MalformedBoardException("La dimension de la baraja y el tablero no coinciden!");
-
         for(int x = 0; x < dimension.width; x++){
             for(int y = 0; y < dimension.height; y++){
                 final Card card = new Card(set.getReverse(), set.sacarCarta());
@@ -53,7 +48,7 @@ public class BoardStandard extends com.sharpsoft.twins_clases.logic.Board {
     }
 
     @Override
-    protected boolean isSameCard(com.sharpsoft.twins_clases.logic.Card c1, com.sharpsoft.twins_clases.logic.Card c2) {
+    protected boolean isSameCard(CardInterface c1, CardInterface c2) {
         return c1.sameImage(c2);
     }
 }

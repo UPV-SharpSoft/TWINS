@@ -1,19 +1,16 @@
 package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
-import com.sharpsoft.twins_clases.logic.Score;
-import com.sharpsoft.twins_clases.logic.Turn;
-
 import java.io.Serializable;
 
 public class Player implements Serializable {
     private int color;
     private String nickname;
-    private com.sharpsoft.twins_clases.logic.Score score;
+    private ScoreSuperclass score;
 
     public Player(int color, String nickname) {
         this.color = color;
         this.nickname = nickname;
-        this.score = new com.sharpsoft.twins_clases.logic.Score();
+        this.score = new ScoreSuperclass();
     }
 
     public String getNickname() {
@@ -24,12 +21,12 @@ public class Player implements Serializable {
         return color;
     }
 
-    public Score getScore() {
+    public ScoreSuperclass getScore() {
         return score;
     }
 
     public void resetScore(){
-        score = new Score();
+        score = new ScoreSuperclass();
     }
 
 }
