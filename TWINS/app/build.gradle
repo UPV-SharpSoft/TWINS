@@ -34,12 +34,16 @@ dependencies {
     implementation "androidx.media:media:1.1.0"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':twins-clases')
     implementation 'com.android.support:design:28.0.0'
-    compile 'com.github.divyanshub024:ColorSeekBar:v1.0.2'
-    testImplementation 'junit:junit:4.12'
+    implementation 'com.github.divyanshub024:ColorSeekBar:v1.0.2'
+
+    //tests
+    // Required -- JUnit 4 framework
+    testImplementation 'junit:junit:4.13'
+    // Optional -- Robolectric environment
+    testImplementation 'androidx.test:core:1.2.0'
+    // Optional -- Mockito framework
+    testImplementation 'org.mockito:mockito-core:1.10.19'
 
 }

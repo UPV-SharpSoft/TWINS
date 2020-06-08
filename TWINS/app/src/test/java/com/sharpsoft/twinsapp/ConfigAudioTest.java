@@ -1,20 +1,18 @@
 package com.sharpsoft.twinsapp;
 
-import android.app.Application;
-import android.app.Instrumentation;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
-import androidx.test.core.app.ApplicationProvider;
+
 import junit.framework.TestCase;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
+import static org.junit.Assert.assertEquals;
 
 public class ConfigAudioTest extends TestCase {
     static int musicVolumeValues [] ;
-
-
 
     @BeforeClass
     public static void setUpBeforeClass(){
@@ -23,12 +21,10 @@ public class ConfigAudioTest extends TestCase {
 
     @Test
     public void setMusicVolume_isCorrect(){
-       for(int i= 0; i< musicVolumeValues.length; i++){
-           int valor = musicVolumeValues[i];
-           boolean res = ConfigSingleton.getInstance().setMusicVolume(valor, ApplicationProvider);
-           assert(0, );
-       }
-
+        for (int valor : musicVolumeValues) {
+            boolean res = ConfigSingleton.getInstance().setMusicVolume(valor, ApplicationProvider.getApplicationContext());
+            assertEquals(res, valor > 0 && valor < 100);
+        }
     }
 }
 
