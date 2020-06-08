@@ -1,4 +1,4 @@
-package com.sharpsoft.twins_clases.logic;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import java.util.Observable;
 import java.util.Observer;

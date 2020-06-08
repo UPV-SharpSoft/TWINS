@@ -1,7 +1,5 @@
 package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
-
 import java.util.Random;
 
 public class LevelRandomBuilder extends ILevelBuilder {

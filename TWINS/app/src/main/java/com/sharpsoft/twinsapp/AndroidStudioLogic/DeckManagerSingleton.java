@@ -3,9 +3,6 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
-
-import com.sharpsoft.twins_clases.logic.Dimension;
 
 import java.io.File;
 import java.io.FileNotFoundException;

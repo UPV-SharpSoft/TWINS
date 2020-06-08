@@ -1,14 +1,17 @@
-package com.sharpsoft.twins_clases.logic;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
+
+import android.content.Context;
+import android.view.View;
 
 import java.util.Observable;
 import java.util.Stack;
 
 public abstract class Board extends Observable {
-    protected Card[][] cards;
+    protected CardInterface[][] cards;
     protected Dimension dimension;
-    protected Stack<Card> cardsUpside;
+    protected Stack<CardInterface> cardsUpside;
     protected boolean isWaiting;
-    protected Score score;
+    protected ScoreSuperclass score;
     protected Turn turn;
     private Integer tiempoVolteo;
     boolean firstTime = true;
@@ -21,13 +24,13 @@ public abstract class Board extends Observable {
 
         if( ((width*height) % 2 != 0) ) throw new MalformedBoardException("The cards are odd");
 
-        cards = new Card[width][height];
+        cards = new CardInterface[width][height];
 
         cardsUpside = new Stack<>();
 
         isWaiting = false;
 
-        score = new Score();
+        score = new ScoreSuperclass();
 
         turn = new Turn(score, secondsPerTurn, this);
     }
@@ -40,7 +43,7 @@ public abstract class Board extends Observable {
         this.tiempoVolteo = tiempoVolteo;
     }
 
-    void turnCards(final Card c1, final Card c2){
+    void turnCards(final CardInterface c1, final CardInterface c2){
         isWaiting = true;
         new Thread(){
             public void run(){
@@ -60,8 +63,8 @@ public abstract class Board extends Observable {
         isWaiting = true;
         new Thread(){
             public void run(){
-                for(Card[] c1 : cards){
-                    for(Card card : c1){
+                for(CardInterface[] c1 : cards){
+                    for(CardInterface card : c1){
                         card.turn();
                     }
                 }
@@ -71,8 +74,8 @@ public abstract class Board extends Observable {
                     e.printStackTrace();
                 }
                 isWaiting = false;
-                for(Card[] c1 : cards){
-                    for(Card card : c1){
+                for(CardInterface[] c1 : cards){
+                    for(CardInterface card : c1){
                         card.turn();
                     }
                 }
@@ -81,7 +84,7 @@ public abstract class Board extends Observable {
     }
 
     public void turn(int x, int y){
-        Card c = cards[x][y];
+        CardInterface c = cards[x][y];
         if(c.isFacedUp()) return; //salir si la carta ya ha sido girada
         if(isWaiting) return;
         if(firstTime) turn.startTurn(); firstTime = false;
@@ -93,8 +96,8 @@ public abstract class Board extends Observable {
         cardsUpside.push(c);
         if(cardsUpside.size() % 2 == 0){  //Se ha girado la segunda carta
             turn.endTurn();
-            Card c1 = cardsUpside.pop();
-            Card c2 = cardsUpside.pop();
+            CardInterface c1 = cardsUpside.pop();
+            CardInterface c2 = cardsUpside.pop();
             if(isSameCard(c1, c2)){ //Coinciden
                 cardsUpside.push(c1);
                 cardsUpside.push(c2);
@@ -114,7 +117,7 @@ public abstract class Board extends Observable {
         }
     }
 
-    public Card getCard(int x, int y){
+    public CardInterface getCard(int x, int y){
         return cards[x][y];
     }
 
@@ -122,11 +125,11 @@ public abstract class Board extends Observable {
         return cardsUpside.size() == dimension.getTotal();
     }
 
-    public Score getScore(){
+    public ScoreSuperclass getScore(){
         return this.score;
     }
 
-    public void setScore(Score score){
+    public void setScore(ScoreSuperclass score){
         this.score = score;
         turn.setScore(score);
     }
@@ -135,7 +138,8 @@ public abstract class Board extends Observable {
         return turn;
     }
 
-    protected abstract boolean isSameCard(Card c1, Card c2);
+    protected abstract boolean isSameCard(CardInterface c1, CardInterface c2);
+    protected abstract View getView(Context ctx);
 }
 
 

@@ -4,35 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Space;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;
 
 import java.io.FileNotFoundException;

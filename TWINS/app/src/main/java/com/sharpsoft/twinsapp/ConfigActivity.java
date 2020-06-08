@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
-import com.sharpsoft.twins_clases.logic.Dimension;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Dimension;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckManagerSingleton;

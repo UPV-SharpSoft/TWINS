@@ -5,8 +5,6 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

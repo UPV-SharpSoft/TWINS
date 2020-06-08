@@ -4,16 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.sharpsoft.twins_clases.logic.FinalScore;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.FinalScore;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 
-import java.util.Calendar;
 import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {

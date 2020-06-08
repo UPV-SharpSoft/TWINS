@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sharpsoft.twins_clases.logic.FlipObserver;
-import com.sharpsoft.twins_clases.logic.Turn;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.FlipObserver;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Turn;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardStandard;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardByCard;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardBySet;
@@ -40,7 +41,7 @@ public class GameActivity extends AppCompatActivity {
     private Level level;
 
     private LinearLayout tableLayout;
-    private com.sharpsoft.twins_clases.logic.Board board;
+    private Board board;
     private ImageButton imageButtonPause;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");

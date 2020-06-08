@@ -4,20 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sharpsoft.twins_clases.logic.FinalScore;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
-
-import java.util.Calendar;
 
 public class MultiGameOverActivity extends AppCompatActivity {
     private TextView winnerTV, winnerScoreTV;

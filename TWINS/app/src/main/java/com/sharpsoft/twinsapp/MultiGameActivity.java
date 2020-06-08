@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sharpsoft.twins_clases.logic.FlipObserver;
-import com.sharpsoft.twins_clases.logic.Turn;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.FlipObserver;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Turn;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
+import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardStandard;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardBySet;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
@@ -32,7 +33,7 @@ public class MultiGameActivity extends AppCompatActivity {
     private CountDownTimer turnCrono;
     private int turnSeconds;
     private LinearLayout tableLayout;
-    private com.sharpsoft.twins_clases.logic.Board board;
+    private Board board;
     private ImageButton imageButtonPause;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private boolean first = true;

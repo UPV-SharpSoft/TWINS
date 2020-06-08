@@ -1,7 +1,5 @@
 package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
-import com.sharpsoft.twins_clases.logic.Dimension;
-
 public class Level2Builder extends ILevelBuilder {
 
     public Level2Builder() {super.level = new Level();}

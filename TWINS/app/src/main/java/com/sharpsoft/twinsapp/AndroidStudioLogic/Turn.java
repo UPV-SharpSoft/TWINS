@@ -1,10 +1,10 @@
-package com.sharpsoft.twins_clases.logic;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import java.util.Observable;
 import java.util.Observer;
 
 public class Turn extends Observable {
-    private Score score;
+    private ScoreSuperclass score;
     private int duration;
     private Board board;
     private Thread thread;
@@ -22,13 +22,13 @@ public class Turn extends Observable {
         };
     }
 
-    public Turn(Score score, int duration, Board board){
+    public Turn(ScoreSuperclass score, int duration, Board board){
         this.score = score;
         this.duration = duration;
         this.board = board;
     }
 
-    public void setScore(Score score){
+    public void setScore(ScoreSuperclass score){
         this.score = score;
     }
 
@@ -52,7 +52,7 @@ public class Turn extends Observable {
         thread.interrupt();
         score.missedTurn();
         if(board.cardsUpside.size() % 2 == 1){
-            Card lastFlipCard = board.cardsUpside.pop();
+            CardInterface lastFlipCard = board.cardsUpside.pop();
             lastFlipCard.turn();
         }
         setChanged();

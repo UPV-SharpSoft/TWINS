@@ -1,13 +1,13 @@
-package com.sharpsoft.twins_clases.logic;
+package com.sharpsoft.twinsapp.AndroidStudioLogic;
 
 import java.io.Serializable;
 
-public class Score implements Serializable {
+public class ScoreSuperclass implements Serializable {
     private int numCorrect;
     private int numFails;
     private int missedTurns;
 
-    public Score(){
+    public ScoreSuperclass(){
         this.numFails = 0;
         this.numCorrect = 0;
         this.missedTurns = 0;
