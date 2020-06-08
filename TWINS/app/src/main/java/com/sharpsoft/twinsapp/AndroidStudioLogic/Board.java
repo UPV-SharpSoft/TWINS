@@ -139,7 +139,7 @@ public abstract class Board extends Observable {
     }
 
     protected abstract boolean isSameCard(CardInterface c1, CardInterface c2);
-    protected abstract View getView(Context ctx);
+    public abstract View getView(Context ctx);
 }
 
 

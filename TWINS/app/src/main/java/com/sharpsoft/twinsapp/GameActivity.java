@@ -132,7 +132,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void setBoard() {
-        View tableroView = ((BoardStandard) board).getView(this);
+        View tableroView = board.getView(this);
         tableLayout.addView(tableroView);
 
         board.addObserver(new FlipObserver() {
