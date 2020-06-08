@@ -15,14 +15,15 @@ public class Music {
 
     public float getMusicVolume() { return musicVolume; }
 
-    public void setMusicVolume(float volume) {
+    public float setMusicVolume(float volume) {
         if(volume > 1) {
             this.musicVolume = 1;
         } else {
             musicVolume = volume;
         };
 
-        bgMusic.setVolume(volume, volume);
+        bgMusic.setVolume(musicVolume, musicVolume);
+        return musicVolume;
     }
 
     public void startMusic(Context context, int song) {

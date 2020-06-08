@@ -54,15 +54,20 @@ public class GameOverActivity extends AppCompatActivity {
             resultTV.setText("¡DERROTA!");
             timeTV.setText("Se te ha agotado el tiempo");
         }
-        score = score + (int)timeLeft/1000;
-        scoreTV.setText("Puntuación final: " + score);
+        int finalScore = calcScore(score, timeLeft);
+
+        scoreTV.setText("Puntuación final: " + finalScore);
 
         Calendar cal = Calendar.getInstance();
         int timeSpent = totalTime - (int)timeLeft;
-        FinalScore results = new FinalScore(level.getType().toString(), score, timeSpent , cal);
+        FinalScore results = new FinalScore(level.getType().toString(), finalScore, timeSpent , cal);
 
         ConfigSingleton config =  ConfigSingleton.getInstance();
         config.saveFinalScore(results, GameOverActivity.this);
+    }
+
+    private int calcScore(int score, long timeLeft) {
+        return score + (int) timeLeft / 1000;
     }
 
     private void receiveData(){
