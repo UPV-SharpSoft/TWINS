@@ -21,23 +21,6 @@ public class BoardBySet extends Board {
 
     public BoardBySet(Dimension dimension, int segundosPorTurno, Deck set, Deck set2) {
         super(dimension, segundosPorTurno);
-        for(int x = 0; x < dimension.width; x++){
-            for(int y = 0; y < dimension.height; y++){
-                final Card card = new Card(set.getReverse(), set.sacarCarta());
-                card.setDeck(set.getName());
-                card.setBoard(this, x, y);
-                this.cards[x][y] = card;
-            }
-        }
-
-        for(int x = 0; x < dimension.width; x++){
-            for(int y = 0; y < dimension.height; y++){
-                final Card card = new Card(set.getReverse(), set.sacarCarta());
-                card.setDeck(set.getName());
-                card.setBoard(this, x, y);
-                this.cards[x][y] = card;
-            }
-        }
 
         super.addObserver(new FlipObserver() {
             @Override
