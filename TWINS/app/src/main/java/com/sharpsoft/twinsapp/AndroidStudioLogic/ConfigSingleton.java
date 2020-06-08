@@ -81,6 +81,7 @@ public class ConfigSingleton extends Observable {
 
     public boolean setMusicVolume(int volume, Context ctx){
         File musicVolumeFile = new File(ctx.getFilesDir().getPath() + "/musicVolume.txt");
+        if(volume < 0 || volume > 100) return false;
         try {
             PrintWriter pw = new PrintWriter(musicVolumeFile);
             pw.println(volume);
