@@ -73,15 +73,6 @@ public class MultiGameOverActivity extends AppCompatActivity {
         nickname1 = player1.getNickname();
         nickname2 = player2.getNickname();
 
-
-
-       /* Para Tabla Puntuaciones
-        Calendar cal = Calendar.getInstance();
-        int timeSpent = totalTime - (int)timeLeft;
-        FinalScore results = new FinalScore(level.getType().toString(), score, timeSpent , cal);
-        ConfigSingleton config =  ConfigSingleton.getInstance();
-        config.saveFinalScore(results, MultiGameOverActivity.this);
-        */
     }
 
     private void createButtons(){

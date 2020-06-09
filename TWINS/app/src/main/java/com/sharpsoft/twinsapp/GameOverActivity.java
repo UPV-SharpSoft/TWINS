@@ -67,6 +67,7 @@ public class GameOverActivity extends AppCompatActivity {
     }
 
     private int calcScore(int score, long timeLeft) {
+
         return score + (int) timeLeft / 1000;
     }
 
