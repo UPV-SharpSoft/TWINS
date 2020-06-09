@@ -36,7 +36,6 @@ public class NicknamesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nicknames);
 
-        //UI
         colorSeekBar1 = findViewById(R.id.colorSeekBar1);
         colorSeekBar2 = findViewById(R.id.colorSeekBar2);
         player1 = findViewById(R.id.player1);
@@ -67,7 +66,6 @@ public class NicknamesActivity extends AppCompatActivity {
             }
         });
 
-        //Receive Level
         level = (Level) getIntent().getExtras().get("level");
         level.setTotalTime(Integer.MAX_VALUE);
 
