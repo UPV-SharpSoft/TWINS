@@ -28,7 +28,7 @@ public class Sound {
 
     private static final Sound soundInstance = new Sound();
 
-    //MÉTODOS
+    //Methods
 
     public static Sound getInstance(){return soundInstance;}
 
@@ -61,7 +61,7 @@ public class Sound {
             soundFX = new SoundPool(9, AudioManager.STREAM_MUSIC, 0);
         }
 
-        //Precarga de sonidos default
+        //Default sounds add
         flipSound = soundFX.load(context, R.raw.flip_default, 2);
         gameOverSound = soundFX.load(context, R.raw.gameover_default, 2);
         correctSound = soundFX.load(context, R.raw.correct_default, 2);
