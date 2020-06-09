@@ -100,6 +100,8 @@ public class MultiGameOverActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MultiGameOverActivity.this, MultiGameActivity.class);
                 i.putExtra("level", level);
+                player1.resetScore();
+                player2.resetScore();
                 i.putExtra("player1", player1);
                 i.putExtra("player2", player2);
                 startActivity(i);
