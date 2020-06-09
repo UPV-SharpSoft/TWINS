@@ -3,37 +3,33 @@ package com.sharpsoft.twinsapp;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Arrays;
+
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class FinalScoreTest {
-    static int scoreValues [];
-    static float timeLeft [];
-    static float value, res;
+    static int scoreValues [], expected [], actual[];
+    static long timeLeft [];
 
 
     @BeforeClass
     public static void setUpBeforeClass(){
         scoreValues = new int[]{0, 1, -1, 5};
-        timeLeft = new float[]{0, 60.2f, -23, 500};
+        timeLeft = new long[]{0, 60000, -23000, 500000};
+        expected = new int[]{0, 61, -24, 505};
+        actual = new int[4];
     }
 
     @Test
     public void calcScore_isCorrect(){
        for(int i= 0; i< scoreValues.length; i++){
            int score = scoreValues[i];
-           float time = timeLeft[i];
-           //res =
-           value = score + (int) time / 1000;
-           assertEquals(value, res);
+           long time = timeLeft[i];
+           actual[i] = GameOverActivity.calcScore(score, time);
        }
-
+       assertEquals(Arrays.equals(expected, actual), true);
     }
 }
 
 
-//usando el setMusicVolume del ConfigSingleton →
-    // 0 → -
-    // 1 → -
-    // 0.5 → -
-    // 3 → error
-    // -2 → error

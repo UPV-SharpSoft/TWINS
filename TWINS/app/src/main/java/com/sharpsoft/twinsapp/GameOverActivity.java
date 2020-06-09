@@ -66,7 +66,7 @@ public class GameOverActivity extends AppCompatActivity {
         config.saveFinalScore(results, GameOverActivity.this);
     }
 
-    private int calcScore(int score, long timeLeft) {
+    static public int calcScore(int score, long timeLeft) {
         return score + (int) timeLeft / 1000;
     }
 

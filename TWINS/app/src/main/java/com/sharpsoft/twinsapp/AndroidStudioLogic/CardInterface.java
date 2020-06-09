@@ -3,7 +3,6 @@ package com.sharpsoft.twinsapp.AndroidStudioLogic;
 public interface CardInterface {
 
     boolean sameImage(CardInterface c);
-    boolean isSameDeck(CardInterface c);
     void setDeck(String name);
     String getDeck();
     void turn();

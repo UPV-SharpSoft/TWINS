@@ -9,11 +9,11 @@ import android.widget.LinearLayout;
 
 public class BoardStandard extends Board {
 
-    public BoardStandard(Dimension dimension, int segundosPorTurno, Deck set) {
-        super(dimension, segundosPorTurno);
+    public BoardStandard(Dimension dimension, int secsPerTurn, Deck set) {
+        super(dimension, secsPerTurn);
         for(int x = 0; x < dimension.width; x++){
             for(int y = 0; y < dimension.height; y++){
-                final Card card = new Card(set.getReverse(), set.sacarCarta());
+                final Card card = new Card(set.getReverse(), set.removeCard());
                 card.setDeck(set.getName());
                 card.setBoard(this, x, y);
                 this.cards[x][y] = card;

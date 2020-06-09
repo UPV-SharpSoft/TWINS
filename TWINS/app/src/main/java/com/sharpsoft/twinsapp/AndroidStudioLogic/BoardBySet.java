@@ -16,11 +16,9 @@ import java.util.Random;
 public class BoardBySet extends Board {
     private TextView suggestedTextView;
     protected CardInterface suggestedCard;
-    private Deck set2;
 
-
-    public BoardBySet(Dimension dimension, int segundosPorTurno, Deck set, Deck set2) {
-        super(dimension, segundosPorTurno);
+    public BoardBySet(Dimension dimension, int secsPerTurn, Deck set, Deck set2) {
+        super(dimension, secsPerTurn);
 
         super.addObserver(new FlipObserver() {
             @Override
@@ -85,7 +83,6 @@ public class BoardBySet extends Board {
         }
 
         suggestedTextView = new TextView(ctx);
-        suggestedTextView.setText("asdasdasdasdasdasdasdasdasdasdasdasdasdasdasd");
         LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         suggestedTextView.setLayoutParams(tvParams);
         suggestedTextView.setTextColor(Color.BLACK);

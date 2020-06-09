@@ -17,10 +17,8 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Turn;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.AudioFacade;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Board;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardStandard;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.BoardBySet;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Deck;
-import com.sharpsoft.twinsapp.AndroidStudioLogic.DeckFactory;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Player;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Sound;
@@ -84,7 +82,7 @@ public class MultiGameActivity extends AppCompatActivity {
         board = new BoardStandard(level.getDimension(), level.getTimePerTurn(), deck);
 
 
-        board.setTiempoVolteo(level.getFlipTime() == null? 500 : level.getFlipTime());
+        board.setFlipTime(level.getFlipTime() == null? 500 : level.getFlipTime());
 
         setBoard();
         ToPausedActivity();

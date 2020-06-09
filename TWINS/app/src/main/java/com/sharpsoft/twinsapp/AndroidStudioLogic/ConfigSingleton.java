@@ -29,7 +29,7 @@ public class ConfigSingleton extends Observable {
     private boolean isCustomDeck;
 
     private int selectedMusic;
-    private ArrayList<Bitmap> listaBitmapsCartas = new ArrayList<Bitmap>() {
+    private ArrayList<Bitmap> listBitmapsCards = new ArrayList<Bitmap>() {
     };
 
     private ConfigSingleton(){
@@ -162,18 +162,18 @@ public class ConfigSingleton extends Observable {
     }
 
 
-    public Deck getSelectedDeck(Dimension d, int numCartas, Context ctx){
+    public Deck getSelectedDeck(Dimension d, int numCards, Context ctx){
         if(isCustomDeck){
-            return DeckManagerSingleton.getInstance().getDeck(d, customDeck, numCartas, ctx);
+            return DeckManagerSingleton.getInstance().getDeck(d, customDeck, numCards, ctx);
         }else{
-            return DeckFactory.getDeck(selectedDeck, d, numCartas, ctx);
+            return DeckFactory.getDeck(selectedDeck, d, numCards, ctx);
         }
     }
 
     public List<Bitmap> getEditDeck(Context ctx, String deckName){
-        listaBitmapsCartas.add(DeckManagerSingleton.getInstance().getReverse(deckName, ctx));
-        listaBitmapsCartas.addAll(DeckManagerSingleton.getInstance().getAllImages(deckName, ctx));
-        return listaBitmapsCartas;
+        listBitmapsCards.add(DeckManagerSingleton.getInstance().getReverse(deckName, ctx));
+        listBitmapsCards.addAll(DeckManagerSingleton.getInstance().getAllImages(deckName, ctx));
+        return listBitmapsCards;
 
     }
 

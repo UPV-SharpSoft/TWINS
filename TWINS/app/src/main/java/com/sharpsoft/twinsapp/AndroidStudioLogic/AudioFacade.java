@@ -76,7 +76,6 @@ public class AudioFacade {
         sound.setOnPrepared(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int i, int i1) {
-                //setMusicVolume(ConfigSingleton.getInstance().getMusicVolume(ctx)/100f);
                 setSoundVolume(ConfigSingleton.getInstance().getFXVolume(ctx)/100f);
                 if(i1 == 0 && i==7) sound.makeSound(Sound.Sounds.shuffle);
             }

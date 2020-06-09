@@ -15,7 +15,7 @@ public class Card implements CardInterface {
     private Bitmap bitmapReverse, bitmapCard;
     private ImageView imageView;
     private View layout;
-    private boolean faceUp; //bocaArriba
+    private boolean faceUp;
     private String deck;
 
     private Board board;
@@ -64,11 +64,6 @@ public class Card implements CardInterface {
     }
 
     @Override
-    public boolean isSameDeck(CardInterface c) {
-        return this.deck.equals(c.getDeck());
-    }
-
-    @Override
     public void setDeck(String name) {
         this.deck = name;
     }
@@ -79,7 +74,7 @@ public class Card implements CardInterface {
     }
 
     @Override
-    public void turn() {       //Faltaria animar?
+    public void turn() {
         faceUp = !faceUp;
 
         final Bitmap b = faceUp ? bitmapCard : bitmapReverse;

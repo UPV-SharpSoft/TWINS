@@ -13,7 +13,7 @@ public abstract class Board extends Observable {
     protected boolean isWaiting;
     protected ScoreSuperclass score;
     protected Turn turn;
-    private Integer tiempoVolteo;
+    private Integer flipTime;
     boolean firstTime = true;
 
     public Board(Dimension dimension, int secondsPerTurn){
@@ -39,8 +39,8 @@ public abstract class Board extends Observable {
         return dimension;
     }
 
-    public void setTiempoVolteo(int tiempoVolteo){
-        this.tiempoVolteo = tiempoVolteo;
+    public void setFlipTime(int flipTime){
+        this.flipTime = flipTime;
     }
 
     void turnCards(final CardInterface c1, final CardInterface c2){
@@ -48,7 +48,7 @@ public abstract class Board extends Observable {
         new Thread(){
             public void run(){
                 try {
-                    Thread.sleep(tiempoVolteo == null ? 500: tiempoVolteo);
+                    Thread.sleep(flipTime == null ? 500: flipTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -85,7 +85,7 @@ public abstract class Board extends Observable {
 
     public void turn(int x, int y){
         CardInterface c = cards[x][y];
-        if(c.isFacedUp()) return; //salir si la carta ya ha sido girada
+        if(c.isFacedUp()) return;
         if(isWaiting) return;
         if(firstTime) turn.startTurn(); firstTime = false;
         c.turn();
@@ -94,11 +94,11 @@ public abstract class Board extends Observable {
         notifyObservers(FlipObserver.On.Flip);
 
         cardsUpside.push(c);
-        if(cardsUpside.size() % 2 == 0){  //Se ha girado la segunda carta
+        if(cardsUpside.size() % 2 == 0){
             turn.endTurn();
             CardInterface c1 = cardsUpside.pop();
             CardInterface c2 = cardsUpside.pop();
-            if(isSameCard(c1, c2)){ //Coinciden
+            if(isSameCard(c1, c2)){
                 cardsUpside.push(c1);
                 cardsUpside.push(c2);
 
@@ -106,7 +106,7 @@ public abstract class Board extends Observable {
 
                 setChanged();
                 notifyObservers(FlipObserver.On.success);
-            }else{  //No coinciden
+            }else{
                turnCards(c1, c2);
 
                score.fail();

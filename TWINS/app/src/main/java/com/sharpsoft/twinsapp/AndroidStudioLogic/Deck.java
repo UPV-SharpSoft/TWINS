@@ -19,12 +19,6 @@ public class Deck {
         this.deckName = name;
     }
 
-    public Deck(Deck deck){
-        this.cards = new ArrayList<>(deck.cards);
-        this.reverse = deck.reverse;
-        this.deckName = deck.deckName;
-    }
-
     public List<Bitmap> getAllBitmaps(){return this.cards;}
 
     public void setName(String deckName){
@@ -35,21 +29,13 @@ public class Deck {
         return this.deckName;
     }
 
-    public boolean EmptyDeck(){
-        return !cards.isEmpty();
-    }
-
-    public Bitmap sacarCarta(){
+    public Bitmap removeCard(){
         int i = new Random().nextInt(cards.size());
         return cards.remove(i);
     }
 
     public Bitmap getReverse(){
         return reverse;
-    }
-
-    public int getNumCartas(){
-        return cards.size();
     }
 
     @Override

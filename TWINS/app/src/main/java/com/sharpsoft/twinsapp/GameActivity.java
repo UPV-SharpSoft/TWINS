@@ -78,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
         }
         int time = level.getTotalTime();
 
-        board.setTiempoVolteo(level.getFlipTime() == null? 500 : level.getFlipTime());
+        board.setFlipTime(level.getFlipTime() == null? 500 : level.getFlipTime());
 
         Log.i("asd", level.getNumPairs() + "");
 
