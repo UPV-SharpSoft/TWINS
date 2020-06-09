@@ -27,7 +27,7 @@ import java.text.DecimalFormat;
 
 public class MultiGameActivity extends AppCompatActivity {
 
-    private TextView turnTimer, puntuacionTextView, puntuacion2TextView;
+    private TextView turnTimer, puntuation1, puntuation2;
     private CountDownTimer turnCrono;
     private int turnSeconds;
     private LinearLayout tableLayout;
@@ -35,8 +35,6 @@ public class MultiGameActivity extends AppCompatActivity {
     private ImageButton imageButtonPause;
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
     private boolean first = true;
-    private boolean gameOverBool = false;
-    private static boolean closed = false;
     private Level level;
     private int levelNumber;
     private final DecimalFormat cronoFormatLong = new DecimalFormat("#0.0");
@@ -46,7 +44,6 @@ public class MultiGameActivity extends AppCompatActivity {
 
     private static MultiGameActivity instance;
 
-    //UI
     private int colorPlayer1;
     private int colorPlayer2;
     private String nickname1;
@@ -60,11 +57,11 @@ public class MultiGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiplayer);
 
-        tableLayout = findViewById(R.id.tableroLayout);
+        tableLayout = findViewById(R.id.tableLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
         turnTimer = findViewById(R.id.turnTimer);
-        puntuacionTextView = findViewById(R.id.puntuacionTextView);
-        puntuacion2TextView = findViewById(R.id.puntuacion2TextView);
+        puntuation1 = findViewById(R.id.puntuation1);
+        puntuation2 = findViewById(R.id.puntuation2);
         player1TV = findViewById(R.id.player1TV);
         player2TV = findViewById(R.id.player2TV);
         avatar1 = findViewById(R.id.avatar1);
@@ -126,7 +123,7 @@ public class MultiGameActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                            puntuation1.setText(String.valueOf(player1.getScore().getScore()));
 
                         }
                     });
@@ -136,7 +133,7 @@ public class MultiGameActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                            puntuation2.setText(String.valueOf(player2.getScore().getScore()));
                         }
                     });
                     changeTurn();
@@ -204,7 +201,7 @@ public class MultiGameActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                            puntuation1.setText(String.valueOf(player1.getScore().getScore()));
                         }
                     });
 
@@ -215,12 +212,11 @@ public class MultiGameActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                            puntuation2.setText(String.valueOf(player2.getScore().getScore()));
                         }
                     });
 
                     changeTurn();
-                    //turnCrono.cancel();
                 }
                 if(board.isComplete()){
                     Intent i = new Intent(MultiGameActivity.this, MultiGameOverActivity.class);
@@ -237,7 +233,7 @@ public class MultiGameActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            puntuacionTextView.setText(String.valueOf(player1.getScore().getScore()));
+                            puntuation1.setText(String.valueOf(player1.getScore().getScore()));
                         }
                     });
 
@@ -247,7 +243,7 @@ public class MultiGameActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            puntuacion2TextView.setText(String.valueOf(player2.getScore().getScore()));
+                            puntuation2.setText(String.valueOf(player2.getScore().getScore()));
                         }
                     });
 

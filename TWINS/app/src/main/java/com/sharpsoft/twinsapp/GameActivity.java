@@ -56,7 +56,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         chronoTV = findViewById(R.id.cronoTV);
-        tableLayout = findViewById(R.id.tableroLayout);
+        tableLayout = findViewById(R.id.tableLayout);
         imageButtonPause = findViewById(R.id.imageButtonPause);
         turnTimer = findViewById(R.id.turnTimer);
 
@@ -163,7 +163,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        TextView puntuacionTextView = findViewById(R.id.puntuacionTextView);
+        TextView puntuacionTextView = findViewById(R.id.puntuation1);
         board.setScore(new Score(puntuacionTextView));
     }
 

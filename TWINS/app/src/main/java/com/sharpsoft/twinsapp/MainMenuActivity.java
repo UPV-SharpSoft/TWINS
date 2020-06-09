@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,7 +18,7 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.ConfigSingleton;
 public class MainMenuActivity extends AppCompatActivity {
     private AudioFacade audioFacadeInstance = AudioFacade.getInstance();
 
-    private Button partidaNivelesImageView;
+    private Button levelsImageView;
     private Button freeGameImageView;
     private Button buttonEditDeck;
     private Button buttonRanking;
@@ -33,7 +32,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        partidaNivelesImageView = findViewById(R.id.partidaNivelesImageView);
+        levelsImageView = findViewById(R.id.levelsImageView);
         freeGameImageView = findViewById(R.id.freeGameImageView);
         buttonEditDeck = findViewById(R.id.buttonEditDeck);
         closeAppButton = findViewById(R.id.closeAppButton);
@@ -55,7 +54,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
 
     private void onClickButton(){
-        partidaNivelesImageView.setOnClickListener(new View.OnClickListener() {
+        levelsImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new Handler().postDelayed(new Runnable() {
