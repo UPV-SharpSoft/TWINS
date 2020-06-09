@@ -23,15 +23,21 @@ public class FacadeTest {
 
     @BeforeClass
     public static void setUpBeforeClass(){
-        musicVolumeValues = new float[]{0, 1, -1, 5, (float) 0.8};
+        musicVolumeValues = new float[]{0, 1, -1, 5, 0.8f};
     }
 
     @Test
     public void setMusicVolume_isCorrect(){
-       for(int i= 0; i< musicVolumeValues.length; i++){
+       for(int i= 0; i < musicVolumeValues.length; i++){
            valor = musicVolumeValues[i];
            res = Music.getInstance().setMusicVolume(valor);
-           assertEquals(valor, res);
+           if(valor > 1){
+               assertEquals(1, res, 0.0);
+           }else if (valor < 0){
+               assertEquals(0, res, 0.0);
+           }else{
+               assertEquals(valor, res, 0.0);
+           }
        }
 
     }
