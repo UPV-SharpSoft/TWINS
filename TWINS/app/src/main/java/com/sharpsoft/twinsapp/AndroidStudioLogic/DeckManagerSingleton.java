@@ -55,15 +55,15 @@ public class DeckManagerSingleton {
         return res;
     }
 
-    public Deck getDeck(Dimension d, String deckName, int numCartas,Context ctx){
+    public Deck getDeck(Dimension d, String deckName, int numCards,Context ctx){
         List<Bitmap> allImages = getAllImages(deckName, ctx);
-        List<Bitmap> cartas = new ArrayList<>();
+        List<Bitmap> cards = new ArrayList<>();
         Bitmap reverse = getReverse(deckName, ctx);
         for(int i = 0; i < d.getTotal()/2; i++){
-            Bitmap img = allImages.get( (i % allImages.size()) % numCartas);
-            cartas.add(img); cartas.add(img);
+            Bitmap img = allImages.get( (i % allImages.size()) % numCards);
+            cards.add(img); cards.add(img);
         }
-        return new Deck(cartas, reverse, deckName);
+        return new Deck(cards, reverse, deckName);
     }
 
     public List<Bitmap> getAllImages(String deckName, Context ctx){

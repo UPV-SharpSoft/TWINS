@@ -20,21 +20,21 @@ public class DeckFactory {
     private final static String[] minecraftCards = {"RedstoneOre.png", "DiamondOre.png", "GoldOre.png", "LapislazuliOre.png", "EmeraldOre.png", "IronOre.png"};
     private final static String[] fruitCards = {"apple.png", "banana.png", "carrot.png", "eggplant.png", "kiwi.png", "lemon.png", "orange.png", "pear.png", "pineapple.png", "tomato.png", "watermelon.png"};
 
-    public static Deck getDeck(Decks deck, Dimension dimension, int numCartas,Context ctx){
+    public static Deck getDeck(Decks deck, Dimension dimension, int numCards,Context ctx){
         List<Bitmap> cards = new ArrayList<>();
         Bitmap reverse = null;
         String name = null;
 
         if(deck == Decks.minecraft){
             for(int i = 0; i < dimension.getTotal()/2; i++){
-                Bitmap b = getBitmapFromAsset("CartasMinecraft/" + minecraftCards[i% minecraftCards.length % numCartas], ctx);
+                Bitmap b = getBitmapFromAsset("CartasMinecraft/" + minecraftCards[i% minecraftCards.length % numCards], ctx);
                 cards.add(b); cards.add(b);
             }
             reverse = getBitmapFromAsset("CartasMinecraft/back.png", ctx);
             name = "Minecraft";
         }else if(deck == Decks.fruits){
             for(int i = 0; i < dimension.getTotal()/2; i++){
-                Bitmap b = getBitmapFromAsset("FruitsDeck/" + fruitCards[i% fruitCards.length % numCartas], ctx);
+                Bitmap b = getBitmapFromAsset("FruitsDeck/" + fruitCards[i% fruitCards.length % numCards], ctx);
                 cards.add(b); cards.add(b);
             }
             reverse = getBitmapFromAsset("FruitsDeck/backFruit.png", ctx);
@@ -42,22 +42,6 @@ public class DeckFactory {
         }
 
         return new Deck(cards, reverse, name);
-    }
-
-    public static List<Bitmap> getAllImages(Decks deck, Context ctx){
-        List<Bitmap> res = new ArrayList<>();
-        if(deck == Decks.minecraft){
-            for(String s : minecraftCards){
-                res.add(getBitmapFromAsset("CartasMinecraft/" + s, ctx));
-            }
-            res.add(getBitmapFromAsset("CartasMinecraft/back.png", ctx));
-        }else if(deck == Decks.fruits){
-            for(String s : fruitCards){
-                res.add(getBitmapFromAsset("FruitsDeck/" + s, ctx));
-            }
-            res.add(getBitmapFromAsset("FruitsDeck/backFruit.png", ctx));
-        }
-        return res;
     }
 
     private static Bitmap getBitmapFromAsset(String path, Context ctx) {
