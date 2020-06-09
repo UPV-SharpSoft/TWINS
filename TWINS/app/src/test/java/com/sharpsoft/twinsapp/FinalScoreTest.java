@@ -1,7 +1,5 @@
 package com.sharpsoft.twinsapp;
 
-import com.sharpsoft.twinsapp.AndroidStudioLogic.Music;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -16,14 +14,17 @@ public class FinalScoreTest {
     @BeforeClass
     public static void setUpBeforeClass(){
         scoreValues = new int[]{0, 1, -1, 5};
+        timeLeft = new float[]{0, 60.2f, -23, 500};
     }
 
     @Test
     public void calcScore_isCorrect(){
        for(int i= 0; i< scoreValues.length; i++){
-           /* = scoreValues[i];
-           res = Music.getInstance().setMusicVolume();
-           assertEquals(, res);*/
+           int score = scoreValues[i];
+           float time = timeLeft[i];
+           //res =
+           value = score + (int) time / 1000;
+           assertEquals(value, res);
        }
 
     }
