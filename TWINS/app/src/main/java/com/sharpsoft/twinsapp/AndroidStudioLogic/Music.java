@@ -20,14 +20,12 @@ public class Music {
         } else {
             musicVolume = volume;
         }
+        bgMusic.setVolume(musicVolume, musicVolume);
         return musicVolume;
     }
 
     public void startMusic(Context context, int song) {
         bgMusic = MediaPlayer.create(context, song);
-
-        bgMusic.setVolume(musicVolume, musicVolume);
-
         bgMusic.setLooping(true);
         int volume = ConfigSingleton.getInstance().getMusicVolume(context);
         bgMusic.setVolume(volume, volume);
@@ -49,7 +47,6 @@ public class Music {
 
     public void resumeMusic() {
         if(bgMusic != null) {
-            bgMusic.setVolume(musicVolume, musicVolume);
             bgMusic.start();
         }
     }
