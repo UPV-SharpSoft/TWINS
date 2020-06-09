@@ -42,7 +42,6 @@ public class NewDeckActivity extends AppCompatActivity {
     private TextView titleTV;
     private Animation rotateAnim;
     private List<Bitmap> selectedDeck;
-    private int count = 0;
 
     Bundle data;
     private ArrayList<Bitmap> newDeckList;

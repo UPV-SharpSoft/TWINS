@@ -6,7 +6,6 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -21,9 +20,6 @@ import com.sharpsoft.twinsapp.AndroidStudioLogic.Level1Builder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level3Builder;
 import com.sharpsoft.twinsapp.AndroidStudioLogic.Level2Builder;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
