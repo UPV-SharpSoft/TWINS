@@ -9,8 +9,7 @@ public class Music {
     private MediaPlayer bgMusic;
     private float musicVolume = 1;
     private static final Music musicInstance = new Music();
-
-
+    
     public static Music getInstance(){return musicInstance;}
 
     public float getMusicVolume() { return musicVolume; }
